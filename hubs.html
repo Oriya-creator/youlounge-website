@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubs</title>  
+  <link rel="stylesheet" href="YLStyle.css">
+  <style>
+    .collapsible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      padding: 24px;
+      margin: 20px auto;
+      border: none;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      border-radius: 16px;
+      cursor: pointer;
+      background-color: #f4f4f4;
+      color: #333;
+      box-shadow: 0 20px 20px rgba(0,0,0,0.9);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .collapsible:hover {
+      background-color: #ddd;
+      transform: scale(1.07);
+    }
+
+    .content {
+      display: none;
+      padding: 16px;
+      background-color: #fdfdfd;
+      border-radius: 0 0 6px 6px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+      margin: 0 auto 40px;
+      max-width: 600px;
+    }
+
+    .nested-collapsible {
+      background-color: #eee;
+      color: #333;
+      font-size: 16px;
+      margin: 10px 0;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      text-align: left;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .nested-collapsible:hover {
+      background-color: #ddd;
+    }
+
+    .nested-content {
+      display: none;
+      padding: 10px 16px;
+      background-color: #f9f9f9;
+      border-left: 4px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Diagnostic button styles */
+    .diagnostic-btn {
+      background: linear-gradient(135deg, #2b6cb0 0%, #4299e1 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 20px 0;
+      width: 100%;
+      text-align: center;
+      display: block;
+      box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+    }
+
+    .diagnostic-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(66, 153, 225, 0.4);
+      background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+    }
+
+    @media screen and (max-width: 768px) {
+      .collapsible {
+        font-size: 24px;
+        height: auto;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .content,
+      .nested-content {
+        padding: 12px;
+        font-size: 15px;
+      }
+
+      .nested-collapsible {
+        font-size: 15px;
+        padding: 12px;
+      }
+
+      .diagnostic-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header style="text-align: left; padding: 20px 40px; background: linear-gradient(to right, #f0f4f8, #ffffff);">
+    <h1 style="color: #000;">Hubs</h1>
+  </header>
+
+  <main>
+    <button class="collapsible grid-item">Food Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">Food Systems</strong> ensure that if indeed we find our health in nutrition, then the cycle of the system has to be clean from the roots. We are committed to reducing, if not completely eradicating, Nutritional Non-Communicable Diseases (NCDs) as a top-tier priority.</p>
+    </div>
+
+    <button class="collapsible grid-item">Climate Solutions Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">Climate Solutions Systems</strong> build systematic products and deliver services that meet needs in communities, societies, and nations, contributing to reducing GHG emissions.</p>
+    </div>
+
+    <button class="collapsible grid-item">Renewable Energy Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">Renewable Energy Systems</strong> produce heat, electricity and other forms of energy while reducing reliance on depleting resources and minimising greenhouse gas emissions.</p>
+    </div>
+
+    <button class="collapsible grid-item">Human Agency Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">Human Agency Systems</strong> are rooted in purity of light through the essence of identity restoration.</p>
+      
+      <!-- Sovereign Protocol Diagnostic Button - Links to separate file -->
+      <button class="diagnostic-btn" onclick="window.location.href='sovereignprotocoldiagnostic.html'">
+        🎯 Sovereign Protocol Diagnostic
+      </button>
+      <p style="text-align: center; color: #666; font-style: italic;">
+        Take this 7-question diagnostic to reveal your hidden performance gap and urgency score. 
+        After completing, you'll receive personalized recommendations and access to the Sovereign Protocol.
+      </p>
+    </div>
+
+    <button class="collapsible grid-item">Media & Creative Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">Media & Creative Systems</strong> are a tangible expression of restored identity through:<br>■ Animation<br>■ Gaming<br>■ Talkshows and Films</p>
+    </div>
+
+    <button class="collapsible grid-item">M.I.C.E Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">M.I.C.E Systems</strong> are signatory to our commitment to growth through professional collaboration and synergy.</p>
+    </div>
+
+    <button class="collapsible grid-item">Non-Profit & Think Tank Systems</button>
+    <div class="content">
+      <p><strong style="font-size: 1.3em;">Non-Profit & Think Tank Systems</strong> – At You Lounge, we build with and for community. Our Non-Profit encompasses:</p>
+
+      <button class="nested-collapsible">🔬 Think Tank – Applied Science Research</button>
+      <div class="nested-content"><p>Applied research advancing impact-driven innovation.</p></div>
+
+      <button class="nested-collapsible">🌱 Human Agency</button>
+      <div class="nested-content"><p>Empowering individuals to lead transformation in their communities.</p></div>
+
+      <button class="nested-collapsible">🛠️ Purposeful Skill Development</button>
+      <div class="nested-content"><p>Equipping communities with sustainable, purpose-aligned skills.</p></div>
+
+      <button class="nested-collapsible">☀️ Climate Change Solutions</button>
+      <div class="nested-content"><p>Science-based strategies for climate adaptation and resilience.</p></div>
+
+      <button class="nested-collapsible">⚡ Energy Justice Solutions</button>
+      <div class="nested-content"><p>Ensuring energy access, equity, and sustainability for all.</p></div>
+
+      <button class="nested-collapsible">❤️ Holistic Health and Wellbeing</button>
+      <div class="nested-content"><p>Holistic health systems rooted in dignity and equity.</p></div>
+
+      <button class="nested-collapsible">🌾 Smart Food Systems</button>
+      <div class="nested-content"><p>Integrated food security, nutrition, and agricultural innovation.</p></div>
+
+      <button class="nested-collapsible">💸 Poverty Graduation</button>
+      <div class="nested-content"><p>Long-term pathways from poverty to sustainable livelihood.</p></div>
+
+      <button class="nested-collapsible">🎥 Media and M.I.C.E Experiences</button>
+      <div class="nested-content"><p>Advocacy through creative and convening platforms.</p></div>
+
+      <button class="nested-collapsible">🎁 Meeting Needs</button>
+      <div class="nested-content"><p>Responsive programs rooted in real community needs and voices.</p></div>
+    </div>
+  </main>
+
+  <script>
+    // Original collapsible functionality
+    const collapsibles = document.querySelectorAll(".collapsible");
+    collapsibles.forEach(button => {
+      button.addEventListener("click", () => {
+        const content = button.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+
+    const nested = document.querySelectorAll(".nested-collapsible");
+    nested.forEach(button => {
+      button.addEventListener("click", () => {
+        const content = button.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+</body>
+</html>

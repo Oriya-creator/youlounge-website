@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access 7-Day Sovereign Protocol</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Access Your Course</h2>
+        <form action="verify-access.php" method="POST">
+            <input type="text" name="access_code" placeholder="Enter your access code" required>
+            <button type="submit">Access Course</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px; color: #666;">
+            Don't have a code? <a href="index.html">Purchase the course</a>
+        </p>
+        <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #888;">
+            Lost your code? Email: support@yourdomain.com
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tab-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+    }
+    .tab-btn {
+      background: #f0f0f0;
+      border: none;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: justify;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tab-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .tab-btn .icon {
+      font-size: 32px;
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    .tab-btn a {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .tab-btn p {
+      font-size: 16px;
+      color: #555;
+      margin-top: 10px;
+    }
+    .section-block {
+      margin-bottom: 40px;
+    }
+    .image-block {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .image-block img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .tab-btn {
+        padding: 16px;
+        font-size: 18px;
+      }
+      .tab-btn .icon {
+        font-size: 24px;
+      }
+      .tab-btn a {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About</h1>
+    <nav></nav>
+  </header>
+  <main>
+    <div class="tabs">
+      <div class="tab-buttons">
+        <div class="section-block">
+          <button class="tab-btn active" data-tab="Vision">
+            <span class="icon">👁</span>
+            <a href="about.html#Vision">Vision</a>
+            <p>A safe space for nations to seek the essence of identity through purity of light. We commit to equip nations with everyday practical and tangible tools to thrive in identity; where purity light is evident, wholeness is systematic, and reason of being is the way of life. We are committed to building nations that thrive in their purest light where essence of being is honoured, the totality of identity is beyond territories, and reason of being is tangibly practical: wholly and sustainably.~</p>
+          </button>
+        </div><div class="section-block">
+      <button class="tab-btn" data-tab="Theory">
+        <span class="icon">🔮</span>
+        <a href="about.html#Theory">Theory of Change</a>
+        <p>At You Lounge, human agency is imperative for thriving in light, operating in the essence of identity and serving in alignment. The diagram below illustrates the transformative change~</p>
+     
+<div class="image-block">
+  <img src="assets/theoryofchange.png" alt="TheoryOfChange"
+       onmouseover="this.style.transform='scale(2.07)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.2)'"
+       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+</div>
+    </div>
+
+    <div class="section-block">
+      <button class="tab-btn" data-tab="Approach">
+        <span class="icon">⚙️</span>
+        <a href="about.html#Approach">Approach</a>
+        <p>From toddlers-youths-adults, engagements are immersed in the present-future with evidence-based storytelling, totality in human-agency and thriving like-minded community. One nation at a time, we shift communities from survival to sovereignty in body, soul and spirit through wholeness systems encompassed in the eight dimensions. Immersed and grounded in essence of identity, we blend wisdom of light, applied research and technological sustainability through eight dimensions to build wholeness systems. Through evidence-based storytelling, design thinking and wholeness-driven systems, we serve toddlers, youths and adults inclusive of a gender perspective; every step dignified in power, evidence and identity in light.~</p>
+      </button>
+    </div>
+  </div>
+</div>
+
+  </main>
+  <footer></footer>
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');function showTab(tabId) {
+  tabs.forEach(btn => btn.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
+  const targetTab = document.getElementById(tabId);
+  if (targetTab) {
+    document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+    targetTab.classList.add('active');
+  }
+}
+
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    showTab(btn.dataset.tab);
+    history.replaceState(null, null, `#${btn.dataset.tab}`);
+  });
+});
+
+window.addEventListener('load', () => {
+  const hash = location.hash.replace('#', '');
+  if (hash) {
+    showTab(hash);
+  }
+});
+
+  </script>
+</body>
+</html>

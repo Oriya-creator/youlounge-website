@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #333;
+      color: white;
+    }
+
+    h1, h2 {
+      margin: 0 0 10px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+
+    .tab-btn {
+      background: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .tab-btn a {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .facilitator-info {
+      background: linear-gradient(to right, #f0f4f8, #ffffff);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .facilitator-info img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 10px auto;
+      display: block;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .facilitator-info div {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.2em;
+      line-height: 1.7;
+      color: #333;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .contact-section {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+      display: block;
+      font-weight: bold;
+      margin-top: 16px;
+      color: #333;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    form button {
+      margin-top: 20px;
+      background-color: #333;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    form button:hover {
+      background-color: #555;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 10px;
+      }
+
+      .facilitator-info img {
+        width: 160px;
+        height: 160px;
+      }
+
+      .facilitator-info div {
+        font-size: 1em;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Contact</h1>
+  </header>
+
+  <main>
+    <div class="tabs">
+      <div class="tab-buttons">
+
+        <!-- Facilitator Section -->
+        <div class="tab-btn">
+          <h2>Meet Our Facilitator</h2>
+          <div class="facilitator-info">
+            <img src="assets/sarahedmore.png" alt="Sarah Edmore">
+            <div>
+              <p>Meet <strong style="font-size: 1.3em;">Sarah Edmore</strong>, a human development strategist reshaping the present-future of human agency—across nations, in context and sustainability~</p>
+              <p>From the soul of Botswana, to the innovation hubs of Japan, to the policy arenas of Sweden, she architects national identities in wholeness systems, and sustainable transformative strategies for cohesive alignment with a community-centered approach.~</p>
+              <p>Her rare ability to harmonize advanced technologies with contextual relevance, her work is not just global—it’s community-centered. Open-minded yet grounded, modern yet timeless—she brings a breath of fresh air to systems thinking, policy design, and sustainable innovation.~</p>
+              <p><strong>🎯 If you’re sustainably building the present-future with community, you’ll want her at the table.~</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="tab-btn">
+          <a href="#contact">We Look Forward To Hear From You</a>
+          <section id="contact" class="contact-section">
+            <h2>Contact Us</h2>
+            <p>Please fill out the form below — we aim to respond within <strong>72 hours</strong>.</p>
+
+            <form action="https://formspree.io/f/xpwrjkdl" method="POST">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+
+              <button type="submit">Send Message</button>
+            </form>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

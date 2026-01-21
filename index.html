@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Lounge Organisation</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #fff;
+      color: #333;
+    }
+
+    .topnav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 1rem;
+      background: linear-gradient(to right, #f0f0f0, #ffffff);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .topnav a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #eaeaea;
+      transition: background 0.3s ease;
+    }
+
+    .topnav a:hover {
+      background: #dcdcdc;
+    }
+
+    header {
+      
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    header img {
+      height: 800px;
+      width: auto;
+      display: block;
+      margin: 0 auto 60px;
+    }
+   
+
+    section {
+      max-width: 100%;
+      padding: 60px 0; /* 🔁 Uniform top and bottom spacing */
+    }
+
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f7f7f7;
+      border-top: 1px solid #ddd;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 12px;
+      font-size: 24px;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #0073e6;
+    }
+
+    @media (max-width: 600px) {
+      .topnav {
+        flex-direction: horizontally straight;
+        align-items: center;
+      }
+
+      .topnav a {
+        width: 20%;
+        text-align: horizontally straight;
+      }
+
+      header img {
+        height: 800px;
+      }
+
+      iframe {
+        height: 350px;
+      }
+    }
+    .logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px; /* ✅ matches section spacing */
+  }
+
+  .logo-section img {
+    height: 400px;
+    width: auto;
+    max-width: 100%;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔝 Sticky Navigation -->
+  <div class="topnav">
+  
+    <a href="#about-section">About</a>
+    <a href="#Hubs-section">Hubs</a>
+    <a href="#contact-section">Contact</a>
+  </div>
+
+  <!-- 🖼️ Logo Banner -->
+  <header>
+   <header class="logo-section">
+  <img src="YouLounge - logo.png" alt="You Lounge Logo">
+</header>
+
+  <!-- 🌍 Sections (Equal Spacing) -->
+  <section id="welcome-section">
+    <iframe src="welcome.html" style="width: 100%; height: 300px; border: none;"></iframe>
+  </section>
+
+  <section id="about-section">
+    <iframe src="about.html"></iframe>
+  </section>
+
+<section id="Hubs-section">
+  <div style="width: 100%; border: none; padding: 0;">
+    <object data="hubs.html" type="text/html" width="100%" height="1500px" style="border: none; overflow: auto;">
+      Your browser does not support embedded HTML. Please <a href="hubs.html" target="_blank">click here to view.</a>
+    </object>
+  </div>
+</section>
+
+  <section id="contact-section">
+    <iframe src="contact.html"></iframe>
+  </section>
+  
+  
+
+  <!-- 🤝 Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter-square"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram-square"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="mailto:wholenessprogramme@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p style="margin-top: 16px;">&copy;2025 You Lounge Organisation™ All legal rights reserved.</p>
+  </footer>
+
+</body>
+</html>
