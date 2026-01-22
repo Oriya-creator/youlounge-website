@@ -79,6 +79,83 @@ button:hover {
   font-size:12px;
   margin-top:100px;
 }
+
+/* Payment Section Styles */
+.payment-section {
+  background: #141414;
+  border: 1px solid #c7a046;
+  border-radius: 8px;
+  padding: 40px;
+  margin: 60px 0;
+  text-align: center;
+}
+
+.payment-tier {
+  margin: 30px 0;
+  padding: 30px;
+  background: #0e0e0e;
+  border-radius: 6px;
+  border: 1px solid #2a2a2a;
+}
+
+.payment-tier.featured {
+  border-color: #c7a046;
+  position: relative;
+}
+
+.payment-tier.featured:before {
+  content: "RECOMMENDED";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c7a046;
+  color: #000;
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.payment-tiers {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.payment-tiers .payment-tier {
+  flex: 1;
+  min-width: 0;
+}
+
+.tier-price {
+  font-size: 32px;
+  font-weight: bold;
+  color: #c7a046;
+  margin: 10px 0;
+}
+
+.tier-description {
+  color: #aaa;
+  font-size: 14px;
+  margin: 15px 0;
+}
+
+.paypal-container {
+  margin-top: 25px;
+  min-height: 50px;
+}
+
+@media (max-width: 768px) {
+  .payment-tiers {
+    flex-direction: column;
+  }
+  
+  body {
+    padding: 20px;
+  }
+}
 </style>
 </head>
 
@@ -93,6 +170,31 @@ button:hover {
 This is not development.  
 This is **operating altitude**.
 </p>
+
+<!-- ================= PAYMENT SECTION ================= -->
+<div class="payment-section">
+  <h2>ACTIVATE SOVEREIGN PROTOCOL</h2>
+  <p class="confidential">CONFIDENTIAL — C-SUITE & BOARD-GRADE ARCHITECTURE</p>
+  <p>Select your access tier to begin the 90-Day Executive Governance Systems.</p>
+  
+  <div class="payment-tiers">
+    <!-- Tier 1: $15,000 -->
+    <div class="payment-tier">
+      <h3>90-Day Protocol Access</h3>
+      <div class="tier-price">$15,000</div>
+      <p class="tier-description">Full 90-day access to Executive Governance Systems</p>
+      <div class="paypal-container" id="paypal-container-8MZHW4FL8SJFY"></div>
+    </div>
+    
+    <!-- Tier 2: $30,000 (Featured) -->
+    <div class="payment-tier featured">
+      <h3>90-Day Protocol + Implementation</h3>
+      <div class="tier-price">$30,000</div>
+      <p class="tier-description">Includes personalized implementation guidance and priority support</p>
+      <div class="paypal-container" id="paypal-container-BTYGGLQLY5KVS"></div>
+    </div>
+  </div>
+</div>
 
 <div class="divider"></div>
 
@@ -135,7 +237,7 @@ You are **architecting decision environments**.
 
 <p>
 These days move you from:
-<strong>“excellent leader” → “institutional stabilizer.”</strong>
+<strong>"excellent leader" → "institutional stabilizer."</strong>
 </p>
 </div>
 
@@ -191,7 +293,7 @@ You now operate as a governance system — not a personality.
 <h2>90-DAY FLIGHT — EAGLE VIEW EXECUTIVE APPLICATION</h2>
 
 <p>
-This phase is not “more work.”  
+This phase is not "more work."  
 It is **altitude**.
 </p>
 
@@ -260,6 +362,22 @@ function updateAccess() {
 
 updateAccess();
 setInterval(updateAccess, 60000);
+</script>
+
+<!-- PayPal SDK and Buttons -->
+<script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD">
+</script>
+<script>
+  // Render $15,000 button
+  paypal.HostedButtons({
+    hostedButtonId: "8MZHW4FL8SJFY",
+  }).render("#paypal-container-8MZHW4FL8SJFY");
+  
+  // Render $30,000 button
+  paypal.HostedButtons({
+    hostedButtonId: "BTYGGLQLY5KVS",
+  }).render("#paypal-container-BTYGGLQLY5KVS");
 </script>
 
 </body>
