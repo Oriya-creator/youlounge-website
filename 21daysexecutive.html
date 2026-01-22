@@ -39,6 +39,44 @@ hr {
   margin: 50px 0;
 }
 
+/* ===== PAYMENT SECTION ===== */
+.payment-section {
+  background: #151515;
+  border: 1px solid #c7a046;
+  border-radius: 8px;
+  padding: 50px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.payment-tier {
+  margin: 40px auto;
+  max-width: 500px;
+  padding: 40px;
+  background: #0e0e0e;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+}
+
+.tier-price {
+  font-size: 42px;
+  font-weight: bold;
+  color: #c7a046;
+  margin: 20px 0;
+}
+
+.tier-description {
+  color: #aaa;
+  font-size: 16px;
+  margin: 25px 0;
+  line-height: 1.5;
+}
+
+.paypal-container {
+  margin-top: 35px;
+  min-height: 55px;
+}
+
 /* ===== GATED SECTION ONLY ===== */
 
 .gov-day {
@@ -66,6 +104,7 @@ textarea {
   color: #f2f2f2;
   border: 1px solid #333;
   padding: 10px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 button {
@@ -77,6 +116,7 @@ button {
   cursor: pointer;
   border-radius: 4px;
   margin-top: 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 button:hover {
@@ -95,11 +135,53 @@ button:hover {
   color: #777;
   margin-top: 90px;
 }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+  
+  .payment-section {
+    padding: 30px 20px;
+  }
+  
+  .payment-tier {
+    padding: 30px 20px;
+  }
+  
+  .tier-price {
+    font-size: 36px;
+  }
+  
+  .container {
+    max-width: 100%;
+  }
+}
 </style>
 </head>
 
 <body>
 <div class="container">
+
+<!-- ================= PAYMENT SECTION ================= -->
+<div class="payment-section">
+  <h2>ACTIVATE 21-DAY EXECUTIVE GOVERNANCE SYSTEMS</h2>
+  <p class="confidential">CONFIDENTIAL — BOARD & C-SUITE EYES ONLY</p>
+  <p>Begin your transformation from personal leadership to institutional governance.</p>
+  
+  <div class="payment-tier">
+    <h3>21-Day Executive Governance Installation</h3>
+    <div class="tier-price">$15,000</div>
+    <p class="tier-description">
+      Complete access to the 21-Day Executive Governance Systems<br>
+      One governance layer installed per day<br>
+      Institutional decision architecture<br>
+      Board-grade governance protocols
+    </p>
+    <div class="paypal-container" id="paypal-container-TQ8MBDUY87G6S"></div>
+  </div>
+</div>
 
 <!-- ================= HANDOFF FROM 7-DAY ================= -->
 
@@ -387,6 +469,17 @@ function updateAccess() {
 
 updateAccess();
 setInterval(updateAccess, 60000);
+</script>
+
+<!-- PayPal SDK and Button Integration -->
+<script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD">
+</script>
+<script>
+  // Render the 21-Day PayPal button
+  paypal.HostedButtons({
+    hostedButtonId: "TQ8MBDUY87G6S",
+  }).render("#paypal-container-TQ8MBDUY87G6S");
 </script>
 
 </body>
