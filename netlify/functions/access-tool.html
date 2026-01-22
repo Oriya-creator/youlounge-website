@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input, button { width: 100%; padding: 12px; margin: 10px 0; }
+        .code { background: black; color: gold; padding: 15px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h2>Access Code Generator</h2>
+    <input type="email" id="email" placeholder="Customer email">
+    <button onclick="generate()">Generate Code</button>
+    
+    <div id="result" style="display:none; margin-top:20px;">
+        <p>Code:</p>
+        <div class="code" id="code"></div>
+        <button onclick="copy()">Copy</button>
+    </div>
+    
+    <script>
+    function generate() {
+        const code = 'SOVEREIGN-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+        document.getElementById('code').textContent = code;
+        document.getElementById('result').style.display = 'block';
+        alert('Code generated! Add to course page.');
+    }
+    
+    function copy() {
+        const code = document.getElementById('code').textContent;
+        navigator.clipboard.writeText(code);
+        alert('Copied!');
+    }
+    </script>
+</body>
+</html>
