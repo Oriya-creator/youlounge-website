@@ -749,31 +749,35 @@ document.addEventListener('DOMContentLoaded', function() {
   src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD">
 </script>
 <script>
-  // Render $15,000 button (Standard)
+  // Render $15,000 button (Standard) - UPDATED WITH createOrder
   paypal.HostedButtons({
     hostedButtonId: "8MZHW4FL8SJFY",
     createOrder: function(data, actions) {
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: '15000.00'
+            value: '15000.00',
+            currency_code: 'USD'
           },
-          custom_id: '90day-standard-' + new Date().getTime(),
-          description: '90-Day Executive Governance Systems - Standard'
+          custom_id: '90day-standard-program-' + Date.now(),
+          description: '90-Day Executive Governance Systems - Standard Tier',
+          soft_descriptor: 'Sovereign 90D Standard'
         }]
       });
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
+        console.log('Payment approved:', details);
         handlePayPalTransactionStandard({
           id: details.id,
           status: details.status,
           amount: details.purchase_units[0].amount.value,
           email: details.payer.email_address,
-          tier: 'standard'
+          tier: 'standard',
+          custom_id: details.purchase_units[0].custom_id
         });
         
-        alert('Payment completed successfully! Your 90-day access is being activated...');
+        alert('Payment completed successfully! Your 90-day standard access is being activated...');
       });
     },
     onError: function(err) {
@@ -783,34 +787,46 @@ document.addEventListener('DOMContentLoaded', function() {
         statusElement.className = 'status-message error';
         statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
       }
+    },
+    onCancel: function(data) {
+      console.log('Payment cancelled by user');
+      const statusElement = document.getElementById('payment-status-90-standard');
+      if (statusElement) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '❌ Payment cancelled. Please try again if you wish to proceed.';
+      }
     }
   }).render("#paypal-container-8MZHW4FL8SJFY");
   
-  // Render $30,000 button (Premium)
+  // Render $30,000 button (Premium) - UPDATED WITH createOrder
   paypal.HostedButtons({
     hostedButtonId: "BTYGGLQLY5KVS",
     createOrder: function(data, actions) {
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: '30000.00'
+            value: '30000.00',
+            currency_code: 'USD'
           },
-          custom_id: '90day-premium-' + new Date().getTime(),
-          description: '90-Day Executive Governance Systems - Premium with Implementation'
+          custom_id: '90day-premium-program-' + Date.now(),
+          description: '90-Day Executive Governance Systems - Premium Tier with Implementation',
+          soft_descriptor: 'Sovereign 90D Premium'
         }]
       });
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
+        console.log('Payment approved:', details);
         handlePayPalTransactionPremium({
           id: details.id,
           status: details.status,
           amount: details.purchase_units[0].amount.value,
           email: details.payer.email_address,
-          tier: 'premium'
+          tier: 'premium',
+          custom_id: details.purchase_units[0].custom_id
         });
         
-        alert('Payment completed successfully! Your premium 90-day access is being activated...');
+        alert('Payment completed successfully! Your 90-day premium access is being activated...');
       });
     },
     onError: function(err) {
@@ -819,6 +835,14 @@ document.addEventListener('DOMContentLoaded', function() {
       if (statusElement) {
         statusElement.className = 'status-message error';
         statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
+      }
+    },
+    onCancel: function(data) {
+      console.log('Payment cancelled by user');
+      const statusElement = document.getElementById('payment-status-90-premium');
+      if (statusElement) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '❌ Payment cancelled. Please try again if you wish to proceed.';
       }
     }
   }).render("#paypal-container-BTYGGLQLY5KVS");
