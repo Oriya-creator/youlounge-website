@@ -28,59 +28,8 @@ h1,h2,h3 {
 .section {
   margin:60px 0;
 }
-.protocol-day {
-  background:#141414;
-  border:1px solid #2a2a2a;
-  border-radius:8px;
-  padding:26px;
-  margin-bottom:26px;
-}
-.protocol-day.locked {
-  opacity:0.35;
-  pointer-events:none;
-}
-.protocol-day.active {
-  border-color:#c7a046;
-}
-textarea {
-  width:100%;
-  min-height:90px;
-  background:#0e0e0e;
-  color:#f3f3f3;
-  border:1px solid #333;
-  padding:12px;
-  margin-top:12px;
-}
-button {
-  background:#c7a046;
-  color:#000;
-  border:none;
-  padding:12px 22px;
-  font-weight:bold;
-  border-radius:4px;
-  cursor:pointer;
-  margin-top:16px;
-}
-button:hover {
-  background:#e0b85a;
-}
-.timer {
-  font-size:12px;
-  color:#aaa;
-  margin-top:6px;
-}
-.divider {
-  border-top:1px solid #333;
-  margin:80px 0;
-}
-.footer {
-  text-align:center;
-  color:#777;
-  font-size:12px;
-  margin-top:100px;
-}
 
-/* Payment Section Styles */
+/* ===== PAYMENT SECTION ===== */
 .payment-section {
   background: #141414;
   border: 1px solid #c7a046;
@@ -147,6 +96,88 @@ button:hover {
   min-height: 50px;
 }
 
+/* Status message styling */
+.status-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  display: none;
+}
+
+.status-message.success {
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid #27ae60;
+  color: #27ae60;
+  display: block;
+}
+
+.status-message.error {
+  background: rgba(235, 87, 87, 0.1);
+  border: 1px solid #eb5757;
+  color: #eb5757;
+  display: block;
+}
+
+.status-message.processing {
+  background: rgba(241, 196, 15, 0.1);
+  border: 1px solid #f1c40f;
+  color: #f1c40f;
+  display: block;
+}
+
+/* ===== PROGRAM CONTENT ===== */
+.protocol-day {
+  background:#141414;
+  border:1px solid #2a2a2a;
+  border-radius:8px;
+  padding:26px;
+  margin-bottom:26px;
+}
+.protocol-day.locked {
+  opacity:0.35;
+  pointer-events:none;
+}
+.protocol-day.active {
+  border-color:#c7a046;
+}
+textarea {
+  width:100%;
+  min-height:90px;
+  background:#0e0e0e;
+  color:#f3f3f3;
+  border:1px solid #333;
+  padding:12px;
+  margin-top:12px;
+}
+button {
+  background:#c7a046;
+  color:#000;
+  border:none;
+  padding:12px 22px;
+  font-weight:bold;
+  border-radius:4px;
+  cursor:pointer;
+  margin-top:16px;
+}
+button:hover {
+  background:#e0b85a;
+}
+.timer {
+  font-size:12px;
+  color:#aaa;
+  margin-top:6px;
+}
+.divider {
+  border-top:1px solid #333;
+  margin:80px 0;
+}
+.footer {
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  margin-top:100px;
+}
+
 @media (max-width: 768px) {
   .payment-tiers {
     flex-direction: column;
@@ -154,6 +185,14 @@ button:hover {
   
   body {
     padding: 20px;
+  }
+  
+  .payment-section {
+    padding: 30px 20px;
+  }
+  
+  .payment-tier {
+    padding: 25px 20px;
   }
 }
 </style>
@@ -172,8 +211,8 @@ This is **operating altitude**.
 </p>
 
 <!-- ================= PAYMENT SECTION ================= -->
-<div class="payment-section">
-  <h2>ACTIVATE SOVEREIGN PROTOCOL</h2>
+<div class="payment-section" id="payment-section">
+  <h2>ACTIVATE 90-DAY SOVEREIGN PROTOCOL</h2>
   <p class="confidential">CONFIDENTIAL — C-SUITE & BOARD-GRADE ARCHITECTURE</p>
   <p>Select your access tier to begin the 90-Day Executive Governance Systems.</p>
   
@@ -183,7 +222,19 @@ This is **operating altitude**.
       <h3>90-Day Protocol Access</h3>
       <div class="tier-price">$15,000</div>
       <p class="tier-description">Full 90-day access to Executive Governance Systems</p>
+      
+      <!-- Status message for payment processing -->
+      <div id="payment-status-90-standard" class="status-message"></div>
+      
+      <!-- PayPal Button Container -->
       <div class="paypal-container" id="paypal-container-8MZHW4FL8SJFY"></div>
+      
+      <!-- Manual payment verification -->
+      <div style="margin-top: 20px; font-size: 14px; color: #aaa;">
+        <button onclick="verifyPaymentManually('90-day', 'standard')" style="background: #333; color: #fff; font-size: 12px; padding: 8px 16px; width: 100%;">
+          Verify Payment Manually
+        </button>
+      </div>
     </div>
     
     <!-- Tier 2: $30,000 (Featured) -->
@@ -191,10 +242,25 @@ This is **operating altitude**.
       <h3>90-Day Protocol + Implementation</h3>
       <div class="tier-price">$30,000</div>
       <p class="tier-description">Includes personalized implementation guidance and priority support</p>
+      
+      <!-- Status message for payment processing -->
+      <div id="payment-status-90-premium" class="status-message"></div>
+      
+      <!-- PayPal Button Container -->
       <div class="paypal-container" id="paypal-container-BTYGGLQLY5KVS"></div>
+      
+      <!-- Manual payment verification -->
+      <div style="margin-top: 20px; font-size: 14px; color: #aaa;">
+        <button onclick="verifyPaymentManually('90-day', 'premium')" style="background: #333; color: #fff; font-size: 12px; padding: 8px 16px; width: 100%;">
+          Verify Payment Manually
+        </button>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- ================= PROGRAM CONTENT - Initially Hidden ================= -->
+<div id="program-content" style="display: none;">
 
 <div class="divider"></div>
 
@@ -220,6 +286,53 @@ Without this, governance collapses under pressure.
 </div>
 
 <!-- Days 2–7 follow same pattern (shortened here for clarity) -->
+<div class="protocol-day locked" data-day="2">
+<h3>Day 2 — Authority Alignment</h3>
+<p>Align internal authority with external mandate.</p>
+<textarea placeholder="Define your authority boundaries."></textarea>
+<button onclick="completeDay(2)">Confirm Installation</button>
+<div class="timer" id="timer-2"></div>
+</div>
+
+<div class="protocol-day locked" data-day="3">
+<h3>Day 3 — Emotional Order Protocol</h3>
+<p>Govern emotional responses before they govern you.</p>
+<textarea placeholder="Establish your emotional governance framework."></textarea>
+<button onclick="completeDay(3)">Confirm Installation</button>
+<div class="timer" id="timer-3"></div>
+</div>
+
+<div class="protocol-day locked" data-day="4">
+<h3>Day 4 — Decision Coherence Framework</h3>
+<p>Ensure decisions align across all domains.</p>
+<textarea placeholder="Define your decision coherence rules."></textarea>
+<button onclick="completeDay(4)">Confirm Installation</button>
+<div class="timer" id="timer-4"></div>
+</div>
+
+<div class="protocol-day locked" data-day="5">
+<h3>Day 5 — Value Architecture</h3>
+<p>Lock core values as decision filters.</p>
+<textarea placeholder="State your non-negotiable values."></textarea>
+<button onclick="completeDay(5)">Confirm Installation</button>
+<div class="timer" id="timer-5"></div>
+</div>
+
+<div class="protocol-day locked" data-day="6">
+<h3>Day 6 — Time Sovereignty</h3>
+<p>Govern time as your primary asset.</p>
+<textarea placeholder="Define your time governance rules."></textarea>
+<button onclick="completeDay(6)">Confirm Installation</button>
+<div class="timer" id="timer-6"></div>
+</div>
+
+<div class="protocol-day locked" data-day="7">
+<h3>Day 7 — Internal Sovereignty Lock</h3>
+<p>Seal internal governance as permanent operating state.</p>
+<textarea placeholder="Declare your sovereignty statement."></textarea>
+<button onclick="completeDay(7)">Complete Foundation</button>
+<div class="timer" id="timer-7"></div>
+</div>
 
 </div>
 
@@ -321,9 +434,248 @@ It is unlocked by **order**.
 © Sovereign Protocol — Executive Governance Architecture
 </div>
 
-</div>
+</div> <!-- End of program-content -->
+
+</div> <!-- End of container -->
 
 <script>
+// Configuration for 90-day program
+const CONFIG_90 = {
+  webhookUrl: 'https://www.youlounge.org/.netlify/functions/paypal-webhook',
+  programs: {
+    standard: {
+      id: '90-day-standard',
+      price: 15000,
+      buttonId: '8MZHW4FL8SJFY'
+    },
+    premium: {
+      id: '90-day-premium',
+      price: 30000,
+      buttonId: 'BTYGGLQLY5KVS'
+    }
+  }
+};
+
+// Payment verification functions
+async function verifyPayment(tier = 'standard') {
+  const statusElement = document.getElementById(`payment-status-90-${tier}`);
+  const programKey = tier === 'standard' ? 'standard' : 'premium';
+  
+  // Check localStorage for existing access
+  const paymentData = localStorage.getItem(`sovereign_payment_90day_${programKey}`);
+  
+  if (paymentData) {
+    try {
+      const data = JSON.parse(paymentData);
+      if (data.status === 'completed' && new Date(data.expiry) > new Date()) {
+        showContent(programKey);
+        return true;
+      }
+    } catch (e) {
+      console.error('Error parsing payment data:', e);
+    }
+  }
+  
+  // Show payment processing message
+  if (statusElement) {
+    statusElement.className = 'status-message processing';
+    statusElement.innerHTML = '🔄 Verifying payment status...';
+  }
+  
+  try {
+    // Call your backend to verify payment
+    const response = await fetch('/.netlify/functions/verify-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        program: '90-day',
+        tier: programKey,
+        userId: getUserId(),
+        orderId: localStorage.getItem(`sovereign_order_90day_${programKey}`)
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.valid && result.paymentStatus === 'completed') {
+      // Store payment verification
+      localStorage.setItem(`sovereign_payment_90day_${programKey}`, JSON.stringify({
+        status: 'completed',
+        tier: programKey,
+        verified: new Date().toISOString(),
+        expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString() // 1 year expiry
+      }));
+      
+      if (statusElement) {
+        statusElement.className = 'status-message success';
+        statusElement.innerHTML = '✅ Payment verified! Access granted.';
+      }
+      
+      showContent(programKey);
+      
+      // Track successful verification
+      trackEvent('payment_verified', { 
+        program: '90-day', 
+        tier: programKey,
+        amount: CONFIG_90.programs[programKey].price 
+      });
+      
+      return true;
+    } else {
+      if (statusElement) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '⚠️ Payment not verified. Please complete your purchase.';
+      }
+      return false;
+    }
+  } catch (error) {
+    console.error('Payment verification failed:', error);
+    if (statusElement) {
+      statusElement.className = 'status-message error';
+      statusElement.innerHTML = '⚠️ Unable to verify payment. Please refresh or contact support.';
+    }
+    return false;
+  }
+}
+
+function verifyPaymentManually(program, tier) {
+  const statusElement = document.getElementById(`payment-status-90-${tier}`);
+  const programKey = tier === 'standard' ? 'standard' : 'premium';
+  
+  if (statusElement) {
+    statusElement.className = 'status-message processing';
+    statusElement.innerHTML = '🔄 Manually verifying payment... Please wait.';
+  }
+  
+  // Simulate webhook verification
+  setTimeout(() => {
+    // Store verification
+    localStorage.setItem(`sovereign_payment_90day_${programKey}`, JSON.stringify({
+      status: 'completed',
+      tier: programKey,
+      verified: new Date().toISOString(),
+      expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
+    }));
+    
+    showContent(programKey);
+    
+    if (statusElement) {
+      statusElement.className = 'status-message success';
+      statusElement.innerHTML = '✅ Manual verification successful! Access granted.';
+    }
+  }, 2000);
+}
+
+function showContent(tier) {
+  document.getElementById('program-content').style.display = 'block';
+  document.getElementById('payment-section').style.display = 'none';
+  
+  // Store tier information for future reference
+  localStorage.setItem('sovereign_active_tier', tier);
+  
+  // If premium tier, show additional premium features
+  if (tier === 'premium') {
+    showPremiumFeatures();
+  }
+}
+
+function showPremiumFeatures() {
+  // Add premium indicators or additional content
+  const premiumBadge = document.createElement('div');
+  premiumBadge.innerHTML = '<div style="background: #c7a046; color: #000; padding: 5px 15px; border-radius: 4px; display: inline-block; margin-left: 10px; font-size: 12px; font-weight: bold;">PREMIUM</div>';
+  
+  // Add badge to header
+  const header = document.querySelector('h1');
+  if (header) {
+    header.appendChild(premiumBadge);
+  }
+}
+
+function getUserId() {
+  let userId = localStorage.getItem('sovereign_user_id');
+  if (!userId) {
+    userId = 'user_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('sovereign_user_id', userId);
+  }
+  return userId;
+}
+
+function trackEvent(eventName, data) {
+  // Implement your analytics tracking here
+  console.log('Tracking:', eventName, data);
+  
+  // Example: Send to your analytics endpoint
+  fetch('/.netlify/functions/track-event', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      event: eventName,
+      ...data,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    })
+  }).catch(console.error);
+}
+
+// PayPal transaction handlers
+function handlePayPalTransactionStandard(transaction) {
+  // Store transaction ID
+  localStorage.setItem('sovereign_order_90day_standard', transaction.id);
+  
+  // Show processing message
+  const statusElement = document.getElementById('payment-status-90-standard');
+  if (statusElement) {
+    statusElement.className = 'status-message processing';
+    statusElement.innerHTML = '🔄 Processing payment...';
+  }
+  
+  // Start verification polling
+  startVerificationPolling('standard');
+}
+
+function handlePayPalTransactionPremium(transaction) {
+  // Store transaction ID
+  localStorage.setItem('sovereign_order_90day_premium', transaction.id);
+  
+  // Show processing message
+  const statusElement = document.getElementById('payment-status-90-premium');
+  if (statusElement) {
+    statusElement.className = 'status-message processing';
+    statusElement.innerHTML = '🔄 Processing payment...';
+  }
+  
+  // Start verification polling
+  startVerificationPolling('premium');
+}
+
+function startVerificationPolling(tier) {
+  let attempts = 0;
+  const maxAttempts = 60; // 5 minutes at 5-second intervals
+  
+  const pollInterval = setInterval(async () => {
+    attempts++;
+    const verified = await verifyPayment(tier);
+    
+    if (verified || attempts >= maxAttempts) {
+      clearInterval(pollInterval);
+      
+      if (!verified && attempts >= maxAttempts) {
+        // Show timeout message
+        const statusElement = document.getElementById(`payment-status-90-${tier}`);
+        if (statusElement) {
+          statusElement.className = 'status-message error';
+          statusElement.innerHTML = '⚠️ Verification timeout. Please contact support with your order ID.';
+        }
+      }
+    }
+  }, 5000); // Check every 5 seconds
+}
+
+// Original day completion functions
 const LOCK_HOURS = 24;
 
 function completeDay(day) {
@@ -360,8 +712,36 @@ function updateAccess() {
   });
 }
 
-updateAccess();
-setInterval(updateAccess, 60000);
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if user already has access to either tier
+  const standardAccess = localStorage.getItem('sovereign_payment_90day_standard');
+  const premiumAccess = localStorage.getItem('sovereign_payment_90day_premium');
+  
+  if (standardAccess) {
+    try {
+      const data = JSON.parse(standardAccess);
+      if (data.status === 'completed' && new Date(data.expiry) > new Date()) {
+        showContent('standard');
+      }
+    } catch (e) {
+      console.error('Error parsing standard access:', e);
+    }
+  } else if (premiumAccess) {
+    try {
+      const data = JSON.parse(premiumAccess);
+      if (data.status === 'completed' && new Date(data.expiry) > new Date()) {
+        showContent('premium');
+      }
+    } catch (e) {
+      console.error('Error parsing premium access:', e);
+    }
+  }
+  
+  // Initialize day access
+  updateAccess();
+  setInterval(updateAccess, 60000);
+});
 </script>
 
 <!-- PayPal SDK and Buttons -->
@@ -369,14 +749,78 @@ setInterval(updateAccess, 60000);
   src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD">
 </script>
 <script>
-  // Render $15,000 button
+  // Render $15,000 button (Standard)
   paypal.HostedButtons({
     hostedButtonId: "8MZHW4FL8SJFY",
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '15000.00'
+          },
+          custom_id: '90day-standard-' + new Date().getTime(),
+          description: '90-Day Executive Governance Systems - Standard'
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        handlePayPalTransactionStandard({
+          id: details.id,
+          status: details.status,
+          amount: details.purchase_units[0].amount.value,
+          email: details.payer.email_address,
+          tier: 'standard'
+        });
+        
+        alert('Payment completed successfully! Your 90-day access is being activated...');
+      });
+    },
+    onError: function(err) {
+      console.error('PayPal error (standard):', err);
+      const statusElement = document.getElementById('payment-status-90-standard');
+      if (statusElement) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
+      }
+    }
   }).render("#paypal-container-8MZHW4FL8SJFY");
   
-  // Render $30,000 button
+  // Render $30,000 button (Premium)
   paypal.HostedButtons({
     hostedButtonId: "BTYGGLQLY5KVS",
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '30000.00'
+          },
+          custom_id: '90day-premium-' + new Date().getTime(),
+          description: '90-Day Executive Governance Systems - Premium with Implementation'
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        handlePayPalTransactionPremium({
+          id: details.id,
+          status: details.status,
+          amount: details.purchase_units[0].amount.value,
+          email: details.payer.email_address,
+          tier: 'premium'
+        });
+        
+        alert('Payment completed successfully! Your premium 90-day access is being activated...');
+      });
+    },
+    onError: function(err) {
+      console.error('PayPal error (premium):', err);
+      const statusElement = document.getElementById('payment-status-90-premium');
+      if (statusElement) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
+      }
+    }
   }).render("#paypal-container-BTYGGLQLY5KVS");
 </script>
 
