@@ -11,43 +11,86 @@ body {
   color: #f2f2f2;
   line-height: 1.65;
   padding: 32px;
+  margin: 0;
+  position: relative;
 }
+
+/* Background wallpaper at the top */
+.background-wallpaper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background-image: url('./integrated.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.25;
+}
+
+/* Dark overlay for better text readability */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: linear-gradient(to bottom, rgba(14, 15, 17, 0.85) 0%, rgba(14, 15, 17, 0.65) 50%, rgba(14, 15, 17, 0) 100%);
+  z-index: -1;
+}
+
 .container {
   max-width: 900px;
   margin: auto;
+  position: relative;
+  z-index: 1;
+  background: rgba(14, 15, 17, 0.85);
+  padding: 40px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
+
 .classified {
   color: #c9a44c;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
+
 h1, h2, h3 {
   font-weight: 600;
 }
+
 hr {
   border: none;
   border-top: 1px solid #333;
   margin: 38px 0;
 }
+
 ul {
   margin-left: 22px;
 }
+
 .metric-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
+
 .metric-table th, .metric-table td {
   border-bottom: 1px solid #333;
   padding: 12px 10px;
   text-align: left;
 }
+
 .section-label {
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.09em;
   color: #999;
 }
+
 .cta {
   margin-top: 44px;
   padding: 28px;
@@ -56,27 +99,52 @@ ul {
   font-weight: 600;
   background: rgba(201, 164, 76, 0.05);
 }
+
 a {
   color: #c9a44c;
   text-decoration: none;
 }
+
 .price {
   font-size: 1.5em;
   color: #c9a44c;
   margin: 15px 0;
 }
+
 .pp-button-container {
   margin: 25px 0;
 }
+
 .security-note {
   font-size: 0.8em;
   color: #999;
   margin-top: 15px;
 }
+
+/* Image loading test indicator */
+.image-test {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: #c9a44c;
+  color: #000;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 3px;
+  z-index: 10000;
+}
 </style>
 </head>
 
 <body>
+<!-- Test indicator for image loading -->
+<div class="image-test" id="imageTest">Loading image...</div>
+
+<!-- Background wallpaper elements -->
+<div class="background-wallpaper" id="wallpaper"></div>
+<div class="background-overlay"></div>
+
 <div class="container">
 
 <!-- ===================== -->
@@ -274,5 +342,58 @@ Executive approvals · Capital allocation · Senior hires · Board responses · 
 </div>
 
 </div>
+
+<script>
+// Test if image loads
+document.addEventListener('DOMContentLoaded', function() {
+  const imageTest = document.getElementById('imageTest');
+  
+  // Test image loading
+  const testImage = new Image();
+  
+  testImage.onload = function() {
+    imageTest.innerHTML = '✅ Image Loaded Successfully';
+    imageTest.style.background = '#4CAF50';
+    imageTest.style.color = 'white';
+    
+    // Remove indicator after 3 seconds
+    setTimeout(() => {
+      imageTest.style.display = 'none';
+    }, 3000);
+  };
+  
+  testImage.onerror = function() {
+    imageTest.innerHTML = '❌ Image NOT Found! Check filename';
+    imageTest.style.background = '#f44336';
+    imageTest.style.color = 'white';
+    
+    // Try alternative paths
+    const altPaths = [
+      'integrated.png',
+      './integrated.png',
+      'integrated.jpg',
+      './integrated.jpg'
+    ];
+    
+    // Test alternative paths
+    altPaths.forEach(path => {
+      if (path !== './integrated.png') { // Skip the one we already tried
+        const altImage = new Image();
+        altImage.onload = function() {
+          imageTest.innerHTML = `✅ Image found at: ${path}`;
+          imageTest.style.background = '#4CAF50';
+          imageTest.style.color = 'white';
+          document.getElementById('wallpaper').style.backgroundImage = `url('${path}')`;
+        };
+        altImage.src = path;
+      }
+    });
+  };
+  
+  // Test the exact path we're using
+  testImage.src = './integrated.png';
+});
+</script>
+
 </body>
 </html>
