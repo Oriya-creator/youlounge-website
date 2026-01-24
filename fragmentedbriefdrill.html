@@ -11,37 +11,74 @@ body {
   color: #f2f2f2;
   line-height: 1.6;
   padding: 32px;
+  margin: 0;
 }
+
+/* Background wallpaper at the top */
+.background-wallpaper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px; /* Adjust height as needed */
+  background-image: url('fragmented.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.15; /* Adjust opacity for subtlety */
+}
+
+/* Dark overlay for better text readability */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: linear-gradient(to bottom, rgba(14, 15, 17, 0.9) 0%, rgba(14, 15, 17, 0.7) 50%, rgba(14, 15, 17, 0) 100%);
+  z-index: -1;
+}
+
 .container {
   max-width: 860px;
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
+
 .classified {
   color: #c9a44c;
   font-weight: 600;
   letter-spacing: 0.05em;
 }
+
 h1, h2, h3 {
   font-weight: 600;
 }
+
 hr {
   border: none;
   border-top: 1px solid #333;
   margin: 36px 0;
 }
+
 ul {
   margin-left: 18px;
 }
+
 .metric-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 16px;
 }
+
 .metric-table th, .metric-table td {
   border-bottom: 1px solid #333;
   padding: 10px;
   text-align: left;
 }
+
 .cta {
   margin-top: 40px;
   padding: 25px;
@@ -50,33 +87,53 @@ ul {
   font-weight: 600;
   background: rgba(201, 164, 76, 0.05);
 }
+
 a {
   color: #c9a44c;
   text-decoration: none;
 }
+
 .section-label {
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.08em;
   color: #999;
 }
+
 .price {
   font-size: 1.5em;
   color: #c9a44c;
   margin: 15px 0;
 }
+
 .security-note {
   font-size: 0.8em;
   color: #999;
   margin-top: 15px;
 }
+
 .pp-button-container {
   margin: 25px 0;
 }
+
+/* Alternative: Full background version */
+/* Uncomment if you want the image as full background
+body {
+  background: 
+    linear-gradient(rgba(14, 15, 17, 0.85), rgba(14, 15, 17, 0.95)),
+    url('fragmented.png') no-repeat center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+*/
 </style>
 </head>
 
 <body>
+<!-- Background wallpaper elements -->
+<div class="background-wallpaper"></div>
+<div class="background-overlay"></div>
+
 <div class="container">
 
 <!-- ===================== -->
