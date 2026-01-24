@@ -601,96 +601,179 @@
                 </div>
             </div>
             
-            <!-- Form with Horizontal Laptop Image Background -->
-            <div class="form-container">
-                <div class="form-header">
-                    <h2 class="form-title">Sovereign Diagnostic Assessment</h2>
-                    <p class="form-subtitle">Discover your current alignment and next growth phase</p>
-                </div>
-                
-                <p class="form-subtitle" style="margin-bottom: 30px;">
-                    This confidential diagnostic helps to understand where one currently stands and what is required to move into deeper alignment, clarity, and integration.
-                    Enter your details below to receive the diagnostic and your personalized results.
-                </p>
-                
-                <form id="sovereignForm" action="https://formspree.io/f/mgoovzbp" method="POST">
-                    <!-- Hidden fields for Formspree configuration -->
-                    <input type="hidden" name="_next" value="https://yourdomain.com/sovereignprotocoldiagnostic.html">
-                    <input type="hidden" name="_subject" value="New Sovereign Protocol Diagnostic Registration">
-                    <input type="hidden" name="_replyto" id="replyToEmail">
-                    
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-input" 
-                            placeholder="your.name@company.com" 
-                            required
-                        >
-                        <div class="error-message" id="emailError">Please enter a valid email address</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            class="form-input" 
-                            placeholder="John Smith"
-                        >
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="role" class="form-label">Primary Role (Optional)</label>
-                        <select id="role" name="role" class="form-input">
-                            <option value="">Select your role</option>
-                            <option value="CEO">CEO</option>
-                            <option value="COO">COO</option>
-                            <option value="CFO">CFO</option>
-                            <option value="CTO">CTO</option>
-                            <option value="CMO">CMO</option>
-                            <option value="Other C-Suite">Other C-Suite</option>
-                            <option value="Board Member">Board Member</option>
-                            <option value="Senior Executive">Senior Executive</option>
-                            <option value="Managing Director">Managing Director</option>
-                            <option value="Partner">Partner</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <input type="hidden" id="termsAccepted" name="termsAccepted" value="false">
-                    
-                    <div class="privacy-note">
-                        <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
-                    </div>
-                    
-                    <!-- Checkbox for terms agreement -->
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="termsCheckbox" class="checkbox-input">
-                        <label for="termsCheckbox" class="checkbox-label">
-                            By proceeding, you confirm that you meet the criteria for the Sovereign Protocol and understand this is a confidential executive diagnostic.
-                        </label>
-                    </div>
-                    
-                    <!-- Submit button -->
-                    <button type="submit" class="submit-button" id="submitButton" disabled>
-                        Begin Diagnostic Assessment
-                    </button>
-                    
-                    <div class="loader" id="formLoader">
-                        <div class="spinner"></div>
-                        <p>Submitting your information...</p>
-                    </div>
-                    
-                    <div class="success-message" id="successMessage">
-                        <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
-                    </div>
-                </form>
-            </div>
+          <!-- Form with Horizontal Laptop Image Background -->
+<div class="form-container">
+    <div class="form-header">
+        <h2 class="form-title">Sovereign Diagnostic Assessment</h2>
+        <p class="form-subtitle">Discover your current alignment and next growth phase</p>
+    </div>
+    
+    <p class="form-subtitle" style="margin-bottom: 30px;">
+        This confidential diagnostic helps to understand where one currently stands and what is required to move into deeper alignment, clarity, and integration.
+        Enter your details below to receive the diagnostic and your personalized results.
+    </p>
+    
+    <!-- FORM WITH FORMSPREE INTEGRATION -->
+    <form id="sovereignForm" action="https://formspree.io/f/mgoovzbp" method="POST">
+        <!-- Hidden fields for Formspree configuration -->
+        <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
+        <input type="hidden" name="_next" value="sovereignprotocoldiagnostic.html">
+        
+        <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-input" 
+                placeholder="your.name@company.com" 
+                required
+            >
+            <div class="error-message" id="emailError">Please enter a valid email address</div>
         </div>
+        
+        <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="form-input" 
+                placeholder="John Smith"
+            >
+        </div>
+        
+        <div class="form-group">
+            <label for="role" class="form-label">Primary Role (Optional)</label>
+            <select id="role" name="role" class="form-input">
+                <option value="">Select your role</option>
+                <option value="CEO">CEO</option>
+                <option value="COO">COO</option>
+                <option value="CFO">CFO</option>
+                <option value="CTO">CTO</option>
+                <option value="CMO">CMO</option>
+                <option value="Other C-Suite">Other C-Suite</option>
+                <option value="Board Member">Board Member</option>
+                <option value="Senior Executive">Senior Executive</option>
+                <option value="Managing Director">Managing Director</option>
+                <option value="Partner">Partner</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="privacy-note">
+            <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
+        </div>
+        
+        <!-- Checkbox for terms agreement -->
+        <div class="checkbox-group">
+            <input type="checkbox" id="termsCheckbox" class="checkbox-input">
+            <label for="termsCheckbox" class="checkbox-label">
+                By proceeding, you confirm that you meet the criteria for the Sovereign Protocol and understand this is a confidential executive diagnostic.
+            </label>
+        </div>
+        
+        <!-- Submit button -->
+        <button type="submit" class="submit-button" id="submitButton" disabled>
+            Begin Diagnostic Assessment
+        </button>
+        
+        <div class="loader" id="formLoader">
+            <div class="spinner"></div>
+            <p>Processing your request...</p>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('sovereignForm');
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        const submitButton = document.getElementById('submitButton');
+        const formLoader = document.getElementById('formLoader');
+        const successMessage = document.getElementById('successMessage');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        
+        // Validate email on input
+        emailInput.addEventListener('input', function() {
+            if (validateEmail(emailInput.value)) {
+                emailError.style.display = 'none';
+                emailInput.style.borderColor = '#d1d5db';
+            } else {
+                emailError.style.display = 'block';
+                emailInput.style.borderColor = '#dc2626';
+            }
+            updateSubmitButtonState();
+        });
+        
+        // Update submit button state when checkbox is clicked
+        termsCheckbox.addEventListener('change', updateSubmitButtonState);
+        
+        // Function to update submit button state
+        function updateSubmitButtonState() {
+            const isEmailValid = validateEmail(emailInput.value);
+            const isTermsAccepted = termsCheckbox.checked;
+            
+            if (isEmailValid && isTermsAccepted) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+        
+        // Form submission handler
+        form.addEventListener('submit', function(e) {
+            // Validate email
+            if (!validateEmail(emailInput.value)) {
+                e.preventDefault();
+                emailError.style.display = 'block';
+                emailInput.style.borderColor = '#dc2626';
+                emailInput.focus();
+                return false;
+            }
+            
+            // Validate terms checkbox
+            if (!termsCheckbox.checked) {
+                e.preventDefault();
+                alert('Please confirm that you meet the criteria and understand this is a confidential diagnostic.');
+                return false;
+            }
+            
+            // Show loader and success message
+            submitButton.style.display = 'none';
+            formLoader.style.display = 'block';
+            
+            // Store user data in localStorage for the diagnostic page
+            const userData = {
+                email: emailInput.value,
+                name: document.getElementById('name').value,
+                role: document.getElementById('role').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('sovereignUserData', JSON.stringify(userData));
+            
+            // Allow form to submit to Formspree - it will redirect automatically
+            // due to the hidden _next field: <input type="hidden" name="_next" value="sovereignprotocoldiagnostic.html">
+            
+            return true;
+        });
+        
+        // Email validation function
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Initial button state check
+        updateSubmitButtonState();
+    });
+</script>
         
         <div class="footer">
             <p>Sovereign Protocol © 2026 | Confidential Executive Diagnostics</p>
