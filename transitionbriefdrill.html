@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sovereign Protocol — Executive Installation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* Earth & Teal Color Palette - MATCHING HOMEPAGE */
+:root {
+    --sand: #E6D5B8;
+    --clay: #C4A484;
+    --terracotta: #A85C32;
+    --forest: #2D5A27;
+    --teal: #008080;
+    --dark-teal: #006666;
+    --charcoal: #333333;
+    --light-clay: #E8D0B3;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--sand);
+    color: var(--charcoal);
+    line-height: 1.65;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* TOP BANNER IMAGE */
+.top-banner {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background: var(--teal); /* Teal fallback color */
+    position: relative;
+}
+
+.top-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Main content container */
+.container {
+    max-width: 880px;
+    margin: -30px auto 40px auto;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--clay);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.classified {
+    color: var(--terracotta);
+    background: rgba(168, 92, 50, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+h1 {
+    color: var(--teal);
+    font-size: 2.5em;
+    margin: 15px 0 5px 0;
+}
+
+h2 {
+    color: var(--teal);
+    font-size: 1.8em;
+    margin: 25px 0 15px 0;
+}
+
+h3 {
+    color: var(--terracotta);
+    font-size: 1.3em;
+    margin: 20px 0 12px 0;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--teal);
+    margin: 36px 0;
+    opacity: 0.3;
+}
+
+ul {
+    margin-left: 20px;
+    margin-bottom: 25px;
+}
+
+li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: var(--charcoal);
+}
+
+.metric-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background: rgba(230, 213, 184, 0.1);
+    border: 1px solid var(--clay);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.metric-table th, .metric-table td {
+    border-bottom: 1px solid rgba(196, 164, 132, 0.3);
+    padding: 12px 10px;
+    text-align: left;
+}
+
+.metric-table th {
+    background: rgba(0, 128, 128, 0.1);
+    color: var(--teal);
+    font-weight: 600;
+}
+
+.metric-table tr:last-child td {
+    border-bottom: none;
+}
+
+.section-label {
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.08em;
+    color: var(--dark-teal);
+    font-weight: 600;
+}
+
+.cta {
+    margin-top: 42px;
+    padding: 28px;
+    border: 2px solid var(--teal);
+    text-align: center;
+    font-weight: 600;
+    background: rgba(0, 128, 128, 0.05);
+    border-radius: 8px;
+}
+
+a {
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--dark-teal);
+    border-bottom-color: var(--teal);
+}
+
+.price {
+    font-size: 1.8em;
+    color: var(--terracotta);
+    margin: 20px 0;
+    font-weight: 700;
+}
+
+.pp-button-container {
+    margin: 25px 0;
+}
+
+.security-note {
+    font-size: 0.8em;
+    color: var(--dark-teal);
+    margin-top: 15px;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+strong {
+    color: var(--teal);
+    font-weight: 700;
+}
+
+/* Title section */
+.title-section {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--clay);
+}
+
+/* Simple status */
+.status {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: var(--teal);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 1000;
+    border: none;
+    box-shadow: 0 3px 10px rgba(0, 128, 128, 0.3);
+}
+
+/* Fallback banner */
+.fallback-banner {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--dark-teal) 100%);
+    color: var(--white);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.fallback-banner small {
+    font-size: 0.7em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .top-banner {
+        height: 200px;
+    }
+    
+    .container {
+        padding: 25px;
+        margin: -20px 15px 20px 15px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.6em;
+    }
+}
+
+/* Button styling to match teal theme */
+.pp-Y6B89NSN9RDS8 {
+    text-align: center;
+    border: none;
+    border-radius: 0.25rem;
+    min-width: 11.625rem;
+    padding: 0 2rem;
+    height: 2.625rem;
+    font-weight: bold;
+    background-color: var(--terracotta) !important;
+    color: var(--white) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pp-Y6B89NSN9RDS8:hover {
+    background-color: var(--teal) !important;
+}
+
+/* Callout for important sections */
+.callout {
+    background: rgba(230, 213, 184, 0.2);
+    border-left: 4px solid var(--terracotta);
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 0 8px 8px 0;
+}
+</style>
+</head>
+
+<body>
+<!-- Simple status indicator -->
+<div class="status" id="status">🔄 Loading transitioning.jpg...</div>
+
+<!-- TOP BANNER - IMAGE AT THE TOP -->
+<div class="top-banner">
+    <img src="transitioning.jpg" alt="Transitioning Leader Profile" id="bannerImage"
+         onload="document.getElementById('status').innerHTML='✅ Image loaded'; setTimeout(()=>{const s=document.getElementById('status');s.style.opacity='0';setTimeout(()=>s.style.display='none',300)},2000)"
+         onerror="handleImageError(this)">
+</div>
+
+<!-- Main content -->
+<div class="container">
+
+<!-- ===================== -->
+<!-- TRANSITIONING PROFILE -->
+<!-- ===================== -->
+
+<div class="title-section">
+    <p class="classified">CONFIDENTIAL — C-SUITE EYES ONLY</p>
+    <h1>Transitioning Leader Profile</h1>
+    <p class="section-label">Leadership Architecture Analysis | Score: 31–50</p>
+</div>
+
+<hr>
+
+<div class="callout">
+<h2>To the Transitioning Leader:</h2>
+<p>
+You are no longer fragmented. Integration has begun.
+</p>
+<p>
+You experience moments of elite clarity and decisive command — yet they are not
+<strong>consistently reproducible under pressure</strong>.
+The friction you feel is not failure; it is the gap between
+your <strong>current operating system</strong> and your <strong>true leadership ceiling</strong>.
+</p>
+</div>
+
+<h3>Your Oscillation Pattern</h3>
+<ul>
+<li><strong>Inconsistent Calibration:</strong> You alternate between strategic clarity and reactive fire-fighting.</li>
+<li><strong>Purpose Drift:</strong> Roughly half of your effort compounds your mission; the remainder dissipates energy.</li>
+<li><strong>Market-Paced, Not Market-Making:</strong> You identify opportunities as they surface — not before they emerge.</li>
+</ul>
+
+<h3>The Ceiling</h3>
+<p>
+Without architectural upgrade, this oscillation persists — quietly capping scale,
+influence, and long-term impact.
+</p>
+
+<h3>Your Integration Blueprint</h3>
+<ul>
+<li><strong>Phase 1:</strong> Pressure-Proof Your Presence → Make composed days your default state</li>
+<li><strong>Phase 2:</strong> Systemize Strategic Foresight → Shift from reactive to anticipatory leadership</li>
+<li><strong>Phase 3:</strong> Architect Legacy Leverage → Scale clarity across teams and time horizons</li>
+</ul>
+
+<p><strong>What Next:</strong><br>
+Review the Executive Brief below. Begin installation.</p>
+
+<hr>
+
+<!-- ===================== -->
+<!-- EXECUTIVE BRIEF -->
+<!-- ===================== -->
+
+<h1>The Executive Brief</h1>
+
+<p>
+<strong>FROM:</strong> The Sovereign Protocol Engineering Team<br>
+<strong>RE:</strong> Your 7-Day Leadership OS Installation Brief<br>
+<span class="classified">CLASSIFICATION: CONFIDENTIAL</span>
+</p>
+
+<hr>
+
+<h2>Mission</h2>
+<p>
+Upgrade your internal leadership operating system from high-functioning execution
+to <strong>sovereign command in 7 days</strong>,
+recovering <strong>3.2+ hours of strategic capacity daily</strong>.
+</p>
+
+<h2>Core Mechanism — The Architecture</h2>
+<p>
+This is not a course.<br>
+It is a <strong>performance installation</strong>.
+</p>
+<p>
+15 minutes per day recalibrates the internal architecture governing
+decision-making, energy regulation, and strategic foresight under pressure.
+</p>
+
+<h2>Installation Sequence</h2>
+<p><strong>Day 1 — Cognitive Layer:</strong> Decision Filter Installed → +90 minutes/day</p>
+<p><strong>Day 3 — Emotional Layer:</strong> Energy Circuit Calibrated → Pressure-proof presence</p>
+<p><strong>Day 5 — Strategic Layer:</strong> Horizon Capture Activated → 6–8 month market foresight</p>
+<p><strong>Day 7 — Command Layer:</strong> Sovereign Dashboard Live → Integrated leadership at scale</p>
+
+<h2>Quantified ROI</h2>
+<table class="metric-table">
+<tr>
+<th>Metric</th>
+<th>Daily</th>
+<th>Annual</th>
+<th>5-Year Horizon</th>
+</tr>
+<tr>
+<td>Time Recovered</td>
+<td>3.2 hours</td>
+<td>704 hours</td>
+<td>3,520 hours</td>
+</tr>
+<tr>
+<td>Financial Value (@ $500/hr)</td>
+<td>$1,600</td>
+<td>$352,000</td>
+<td>$1.76M</td>
+</tr>
+</table>
+
+<h2>Authority & Provenance</h2>
+<ul>
+<li>Forged at: Amazon, Pfizer, MIT Leadership Center</li>
+<li>Methodology: Cognitive engineering, behavioral architecture, decision science</li>
+<li>Delivery: 100% digital · 15 minutes/day · C-Suite compatible scheduling</li>
+</ul>
+
+<hr>
+
+<!-- ===================== -->
+<!-- DAY 1 DRILL -->
+<!-- ===================== -->
+
+<h1>Day 1 Installation Preview — The Decision Filter Drill</h1>
+<p class="classified">PRE-INSTALL EXERCISE | TIME: 10 MINUTES</p>
+
+<h2>Objective</h2>
+<p>
+Reclaim <strong>90+ minutes of strategic time tomorrow</strong>
+by pre-filtering decisions tonight.
+</p>
+
+<h2>Background</h2>
+<p>
+High-performing leaders still lose an average of <strong>3.2 hours per day</strong>
+to low-leverage decisions.
+The <strong>Strategic Triad Filter</strong> converts clarity into repeatable execution.
+</p>
+
+<h2>Your Drill — Tonight, Before 9 PM</h2>
+
+<h3>Step 1: List Your Top 5 Decisions for Tomorrow</h3>
+<p>
+Hiring · Budget approvals · Board responses · Team conflicts · Capital allocation
+</p>
+
+<h3>Step 2: Apply the Strategic Triad</h3>
+<ul>
+<li><strong>IGNORE:</strong> Not aligned with mission → discard</li>
+<li><strong>DELEGATE:</strong> Does not require your unique strategic judgment → assign</li>
+<li><strong>EXECUTE PERSONALLY:</strong> Only if it demands your highest leadership leverage</li>
+</ul>
+
+<h3>Step 3: Execute Pre-Delegation</h3>
+<ul>
+<li>Name the responsible person</li>
+<li>Send tonight including:
+    <ul>
+    <li>Context</li>
+    <li>Outcome</li>
+    <li>Deadline</li>
+    <li>Autonomy level</li>
+    </ul>
+</li>
+</ul>
+
+<h2>Expected Outcome</h2>
+<ul>
+<li>Clear 60–90 minutes from tomorrow's calendar</li>
+<li>Reduce morning decision fatigue by ~70%</li>
+<li>Experience the Protocol's core mechanism in action</li>
+</ul>
+
+<!-- ===================== -->
+<!-- PAYMENT SECTION -->
+<!-- ===================== -->
+
+<div class="cta">
+    <h2>Begin Installation</h2>
+    <p class="price">$1,700 · One-time investment</p>
+    
+    <div class="pp-button-container">
+        <div>
+            <form action="https://www.paypal.com/ncp/payment/Y6B89NSN9RDS8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-Y6B89NSN9RDS8" type="submit" value="Begin Installation" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" />
+                <section style="font-size: 0.75rem; color: var(--dark-teal);"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+        </div>
+    </div>
+    
+    <p class="security-note">
+        Secure payment via PayPal • Instant access upon completion • Confidential transaction
+    </p>
+</div>
+
+</div>
+
+<script>
+// Image error handler function
+function handleImageError(imgElement) {
+    // Hide the broken image
+    imgElement.style.display = 'none';
+    
+    // Update status
+    const status = document.getElementById('status');
+    status.innerHTML = '⚠️ Using fallback banner';
+    status.style.background = 'var(--terracotta)';
+    
+    // Create fallback banner
+    const banner = document.createElement('div');
+    banner.className = 'fallback-banner';
+    banner.innerHTML = 'TRANSITIONING LEADER PROFILE<br><small>Score: 31–50</small><br><small style="opacity:0.8;margin-top:20px;">Leadership Architecture Analysis</small>';
+    
+    // Add banner to the top-banner div
+    imgElement.parentNode.appendChild(banner);
+}
+
+// Simple check
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Transitioning Leader page loaded');
+    console.log('Looking for transitioning.jpg in same folder...');
+    
+    // Check if image loaded after 2 seconds
+    setTimeout(function() {
+        const img = document.getElementById('bannerImage');
+        if (img && img.complete && img.naturalHeight !== 0) {
+            console.log('✅ transitioning.jpg loaded successfully');
+        } else {
+            console.log('⚠️ Check: File should be named "transitioning.jpg"');
+            console.log('⚠️ And be in the same folder as this HTML file');
+        }
+    }, 2000);
+});
+</script>
+
+</body>
+</html>

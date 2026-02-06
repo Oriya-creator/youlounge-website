@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The You Lounge | Global Executive Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Earth & Teal Color Palette */
+        :root {
+            --sand: #E6D5B8;
+            --clay: #C4A484;
+            --terracotta: #A85C32;
+            --forest: #2D5A27;
+            --teal: #008080;
+            --dark-teal: #006666;
+            --charcoal: #333333;
+            --light-clay: #E8D0B3;
+            --white: #FFFFFF;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--sand);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Hamburger Menu */
+        header {
+            background-color: var(--teal);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            color: var(--sand);
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            margin-left: 15px;
+            display: none;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            color: var(--sand);
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            color: var(--dark-teal);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--teal);
+            padding: 0;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            border-bottom: 1px solid rgba(230, 213, 184, 0.1);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 20px;
+            color: var(--sand);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mobile-menu a:hover {
+            background-color: var(--dark-teal);
+            color: var(--white);
+            padding-left: 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 20px 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-clay) 0%, var(--sand) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="%23A85C32" stroke-width="0.5" opacity="0.1" fill="none"/></svg>');
+            opacity: 0.2;
+        }
+
+        .hero-logo {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto 30px;
+            display: block;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--charcoal);
+        }
+
+        .highlight {
+            color: var(--teal);
+            font-weight: 600;
+        }
+        
+        .content-block {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+        
+        .content-block h2 {
+            color: var(--teal);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--teal);
+            padding-bottom: 10px;
+        }
+        
+        .bullet-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .bullet-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .bullet-list li:before {
+            content: "°";
+            color: var(--teal);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+        
+        .architecture-bold {
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--teal);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--teal);
+            box-shadow: 0 5px 15px rgba(0, 128, 128, 0.2);
+            margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--teal);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 128, 128, 0.3);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 100px 20px;
+            background-color: var(--light-clay);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: var(--teal);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--teal);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--teal);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .author-info h4 {
+            color: var(--teal);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--terracotta);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--teal);
+            color: var(--sand);
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo-img {
+            max-width: 250px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .footer-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            margin-bottom: 40px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--sand);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contact-info a:hover {
+            color: var(--white);
+            border-bottom-color: var(--sand);
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(230, 213, 184, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* CONTACT FORM MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .contact-modal {
+            background-color: var(--white);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-30px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .contact-modal {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--teal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--dark-teal);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            color: var(--teal);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--clay);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: rgba(230, 213, 184, 0.1);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: var(--teal);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: var(--dark-teal);
+            transform: translateY(-2px);
+        }
+
+        .form-note {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-success {
+            text-align: center;
+            padding: 30px;
+            color: var(--teal);
+            display: none;
+        }
+
+        .form-success i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--teal);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid rgba(0, 128, 128, 0.2);
+            border-radius: 50%;
+            border-top: 3px solid var(--teal);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-logo {
+                max-width: 250px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .mobile-menu a {
+                padding: 18px;
+                font-size: 16px;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .content-block {
+                padding: 30px 20px;
+            }
+            
+            .contact-modal {
+                padding: 30px 20px;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 120px 15px 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-logo {
+                max-width: 200px;
+                margin-bottom: 20px;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .testimonial-card {
+                padding: 25px;
+            }
+            
+            .footer-logo-img {
+                max-width: 200px;
+            }
+            
+            .content-block {
+                padding: 25px 15px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Hamburger Menu -->
+    <header>
+        <div class="header-content container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="logo-img">
+                </a>
+                <a href="index.html" class="logo-text">The You<span>Lounge</span></a>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="hubs.html">Hubs</a></li>
+                <li><a href="thinktank.html">Non-Profit & Think Tank</a></li>
+                <li><a href="#" id="navContact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <!-- Logo in Hero Section -->
+            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="hero-logo">
+            
+            <h1 class="fade-in">Governance Architecture for Complex, Multi-Nation Decision Environments</h1>
+            
+            <p class="fade-in delay-1">
+                We design alignment-led governance systems that help decision-makers & senior leaders steward complexity, scale across nations, and make sustainable decisions without fragmentation.
+            </p>
+            
+            <div class="fade-in delay-2">
+                <h3 style="color: var(--teal); margin-bottom: 15px;">Three Authority Signals</h3>
+                <p>
+                    ° Governance Decision Architecture<br>
+                    ° Multi-National Systems Alignment<br>
+                    ° Narrative & Institutional Coherence
+                </p>
+            </div>
+            
+            <a href="hubs.html" class="cta-button fade-in delay-3">Explore Systems</a>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <div class="content-block fade-in">
+        <div class="container">
+            <h2>What We Do</h2>
+            <p><strong>We Operate Upstream Of Execution</strong></p>
+            <p>Our work focuses on how decisions are framed, authority is distributed, and coherence is maintained across people, institutions and nations.</p>
+            
+            <div style="margin-top: 40px;">
+                <p><strong>We Are Engaged When:</strong></p>
+                <ul class="bullet-list">
+                    <li>Decisions carry long-term civil, socio-economic or cultural consequences</li>
+                    <li>Institutions are scaling across regions and sectors</li>
+                    <li>Leaders & decision-makers need clarity without simplification</li>
+                    <li>Governance must hold complexity without burnout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Who This Is For Section -->
+    <div class="content-block fade-in delay-1">
+        <div class="container">
+            <h2>Who This Is For</h2>
+            <p><strong>We Work With:</strong></p>
+            <ul class="bullet-list">
+                <li>Decision-makers</li>
+                <li>C-Suite Executives & Board Leaders</li>
+                <li>Institutional Decision-makers</li>
+                <li>Multi-national Leads</li>
+                <li>Family Offices, Foundations, & Public-Private Entities</li>
+            </ul>
+            <p><em>NB* This Work Is NOT Consulting, Coaching, Advisory or Content.</em> <span class="architecture-bold">It Is Architecture</span></p>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="hubs">
+        <div class="container">
+            <h2 class="section-title fade-in">Executive Testimonials</h2>
+            <div class="testimonials-container">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card fade-in delay-1">
+                    <div class="testimonial-text">
+                        "The Sovereign Protocol transformed how I approach global challenges. The discreet peer circles provided insights no consultancy could offer. This is the most valuable network I've ever been part of."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: var(--teal);">
+                            J
+                        </div>
+                        <div class="author-info">
+                            <h4>James Chen</h4>
+                            <p>CEO, Fortune 100 Tech Company</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card fade-in delay-2">
+                    <div class="testimonial-text">
+                        "The Media & Creatives system helped our executive team articulate a compelling vision across three continents. Their understanding of cultural nuance in storytelling is unparalleled."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: var(--dark-teal);">
+                            M
+                        </div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Global CMO, Luxury Conglomerate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card fade-in delay-3">
+                    <div class="testimonial-text">
+                        "Our board retreat in Kyoto, orchestrated by the M.I.C.E. team, was flawless. Every detail respected both Japanese tradition and our global business needs. Extraordinary execution."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: var(--terracotta);">
+                            K
+                        </div>
+                        <div class="author-info">
+                            <h4>Klaus Schmidt</h4>
+                            <p>Chairman, European Manufacturing Group</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card fade-in delay-4">
+                    <div class="testimonial-text">
+                        "The Think Tank's research on sustainable supply chains informed our entire ESG strategy. Their global, cross-cultural approach provided perspectives we were missing internally."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: var(--teal);">
+                            A
+                        </div>
+                        <div class="author-info">
+                            <h4>Aisha Nkrumah</h4>
+                            <p>Chief Sustainability Officer, Energy Multinational</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content container">
+            <!-- Logo in Footer -->
+            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
+            <p class="footer-tagline">The Global Executive Ecosystem: Four Systems, One Vision for Sovereign Leadership</p>
+            
+            <div class="contact-info">
+                <p>Connect with our Global Concierge:</p>
+                <p><a href="#" id="openContactForm">executive@youlounge.org</a></p>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 The You Lounge. All rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="#" id="footerContact">Contact</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Form Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="contact-modal">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h2 class="modal-title">Connect with The You Lounge</h2>
+            
+            <!-- Formspree Form -->
+            <form id="contactForm" action="https://formspree.io/f/xykjaerk" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" name="name" required placeholder="John Smith">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Title/Position *</label>
+                    <input type="text" class="form-input" name="position" required placeholder="CEO, Global Director, etc.">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Company/Organization *</label>
+                    <input type="text" class="form-input" name="company" required placeholder="Your organization name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" name="email" required placeholder="you@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="phone" placeholder="+1 (123) 456-7890">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Which system interests you? *</label>
+                    <select class="form-input" name="interest" required>
+                        <option value="">Select an option</option>
+                        <option value="Human Agency">Human Agency</option>
+                        <option value="Media & Creatives">Media & Creatives</option>
+                        <option value="M.I.C.E.">M.I.C.E. (Meetings, Incentives, Conferences, Exhibitions)</option>
+                        <option value="Non-Profit & Think Tank">Non-Profit & Think Tank</option>
+                        <option value="All Systems">All Systems</option>
+                        <option value="Not sure yet">Not sure yet - need guidance</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Message *</label>
+                    <textarea class="form-textarea" name="message" required placeholder="Tell us about your executive needs, challenges, or how we can assist you..."></textarea>
+                </div>
+                
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p>Sending your message...</p>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                
+                <p class="form-note">
+                    Your information is confidential and will only be used to connect you with the appropriate executive concierge.
+                </p>
+            </form>
+            
+            <div class="form-success" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out to The You Lounge. Our executive concierge will contact you within 24 hours.</p>
+                <p>You may also reach us directly at <strong>executive@youlounge.org</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking a link
+        const menuLinks = document.querySelectorAll('.mobile-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                hamburger.querySelector('i').classList.remove('fa-times');
+                hamburger.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Fade-in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        document.querySelectorAll('.section-title, .content-block, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact Form Modal Functionality
+        const contactModal = document.getElementById('contactModal');
+        const openContactForm = document.getElementById('openContactForm');
+        const navContact = document.getElementById('navContact');
+        const footerContact = document.getElementById('footerContact');
+        const closeModal = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Function to open modal
+        function openModal() {
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        // Function to close modal
+        function closeModalFunc() {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Open modal when clicking email
+        openContactForm.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Open modal when clicking Contact in navigation
+        navContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Open modal when clicking Contact in footer
+        footerContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            closeModalFunc();
+        });
+
+        // Close modal when clicking outside
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeModalFunc();
+            }
+        });
+
+        // Handle form submission with Formspree
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading spinner
+            loadingSpinner.style.display = 'block';
+            contactForm.querySelector('.submit-button').disabled = true;
+            
+            try {
+                // Create form data
+                const formData = new FormData(contactForm);
+                
+                // Send to Formspree
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                contactForm.querySelector('.submit-button').disabled = false;
+                
+                if (response.ok) {
+                    // Show success message
+                    contactForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Reset form after 5 seconds and close modal
+                    setTimeout(() => {
+                        contactForm.reset();
+                        contactForm.style.display = 'block';
+                        successMessage.style.display = 'none';
+                        closeModalFunc();
+                    }, 5000);
+                } else {
+                    // Handle error
+                    alert('There was an error submitting the form. Please try again or email us directly at executive@youlounge.org');
+                }
+            } catch (error) {
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                contactForm.querySelector('.submit-button').disabled = false;
+                
+                // Handle network error
+                alert('Network error. Please check your connection and try again, or email us directly at executive@youlounge.org');
+                console.error('Form submission error:', error);
+            }
+        });
+
+        // Add hidden honeypot field to prevent spam (optional but recommended)
+        const honeypotField = document.createElement('input');
+        honeypotField.type = 'text';
+        honeypotField.name = '_gotcha';
+        honeypotField.style.display = 'none';
+        contactForm.appendChild(honeypotField);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Sovereign Protocol</title>
+    <style>
+        body { font-family: Arial; padding: 40px; max-width: 500px; margin: auto; }
+        input { width: 100%; padding: 12px; margin: 10px 0; }
+        button { background: #000; color: white; padding: 12px 20px; border: none; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h2>Enter Access Code</h2>
+    <p>Check your email after payment for your access code.</p>
+    
+    <input type="text" id="accessCode" placeholder="Enter code from email">
+    <button onclick="checkAccess()">Access Course</button>
+    
+    <p id="message"></p>
+    
+    <script>
+    // Valid access codes (you'll update manually for now)
+    const validCodes = [
+        'SOVEREIGN2026-001',
+        'SOVEREIGN2026-002'
+    ];
+    
+    function checkAccess() {
+        const code = document.getElementById('accessCode').value.trim();
+        const message = document.getElementById('message');
+        
+        if (validCodes.includes(code)) {
+            // Save to localStorage
+            localStorage.setItem('sovereign_access', code);
+            localStorage.setItem('access_time', new Date().toISOString());
+            
+            // Redirect to course
+            window.location.href = '7daysexecutive.html';
+        } else {
+            message.innerHTML = '<span class="error">Invalid code. Check your email or contact support.</span>';
+        }
+    }
+    </script>
+</body>
+</html>

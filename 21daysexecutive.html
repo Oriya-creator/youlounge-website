@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sovereign Protocol — 21-Day Executive Governance Systems</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #0b0b0b;
+  color: #f2f2f2;
+  margin: 0;
+  padding: 40px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: 0.6px;
+}
+
+.confidential {
+  color: #c7a046;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.section {
+  margin-bottom: 70px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #2a2a2a;
+  margin: 50px 0;
+}
+
+/* ===== PAYMENT SECTION ===== */
+.payment-section {
+  background: #151515;
+  border: 1px solid #c7a046;
+  border-radius: 8px;
+  padding: 50px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.payment-tier {
+  margin: 40px auto;
+  max-width: 500px;
+  padding: 40px;
+  background: #0e0e0e;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+}
+
+.tier-price {
+  font-size: 42px;
+  font-weight: bold;
+  color: #c7a046;
+  margin: 20px 0;
+}
+
+.tier-description {
+  color: #aaa;
+  font-size: 16px;
+  margin: 25px 0;
+  line-height: 1.5;
+}
+
+.paypal-container {
+  margin-top: 35px;
+  min-height: 55px;
+}
+
+/* Status message styling */
+.status-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  display: none;
+}
+
+.status-message.success {
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid #27ae60;
+  color: #27ae60;
+  display: block;
+}
+
+.status-message.error {
+  background: rgba(235, 87, 87, 0.1);
+  border: 1px solid #eb5757;
+  color: #eb5757;
+  display: block;
+}
+
+.status-message.processing {
+  background: rgba(241, 196, 15, 0.1);
+  border: 1px solid #f1c40f;
+  color: #f1c40f;
+  display: block;
+}
+
+/* ===== GATED SECTION ONLY ===== */
+
+.gov-day {
+  border: 1px solid #2a2a2a;
+  padding: 28px;
+  margin-bottom: 28px;
+  border-radius: 8px;
+  background: #151515;
+}
+
+.gov-day.locked {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.gov-day.active {
+  border-color: #c7a046;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  margin-top: 15px;
+  background: #0e0e0e;
+  color: #f2f2f2;
+  border: 1px solid #333;
+  padding: 10px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+button {
+  background: #c7a046;
+  color: #000;
+  padding: 12px 24px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+button:hover {
+  background: #e0b85a;
+}
+
+.timer {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin-top: 90px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+  
+  .payment-section {
+    padding: 30px 20px;
+  }
+  
+  .payment-tier {
+    padding: 30px 20px;
+  }
+  
+  .tier-price {
+    font-size: 36px;
+  }
+  
+  .container {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- ================= PAYMENT SECTION ================= -->
+<div class="payment-section">
+  <h2>ACTIVATE 21-DAY EXECUTIVE GOVERNANCE SYSTEMS</h2>
+  <p class="confidential">CONFIDENTIAL — BOARD & C-SUITE EYES ONLY</p>
+  <p>Begin your transformation from personal leadership to institutional governance.</p>
+  
+  <div class="payment-tier">
+    <h3>21-Day Executive Governance Installation</h3>
+    <div class="tier-price">$1</div>
+    <p class="tier-description">
+      Complete access to the 21-Day Executive Governance Systems<br>
+      One governance layer installed per day<br>
+      Institutional decision architecture<br>
+      Board-grade governance protocols
+    </p>
+    
+    <!-- Status message for payment processing -->
+    <div id="payment-status-21" class="status-message"></div>
+    
+    <!-- PayPal Button Container -->
+    <div class="paypal-container" id="paypal-container-TQ8MBDUY87G6S"></div>
+    
+    <!-- Manual payment verification (for webhook integration) -->
+    <div style="margin-top: 20px; font-size: 14px; color: #aaa;">
+      <p>Having issues with payment verification?</p>
+      <button onclick="verifyPaymentManually('21-day')" style="background: #333; color: #fff; font-size: 12px; padding: 8px 16px;">
+        Verify Payment Manually
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CONTENT - Initially Hidden ================= -->
+<div id="program-content" style="display: none;">
+
+<!-- ================= HANDOFF FROM 7-DAY ================= -->
+
+<h1>SOVEREIGN PROTOCOL</h1>
+<h2>21-Day Executive Governance Systems</h2>
+<p class="confidential">CONFIDENTIAL — BOARD & C-SUITE EYES ONLY</p>
+
+<p>
+If you are here, the **7-Day Foundations** have done their work.  
+Your internal operating system is aligned.
+</p>
+
+<p>
+This phase does not improve the leader.  
+It **governs the system the leader now commands**.
+</p>
+
+<p>
+This is not an escalation in intensity.  
+It is an escalation in **responsibility, scale, and consequence**.
+</p>
+
+<hr>
+
+<!-- ================= OVERVIEW ================= -->
+
+<div class="section">
+<h2>Executive Governance Systems Overview</h2>
+
+<p>
+Governance is how clarity survives scale.
+This 21-day installation converts personal alignment into:
+</p>
+
+<ul>
+<li>Decision rights that hold under pressure</li>
+<li>Authority that propagates across layers</li>
+<li>Foresight that becomes institutional, not personal</li>
+<li>Legacy that outlives role or tenure</li>
+</ul>
+
+<p>
+Each day installs **one enforceable governance mechanism**.  
+Order is mandatory. Integration time is protected.
+</p>
+</div>
+
+<hr>
+
+<!-- ================= GATED INSTALLATION ================= -->
+
+<div class="section" id="governance-installation">
+
+<h2>21-Day Executive Governance Installation</h2>
+<p class="confidential">
+INSTRUCTION: One governance layer per day.  
+Each unlocks automatically 24 hours after completion.
+</p>
+
+<!-- WEEK 1 -->
+<h3>Week 1 — Internal Governance (Solidifier of the 7-Day Foundations)</h3>
+
+<div class="gov-day active" data-day="1">
+<h4>Day 1 — Final Decision Authority</h4>
+<p>Define which decisions require you — and which categorically do not.</p>
+<textarea placeholder="State the non-negotiable rule you will now enforce."></textarea>
+<button onclick="completeDay(1)">Confirm & Install</button>
+<div class="timer" id="timer-1"></div>
+</div>
+
+<div class="gov-day locked" data-day="2">
+<h4>Day 2 — Cognitive Load Governance</h4>
+<p>Codify which decisions are forbidden from entering your cognitive space.</p>
+<textarea placeholder="List decisions now barred from your attention."></textarea>
+<button onclick="completeDay(2)">Confirm & Install</button>
+<div class="timer" id="timer-2"></div>
+</div>
+
+<div class="gov-day locked" data-day="3">
+<h4>Day 3 — Emotional Containment Protocol</h4>
+<p>Formalize how emotion is governed during high-stakes moments.</p>
+<textarea placeholder="Describe the protocol you will apply under pressure."></textarea>
+<button onclick="completeDay(3)">Confirm & Install</button>
+<div class="timer" id="timer-3"></div>
+</div>
+
+<div class="gov-day locked" data-day="4">
+<h4>Day 4 — Energy Allocation Rules</h4>
+<p>Determine where executive energy is permitted — and where it is prohibited.</p>
+<textarea placeholder="Define the boundaries you are now enforcing."></textarea>
+<button onclick="completeDay(4)">Confirm & Install</button>
+<div class="timer" id="timer-4"></div>
+</div>
+
+<div class="gov-day locked" data-day="5">
+<h4>Day 5 — Identity-Based Decision Filters</h4>
+<p>Ensure decisions reinforce role, mandate, and mission.</p>
+<textarea placeholder="State the identity filter governing decisions."></textarea>
+<button onclick="completeDay(5)">Confirm & Install</button>
+<div class="timer" id="timer-5"></div>
+</div>
+
+<div class="gov-day locked" data-day="6">
+<h4>Day 6 — Priority Enforcement Mechanism</h4>
+<p>Prevent priority erosion through formal enforcement.</p>
+<textarea placeholder="Define how priorities will now be protected."></textarea>
+<button onclick="completeDay(6)">Confirm & Install</button>
+<div class="timer" id="timer-6"></div>
+</div>
+
+<div class="gov-day locked" data-day="7">
+<h4>Day 7 — Internal Governance Lock</h4>
+<p>Lock internal governance as default operating state.</p>
+<textarea placeholder="Declare the standard you will not violate."></textarea>
+<button onclick="completeDay(7)">Confirm & Lock</button>
+<div class="timer" id="timer-7"></div>
+</div>
+
+<!-- WEEK 2 -->
+<h3>Week 2 — Organizational Governance (Board-Level Architecture)</h3>
+
+<div class="gov-day locked" data-day="8">
+<h4>Day 8 — Authority Mapping Across the Organization</h4>
+<p>Clarify where authority truly sits — not where it is assumed.</p>
+<textarea placeholder="Document misalignments you will correct."></textarea>
+<button onclick="completeDay(8)">Confirm & Install</button>
+<div class="timer" id="timer-8"></div>
+</div>
+
+<div class="gov-day locked" data-day="9">
+<h4>Day 9 — Decision Escalation Rules</h4>
+<p>Formally define what may escalate — and what may not.</p>
+<textarea placeholder="State escalation thresholds."></textarea>
+<button onclick="completeDay(9)">Confirm & Install</button>
+<div class="timer" id="timer-9"></div>
+</div>
+
+<div class="gov-day locked" data-day="10">
+<h4>Day 10 — Delegation as Governance</h4>
+<p>Delegate outcomes, authority, and accountability.</p>
+<textarea placeholder="Describe the delegation model you are enforcing."></textarea>
+<button onclick="completeDay(10)">Confirm & Install</button>
+<div class="timer" id="timer-10"></div>
+</div>
+
+<div class="gov-day locked" data-day="11">
+<h4>Day 11 — Accountability & Consequence Structures</h4>
+<p>Ensure execution has consequences.</p>
+<textarea placeholder="Define consequences now being enforced."></textarea>
+<button onclick="completeDay(11)">Confirm & Install</button>
+<div class="timer" id="timer-11"></div>
+</div>
+
+<div class="gov-day locked" data-day="12">
+<h4>Day 12 — Meeting Governance</h4>
+<p>Eliminate meetings that do not govern decisions.</p>
+<textarea placeholder="State the meeting criteria you will enforce."></textarea>
+<button onclick="completeDay(12)">Confirm & Install</button>
+<div class="timer" id="timer-12"></div>
+</div>
+
+<div class="gov-day locked" data-day="13">
+<h4>Day 13 — Culture as Governance</h4>
+<p>Translate values into enforceable behavior.</p>
+<textarea placeholder="Identify one cultural rule now enforced."></textarea>
+<button onclick="completeDay(13)">Confirm & Install</button>
+<div class="timer" id="timer-13"></div>
+</div>
+
+<div class="gov-day locked" data-day="14">
+<h4>Day 14 — Organizational Governance Lock</h4>
+<p>Ensure coherence across leadership layers.</p>
+<textarea placeholder="State how governance will be audited."></textarea>
+<button onclick="completeDay(14)">Confirm & Lock</button>
+<div class="timer" id="timer-14"></div>
+</div>
+
+<!-- WEEK 3 -->
+<h3>Week 3 — Strategic & Legacy Governance</h3>
+
+<div class="gov-day locked" data-day="15">
+<h4>Day 15 — Strategic Time Horizons</h4>
+<p>Govern decisions across short-, mid-, and long-term horizons.</p>
+<textarea placeholder="Define the horizons you will govern."></textarea>
+<button onclick="completeDay(15)">Confirm & Install</button>
+<div class="timer" id="timer-15"></div>
+</div>
+
+<div class="gov-day locked" data-day="16">
+<h4>Day 16 — Market Anticipation Systems</h4>
+<p>Move from market-paced to market-making.</p>
+<textarea placeholder="Describe foresight mechanisms you will institutionalize."></textarea>
+<button onclick="completeDay(16)">Confirm & Install</button>
+<div class="timer" id="timer-16"></div>
+</div>
+
+<div class="gov-day locked" data-day="17">
+<h4>Day 17 — Capital Allocation Governance</h4>
+<p>Ensure resources follow strategy, not inertia.</p>
+<textarea placeholder="Define capital governance rules."></textarea>
+<button onclick="completeDay(17)">Confirm & Install</button>
+<div class="timer" id="timer-17"></div>
+</div>
+
+<div class="gov-day locked" data-day="18">
+<h4>Day 18 — Risk Governance</h4>
+<p>Decide risk deliberately and visibly.</p>
+<textarea placeholder="State how risk will be governed."></textarea>
+<button onclick="completeDay(18)">Confirm & Install</button>
+<div class="timer" id="timer-18"></div>
+</div>
+
+<div class="gov-day locked" data-day="19">
+<h4>Day 19 — Influence & Power Ethics</h4>
+<p>Govern power with integrity and restraint.</p>
+<textarea placeholder="Define ethical boundaries you will enforce."></textarea>
+<button onclick="completeDay(19)">Confirm & Install</button>
+<div class="timer" id="timer-19"></div>
+</div>
+
+<div class="gov-day locked" data-day="20">
+<h4>Day 20 — Legacy Architecture</h4>
+<p>Engineer impact beyond tenure.</p>
+<textarea placeholder="State the legacy system you are building."></textarea>
+<button onclick="completeDay(20)">Confirm & Install</button>
+<div class="timer" id="timer-20"></div>
+</div>
+
+<div class="gov-day locked" data-day="21">
+<h4>Day 21 — Sovereign System Integration</h4>
+<p>Lock governance as institutional default.</p>
+<textarea placeholder="Declare the governance standard that now holds."></textarea>
+<button onclick="completeDay(21)">Complete Installation</button>
+<div class="timer" id="timer-21"></div>
+</div>
+
+</div>
+
+<div class="footer">
+© Sovereign Protocol — Executive Governance Architecture
+</div>
+
+</div> <!-- End of program-content -->
+
+</div> <!-- End of container -->
+
+<script>
+// Configuration
+const CONFIG = {
+  webhookUrl: 'https://www.youlounge.org/.netlify/functions/paypal-webhook',
+  programId: '21-day',
+  price: 1
+};
+
+// Payment verification functions
+async function verifyPayment() {
+  const statusElement = document.getElementById('payment-status-21');
+  
+  // Check localStorage for existing access
+  const paymentData = localStorage.getItem('sovereign_payment_21day');
+  
+  if (paymentData) {
+    try {
+      const data = JSON.parse(paymentData);
+      if (data.status === 'completed' && new Date(data.expiry) > new Date()) {
+        showContent();
+        return;
+      }
+    } catch (e) {
+      console.error('Error parsing payment data:', e);
+    }
+  }
+  
+  // Show payment processing message
+  statusElement.className = 'status-message processing';
+  statusElement.innerHTML = '🔄 Verifying payment status...';
+  
+  try {
+    // Call your backend to verify payment
+    const response = await fetch('/.netlify/functions/verify-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        program: '21-day',
+        userId: getUserId(),
+        orderId: localStorage.getItem('sovereign_order_21day')
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.valid && result.paymentStatus === 'completed') {
+      // Store payment verification
+      localStorage.setItem('sovereign_payment_21day', JSON.stringify({
+        status: 'completed',
+        verified: new Date().toISOString(),
+        expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString() // 1 year expiry
+      }));
+      
+      statusElement.className = 'status-message success';
+      statusElement.innerHTML = '✅ Payment verified! Access granted.';
+      showContent();
+      
+      // Track successful verification
+      trackEvent('payment_verified', { program: '21-day', amount: 1 });
+    } else {
+      statusElement.className = 'status-message error';
+      statusElement.innerHTML = '⚠️ Payment not verified. Please complete your purchase.';
+    }
+  } catch (error) {
+    console.error('Payment verification failed:', error);
+    statusElement.className = 'status-message error';
+    statusElement.innerHTML = '⚠️ Unable to verify payment. Please refresh or contact support.';
+  }
+}
+
+function verifyPaymentManually(program) {
+  const statusElement = document.getElementById('payment-status-21');
+  statusElement.className = 'status-message processing';
+  statusElement.innerHTML = '🔄 Manually verifying payment... Please wait.';
+  
+  // Simulate webhook verification
+  setTimeout(() => {
+    // This would normally call your API
+    localStorage.setItem('sovereign_payment_21day', JSON.stringify({
+      status: 'completed',
+      verified: new Date().toISOString(),
+      expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
+    }));
+    
+    showContent();
+    statusElement.className = 'status-message success';
+    statusElement.innerHTML = '✅ Manual verification successful! Access granted.';
+  }, 2000);
+}
+
+function showContent() {
+  document.getElementById('program-content').style.display = 'block';
+  document.querySelector('.payment-section').style.display = 'none';
+}
+
+function getUserId() {
+  let userId = localStorage.getItem('sovereign_user_id');
+  if (!userId) {
+    userId = 'user_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('sovereign_user_id', userId);
+  }
+  return userId;
+}
+
+function trackEvent(eventName, data) {
+  // Implement your analytics tracking here
+  console.log('Tracking:', eventName, data);
+}
+
+// PayPal transaction handler
+function handlePayPalTransaction(transaction) {
+  // Store transaction ID
+  localStorage.setItem('sovereign_order_21day', transaction.id);
+  
+  // Show processing message
+  const statusElement = document.getElementById('payment-status-21');
+  statusElement.className = 'status-message processing';
+  statusElement.innerHTML = '🔄 Processing payment...';
+  
+  // Check for payment verification every 5 seconds
+  const checkInterval = setInterval(() => {
+    verifyPayment();
+  }, 5000);
+  
+  // Stop checking after 5 minutes
+  setTimeout(() => {
+    clearInterval(checkInterval);
+  }, 5 * 60 * 1000);
+}
+
+// Original day completion functions (keep these)
+const LOCK_HOURS = 24;
+
+function completeDay(day) {
+  const text = document.querySelector(`[data-day="${day}"] textarea`).value.trim();
+  if (!text) {
+    alert("Integration required. Please complete the prompt before proceeding.");
+    return;
+  }
+
+  const timestamp = Date.now();
+  localStorage.setItem("gov_day_" + day, timestamp);
+
+  updateAccess();
+}
+
+function updateAccess() {
+  document.querySelectorAll(".gov-day").forEach(el => {
+    const day = parseInt(el.getAttribute("data-day"));
+    const completedAt = localStorage.getItem("gov_day_" + (day - 1));
+
+    if (day === 1) return;
+
+    if (completedAt) {
+      const unlockTime = parseInt(completedAt) + LOCK_HOURS * 60 * 60 * 1000;
+      const now = Date.now();
+
+      if (now >= unlockTime) {
+        el.classList.remove("locked");
+        el.classList.add("active");
+      } else {
+        const remaining = unlockTime - now;
+        const hrs = Math.floor(remaining / (1000 * 60 * 60));
+        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("timer-" + day).innerText =
+          `Next installation unlocks in ${hrs}h ${mins}m`;
+      }
+    }
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if user already has access
+  verifyPayment();
+  
+  // Initialize day access
+  updateAccess();
+  setInterval(updateAccess, 60000);
+});
+</script>
+
+<!-- PayPal SDK and Button Integration - UPDATED -->
+<script 
+  src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD">
+</script>
+<script>
+  // Render the 21-Day PayPal button - UPDATED WITH createOrder
+  paypal.HostedButtons({
+    hostedButtonId: "TQ8MBDUY87G6S",
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '1.00',
+            currency_code: 'USD'
+          },
+          custom_id: '21day-executive-program-' + Date.now(),
+          description: '21-Day Executive Governance Systems',
+          soft_descriptor: 'Sovereign 21D'
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        console.log('Payment approved:', details);
+        handlePayPalTransaction({
+          id: details.id,
+          status: details.status,
+          amount: details.purchase_units[0].amount.value,
+          email: details.payer.email_address,
+          custom_id: details.purchase_units[0].custom_id
+        });
+        
+        alert('Payment completed successfully! Your 21-day access is being activated...');
+      });
+    },
+    onError: function(err) {
+      console.error('PayPal error:', err);
+      const statusElement = document.getElementById('payment-status-21');
+      statusElement.className = 'status-message error';
+      statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
+    },
+    onCancel: function(data) {
+      console.log('Payment cancelled by user');
+      const statusElement = document.getElementById('payment-status-21');
+      if (statusElement) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '❌ Payment cancelled. Please try again if you wish to proceed.';
+      }
+    }
+  }).render("#paypal-container-TQ8MBDUY87G6S");
+</script>
+
+</body>
+</html>

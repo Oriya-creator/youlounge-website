@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The You Lounge | About</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Earth & Teal Color Palette - Matching Homepage */
+        :root {
+            --sand: #E6D5B8;
+            --clay: #C4A484;
+            --terracotta: #A85C32;
+            --forest: #2D5A27;
+            --teal: #008080;
+            --dark-teal: #006666;
+            --charcoal: #333333;
+            --light-clay: #E8D0B3;
+            --white: #FFFFFF;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--sand);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Hamburger Menu - CHANGED FROM FOREST TO TEAL */
+        header {
+            background-color: var(--teal); /* CHANGED FROM FOREST */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            color: var(--sand);
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            color: var(--dark-teal); /* CHANGED FROM TEAL */
+            transform: scale(1.1);
+        }
+
+        /* Mobile Menu - CHANGED FROM FOREST TO TEAL */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--teal); /* CHANGED FROM FOREST */
+            padding: 0;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            border-bottom: 1px solid rgba(230, 213, 184, 0.1);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 20px;
+            color: var(--sand);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mobile-menu a:hover {
+            background-color: var(--dark-teal); /* Already teal, changed to dark-teal */
+            color: var(--white);
+            padding-left: 30px;
+        }
+
+        /* Hero Section */
+        .about-hero {
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-clay) 0%, var(--sand) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="%23A85C32" stroke-width="0.5" opacity="0.1" fill="none"/></svg>');
+            opacity: 0.2;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--charcoal);
+        }
+
+        /* Return to Homepage Button */
+        .return-home-btn {
+            display: inline-block;
+            background-color: var(--terracotta);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--terracotta);
+            margin-top: 20px;
+        }
+
+        .return-home-btn:hover {
+            background-color: transparent;
+            color: var(--terracotta);
+            transform: translateY(-3px);
+        }
+
+        /* About Content Section */
+        .about-section {
+            padding: 60px 20px 100px;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--teal);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Tab Buttons */
+        .tab-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tab-btn {
+            background: linear-gradient(135deg, var(--light-clay) 0%, var(--sand) 100%);
+            border: none;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: left;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border-left: 6px solid var(--teal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,128,128,0.1) 0%, rgba(0,102,102,0.1) 100%); /* CHANGED FROM FOREST TO DARK-TEAL */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover::before {
+            opacity: 1;
+        }
+
+        .tab-btn .icon {
+            font-size: 36px;
+            display: inline-block;
+            margin-right: 15px;
+            vertical-align: middle;
+            padding: 10px;
+            border: 2px solid var(--teal);
+            border-radius: 50%;
+            background-color: var(--white);
+            color: var(--teal);
+            margin-bottom: 15px;
+        }
+
+        .tab-btn a {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            text-decoration: none;
+            margin-bottom: 15px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .tab-btn:hover a {
+            color: var(--dark-teal); /* CHANGED FROM TEAL TO DARK-TEAL */
+        }
+
+        .tab-btn p {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        .section-block {
+            margin-bottom: 40px;
+        }
+
+        .image-block {
+            margin-top: 25px;
+            text-align: center;
+            padding: 20px;
+            background-color: var(--light-clay);
+            border-radius: 12px;
+            border: 2px solid var(--clay);
+        }
+
+        .image-block img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .image-block img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Core Values Section */
+        .values-section {
+            padding: 80px 20px;
+            background-color: var(--light-clay);
+            margin-top: 60px;
+            border-radius: 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--teal);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .value-card i {
+            font-size: 36px;
+            color: var(--teal);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .value-card p {
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Footer - CHANGED FROM FOREST TO TEAL */
+        footer {
+            background-color: var(--teal); /* CHANGED FROM FOREST */
+            color: var(--sand);
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo-img {
+            max-width: 250px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .footer-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            margin-bottom: 40px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--sand); /* CHANGED FROM TEAL TO SAND for better contrast */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contact-info a:hover {
+            color: var(--white);
+            border-bottom-color: var(--sand);
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(230, 213, 184, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* CONTACT FORM MODAL - Matching Homepage */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .contact-modal {
+            background-color: var(--white);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-30px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .contact-modal {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--teal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--dark-teal);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            color: var(--teal);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--clay);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: rgba(230, 213, 184, 0.1);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: var(--teal);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: var(--dark-teal);
+            transform: translateY(-2px);
+        }
+
+        .form-note {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-success {
+            text-align: center;
+            padding: 30px;
+            color: var(--teal);
+            display: none;
+        }
+
+        .form-success i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--teal);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid rgba(0, 128, 128, 0.2);
+            border-radius: 50%;
+            border-top: 3px solid var(--teal);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .tab-btn {
+                padding: 20px;
+            }
+            
+            .tab-btn a {
+                font-size: 20px;
+            }
+            
+            .tab-btn .icon {
+                font-size: 28px;
+                padding: 8px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-menu a {
+                padding: 18px;
+                font-size: 16px;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .contact-modal {
+                padding: 30px 20px;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero {
+                padding: 120px 15px 50px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tab-btn {
+                padding: 18px;
+            }
+            
+            .tab-btn p {
+                font-size: 1rem;
+            }
+            
+            .footer-logo-img {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Hamburger Menu - Matching Homepage -->
+    <header>
+        <div class="header-content container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="logo-img">
+                </a>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="about.html" style="background-color: var(--dark-teal); color: var(--white);">About</a></li>
+                <li><a href="hubs.html">Hubs</a></li>
+                <li><a href="thinktank.html">Non-Profit & Think Tank</a></li>
+                <li><a href="#" id="navContact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="fade-in">About</h1>
+            <p class="fade-in delay-1">As governance architects- we design the conditions under which decision-makers, executives, leaders, institutions and systems operate in alignment with their true mandate.<p><p>
+            
+            Our work sits at the intersection of governance design, human agency and narrative coherence.<p><p>
+            
+            Rather than increasing activity, we focus on increasing <strong>dominion;</strong> authority that flows through structure and systems, not personality
+         
+         <p><p> <span class="highlight">Operating Principles</span>,
+           <br>°Authority Must Match Territory
+           <br>°Alignment Precedes Performance
+           <br>°Systems Fail When Mandate & Substance Diverge
+           <br>°Sustainable Governance Is Designed, Not Forced
+           <p><p>
+      
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title fade-in">HUBS</h2>
+            
+            <div class="tab-buttons">
+                <!-- Vision Section -->
+                <div class="section-block">
+                    <div class="tab-btn active" id="vision-btn">
+                        <span class="icon">👁</span>
+                        <a href="#vision">Vision</a>
+                        <p><strong>A safe space for nations to seek the essence of identity through purity of light.</strong> We commit to equip nations with everyday practical and tangible tools to thrive in identity; where purity light is evident, wholeness is systematic, and reason of being is the way of life.</p>
+                        <p>We are committed to building nations that thrive in their purest light where essence of being is honoured, the totality of identity is beyond territories, and reason of being is tangibly practical: wholly and sustainably.</p>
+                        <p>At The You Lounge, we envision a world where every leader operates from their sovereign identity, every community thrives in its unique light, and every system serves the elevation of human potential.</p>
+                    </div>
+                </div>
+
+                <!-- Approach Section -->
+                <div class="section-block">
+                    <div class="tab-btn" id="approach-btn">
+                        <span class="icon">⚙️</span>
+                        <a href="#approach">Approach</a>
+                        <p><strong>From toddlers-youths-adults, engagements are immersed in the present-future with evidence-based storytelling, totality in human-agency and thriving like-minded community.</strong></p>
+                        <p>One nation at a time, we shift communities from survival to sovereignty in body, soul and spirit through wholeness systems encompassed in the eight dimensions. Immersed and grounded in essence of identity, we blend wisdom of light, applied research and technological sustainability through eight dimensions to build wholeness systems.</p>
+                        <p>Through evidence-based storytelling, design thinking and wholeness-driven systems, we serve toddlers, youths and adults inclusive of a gender perspective; every step dignified in power, evidence and identity in light.</p>
+                        
+                        <p style="margin-top: 20px;"><strong>Our Multi-Dimensional Framework:</strong></p>
+                        <p>• <strong>Identity & Purpose:</strong> Grounding all action in sovereign identity</p>
+                        <p>• <strong>Systems Thinking:</strong> Addressing challenges holistically</p>
+                        <p>• <strong>Evidence-Based Practice:</strong> Grounding interventions in research</p>
+                        <p>• <strong>Culturally Adaptive Models:</strong> Respecting local wisdom while innovating</p>
+                        <p>• <strong>Intergenerational Engagement:</strong> Serving all age groups with tailored approaches</p>
+                        <p>• <strong>Gender-Inclusive Design:</strong> Ensuring equity in all programs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Values Section -->
+            <div class="values-section">
+                <h2 class="section-title">Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Sovereignty</h3>
+                        <p>Honoring the autonomy and authority of individuals and communities to determine their own paths, make their own decisions, and govern their own systems.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Integrity</h3>
+                        <p>Operating with unwavering ethical standards, transparency, and consistency between our words, actions, and the identity we champion.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-globe-americas"></i>
+                        <h3>Cultural Intelligence</h3>
+                        <p>Respecting and integrating diverse cultural perspectives, wisdom traditions, and local knowledge into all our approaches and solutions.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Sustainable Impact</h3>
+                        <p>Building systems and solutions that create lasting change, considering environmental, social, and economic sustainability in all we do.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Return to Homepage Button at Bottom -->
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="index.html" class="return-home-btn">
+                    <i class="fas fa-home"></i> Back to Homepage
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Matching Homepage -->
+    <footer id="contact">
+        <div class="footer-content container">
+            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
+            <p class="footer-tagline">Building sovereign leadership and thriving communities through identity, agency, and systemic transformation.</p>
+            
+            <div class="contact-info">
+                <p>Connect with us:</p>
+                <p><a href="#" id="footerContact">executive@youlounge.org</a></p>
+                <p>For inquiries about our approach and philosophy</p>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 The You Lounge. All rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="#" id="footerContactLink">Contact</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Form Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="contact-modal">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h2 class="modal-title">Connect with The You Lounge</h2>
+            
+            <!-- Formspree Form -->
+            <form id="contactForm" action="https://formspree.io/f/xykjaerk" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" name="name" required placeholder="John Smith">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Title/Position *</label>
+                    <input type="text" class="form-input" name="position" required placeholder="CEO, Global Director, etc.">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Company/Organization *</label>
+                    <input type="text" class="form-input" name="company" required placeholder="Your organization name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" name="email" required placeholder="you@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="phone" placeholder="+1 (123) 456-7890">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">What brings you to The You Lounge? *</label>
+                    <select class="form-input" name="interest" required>
+                        <option value="">Select an option</option>
+                        <option value="Learn about our philosophy">Learn about our philosophy</option>
+                        <option value="Discuss partnership opportunities">Discuss partnership opportunities</option>
+                        <option value="Explore consulting services">Explore consulting services</option>
+                        <option value="Understand our Theory of Change">Understand our Theory of Change</option>
+                        <option value="Join our community">Join our community</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Message *</label>
+                    <textarea class="form-textarea" name="message" required placeholder="Tell us what you'd like to discuss about our approach, philosophy, or potential collaboration..."></textarea>
+                </div>
+                
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p>Sending your message...</p>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                
+                <p class="form-note">
+                    Your information is confidential and will only be used to connect you with the appropriate executive concierge.
+                </p>
+            </form>
+            
+            <div class="form-success" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out to The You Lounge. Our executive concierge will contact you within 24 hours.</p>
+                <p>You may also reach us directly at <strong>executive@youlounge.org</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger Menu Toggle - Matching Homepage
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking a link
+        const menuLinks = document.querySelectorAll('.mobile-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                hamburger.querySelector('i').classList.remove('fa-times');
+                hamburger.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                // Only prevent default for same-page anchors
+                if(targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Image zoom enhancement
+        const images = document.querySelectorAll('.image-block img');
+        images.forEach(img => {
+            img.addEventListener('click', function() {
+                if(this.style.transform === 'scale(2)') {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                } else {
+                    this.style.transform = 'scale(2)';
+                    this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.3)';
+                }
+            });
+        });
+
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked tab
+                btn.classList.add('active');
+                
+                // If there's a hash in the URL, update it
+                const tabId = btn.querySelector('a').getAttribute('href').replace('#', '');
+                history.replaceState(null, null, `#${tabId}`);
+            });
+        });
+
+        // Check URL hash on load
+        window.addEventListener('load', () => {
+            const hash = location.hash.replace('#', '');
+            if (hash) {
+                const targetBtn = document.querySelector(`[id$="${hash}-btn"]`);
+                if(targetBtn) {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    targetBtn.classList.add('active');
+                }
+            }
+        });
+
+        // Contact Form Modal Functionality
+        const contactModal = document.getElementById('contactModal');
+        const navContact = document.getElementById('navContact');
+        const footerContact = document.getElementById('footerContact');
+        const footerContactLink = document.getElementById('footerContactLink');
+        const closeModal = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Function to open modal
+        function openModal() {
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        // Function to close modal
+        function closeModalFunc() {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Open modal when clicking email
+        footerContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Open modal when clicking Contact in navigation
+        navContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Open modal when clicking Contact in footer
+        footerContactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            closeModalFunc();
+        });
+
+        // Close modal when clicking outside
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeModalFunc();
+            }
+        });
+
+        // Handle form submission with Formspree
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading spinner
+            loadingSpinner.style.display = 'block';
+            contactForm.querySelector('.submit-button').disabled = true;
+            
+            try {
+                // Create form data
+                const formData = new FormData(contactForm);
+                
+                // Send to Formspree
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                contactForm.querySelector('.submit-button').disabled = false;
+                
+                if (response.ok) {
+                    // Show success message
+                    contactForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Reset form after 5 seconds and close modal
+                    setTimeout(() => {
+                        contactForm.reset();
+                        contactForm.style.display = 'block';
+                        successMessage.style.display = 'none';
+                        closeModalFunc();
+                    }, 5000);
+                } else {
+                    // Handle error
+                    alert('There was an error submitting the form. Please try again or email us directly at executive@youlounge.org');
+                }
+            } catch (error) {
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                contactForm.querySelector('.submit-button').disabled = false;
+                
+                // Handle network error
+                alert('Network error. Please check your connection and try again, or email us directly at executive@youlounge.org');
+                console.error('Form submission error:', error);
+            }
+        });
+
+        // Add hidden honeypot field to prevent spam (optional but recommended)
+        const honeypotField = document.createElement('input');
+        honeypotField.type = 'text';
+        honeypotField.name = '_gotcha';
+        honeypotField.style.display = 'none';
+        contactForm.appendChild(honeypotField);
+    </script>
+</body>
+</html>
