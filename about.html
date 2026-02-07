@@ -133,7 +133,7 @@
             padding-left: 30px;
         }
 
-        /* Hero Section */
+        /* Hero Section - UPDATED: Reduced padding since video will be inside */
         .about-hero {
             padding: 140px 20px 60px;
             text-align: center;
@@ -156,7 +156,7 @@
         .about-hero h1 {
             font-size: 3.5rem;
             color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
-            margin-bottom: 20px;
+            margin-bottom: 40px; /* Increased margin for video spacing */
             font-weight: 700;
         }
 
@@ -165,6 +165,24 @@
             max-width: 700px;
             margin: 0 auto 30px;
             color: var(--charcoal);
+        }
+
+        /* Video Container - MOVED to inside about-hero */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px; /* Added bottom margin */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
         }
 
         /* Operating Principles Styling */
@@ -194,39 +212,6 @@
             padding: 5px 0;
         }
 
-        /* Video Section */
-        .video-section {
-            padding: 40px 20px;
-            background-color: var(--light-clay);
-            text-align: center;
-            margin: 40px auto;
-            border-radius: 15px;
-            max-width: 900px;
-        }
-
-        .video-section h2 {
-            color: var(--teal);
-            margin-bottom: 30px;
-            font-size: 2.2rem;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 12px;
-        }
-
         /* Return to Homepage Button */
         .return-home-btn {
             display: inline-block;
@@ -248,8 +233,8 @@
             transform: translateY(-3px);
         }
 
-        /* Main Content Section - REMOVED */
-        .about-section {
+        /* REMOVED: Video Section CSS since video is now in about-hero */
+        .video-section {
             display: none;
         }
 
@@ -495,10 +480,6 @@
             .operating-principles {
                 font-size: 1.1rem;
             }
-            
-            .video-section h2 {
-                font-size: 1.8rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -508,14 +489,11 @@
             
             .about-hero h1 {
                 font-size: 2rem;
+                margin-bottom: 30px;
             }
             
             .footer-logo-img {
                 max-width: 200px;
-            }
-            
-            .video-section h2 {
-                font-size: 1.6rem;
             }
         }
     </style>
@@ -545,40 +523,37 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Now contains both heading and video -->
     <section class="about-hero">
         <div class="container">
             <h1 class="fade-in">About</h1>
-            <p class="fade-in delay-1">As governance architects- we design the conditions under which decision-makers, executives, leaders, institutions and systems operate in alignment with their true mandate.<p><p>
             
-            Our work sits at the intersection of governance design, human agency and narrative coherence.<p><p>
-            
-            Rather than increasing activity, we focus on increasing <strong>dominion;</strong> authority that flows through structure and systems, not personality
-         
-         <p><p>
-         <div class="operating-principles">
-           <strong>Operating Principles</strong>
-           <ul>
-               <li>°Authority Must Match Territory</li>
-               <li>°Alignment Precedes Performance</li>
-               <li>°Systems Fail When Mandate & Substance Diverge</li>
-               <li>°Sustainable Governance Is Designed, Not Forced</li>
-           </ul>
-         </div>
-      
-        </div>
-    </section>
-
-    <!-- Video Section -->
-    <section class="video-section fade-in">
-        <div class="container">
-            <h2>About</h2>
+            <!-- Video is now directly under the "About" heading -->
             <div class="video-container">
                 <video id="aboutVideo" autoplay muted loop playsinline>
                     <source src="about.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
+            
+            <!-- Text content comes after the video -->
+            <p class="fade-in delay-1">As governance architects- we design the conditions under which decision-makers, executives, leaders, institutions and systems operate in alignment with their true mandate.</p>
+            
+            <p>Our work sits at the intersection of governance design, human agency and narrative coherence.</p>
+            
+            <p>Rather than increasing activity, we focus on increasing <strong>dominion;</strong> authority that flows through structure and systems, not personality.</p>
+         
+            <div class="operating-principles">
+                <strong>Operating Principles</strong>
+                <ul>
+                    <li>°Authority Must Match Territory</li>
+                    <li>°Alignment Precedes Performance</li>
+                    <li>°Systems Fail When Mandate & Substance Diverge</li>
+                    <li>°Sustainable Governance Is Designed, Not Forced</li>
+                </ul>
+            </div>
+            
+            <!-- Back to Homepage button -->
             <a href="index.html" class="return-home-btn">
                 <i class="fas fa-home"></i> Back to Homepage
             </a>
