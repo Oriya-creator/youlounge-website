@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,6 +167,66 @@
             color: var(--charcoal);
         }
 
+        /* Operating Principles Styling */
+        .operating-principles {
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin: 30px 0;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .operating-principles strong {
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        .operating-principles ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 15px;
+            color: var(--charcoal);
+            font-weight: normal;
+        }
+
+        .operating-principles li {
+            padding: 5px 0;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 40px 20px;
+            background-color: var(--light-clay);
+            text-align: center;
+            margin: 40px auto;
+            border-radius: 15px;
+            max-width: 900px;
+        }
+
+        .video-section h2 {
+            color: var(--teal);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+
         /* Return to Homepage Button */
         .return-home-btn {
             display: inline-block;
@@ -180,7 +239,7 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             border: 2px solid var(--terracotta);
-            margin-top: 20px;
+            margin-top: 40px;
         }
 
         .return-home-btn:hover {
@@ -189,181 +248,9 @@
             transform: translateY(-3px);
         }
 
-        /* About Content Section */
+        /* Main Content Section - REMOVED */
         .about-section {
-            padding: 60px 20px 100px;
-            background-color: var(--white);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background-color: var(--teal);
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-
-        /* Tab Buttons */
-        .tab-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .tab-btn {
-            background: linear-gradient(135deg, var(--light-clay) 0%, var(--sand) 100%);
-            border: none;
-            border-radius: 16px;
-            padding: 30px;
-            text-align: left;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            border-left: 6px solid var(--teal);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tab-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,128,128,0.1) 0%, rgba(0,102,102,0.1) 100%); /* CHANGED FROM FOREST TO DARK-TEAL */
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .tab-btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .tab-btn:hover::before {
-            opacity: 1;
-        }
-
-        .tab-btn .icon {
-            font-size: 36px;
-            display: inline-block;
-            margin-right: 15px;
-            vertical-align: middle;
-            padding: 10px;
-            border: 2px solid var(--teal);
-            border-radius: 50%;
-            background-color: var(--white);
-            color: var(--teal);
-            margin-bottom: 15px;
-        }
-
-        .tab-btn a {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
-            text-decoration: none;
-            margin-bottom: 15px;
-            display: block;
-            transition: color 0.3s ease;
-        }
-
-        .tab-btn:hover a {
-            color: var(--dark-teal); /* CHANGED FROM TEAL TO DARK-TEAL */
-       <p><p> <h2><span class="highlight" style="color: var(--teal);">Operating Principles</span></h2>
-   <div style="font-size: 1.3rem;">
-      °Authority Must Match Territory
-      <br>°Alignment Precedes Performance
-      <br>°Systems Fail When Mandate & Substance Diverge
-      <br>°Sustainable Governance Is Designed, Not Forced
-   </div>
-   <p><p>
-
-        .section-block {
-            margin-bottom: 40px;
-        }
-
-        .image-block {
-            margin-top: 25px;
-            text-align: center;
-            padding: 20px;
-            background-color: var(--light-clay);
-            border-radius: 12px;
-            border: 2px solid var(--clay);
-        }
-
-        .image-block img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .image-block img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Core Values Section */
-        .values-section {
-            padding: 80px 20px;
-            background-color: var(--light-clay);
-            margin-top: 60px;
-            border-radius: 20px;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .value-card {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--teal);
-        }
-
-        .value-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .value-card i {
-            font-size: 36px;
-            color: var(--teal);
-            margin-bottom: 20px;
-        }
-
-        .value-card h3 {
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .value-card p {
-            color: var(--charcoal);
-            line-height: 1.6;
+            display: none;
         }
 
         /* Footer - CHANGED FROM FOREST TO TEAL */
@@ -372,6 +259,7 @@
             color: var(--sand);
             padding: 60px 20px 30px;
             text-align: center;
+            margin-top: 60px;
         }
 
         .footer-content {
@@ -590,27 +478,6 @@
                 font-size: 1.1rem;
             }
             
-            .tab-btn {
-                padding: 20px;
-            }
-            
-            .tab-btn a {
-                font-size: 20px;
-            }
-            
-            .tab-btn .icon {
-                font-size: 28px;
-                padding: 8px;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .mobile-menu a {
                 padding: 18px;
                 font-size: 16px;
@@ -624,6 +491,14 @@
                 padding: 30px 20px;
                 width: 95%;
             }
+            
+            .operating-principles {
+                font-size: 1.1rem;
+            }
+            
+            .video-section h2 {
+                font-size: 1.8rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -635,16 +510,12 @@
                 font-size: 2rem;
             }
             
-            .tab-btn {
-                padding: 18px;
-            }
-            
-            .tab-btn p {
-                font-size: 1rem;
-            }
-            
             .footer-logo-img {
                 max-width: 200px;
+            }
+            
+            .video-section h2 {
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -675,34 +546,42 @@
     </header>
 
     <!-- Hero Section -->
-   <section class="about-hero">
-    <div class="container">
-        <h1 class="fade-in">About</h1>
-        <p class="fade-in delay-1">As governance architects- we design the conditions under which decision-makers, executives, leaders, institutions and systems operate in alignment with their true mandate.<p><p>
-        
-        Our work sits at the intersection of governance design, human agency and narrative coherence.<p><p>
-        
-        Rather than increasing activity, we focus on increasing <strong>dominion;</strong> authority that flows through structure and systems, not personality
-     
-     <p><p> <h2><span class="highlight" style="color: var(--teal);">Operating Principles</span></h2>
-       <div style="font-size: 1.3rem;">
-          °Authority Must Match Territory
-          <br>°Alignment Precedes Performance
-          <br>°Systems Fail When Mandate & Substance Diverge
-          <br>°Sustainable Governance Is Designed, Not Forced
-       </div>
-       <p><p>
-  
-    </div>
-</section>
-            </div>
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="fade-in">About</h1>
+            <p class="fade-in delay-1">As governance architects- we design the conditions under which decision-makers, executives, leaders, institutions and systems operate in alignment with their true mandate.<p><p>
             
-            <!-- Additional Return to Homepage Button at Bottom -->
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="index.html" class="return-home-btn">
-                    <i class="fas fa-home"></i> Back to Homepage
-                </a>
+            Our work sits at the intersection of governance design, human agency and narrative coherence.<p><p>
+            
+            Rather than increasing activity, we focus on increasing <strong>dominion;</strong> authority that flows through structure and systems, not personality
+         
+         <p><p>
+         <div class="operating-principles">
+           <strong>Operating Principles</strong>
+           <ul>
+               <li>°Authority Must Match Territory</li>
+               <li>°Alignment Precedes Performance</li>
+               <li>°Systems Fail When Mandate & Substance Diverge</li>
+               <li>°Sustainable Governance Is Designed, Not Forced</li>
+           </ul>
+         </div>
+      
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section fade-in">
+        <div class="container">
+            <h2>About</h2>
+            <div class="video-container">
+                <video id="aboutVideo" autoplay muted loop playsinline>
+                    <source src="about.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
+            <a href="index.html" class="return-home-btn">
+                <i class="fas fa-home"></i> Back to Homepage
+            </a>
         </div>
     </section>
 
@@ -827,67 +706,6 @@
                 hamburger.querySelector('i').classList.remove('fa-times');
                 hamburger.querySelector('i').classList.add('fa-bars');
             });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                // Only prevent default for same-page anchors
-                if(targetId.startsWith('#')) {
-                    e.preventDefault();
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-
-        // Image zoom enhancement
-        const images = document.querySelectorAll('.image-block img');
-        images.forEach(img => {
-            img.addEventListener('click', function() {
-                if(this.style.transform === 'scale(2)') {
-                    this.style.transform = 'scale(1)';
-                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-                } else {
-                    this.style.transform = 'scale(2)';
-                    this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.3)';
-                }
-            });
-        });
-
-        // Tab functionality
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all tabs
-                tabBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked tab
-                btn.classList.add('active');
-                
-                // If there's a hash in the URL, update it
-                const tabId = btn.querySelector('a').getAttribute('href').replace('#', '');
-                history.replaceState(null, null, `#${tabId}`);
-            });
-        });
-
-        // Check URL hash on load
-        window.addEventListener('load', () => {
-            const hash = location.hash.replace('#', '');
-            if (hash) {
-                const targetBtn = document.querySelector(`[id$="${hash}-btn"]`);
-                if(targetBtn) {
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    targetBtn.classList.add('active');
-                }
-            }
         });
 
         // Contact Form Modal Functionality
