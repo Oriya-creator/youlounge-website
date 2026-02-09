@@ -220,7 +220,7 @@ button:hover {
       <p>Secure payment via PayPal - VISA, MasterCard, American Express accepted</p>
     </div>
     
-    <!-- Manual payment verification (for webhook integration) -->
+    <!-- Manual payment verification (for troubleshooting) -->
     <div style="margin-top: 20px; font-size: 14px; color: #aaa;">
       <p>Already paid but don't see access?</p>
       <button onclick="verifyPaymentManually()" style="background: #333; color: #fff; font-size: 12px; padding: 8px 16px;">
@@ -480,23 +480,19 @@ Each unlocks automatically 24 hours after completion.
 </div> <!-- End of container -->
 
 <script>
-// Simple PayPal integration - Works with your hosted button
+// Configuration
 const CONFIG = {
   price: 1
 };
 
-// Payment verification functions
-async function verifyPayment() {
-  const statusElement = document.getElementById('payment-status-21');
-  
-  // Check localStorage for existing access
+// Check if user already has access
+function checkAccess() {
   const paymentData = localStorage.getItem('sovereign_payment_21day');
   
   if (paymentData) {
     try {
       const data = JSON.parse(paymentData);
       if (data.status === 'completed') {
-        showContent();
         return true;
       }
     } catch (e) {
@@ -507,28 +503,27 @@ async function verifyPayment() {
   return false;
 }
 
+// Manual verification for troubleshooting
 function verifyPaymentManually() {
   const statusElement = document.getElementById('payment-status-21');
   statusElement.className = 'status-message processing';
-  statusElement.innerHTML = '🔄 Manually verifying payment...';
+  statusElement.innerHTML = '🔄 Manual verification...';
   
   // Ask for email
-  const email = prompt('For manual verification, please enter your PayPal email:');
+  const email = prompt('Please enter the email you used for payment:');
   
   if (email && email.includes('@')) {
-    // Simulate verification
-    setTimeout(() => {
-      localStorage.setItem('sovereign_payment_21day', JSON.stringify({
-        status: 'completed',
-        email: email,
-        verified: new Date().toISOString(),
-        expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
-      }));
-      
-      showContent();
-      statusElement.className = 'status-message success';
-      statusElement.innerHTML = '✅ Manual verification successful! Access granted.';
-    }, 1500);
+    // Grant access
+    localStorage.setItem('sovereign_payment_21day', JSON.stringify({
+      status: 'completed',
+      email: email,
+      verified: new Date().toISOString(),
+      manual: true
+    }));
+    
+    showContent();
+    statusElement.className = 'status-message success';
+    statusElement.innerHTML = '✅ Access granted! Welcome to the 21-Day Program.';
   } else {
     statusElement.className = 'status-message error';
     statusElement.innerHTML = '❌ Please enter a valid email address.';
@@ -540,19 +535,15 @@ function showContent() {
   document.querySelector('.payment-section').style.display = 'none';
 }
 
-// PayPal transaction handler
-function handlePayPalTransaction(transaction) {
-  // Store transaction ID
-  localStorage.setItem('sovereign_order_21day', transaction.id);
-  
+// Handle PayPal transaction
+function handlePayPalTransaction(details) {
   // Store payment data
   localStorage.setItem('sovereign_payment_21day', JSON.stringify({
     status: 'completed',
-    transactionId: transaction.id,
-    email: transaction.email,
-    amount: transaction.amount,
-    verified: new Date().toISOString(),
-    expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
+    transactionId: details.id,
+    email: details.payer.email_address,
+    amount: details.purchase_units[0].amount.value,
+    verified: new Date().toISOString()
   }));
   
   // Show success message
@@ -560,7 +551,7 @@ function handlePayPalTransaction(transaction) {
   statusElement.className = 'status-message success';
   statusElement.innerHTML = '✅ Payment successful! Granting access...';
   
-  // Grant access after 2 seconds
+  // Show content after 2 seconds
   setTimeout(() => {
     showContent();
   }, 2000);
@@ -572,7 +563,7 @@ const LOCK_HOURS = 24;
 function completeDay(day) {
   const text = document.querySelector(`[data-day="${day}"] textarea`).value.trim();
   if (!text) {
-    alert("Integration required. Please complete the prompt before proceeding.");
+    alert("Please complete the prompt before proceeding.");
     return;
   }
 
@@ -590,7 +581,7 @@ function completeDay(day) {
   updateAccess();
   
   // Show confirmation
-  alert(`Day ${day} completed! Next day will unlock in 24 hours.`);
+  alert(`Day ${day} completed! Next day unlocks in 24 hours.`);
 }
 
 function updateAccess() {
@@ -622,20 +613,18 @@ function updateAccess() {
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   // Check if user already has access
-  const hasAccess = verifyPayment();
-  
-  if (hasAccess) {
+  if (checkAccess()) {
     showContent();
   }
   
   // Initialize day access
   updateAccess();
-  setInterval(updateAccess, 1000); // Update every second for countdown
+  setInterval(updateAccess, 1000); // Update every second
 });
 </script>
 
-<!-- PayPal SDK - USING YOUR HOSTED BUTTON ID -->
-<script src="https://www.paypal.com/sdk/js?client-id=AS-jIAw2qHOmSVXguxfUHoYbiL-S2ugGD_ASH2u9lYFYqVokSKLn9TN3BALdogBIyMKzbMBaTYEF91bW&components=buttons&currency=USD"></script>
+<!-- PayPal SDK - USING YOUR CLIENT ID -->
+<script src="https://www.paypal.com/sdk/js?client-id=AS-jIAw2qHOmSVXguxfUHoYbiL-S2ugGD_ASH2u9lYFYqVokSKLn9TN3BALdogBIyMKzbMBaTYEF91bW&currency=USD"></script>
 
 <script>
 // Render PayPal button
@@ -661,13 +650,7 @@ paypal.Buttons({
   onApprove: function(data, actions) {
     return actions.order.capture().then(function(details) {
       // Handle successful payment
-      handlePayPalTransaction({
-        id: details.id,
-        status: details.status,
-        amount: details.purchase_units[0].amount.value,
-        email: details.payer.email_address,
-        timestamp: new Date().toISOString()
-      });
+      handlePayPalTransaction(details);
     });
   },
   
@@ -675,7 +658,7 @@ paypal.Buttons({
     console.error('PayPal error:', err);
     const statusElement = document.getElementById('payment-status-21');
     statusElement.className = 'status-message error';
-    statusElement.innerHTML = '❌ Payment failed. Please try again.';
+    statusElement.innerHTML = '❌ Payment failed. Please try again or use manual verification.';
   }
 }).render('#paypal-button-container');
 </script>
