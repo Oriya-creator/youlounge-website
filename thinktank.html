@@ -397,161 +397,6 @@
             text-decoration: underline;
         }
 
-        /* CONTACT FORM MODAL - Matching Homepage */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .contact-modal {
-            background-color: var(--white);
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            transform: translateY(-30px);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .modal-overlay.active .contact-modal {
-            transform: translateY(0);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--teal);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            color: var(--dark-teal);
-            transform: rotate(90deg);
-        }
-
-        .modal-title {
-            color: var(--teal);
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 1.8rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--charcoal);
-            font-weight: 500;
-        }
-
-        .form-input, .form-textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--clay);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background-color: rgba(230, 213, 184, 0.1);
-        }
-
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
-        }
-
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .submit-button {
-            background-color: var(--teal);
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .submit-button:hover {
-            background-color: var(--dark-teal);
-            transform: translateY(-2px);
-        }
-
-        .form-note {
-            font-size: 0.85rem;
-            color: var(--charcoal);
-            opacity: 0.7;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .form-success {
-            text-align: center;
-            padding: 30px;
-            color: var(--teal);
-            display: none;
-        }
-
-        .form-success i {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--teal);
-        }
-
-        /* Loading spinner */
-        .loading-spinner {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .spinner {
-            border: 3px solid rgba(0, 128, 128, 0.2);
-            border-radius: 50%;
-            border-top: 3px solid var(--teal);
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .np-hero h1 {
@@ -588,11 +433,6 @@
             
             .logo-img {
                 height: 40px;
-            }
-            
-            .contact-modal {
-                padding: 30px 20px;
-                width: 95%;
             }
         }
 
@@ -645,7 +485,7 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="hubs.html">Hubs</a></li>
                 <li><a href="thinktank.html" style="background-color: var(--dark-teal); color: var(--white);">Non-Profit & Think Tank</a></li>
-                <li><a href="#" id="navContact">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li> <!-- CHANGED: Link to contact.html -->
             </ul>
         </nav>
     </header>
@@ -727,7 +567,7 @@
             
             <div class="contact-info">
                 <p>Connect with our Global Concierge:</p>
-                <p><a href="#" id="footerContact">executive@youlounge.org</a></p>
+                <p><a href="contact.html">executive@youlounge.org</a></p> <!-- CHANGED: Link to contact.html -->
             </div>
             
             <div class="copyright">
@@ -735,95 +575,11 @@
                     <a href="about.html">About</a> • 
                     <a href="hubs.html">Hubs</a> • 
                     <a href="thinktank.html">Non-Profit & Think Tank</a> • 
-                    <a href="#" id="footerContactLink">Contact</a>
+                    <a href="contact.html">Contact</a> <!-- CHANGED: Link to contact.html -->
                 </p>
             </div>
         </div>
     </footer>
-
-    <!-- Contact Form Modal -->
-    <div class="modal-overlay" id="contactModal">
-        <div class="contact-modal">
-            <button class="close-modal" id="closeModal">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <h2 class="modal-title">Connect with The You Lounge</h2>
-            
-            <!-- Formspree Form -->
-            <form id="contactForm" action="https://formspree.io/f/xykjaerk" method="POST">
-                <div class="form-group">
-                    <label class="form-label">Full Name *</label>
-                    <input type="text" class="form-input" name="name" required placeholder="John Smith">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Title/Position *</label>
-                    <input type="text" class="form-input" name="position" required placeholder="CEO, Global Director, etc.">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Company/Organization *</label>
-                    <input type="text" class="form-input" name="company" required placeholder="Your organization name">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Email Address *</label>
-                    <input type="email" class="form-input" name="email" required placeholder="you@example.com">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-input" name="phone" placeholder="+1 (123) 456-7890">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Which area interests you? *</label>
-                    <select class="form-input" name="interest" required>
-                        <option value="">Select an option</option>
-                        <option value="Think Tank Research">Think Tank – Applied Science Research</option>
-                        <option value="Human Agency">Human Agency</option>
-                        <option value="Skill Development">Purposeful Skill Development</option>
-                        <option value="Climate Solutions">Climate Change Solutions</option>
-                        <option value="Energy Justice">Energy Justice Solutions</option>
-                        <option value="Health & Wellbeing">Holistic Health and Wellbeing</option>
-                        <option value="Food Systems">Smart Food Systems</option>
-                        <option value="Poverty Graduation">Poverty Graduation</option>
-                        <option value="Media & MICE">Media and M.I.C.E Experiences</option>
-                        <option value="Community Needs">Meeting Needs</option>
-                        <option value="All Areas">All Non-Profit & Think Tank Areas</option>
-                        <option value="Not sure yet">Not sure yet - need guidance</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Your Message *</label>
-                    <textarea class="form-textarea" name="message" required placeholder="Tell us about your interest in our non-profit initiatives, research collaborations, or how we can work together..."></textarea>
-                </div>
-                
-                <!-- Loading Spinner -->
-                <div class="loading-spinner" id="loadingSpinner">
-                    <div class="spinner"></div>
-                    <p>Sending your message...</p>
-                </div>
-                
-                <button type="submit" class="submit-button">
-                    <i class="fas fa-paper-plane"></i> Send Message
-                </button>
-                
-                <p class="form-note">
-                    Your information is confidential and will only be used to connect you with the appropriate non-profit and research teams.
-                </p>
-            </form>
-            
-            <div class="form-success" id="successMessage">
-                <i class="fas fa-check-circle"></i>
-                <h3>Message Sent Successfully!</h3>
-                <p>Thank you for reaching out to The You Lounge Non-Profit & Think Tank. Our team will contact you within 24 hours.</p>
-                <p>You may also reach us directly at <strong>executive@youlounge.org</strong></p>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Hamburger Menu Toggle - Matching Homepage
@@ -900,116 +656,7 @@
             });
         });
 
-        // Contact Form Modal Functionality
-        const contactModal = document.getElementById('contactModal');
-        const navContact = document.getElementById('navContact');
-        const footerContact = document.getElementById('footerContact');
-        const footerContactLink = document.getElementById('footerContactLink');
-        const closeModal = document.getElementById('closeModal');
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-
-        // Function to open modal
-        function openModal() {
-            contactModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        }
-
-        // Function to close modal
-        function closeModalFunc() {
-            contactModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Open modal when clicking email
-        footerContact.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
-
-        // Open modal when clicking Contact in navigation
-        navContact.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
-
-        // Open modal when clicking Contact in footer
-        footerContactLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
-
-        // Close modal
-        closeModal.addEventListener('click', () => {
-            closeModalFunc();
-        });
-
-        // Close modal when clicking outside
-        contactModal.addEventListener('click', (e) => {
-            if (e.target === contactModal) {
-                closeModalFunc();
-            }
-        });
-
-        // Handle form submission with Formspree
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Show loading spinner
-            loadingSpinner.style.display = 'block';
-            contactForm.querySelector('.submit-button').disabled = true;
-            
-            try {
-                // Create form data
-                const formData = new FormData(contactForm);
-                
-                // Send to Formspree
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                // Hide loading spinner
-                loadingSpinner.style.display = 'none';
-                contactForm.querySelector('.submit-button').disabled = false;
-                
-                if (response.ok) {
-                    // Show success message
-                    contactForm.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    
-                    // Reset form after 5 seconds and close modal
-                    setTimeout(() => {
-                        contactForm.reset();
-                        contactForm.style.display = 'block';
-                        successMessage.style.display = 'none';
-                        closeModalFunc();
-                    }, 5000);
-                } else {
-                    // Handle error
-                    alert('There was an error submitting the form. Please try again or email us directly at executive@youlounge.org');
-                }
-            } catch (error) {
-                // Hide loading spinner
-                loadingSpinner.style.display = 'none';
-                contactForm.querySelector('.submit-button').disabled = false;
-                
-                // Handle network error
-                alert('Network error. Please check your connection and try again, or email us directly at executive@youlounge.org');
-                console.error('Form submission error:', error);
-            }
-        });
-
-        // Add hidden honeypot field to prevent spam (optional but recommended)
-        const honeypotField = document.createElement('input');
-        honeypotField.type = 'text';
-        honeypotField.name = '_gotcha';
-        honeypotField.style.display = 'none';
-        contactForm.appendChild(honeypotField);
+        // REMOVED: All modal functionality since contact buttons now link to contact.html
     </script>
 </body>
 </html>
