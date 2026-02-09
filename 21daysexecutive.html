@@ -215,6 +215,11 @@ button:hover {
     <!-- PayPal Button Container -->
     <div class="paypal-container" id="paypal-container-TQ8MBDUY87G6S"></div>
     
+    <!-- Alternative payment methods -->
+    <div style="margin-top: 25px; font-size: 13px; color: #777;">
+      <p>Also accepted: VISA, MasterCard, American Express</p>
+    </div>
+    
     <!-- Manual payment verification (for webhook integration) -->
     <div style="margin-top: 20px; font-size: 14px; color: #aaa;">
       <p>Having issues with payment verification?</p>
@@ -431,7 +436,7 @@ Each unlocks automatically 24 hours after completion.
 <div class="timer" id="timer-17"></div>
 </div>
 
-<div class.gov-day locked" data-day="18">
+<div class="gov-day locked" data-day="18">
 <h4>Day 18 — Risk Governance</h4>
 <p>Decide risk deliberately and visibly.</p>
 <textarea placeholder="State how risk will be governed."></textarea>
@@ -466,7 +471,8 @@ Each unlocks automatically 24 hours after completion.
 </div>
 
 <div class="footer">
-© Sovereign Protocol — Executive Governance Architecture
+© Sovereign Protocol — Executive Governance Architecture<br>
+<small>Need support? Contact: support@sovereignprotocol.org</small>
 </div>
 
 </div> <!-- End of program-content -->
@@ -474,12 +480,24 @@ Each unlocks automatically 24 hours after completion.
 </div> <!-- End of container -->
 
 <script>
-// Configuration
+// Configuration - REMOVED HARDCODED CLIENT ID
 const CONFIG = {
   webhookUrl: 'https://www.youlounge.org/.netlify/functions/paypal-webhook',
   programId: '21-day',
   price: 1
 };
+
+// Get client ID from server
+async function getPayPalClientId() {
+  try {
+    const response = await fetch('/.netlify/functions/get-paypal-config');
+    const config = await response.json();
+    return config.clientId;
+  } catch (error) {
+    console.error('Failed to get PayPal config:', error);
+    return null;
+  }
+}
 
 // Payment verification functions
 async function verifyPayment() {
@@ -505,7 +523,7 @@ async function verifyPayment() {
   statusElement.innerHTML = '🔄 Verifying payment status...';
   
   try {
-    // Call your backend to verify payment
+    // Call backend to verify payment
     const response = await fetch('/.netlify/functions/verify-payment', {
       method: 'POST',
       headers: {
@@ -525,7 +543,7 @@ async function verifyPayment() {
       localStorage.setItem('sovereign_payment_21day', JSON.stringify({
         status: 'completed',
         verified: new Date().toISOString(),
-        expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString() // 1 year expiry
+        expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
       }));
       
       statusElement.className = 'status-message success';
@@ -550,19 +568,39 @@ function verifyPaymentManually(program) {
   statusElement.className = 'status-message processing';
   statusElement.innerHTML = '🔄 Manually verifying payment... Please wait.';
   
-  // Simulate webhook verification
+  // Call manual verification endpoint
   setTimeout(() => {
-    // This would normally call your API
-    localStorage.setItem('sovereign_payment_21day', JSON.stringify({
-      status: 'completed',
-      verified: new Date().toISOString(),
-      expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
-    }));
-    
-    showContent();
-    statusElement.className = 'status-message success';
-    statusElement.innerHTML = '✅ Manual verification successful! Access granted.';
-  }, 2000);
+    fetch('/.netlify/functions/manual-verification', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        email: prompt('Please enter your PayPal email:'),
+        orderId: prompt('Please enter your order ID (optional):') 
+      })
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        localStorage.setItem('sovereign_payment_21day', JSON.stringify({
+          status: 'completed',
+          verified: new Date().toISOString(),
+          expiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
+        }));
+        
+        showContent();
+        statusElement.className = 'status-message success';
+        statusElement.innerHTML = '✅ Manual verification successful! Access granted.';
+      } else {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '❌ Manual verification failed. Please contact support.';
+      }
+    })
+    .catch(error => {
+      console.error('Manual verification error:', error);
+      statusElement.className = 'status-message error';
+      statusElement.innerHTML = '❌ Error during verification. Please contact support.';
+    });
+  }, 1000);
 }
 
 function showContent() {
@@ -580,7 +618,7 @@ function getUserId() {
 }
 
 function trackEvent(eventName, data) {
-  // Implement your analytics tracking here
+  // Analytics tracking
   console.log('Tracking:', eventName, data);
 }
 
@@ -589,23 +627,37 @@ function handlePayPalTransaction(transaction) {
   // Store transaction ID
   localStorage.setItem('sovereign_order_21day', transaction.id);
   
+  // Store temporary payment data
+  localStorage.setItem('sovereign_payment_21day_pending', JSON.stringify({
+    status: 'pending',
+    transactionId: transaction.id,
+    email: transaction.email,
+    amount: transaction.amount
+  }));
+  
   // Show processing message
   const statusElement = document.getElementById('payment-status-21');
   statusElement.className = 'status-message processing';
-  statusElement.innerHTML = '🔄 Processing payment...';
+  statusElement.innerHTML = '🔄 Processing payment... This may take up to 30 seconds.';
   
-  // Check for payment verification every 5 seconds
+  // Check for payment verification every 3 seconds
+  let checks = 0;
+  const maxChecks = 30; // 90 seconds total
   const checkInterval = setInterval(() => {
     verifyPayment();
-  }, 5000);
-  
-  // Stop checking after 5 minutes
-  setTimeout(() => {
-    clearInterval(checkInterval);
-  }, 5 * 60 * 1000);
+    checks++;
+    
+    if (checks >= maxChecks) {
+      clearInterval(checkInterval);
+      if (statusElement.className.includes('processing')) {
+        statusElement.className = 'status-message error';
+        statusElement.innerHTML = '⚠️ Payment processing is taking longer than expected. Please refresh or contact support.';
+      }
+    }
+  }, 3000);
 }
 
-// Original day completion functions (keep these)
+// Original day completion functions
 const LOCK_HOURS = 24;
 
 function completeDay(day) {
@@ -617,6 +669,14 @@ function completeDay(day) {
 
   const timestamp = Date.now();
   localStorage.setItem("gov_day_" + day, timestamp);
+  
+  // Save the response
+  const responses = JSON.parse(localStorage.getItem('governance_responses') || '{}');
+  responses[day] = {
+    text: text,
+    date: new Date().toISOString()
+  };
+  localStorage.setItem('governance_responses', JSON.stringify(responses));
 
   updateAccess();
 }
@@ -647,66 +707,77 @@ function updateAccess() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   // Check if user already has access
   verifyPayment();
   
   // Initialize day access
   updateAccess();
   setInterval(updateAccess, 60000);
+  
+  // Load PayPal SDK dynamically with client ID from server
+  const clientId = await getPayPalClientId();
+  if (clientId) {
+    loadPayPalSDK(clientId);
+  } else {
+    const statusElement = document.getElementById('payment-status-21');
+    statusElement.className = 'status-message error';
+    statusElement.innerHTML = '⚠️ Payment system temporarily unavailable. Please try again later.';
+  }
 });
-</script>
 
-<!-- PayPal SDK and Button Integration - UPDATED WITH CORRECT CLIENT ID -->
-<script 
-  src="https://www.paypal.com/sdk/js?client-id=AS-jIAw2qHOmSVXguxfUHoYbiL-S2ugGD_ASH2u9lYFYqVokSKLn9TN3BALdogBIyMKzbMBaTYEF91bW&components=hosted-buttons&disable-funding=venmo&currency=USD">
-</script>
-<script>
-  // Render the 21-Day PayPal button - UPDATED WITH createOrder
-  paypal.HostedButtons({
-    hostedButtonId: "TQ8MBDUY87G6S",
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '1.00',
-            currency_code: 'USD'
-          },
-          custom_id: '21day-executive-program-' + Date.now(),
-          description: '21-Day Executive Governance Systems',
-          soft_descriptor: 'Sovereign 21D'
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        console.log('Payment approved:', details);
-        handlePayPalTransaction({
-          id: details.id,
-          status: details.status,
-          amount: details.purchase_units[0].amount.value,
-          email: details.payer.email_address,
-          custom_id: details.purchase_units[0].custom_id
+function loadPayPalSDK(clientId) {
+  const script = document.createElement('script');
+  script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&components=hosted-buttons&disable-funding=venmo&currency=USD`;
+  script.onload = function() {
+    // Render the PayPal button
+    paypal.HostedButtons({
+      hostedButtonId: "TQ8MBDUY87G6S",
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '1.00',
+              currency_code: 'USD'
+            },
+            custom_id: '21day-executive-program-' + Date.now(),
+            description: '21-Day Executive Governance Systems',
+            soft_descriptor: 'Sovereign 21D'
+          }]
         });
-        
-        alert('Payment completed successfully! Your 21-day access is being activated...');
-      });
-    },
-    onError: function(err) {
-      console.error('PayPal error:', err);
-      const statusElement = document.getElementById('payment-status-21');
-      statusElement.className = 'status-message error';
-      statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
-    },
-    onCancel: function(data) {
-      console.log('Payment cancelled by user');
-      const statusElement = document.getElementById('payment-status-21');
-      if (statusElement) {
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          console.log('Payment approved:', details);
+          handlePayPalTransaction({
+            id: details.id,
+            status: details.status,
+            amount: details.purchase_units[0].amount.value,
+            email: details.payer.email_address,
+            custom_id: details.purchase_units[0].custom_id
+          });
+          
+          alert('Payment completed successfully! Your 21-day access is being activated...');
+        });
+      },
+      onError: function(err) {
+        console.error('PayPal error:', err);
+        const statusElement = document.getElementById('payment-status-21');
         statusElement.className = 'status-message error';
-        statusElement.innerHTML = '❌ Payment cancelled. Please try again if you wish to proceed.';
+        statusElement.innerHTML = '❌ Payment failed. Please try again or contact support.';
+      },
+      onCancel: function(data) {
+        console.log('Payment cancelled by user');
+        const statusElement = document.getElementById('payment-status-21');
+        if (statusElement) {
+          statusElement.className = 'status-message error';
+          statusElement.innerHTML = '❌ Payment cancelled. Please try again if you wish to proceed.';
+        }
       }
-    }
-  }).render("#paypal-container-TQ8MBDUY87G6S");
+    }).render("#paypal-container-TQ8MBDUY87G6S");
+  };
+  document.head.appendChild(script);
+}
 </script>
 
 </body>
