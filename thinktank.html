@@ -167,6 +167,15 @@
             color: var(--charcoal);
         }
 
+        /* Hero section "Long-Horizon Governance Stewardship" styling */
+        .hero-subtitle {
+            color: var(--teal) !important; /* Changed from black to teal */
+            font-size: 1.6rem !important; /* Increased size to match the one in content */
+            font-weight: 700 !important;
+            margin-bottom: 15px;
+            display: block;
+        }
+
         /* Return to Homepage Button */
         .return-home-btn {
             display: inline-block;
@@ -273,6 +282,15 @@
         .content strong {
             color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
             font-size: 1.4em;
+        }
+
+        /* Content section "Long-Horizon Governance Stewardship" styling - Already has teal color and larger size */
+        .content-headline {
+            color: var(--teal);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
         }
 
         /* Nested Collapsibles */
@@ -407,6 +425,10 @@
                 font-size: 1.1rem;
             }
             
+            .hero-subtitle {
+                font-size: 1.4rem !important; /* Adjusted for mobile */
+            }
+            
             .collapsible {
                 font-size: 22px;
                 padding: 18px;
@@ -419,6 +441,10 @@
             
             .content {
                 padding: 20px;
+            }
+            
+            .content-headline {
+                font-size: 1.4rem;
             }
             
             .nested-collapsible {
@@ -445,6 +471,10 @@
                 font-size: 2rem;
             }
             
+            .hero-subtitle {
+                font-size: 1.2rem !important; /* Further adjusted for small mobile */
+            }
+            
             .collapsible {
                 font-size: 20px;
                 padding: 16px;
@@ -452,6 +482,10 @@
             
             .content p {
                 font-size: 1rem;
+            }
+            
+            .content-headline {
+                font-size: 1.2rem;
             }
             
             .nested-collapsible {
@@ -485,7 +519,7 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="hubs.html">Hubs</a></li>
                 <li><a href="thinktank.html" style="background-color: var(--dark-teal); color: var(--white);">Non-Profit & Think Tank</a></li>
-                <li><a href="contact.html">Contact</a></li> <!-- CHANGED: Link to contact.html -->
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -494,30 +528,31 @@
     <section class="np-hero">
         <div class="container">
             <h1 class="fade-in">Non-Profit & Think Tank</h1>
-            <p class="fade-in delay-1"> <p><strong>Long-Horizon Governance Stewardship</strong></br> 
-            <br>At You Lounge, We Build With & For Community Graduation. We Deploy A Comprehensive System Of Impact, Applied Research & Sustainable Solutions For Humanity.</p>
+            <p class="fade-in delay-1">
+                <span class="hero-subtitle">Long-Horizon Governance Stewardship</span> <!-- CHANGED: Added span with class -->
+                <br><br>
+                At You Lounge, We Build With & For Community Graduation. We Deploy A Comprehensive System Of Impact, Applied Research & Sustainable Solutions For Humanity.
+            </p>
         </div>
     </section>
 
     <!-- Main Content Section -->
     <section class="np-section">
         <div class="container">
-            <!-- REMOVED: "Complete Ecosystem of Systems" heading -->
             <!-- Non-Profit & Think Tank Systems ONLY - starts directly after hero -->
             <button class="collapsible">Non-Profit & Think Tank Systems</button>
             <div class="content">
-                <p><strong>Long-Horizon Governance Stewardship</strong></br>
-                At You Lounge, We Build With & For Community Graduation. Our Non-Profit & Think Tank deploys a comprehensive system of impact, applied research & sustainable solutions for humanity; a parallel structure dedicated to long-term governance capacity, applied research, & justice-aligned institutional human development.
+                <p><span class="content-headline">Long-Horizon Governance Stewardship</span></p> <!-- CHANGED: Added span with class -->
+                <p>At You Lounge, We Build With & For Community Graduation. Our Non-Profit & Think Tank deploys a comprehensive system of impact, applied research & sustainable solutions for humanity; a parallel structure dedicated to long-term governance capacity, applied research, & justice-aligned institutional human development.
                 It operates outside immediate commercial cycles.</p>
-                <strong>Purpose and Scope:</strong></br>
-                •Reinvests insight and surplus into governance capacity-building</br>
-                •Supports applied research and institutional learning</br>
-                •Develops decision disciplines that outlast governance-leadership tenure</br>
-                •Protects continuity where markets and politics cannot</br>
-        <strong>This is stewardship infrastructure - not philanthropy.</strong></br>  
-
-
-                </br><p>This hub encompasses a full spectrum of applied research, community empowerment, and solution-focused impact across domains of sustainable development.</p>
+                <p><strong>Purpose and Scope:</strong></p>
+                <p>•Reinvests insight and surplus into governance capacity-building</p>
+                <p>•Supports applied research and institutional learning</p>
+                <p>•Develops decision disciplines that outlast governance-leadership tenure</p>
+                <p>•Protects continuity where markets and politics cannot</p>
+                <p><strong>This is stewardship infrastructure - not philanthropy.</strong></p>
+                
+                <p>This hub encompasses a full spectrum of applied research, community empowerment, and solution-focused impact across domains of sustainable development.</p>
 
                 <button class="nested-collapsible">🔬 Think Tank – Applied Science Research</button>
                 <div class="nested-content"><p>Applied research advancing impact-driven innovation through interdisciplinary collaboration, data-driven insights, and evidence-based solutions for complex global challenges.</p></div>
@@ -567,7 +602,7 @@
             
             <div class="contact-info">
                 <p>Connect with our Global Concierge:</p>
-                <p><a href="contact.html">executive@youlounge.org</a></p> <!-- CHANGED: Link to contact.html -->
+                <p><a href="contact.html">executive@youlounge.org</a></p>
             </div>
             
             <div class="copyright">
@@ -575,7 +610,7 @@
                     <a href="about.html">About</a> • 
                     <a href="hubs.html">Hubs</a> • 
                     <a href="thinktank.html">Non-Profit & Think Tank</a> • 
-                    <a href="contact.html">Contact</a> <!-- CHANGED: Link to contact.html -->
+                    <a href="contact.html">Contact</a>
                 </p>
             </div>
         </div>
