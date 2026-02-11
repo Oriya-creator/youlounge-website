@@ -85,21 +85,18 @@
             margin-bottom: 0;
         }
         
-        /* Sovereign Protocol Section - Green */
         .sovereign-section {
             background-color: #90c218;
             color: #000000;
             border: 3px solid #78a514;
         }
         
-        /* Who This Protocol Is For Section - Teal */
         .who-section {
             background-color: #23dfc8;
             color: #000000;
             border: 3px solid #1cc0ab;
         }
         
-        /* What To Expect Section - Purple */
         .expect-section {
             background-color: #8b5cf6;
             color: #000000;
@@ -114,14 +111,8 @@
             font-weight: 700;
         }
         
-        .sovereign-section .section-title {
-            color: #000000;
-        }
-        
-        .who-section .section-title {
-            color: #000000;
-        }
-        
+        .sovereign-section .section-title,
+        .who-section .section-title,
         .expect-section .section-title {
             color: #000000;
         }
@@ -130,20 +121,6 @@
             font-size: 18px;
             line-height: 1.8;
             margin-bottom: 25px;
-        }
-        
-        .sovereign-section .protocol-definition,
-        .sovereign-section .emphasis-text {
-            color: #000000;
-        }
-        
-        .who-section .protocol-definition,
-        .who-section .emphasis-text {
-            color: #000000;
-        }
-        
-        .expect-section .protocol-definition,
-        .expect-section .emphasis-text {
             color: #000000;
         }
         
@@ -159,17 +136,6 @@
             font-size: 16px;
             line-height: 1.6;
             font-weight: 500;
-        }
-        
-        .sovereign-section .protocol-list li {
-            color: #000000;
-        }
-        
-        .who-section .protocol-list li {
-            color: #000000;
-        }
-        
-        .expect-section .protocol-list li {
             color: #000000;
         }
         
@@ -180,17 +146,6 @@
             left: 0;
             top: -3px;
             font-weight: bold;
-        }
-        
-        .sovereign-section .protocol-list li:before {
-            color: #000000;
-        }
-        
-        .who-section .protocol-list li:before {
-            color: #000000;
-        }
-        
-        .expect-section .protocol-list li:before {
             color: #000000;
         }
         
@@ -207,6 +162,7 @@
             line-height: 1.7;
             font-style: italic;
             font-weight: 500;
+            color: #000000;
         }
         
         .who-subsection {
@@ -442,42 +398,6 @@
             100% { transform: rotate(360deg); }
         }
         
-        .sovereign-section,
-        .who-section,
-        .expect-section {
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
-        }
-        
-        .description-section {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        @media (max-width: 768px) {
-            .form-container {
-                background-attachment: scroll;
-                min-height: 400px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .form-container {
-                min-height: 350px;
-            }
-            
-            .header h1 {
-                font-size: 32px;
-            }
-        }
-        
-        .who-subsection .protocol-list li {
-            margin-bottom: 12px;
-        }
-        
-        .sovereign-section .emphasis-text {
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-        
         .deliverables-list {
             list-style: none;
             padding-left: 0;
@@ -491,6 +411,7 @@
             font-size: 16px;
             line-height: 1.6;
             font-weight: 500;
+            color: #000000;
         }
         
         .deliverables-list li:before {
@@ -500,13 +421,6 @@
             left: 0;
             top: -3px;
             font-weight: bold;
-        }
-        
-        .expect-section .deliverables-list li {
-            color: #000000;
-        }
-        
-        .expect-section .deliverables-list li:before {
             color: #000000;
         }
         
@@ -520,6 +434,7 @@
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 8px;
+            color: #000000;
         }
     </style>
 </head>
@@ -532,7 +447,7 @@
         
         <div class="main-content">
             <div class="protocol-description">
-                <!-- Sovereign Protocol Section - Green -->
+                <!-- Sovereign Protocol Section -->
                 <div class="description-section sovereign-section">
                     <h2 class="section-title">The Sovereign Protocol</h2>
                     <p class="protocol-definition">
@@ -541,7 +456,6 @@
                     <p class="protocol-definition">
                         It assesses internal alignment at the level where authority, clarity, and responsibility intersect; particularly where decision fatigue, fragmentation, or misalignment are present but rarely named.
                     </p>
-                    
                     <div class="emphasis-box">
                         <p class="emphasis-text">
                             The Sovereign Protocol is not a personality assessment.<br>
@@ -549,16 +463,14 @@
                             It is not public.
                         </p>
                     </div>
-                    
                     <p class="protocol-definition">
                         It uses a confidential diagnostic to identify how authority is currently structured, and what must be stabilized before growth, strategy, or execution can advance.
                     </p>
                 </div>
                 
-                <!-- Who This Protocol Is For Section - Teal -->
+                <!-- Who This Protocol Is For Section -->
                 <div class="description-section who-section">
                     <h2 class="section-title">Who This Protocol Is For</h2>
-                    
                     <div class="who-subsection who-not-for">
                         <div class="who-title">Who The Sovereign Protocol Is Not For</div>
                         <ul class="protocol-list">
@@ -568,7 +480,6 @@
                             <li>Anyone unwilling to engage in private, rigorous self-assessment</li>
                         </ul>
                     </div>
-                    
                     <div class="who-subsection who-for">
                         <div class="who-title">Who The Sovereign Protocol Is For</div>
                         <ul class="protocol-list">
@@ -580,19 +491,17 @@
                     </div>
                 </div>
                 
-                <!-- What You Will Receive Section - Purple -->
+                <!-- What You Will Receive Section -->
                 <div class="description-section expect-section">
                     <h2 class="section-title">What You Will Receive</h2>
                     <p class="protocol-definition">
                         Upon completion, you will receive a confidential executive diagnostic calibrated to your responses, including:
                     </p>
-                    
                     <ul class="deliverables-list">
                         <li>A precision analysis of your current leadership architecture</li>
                         <li>A classification of decision posture and cognitive load</li>
                         <li>A private executive brief outlining the highest-leverage corrective actions</li>
                     </ul>
-                    
                     <div class="key-points">
                         <div class="key-point">Delivery is direct.</div>
                         <div class="key-point">Interpretation is unambiguous.</div>
@@ -601,179 +510,94 @@
                 </div>
             </div>
             
-          <!-- Form with Horizontal Laptop Image Background -->
-<div class="form-container">
-    <div class="form-header">
-        <h2 class="form-title">Sovereign Diagnostic Assessment</h2>
-        <p class="form-subtitle">Discover your current alignment and next growth phase</p>
-    </div>
-    
-    <p class="form-subtitle" style="margin-bottom: 30px;">
-        This confidential diagnostic helps to understand where one currently stands and what is required to move into deeper alignment, clarity, and integration.
-        Enter your details below to receive the diagnostic and your personalized results.
-    </p>
-    
-    <!-- FORM WITH FORMSPREE INTEGRATION -->
-    <form id="sovereignForm" action="https://formspree.io/f/mgoovzbp" method="POST">
-        <!-- Hidden fields for Formspree configuration -->
-        <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
-        <input type="hidden" name="_next" value="sovereignprotocoldiagnostic.html">
-        
-        <div class="form-group">
-            <label for="email" class="form-label">Email Address</label>
-            <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                class="form-input" 
-                placeholder="your.name@company.com" 
-                required
-            >
-            <div class="error-message" id="emailError">Please enter a valid email address</div>
+            <!-- Form Container -->
+            <div class="form-container">
+                <div class="form-header">
+                    <h2 class="form-title">Sovereign Diagnostic Assessment</h2>
+                    <p class="form-subtitle">Discover your current alignment and next growth phase</p>
+                </div>
+                
+                <p class="form-subtitle" style="margin-bottom: 30px;">
+                    This confidential diagnostic helps to understand where one currently stands and what is required to move into deeper alignment, clarity, and integration.
+                    Enter your details below to receive the diagnostic and your personalized results.
+                </p>
+                
+                <!-- Form with Formspree Integration -->
+                <form id="sovereignForm">
+                    <!-- Formspree endpoint - Replace with your own if different -->
+                    <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
+                    <input type="hidden" name="_next" value="sovereignprotocoldiagnostic.html">
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="your.name@company.com" 
+                            required
+                        >
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="form-input" 
+                            placeholder="John Smith"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="role" class="form-label">Primary Role (Optional)</label>
+                        <select id="role" name="role" class="form-input">
+                            <option value="">Select your role</option>
+                            <option value="CEO">CEO</option>
+                            <option value="COO">COO</option>
+                            <option value="CFO">CFO</option>
+                            <option value="CTO">CTO</option>
+                            <option value="CMO">CMO</option>
+                            <option value="Other C-Suite">Other C-Suite</option>
+                            <option value="Board Member">Board Member</option>
+                            <option value="Senior Executive">Senior Executive</option>
+                            <option value="Managing Director">Managing Director</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="privacy-note">
+                        <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
+                    </div>
+                    
+                    <!-- Terms Checkbox (the "last box") -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termsCheckbox" class="checkbox-input" required>
+                        <label for="termsCheckbox" class="checkbox-label">
+                            By proceeding, you confirm that you meet the criteria for the Sovereign Protocol and understand this is a confidential executive diagnostic.
+                        </label>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-button" id="submitButton" disabled>
+                        Begin Diagnostic Assessment
+                    </button>
+                    
+                    <div class="loader" id="formLoader">
+                        <div class="spinner"></div>
+                        <p>Processing your request...</p>
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
+                    </div>
+                </form>
+            </div>
         </div>
-        
-        <div class="form-group">
-            <label for="name" class="form-label">Full Name</label>
-            <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                class="form-input" 
-                placeholder="John Smith"
-            >
-        </div>
-        
-        <div class="form-group">
-            <label for="role" class="form-label">Primary Role (Optional)</label>
-            <select id="role" name="role" class="form-input">
-                <option value="">Select your role</option>
-                <option value="CEO">CEO</option>
-                <option value="COO">COO</option>
-                <option value="CFO">CFO</option>
-                <option value="CTO">CTO</option>
-                <option value="CMO">CMO</option>
-                <option value="Other C-Suite">Other C-Suite</option>
-                <option value="Board Member">Board Member</option>
-                <option value="Senior Executive">Senior Executive</option>
-                <option value="Managing Director">Managing Director</option>
-                <option value="Partner">Partner</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        
-        <div class="privacy-note">
-            <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
-        </div>
-        
-        <!-- Checkbox for terms agreement -->
-        <div class="checkbox-group">
-            <input type="checkbox" id="termsCheckbox" class="checkbox-input">
-            <label for="termsCheckbox" class="checkbox-label">
-                By proceeding, you confirm that you meet the criteria for the Sovereign Protocol and understand this is a confidential executive diagnostic.
-            </label>
-        </div>
-        
-        <!-- Submit button -->
-        <button type="submit" class="submit-button" id="submitButton" disabled>
-            Begin Diagnostic Assessment
-        </button>
-        
-        <div class="loader" id="formLoader">
-            <div class="spinner"></div>
-            <p>Processing your request...</p>
-        </div>
-        
-        <div class="success-message" id="successMessage">
-            <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
-        </div>
-    </form>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('sovereignForm');
-        const emailInput = document.getElementById('email');
-        const emailError = document.getElementById('emailError');
-        const submitButton = document.getElementById('submitButton');
-        const formLoader = document.getElementById('formLoader');
-        const successMessage = document.getElementById('successMessage');
-        const termsCheckbox = document.getElementById('termsCheckbox');
-        
-        // Validate email on input
-        emailInput.addEventListener('input', function() {
-            if (validateEmail(emailInput.value)) {
-                emailError.style.display = 'none';
-                emailInput.style.borderColor = '#d1d5db';
-            } else {
-                emailError.style.display = 'block';
-                emailInput.style.borderColor = '#dc2626';
-            }
-            updateSubmitButtonState();
-        });
-        
-        // Update submit button state when checkbox is clicked
-        termsCheckbox.addEventListener('change', updateSubmitButtonState);
-        
-        // Function to update submit button state
-        function updateSubmitButtonState() {
-            const isEmailValid = validateEmail(emailInput.value);
-            const isTermsAccepted = termsCheckbox.checked;
-            
-            if (isEmailValid && isTermsAccepted) {
-                submitButton.disabled = false;
-            } else {
-                submitButton.disabled = true;
-            }
-        }
-        
-        // Form submission handler
-        form.addEventListener('submit', function(e) {
-            // Validate email
-            if (!validateEmail(emailInput.value)) {
-                e.preventDefault();
-                emailError.style.display = 'block';
-                emailInput.style.borderColor = '#dc2626';
-                emailInput.focus();
-                return false;
-            }
-            
-            // Validate terms checkbox
-            if (!termsCheckbox.checked) {
-                e.preventDefault();
-                alert('Please confirm that you meet the criteria and understand this is a confidential diagnostic.');
-                return false;
-            }
-            
-            // Show loader and success message
-            submitButton.style.display = 'none';
-            formLoader.style.display = 'block';
-            
-            // Store user data in localStorage for the diagnostic page
-            const userData = {
-                email: emailInput.value,
-                name: document.getElementById('name').value,
-                role: document.getElementById('role').value,
-                timestamp: new Date().toISOString()
-            };
-            
-            localStorage.setItem('sovereignUserData', JSON.stringify(userData));
-            
-            // Allow form to submit to Formspree - it will redirect automatically
-            // due to the hidden _next field: <input type="hidden" name="_next" value="sovereignprotocoldiagnostic.html">
-            
-            return true;
-        });
-        
-        // Email validation function
-        function validateEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-        
-        // Initial button state check
-        updateSubmitButtonState();
-    });
-</script>
         
         <div class="footer">
             <p>Sovereign Protocol © 2026 | Confidential Executive Diagnostics</p>
@@ -783,70 +607,69 @@
         </div>
     </div>
 
+    <!-- SINGLE, CLEAN JAVASCRIPT BLOCK -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        (function() {
+            "use strict";
+
             const form = document.getElementById('sovereignForm');
             const emailInput = document.getElementById('email');
-            const replyToEmail = document.getElementById('replyToEmail');
             const emailError = document.getElementById('emailError');
             const submitButton = document.getElementById('submitButton');
             const formLoader = document.getElementById('formLoader');
             const successMessage = document.getElementById('successMessage');
             const termsCheckbox = document.getElementById('termsCheckbox');
-            const termsAcceptedInput = document.getElementById('termsAccepted');
-            
-            // Validate email on input
+
+            // ---------- 1. Validation Helpers ----------
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+
+            function updateSubmitButtonState() {
+                const isEmailValid = validateEmail(emailInput.value);
+                const isTermsChecked = termsCheckbox.checked;
+                submitButton.disabled = !(isEmailValid && isTermsChecked);
+            }
+
+            // ---------- 2. Real-time Validation ----------
             emailInput.addEventListener('input', function() {
                 if (validateEmail(emailInput.value)) {
                     emailError.style.display = 'none';
                     emailInput.style.borderColor = '#d1d5db';
-                    replyToEmail.value = emailInput.value;
                 } else {
                     emailError.style.display = 'block';
                     emailInput.style.borderColor = '#dc2626';
                 }
                 updateSubmitButtonState();
             });
-            
-            // Update submit button state when checkbox is clicked
+
             termsCheckbox.addEventListener('change', updateSubmitButtonState);
-            
-            // Function to update submit button state
-            function updateSubmitButtonState() {
-                const isEmailValid = validateEmail(emailInput.value);
-                const isTermsAccepted = termsCheckbox.checked;
-                
-                if (isEmailValid && isTermsAccepted) {
-                    submitButton.disabled = false;
-                    termsAcceptedInput.value = 'true';
-                } else {
-                    submitButton.disabled = true;
-                    termsAcceptedInput.value = 'false';
-                }
-            }
-            
-            // Form submission handler
+
+            // Initial check
+            updateSubmitButtonState();
+
+            // ---------- 3. Form Submission (Fetch + Redirect) ----------
             form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                // Validate email
+                e.preventDefault(); // Prevent default browser submission
+
+                // Re-validate before sending
                 if (!validateEmail(emailInput.value)) {
                     emailError.style.display = 'block';
                     emailInput.style.borderColor = '#dc2626';
                     emailInput.focus();
                     return;
                 }
-                
-                // Validate terms checkbox
+
                 if (!termsCheckbox.checked) {
                     alert('Please confirm that you meet the criteria and understand this is a confidential diagnostic.');
                     return;
                 }
-                
-                // Show loader and success message
+
+                // ---------- 4. UI Feedback ----------
                 submitButton.style.display = 'none';
                 formLoader.style.display = 'block';
-                
+
                 // Store user data in localStorage for the diagnostic page
                 const userData = {
                     email: emailInput.value,
@@ -854,13 +677,16 @@
                     role: document.getElementById('role').value,
                     timestamp: new Date().toISOString()
                 };
-                
                 localStorage.setItem('sovereignUserData', JSON.stringify(userData));
-                
+
+                // ---------- 5. Send to Formspree ----------
+                const formData = new FormData(form);
+                // Add the hidden _next field if it's not already in the form
+                if (!formData.has('_next')) {
+                    formData.append('_next', 'sovereignprotocoldiagnostic.html');
+                }
+
                 try {
-                    // Submit to Formspree using fetch API
-                    const formData = new FormData(form);
-                    
                     const response = await fetch('https://formspree.io/f/mgoovzbp', {
                         method: 'POST',
                         body: formData,
@@ -868,52 +694,29 @@
                             'Accept': 'application/json'
                         }
                     });
-                    
+
                     if (response.ok) {
-                        // Show success message
-                        formLoader.style.display = 'none';
-                        successMessage.style.display = 'block';
-                        
-                        // Redirect to diagnostic page after 1.5 seconds
-                        setTimeout(function() {
-                            window.location.href = 'sovereignprotocoldiagnostic.html';
-                        }, 1500);
+                        // Formspree received the data
+                        console.log('Form successfully sent to Formspree');
                     } else {
-                        // If Formspree fails, still redirect to diagnostic page
-                        // (but store data locally as backup)
-                        console.log('Formspree submission may have failed, but proceeding to diagnostic...');
-                        
-                        formLoader.style.display = 'none';
-                        successMessage.style.display = 'block';
-                        
-                        setTimeout(function() {
-                            window.location.href = 'sovereignprotocoldiagnostic.html';
-                        }, 1500);
+                        // Still proceed, but log error
+                        console.warn('Formspree responded with error:', response.status);
                     }
-                    
                 } catch (error) {
-                    // If there's an error with Formspree, still redirect to diagnostic page
-                    console.log('Error submitting to Formspree:', error);
-                    console.log('Proceeding to diagnostic page with locally stored data...');
-                    
-                    formLoader.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    
-                    setTimeout(function() {
-                        window.location.href = 'sovereignprotocoldiagnostic.html';
-                    }, 1500);
+                    // Network error – still redirect, but log it
+                    console.error('Fetch error:', error);
                 }
+
+                // ---------- 6. Show Success & Redirect ----------
+                formLoader.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                setTimeout(function() {
+                    window.location.href = 'sovereignprotocoldiagnostic.html';
+                }, 1500); // Short delay for user to see success message
             });
-            
-            // Email validation function
-            function validateEmail(email) {
-                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(String(email).toLowerCase());
-            }
-            
-            // Initial button state check
-            updateSubmitButtonState();
-        });
+
+        })();
     </script>
 </body>
 </html>
