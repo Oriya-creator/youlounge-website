@@ -5,32 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sovereign Protocol | Executive Diagnostic</title>
     <style>
+        /* ---- (your existing CSS, unchanged) ---- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
         }
-        
         body {
             background: #ffffff;
             color: #000000;
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
         .header {
             text-align: center;
             padding: 40px 20px;
             margin-bottom: 40px;
             background: #ffffff;
         }
-        
         .logo {
             font-size: 14px;
             font-weight: 600;
@@ -39,7 +36,6 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
-        
         .header h1 {
             font-size: 42px;
             color: #000000;
@@ -47,26 +43,22 @@
             line-height: 1.2;
             font-weight: 300;
         }
-        
         .header h1 span {
             font-weight: 700;
             color: #000000;
         }
-        
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             margin-bottom: 60px;
         }
-        
         @media (max-width: 900px) {
             .main-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
         }
-        
         .protocol-description {
             background: #ffffff;
             border-radius: 20px;
@@ -74,35 +66,29 @@
             border: 1px solid #e5e7eb;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        
         .description-section {
             margin-bottom: 40px;
             padding: 30px;
             border-radius: 12px;
         }
-        
         .description-section:last-child {
             margin-bottom: 0;
         }
-        
         .sovereign-section {
             background-color: #90c218;
             color: #000000;
             border: 3px solid #78a514;
         }
-        
         .who-section {
             background-color: #23dfc8;
             color: #000000;
             border: 3px solid #1cc0ab;
         }
-        
         .expect-section {
             background-color: #8b5cf6;
             color: #000000;
             border: 3px solid #7c3aed;
         }
-        
         .section-title {
             font-size: 24px;
             margin-bottom: 20px;
@@ -110,25 +96,21 @@
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
             font-weight: 700;
         }
-        
         .sovereign-section .section-title,
         .who-section .section-title,
         .expect-section .section-title {
             color: #000000;
         }
-        
         .protocol-definition {
             font-size: 18px;
             line-height: 1.8;
             margin-bottom: 25px;
             color: #000000;
         }
-        
         .protocol-list {
             list-style: none;
             padding-left: 0;
         }
-        
         .protocol-list li {
             margin-bottom: 15px;
             padding-left: 25px;
@@ -138,7 +120,6 @@
             font-weight: 500;
             color: #000000;
         }
-        
         .protocol-list li:before {
             content: "•";
             font-size: 24px;
@@ -148,7 +129,6 @@
             font-weight: bold;
             color: #000000;
         }
-        
         .emphasis-box {
             padding: 25px;
             border-radius: 8px;
@@ -156,7 +136,6 @@
             border-left: 4px solid rgba(0, 0, 0, 0.4);
             background: rgba(255, 255, 255, 0.3);
         }
-        
         .emphasis-text {
             font-size: 18px;
             line-height: 1.7;
@@ -164,31 +143,25 @@
             font-weight: 500;
             color: #000000;
         }
-        
         .who-subsection {
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 25px;
             border: 2px solid rgba(0, 0, 0, 0.3);
         }
-        
         .who-not-for {
             background: rgba(0, 0, 0, 0.15);
             margin-bottom: 30px;
         }
-        
         .who-for {
             background: rgba(255, 255, 255, 0.4);
         }
-        
         .who-title {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
             color: #000000;
         }
-        
-        /* Form Container - Laptop Image */
         .form-container {
             background: url('youlounge/formsimage.jpg') no-repeat center center;
             background-size: cover;
@@ -203,22 +176,17 @@
             color: #000000;
             min-height: 600px;
         }
-        
         @media (max-width: 900px) {
             .form-container {
                 min-height: 500px;
-                background-size: cover;
-                background-position: center;
             }
         }
-        
         @media (max-width: 600px) {
             .form-container {
                 min-height: 450px;
                 padding: 30px 20px;
             }
         }
-        
         .form-header, .form-subtitle {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
@@ -226,19 +194,16 @@
             margin-bottom: 20px;
             border: 2px solid rgba(255, 255, 255, 0.9);
         }
-        
         .form-title {
             font-size: 28px;
             color: #000000;
             margin-bottom: 10px;
         }
-        
         .form-subtitle {
             font-size: 18px;
             color: #000000;
             line-height: 1.6;
         }
-        
         #sovereignForm {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -248,11 +213,9 @@
             z-index: 2;
             backdrop-filter: blur(2px);
         }
-        
         .form-group {
             margin-bottom: 25px;
         }
-        
         .form-label {
             display: block;
             font-size: 16px;
@@ -260,7 +223,6 @@
             color: #000000;
             margin-bottom: 8px;
         }
-        
         .form-input {
             width: 100%;
             padding: 16px 20px;
@@ -272,17 +234,14 @@
             transition: all 0.3s ease;
             font-weight: 500;
         }
-        
         .form-input:focus {
             outline: none;
             border-color: #90c218;
             box-shadow: 0 0 0 3px rgba(144, 194, 24, 0.3);
         }
-        
         .form-input::placeholder {
             color: #6b7280;
         }
-        
         .privacy-note {
             font-size: 14px;
             color: #000000;
@@ -294,13 +253,11 @@
             border-left: 3px solid #90c218;
             font-weight: 500;
         }
-        
         .checkbox-group {
             margin: 30px 0;
             display: flex;
             align-items: flex-start;
         }
-        
         .checkbox-input {
             margin-right: 15px;
             margin-top: 3px;
@@ -308,7 +265,6 @@
             height: 20px;
             accent-color: #90c218;
         }
-        
         .checkbox-label {
             font-size: 14px;
             color: #000000;
@@ -316,7 +272,6 @@
             font-weight: 500;
             flex: 1;
         }
-        
         .submit-button {
             width: 100%;
             padding: 18px;
@@ -332,12 +287,10 @@
             box-shadow: 0 4px 15px rgba(144, 194, 24, 0.3);
             border: 2px solid #78a514;
         }
-        
         .submit-button:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(144, 194, 24, 0.4);
         }
-        
         .submit-button:disabled {
             background: #9ca3af;
             color: #6b7280;
@@ -346,7 +299,6 @@
             box-shadow: none;
             border-color: #9ca3af;
         }
-        
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -356,7 +308,6 @@
             margin-top: 40px;
             background: #ffffff;
         }
-        
         .error-message {
             color: #dc2626;
             font-size: 14px;
@@ -364,7 +315,6 @@
             display: none;
             font-weight: 600;
         }
-        
         .success-message {
             background: rgba(144, 194, 24, 0.15);
             border: 2px solid #90c218;
@@ -376,13 +326,11 @@
             display: none;
             font-weight: 600;
         }
-        
         .loader {
             display: none;
             text-align: center;
             margin: 20px 0;
         }
-        
         .spinner {
             border: 3px solid rgba(144, 194, 24, 0.3);
             border-top: 3px solid #90c218;
@@ -392,18 +340,15 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 10px;
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
         .deliverables-list {
             list-style: none;
             padding-left: 0;
             margin: 20px 0;
         }
-        
         .deliverables-list li {
             margin-bottom: 12px;
             padding-left: 30px;
@@ -413,7 +358,6 @@
             font-weight: 500;
             color: #000000;
         }
-        
         .deliverables-list li:before {
             content: "•";
             font-size: 24px;
@@ -423,13 +367,11 @@
             font-weight: bold;
             color: #000000;
         }
-        
         .key-points {
             margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid rgba(0, 0, 0, 0.2);
         }
-        
         .key-point {
             font-size: 16px;
             font-weight: 600;
@@ -522,11 +464,11 @@
                     Enter your details below to receive the diagnostic and your personalized results.
                 </p>
                 
-                <!-- Form with Formspree Integration -->
+                <!-- IMPORTANT: NO action / method attributes – only JavaScript submission -->
                 <form id="sovereignForm">
-                    <!-- Formspree endpoint - Replace with your own if different -->
+                    <!-- Formspree endpoint will be used in JavaScript -->
                     <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
-                    <input type="hidden" name="_next" value="sovereignprotocoldiagnostic.html">
+                    <!-- _next is REMOVED – we control redirect with JavaScript -->
                     
                     <div class="form-group">
                         <label for="email" class="form-label">Email Address</label>
@@ -607,116 +549,134 @@
         </div>
     </div>
 
-    <!-- SINGLE, CLEAN JAVASCRIPT BLOCK -->
+    <!-- SINGLE, ROBUST JAVASCRIPT BLOCK -->
     <script>
         (function() {
             "use strict";
 
-            const form = document.getElementById('sovereignForm');
-            const emailInput = document.getElementById('email');
-            const emailError = document.getElementById('emailError');
-            const submitButton = document.getElementById('submitButton');
-            const formLoader = document.getElementById('formLoader');
-            const successMessage = document.getElementById('successMessage');
-            const termsCheckbox = document.getElementById('termsCheckbox');
+            // Wait for the DOM to be fully loaded
+            document.addEventListener('DOMContentLoaded', function() {
 
-            // ---------- 1. Validation Helpers ----------
-            function validateEmail(email) {
-                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(String(email).toLowerCase());
-            }
-
-            function updateSubmitButtonState() {
-                const isEmailValid = validateEmail(emailInput.value);
-                const isTermsChecked = termsCheckbox.checked;
-                submitButton.disabled = !(isEmailValid && isTermsChecked);
-            }
-
-            // ---------- 2. Real-time Validation ----------
-            emailInput.addEventListener('input', function() {
-                if (validateEmail(emailInput.value)) {
-                    emailError.style.display = 'none';
-                    emailInput.style.borderColor = '#d1d5db';
-                } else {
-                    emailError.style.display = 'block';
-                    emailInput.style.borderColor = '#dc2626';
-                }
-                updateSubmitButtonState();
-            });
-
-            termsCheckbox.addEventListener('change', updateSubmitButtonState);
-
-            // Initial check
-            updateSubmitButtonState();
-
-            // ---------- 3. Form Submission (Fetch + Redirect) ----------
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault(); // Prevent default browser submission
-
-                // Re-validate before sending
-                if (!validateEmail(emailInput.value)) {
-                    emailError.style.display = 'block';
-                    emailInput.style.borderColor = '#dc2626';
-                    emailInput.focus();
+                const form = document.getElementById('sovereignForm');
+                // If form doesn't exist, stop
+                if (!form) {
+                    console.error('Sovereign Form not found!');
                     return;
                 }
 
-                if (!termsCheckbox.checked) {
-                    alert('Please confirm that you meet the criteria and understand this is a confidential diagnostic.');
-                    return;
+                const emailInput = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const submitButton = document.getElementById('submitButton');
+                const formLoader = document.getElementById('formLoader');
+                const successMessage = document.getElementById('successMessage');
+                const termsCheckbox = document.getElementById('termsCheckbox');
+                const nameInput = document.getElementById('name');
+                const roleSelect = document.getElementById('role');
+
+                // ---------- 1. Validation Helpers ----------
+                function validateEmail(email) {
+                    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(String(email).toLowerCase());
                 }
 
-                // ---------- 4. UI Feedback ----------
-                submitButton.style.display = 'none';
-                formLoader.style.display = 'block';
-
-                // Store user data in localStorage for the diagnostic page
-                const userData = {
-                    email: emailInput.value,
-                    name: document.getElementById('name').value,
-                    role: document.getElementById('role').value,
-                    timestamp: new Date().toISOString()
-                };
-                localStorage.setItem('sovereignUserData', JSON.stringify(userData));
-
-                // ---------- 5. Send to Formspree ----------
-                const formData = new FormData(form);
-                // Add the hidden _next field if it's not already in the form
-                if (!formData.has('_next')) {
-                    formData.append('_next', 'sovereignprotocoldiagnostic.html');
+                function updateSubmitButtonState() {
+                    const isEmailValid = validateEmail(emailInput.value);
+                    const isTermsChecked = termsCheckbox.checked;
+                    submitButton.disabled = !(isEmailValid && isTermsChecked);
                 }
 
-                try {
-                    const response = await fetch('https://formspree.io/f/mgoovzbp', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        // Formspree received the data
-                        console.log('Form successfully sent to Formspree');
+                // ---------- 2. Real-time Validation ----------
+                emailInput.addEventListener('input', function() {
+                    if (validateEmail(emailInput.value)) {
+                        emailError.style.display = 'none';
+                        emailInput.style.borderColor = '#d1d5db';
                     } else {
-                        // Still proceed, but log error
-                        console.warn('Formspree responded with error:', response.status);
+                        emailError.style.display = 'block';
+                        emailInput.style.borderColor = '#dc2626';
                     }
-                } catch (error) {
-                    // Network error – still redirect, but log it
-                    console.error('Fetch error:', error);
-                }
+                    updateSubmitButtonState();
+                });
 
-                // ---------- 6. Show Success & Redirect ----------
-                formLoader.style.display = 'none';
-                successMessage.style.display = 'block';
+                termsCheckbox.addEventListener('change', updateSubmitButtonState);
 
-                setTimeout(function() {
-                    window.location.href = 'sovereignprotocoldiagnostic.html';
-                }, 1500); // Short delay for user to see success message
-            });
+                // Initial check
+                updateSubmitButtonState();
 
+                // ---------- 3. Form Submission (Fetch + Redirect) ----------
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault(); // ⚠️ CRITICAL – prevents default browser submission
+
+                    // Re-validate before sending
+                    if (!validateEmail(emailInput.value)) {
+                        emailError.style.display = 'block';
+                        emailInput.style.borderColor = '#dc2626';
+                        emailInput.focus();
+                        return;
+                    }
+
+                    if (!termsCheckbox.checked) {
+                        alert('Please confirm that you meet the criteria and understand this is a confidential diagnostic.');
+                        return;
+                    }
+
+                    // ---------- 4. UI Feedback ----------
+                    submitButton.style.display = 'none';
+                    formLoader.style.display = 'block';
+
+                    // Store user data in localStorage for the diagnostic page
+                    const userData = {
+                        email: emailInput.value,
+                        name: nameInput ? nameInput.value : '',
+                        role: roleSelect ? roleSelect.value : '',
+                        timestamp: new Date().toISOString()
+                    };
+                    localStorage.setItem('sovereignUserData', JSON.stringify(userData));
+
+                    // ---------- 5. Send to Formspree ----------
+                    const formData = new FormData(form);
+                    // Add the Formspree endpoint – we send it via fetch
+                    const endpoint = 'https://formspree.io/f/mgoovzbp';
+
+                    try {
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            console.log('✅ Form successfully sent to Formspree');
+                        } else {
+                            console.warn('⚠️ Formspree responded with error:', response.status);
+                        }
+                    } catch (error) {
+                        console.error('❌ Fetch error:', error);
+                        // Continue – we still want to redirect the user
+                    }
+
+                    // ---------- 6. Show Success & Redirect ----------
+                    formLoader.style.display = 'none';
+                    successMessage.style.display = 'block';
+
+                    // TARGET REDIRECT – change this if your diagnostic page has a different path
+                    const redirectUrl = 'sovereignprotocoldiagnostic.html';
+                    console.log('🔁 Redirecting to:', redirectUrl);
+
+                    // Use replace() so the user can't go back to the form with back button
+                    setTimeout(function() {
+                        window.location.replace(redirectUrl);
+                    }, 1500); // 1.5 second delay to show success message
+                });
+
+            }); // end DOMContentLoaded
         })();
     </script>
+
+    <!-- NOSCRIPT FALLBACK (optional) -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=sovereignprotocoldiagnostic.html">
+    </noscript>
 </body>
 </html>
