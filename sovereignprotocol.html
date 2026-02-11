@@ -468,7 +468,6 @@
                 <form id="sovereignForm">
                     <!-- Formspree endpoint will be used in JavaScript -->
                     <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
-                    <!-- _next is REMOVED – we control redirect with JavaScript -->
                     
                     <div class="form-group">
                         <label for="email" class="form-label">Email Address</label>
@@ -534,8 +533,9 @@
                         <p>Processing your request...</p>
                     </div>
                     
+                    <!-- Success message – NO REDIRECT -->
                     <div class="success-message" id="successMessage">
-                        <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
+                        <p>✓ Thank you. Your registration has been received. The diagnostic link will be sent to your email shortly.</p>
                     </div>
                 </form>
             </div>
@@ -549,20 +549,13 @@
         </div>
     </div>
 
-    <!-- SINGLE, ROBUST JAVASCRIPT BLOCK -->
     <script>
         (function() {
             "use strict";
 
-            // Wait for the DOM to be fully loaded
             document.addEventListener('DOMContentLoaded', function() {
-
                 const form = document.getElementById('sovereignForm');
-                // If form doesn't exist, stop
-                if (!form) {
-                    console.error('Sovereign Form not found!');
-                    return;
-                }
+                if (!form) return;
 
                 const emailInput = document.getElementById('email');
                 const emailError = document.getElementById('emailError');
@@ -573,7 +566,6 @@
                 const nameInput = document.getElementById('name');
                 const roleSelect = document.getElementById('role');
 
-                // ---------- 1. Validation Helpers ----------
                 function validateEmail(email) {
                     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return re.test(String(email).toLowerCase());
@@ -585,7 +577,6 @@
                     submitButton.disabled = !(isEmailValid && isTermsChecked);
                 }
 
-                // ---------- 2. Real-time Validation ----------
                 emailInput.addEventListener('input', function() {
                     if (validateEmail(emailInput.value)) {
                         emailError.style.display = 'none';
@@ -598,15 +589,11 @@
                 });
 
                 termsCheckbox.addEventListener('change', updateSubmitButtonState);
-
-                // Initial check
                 updateSubmitButtonState();
 
-                // ---------- 3. Form Submission (Fetch + Redirect) ----------
                 form.addEventListener('submit', async function(e) {
-                    e.preventDefault(); // ⚠️ CRITICAL – prevents default browser submission
+                    e.preventDefault();
 
-                    // Re-validate before sending
                     if (!validateEmail(emailInput.value)) {
                         emailError.style.display = 'block';
                         emailInput.style.borderColor = '#dc2626';
@@ -619,11 +606,11 @@
                         return;
                     }
 
-                    // ---------- 4. UI Feedback ----------
+                    // UI: show loader, hide button
                     submitButton.style.display = 'none';
                     formLoader.style.display = 'block';
 
-                    // Store user data in localStorage for the diagnostic page
+                    // Store user data
                     const userData = {
                         email: emailInput.value,
                         name: nameInput ? nameInput.value : '',
@@ -632,51 +619,41 @@
                     };
                     localStorage.setItem('sovereignUserData', JSON.stringify(userData));
 
-                    // ---------- 5. Send to Formspree ----------
+                    // Send to Formspree
                     const formData = new FormData(form);
-                    // Add the Formspree endpoint – we send it via fetch
                     const endpoint = 'https://formspree.io/f/mgoovzbp';
 
                     try {
                         const response = await fetch(endpoint, {
                             method: 'POST',
                             body: formData,
-                            headers: {
-                                'Accept': 'application/json'
-                            }
+                            headers: { 'Accept': 'application/json' }
                         });
-
                         if (response.ok) {
-                            console.log('✅ Form successfully sent to Formspree');
+                            console.log('✅ Form successfully sent');
                         } else {
-                            console.warn('⚠️ Formspree responded with error:', response.status);
+                            console.warn('⚠️ Formspree error:', response.status);
                         }
                     } catch (error) {
                         console.error('❌ Fetch error:', error);
-                        // Continue – we still want to redirect the user
                     }
 
-                    // ---------- 6. Show Success & Redirect ----------
+                    // Hide loader, show success message – NO REDIRECT
                     formLoader.style.display = 'none';
                     successMessage.style.display = 'block';
 
-                    // TARGET REDIRECT – change this if your diagnostic page has a different path
-                  const redirectUrl = '/sovereignprotocoldiagnostic.html';
-                    console.log('🔁 Redirecting to:', redirectUrl);
-
-                    // Use replace() so the user can't go back to the form with back button
-                    setTimeout(function() {
-                        window.location.replace(redirectUrl);
-                    }, 1500); // 1.5 second delay to show success message
+                    // Optional: disable the form further or hide it
+                    // form.style.display = 'none'; // uncomment if you want to hide the form entirely
                 });
-
-            }); // end DOMContentLoaded
+            });
         })();
     </script>
 
-    <!-- NOSCRIPT FALLBACK (optional) -->
-  <noscript>
-    <meta http-equiv="refresh" content="0;url=/sovereignprotocoldiagnostic.html">
-</noscript>
+    <!-- NOSCRIPT FALLBACK – also no redirect -->
+    <noscript>
+        <div style="padding: 20px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 8px; margin-top: 20px;">
+            <strong>JavaScript is disabled.</strong> Please enable JavaScript to submit the form, or email us directly at contact@sovereignprotocol.com.
+        </div>
+    </noscript>
 </body>
 </html>
