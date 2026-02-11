@@ -594,6 +594,9 @@
                 
                 <!-- Main Contact Form -->
                 <form action="https://formspree.io/f/xykjaerk" method="POST">
+                    <!-- Redirect to thank you page after submission -->
+                    <input type="hidden" name="_next" value="thankyou.html">
+                    
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your full name" required>
@@ -696,6 +699,8 @@
             <button class="close-modal">&times;</button>
             <h3>General Inquiry</h3>
             <form action="https://formspree.io/f/xnjvypey" method="POST">
+                <!-- Redirect to thank you page after submission -->
+                <input type="hidden" name="_next" value="thankyou.html">
                 <input type="hidden" name="form_type" value="General Inquiry">
                 <div class="form-group">
                     <label for="general-name">Full Name</label>
@@ -720,6 +725,8 @@
             <button class="close-modal">&times;</button>
             <h3>Partnership Inquiry</h3>
             <form action="https://formspree.io/f/mykjawgk" method="POST">
+                <!-- Redirect to thank you page after submission -->
+                <input type="hidden" name="_next" value="thankyou.html">
                 <input type="hidden" name="form_type" value="Partnership & Business">
                 <div class="form-group">
                     <label for="partner-name">Full Name</label>
@@ -748,6 +755,8 @@
             <button class="close-modal">&times;</button>
             <h3>Media & Press Inquiry</h3>
             <form action="https://formspree.io/f/mlgnkbdd" method="POST">
+                <!-- Redirect to thank you page after submission -->
+                <input type="hidden" name="_next" value="thankyou.html">
                 <input type="hidden" name="form_type" value="Media & Press">
                 <div class="form-group">
                     <label for="media-name">Full Name</label>
@@ -776,6 +785,8 @@
             <button class="close-modal">&times;</button>
             <h3>Events & Speaking Inquiry</h3>
             <form action="https://formspree.io/f/mdazvglv" method="POST">
+                <!-- Redirect to thank you page after submission -->
+                <input type="hidden" name="_next" value="thankyou.html">
                 <input type="hidden" name="form_type" value="Events & Speaking">
                 <div class="form-group">
                     <label for="events-name">Full Name</label>
@@ -833,6 +844,7 @@
                 <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="#" id="footerContact">Contact</a></p>
             </div>
         </div>
+    </footer>
 
     <script>
         // Hamburger Menu Toggle
@@ -850,7 +862,7 @@
             document.body.style.overflow = 'auto';
         });
         
-        menuLinks = document.querySelectorAll('.mobile-menu a');
+        const menuLinks = document.querySelectorAll('.mobile-menu a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
@@ -903,17 +915,39 @@
             });
         });
 
-        // Form submission handling for all forms
+        // Enhanced Form submission handling for all forms
         const forms = document.querySelectorAll('form');
         forms.forEach(form => {
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
+                // Prevent default form submission so we can handle it with JavaScript
+                e.preventDefault();
+                
                 const submitBtn = this.querySelector('button[type="submit"]');
-                if (submitBtn) {
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                    submitBtn.disabled = true;
+                if (!submitBtn) return;
+                
+                const originalText = submitBtn.innerHTML;
+                const originalBgColor = submitBtn.style.backgroundColor;
+                
+                // Show sending state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Get form data
+                    const formData = new FormData(this);
+                    const action = this.action;
                     
-                    setTimeout(() => {
+                    // Send to Formspree using fetch API
+                    const response = await fetch(action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Success - show checkmark briefly then redirect
                         submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
                         submitBtn.style.backgroundColor = 'var(--forest)';
                         
@@ -923,21 +957,41 @@
                             setTimeout(() => {
                                 modal.style.display = 'none';
                                 document.body.style.overflow = 'auto';
-                                this.reset();
-                                submitBtn.innerHTML = originalText;
-                                submitBtn.disabled = false;
-                                submitBtn.style.backgroundColor = '';
-                            }, 2000);
-                        } else {
-                            // For main form, just reset
-                            setTimeout(() => {
-                                this.reset();
-                                submitBtn.innerHTML = originalText;
-                                submitBtn.disabled = false;
-                                submitBtn.style.backgroundColor = '';
-                            }, 3000);
+                            }, 1500);
                         }
-                    }, 1500);
+                        
+                        // Redirect to thank you page after 1.5 seconds
+                        setTimeout(() => {
+                            window.location.href = 'thankyou.html';
+                        }, 1500);
+                        
+                    } else {
+                        // Formspree returned an error
+                        submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error';
+                        submitBtn.style.backgroundColor = 'var(--terracotta)';
+                        
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.backgroundColor = originalBgColor;
+                        }, 3000);
+                        
+                        console.error('Form submission error:', response.statusText);
+                    }
+                } catch (error) {
+                    // Network error or other fetch error
+                    submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Network Error';
+                    submitBtn.style.backgroundColor = 'var(--terracotta)';
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.backgroundColor = originalBgColor;
+                    }, 3000);
+                    
+                    console.error('Form submission error:', error);
                 }
             });
         });
@@ -958,6 +1012,24 @@
                         });
                     }
                 }
+            });
+        });
+
+        // Open main contact form when clicking email in footer
+        document.getElementById('openContactForm').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: document.querySelector('.contact-form-section').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+
+        // Footer contact link scrolls to contact section
+        document.getElementById('footerContact').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: document.getElementById('contact').offsetTop - 100,
+                behavior: 'smooth'
             });
         });
     </script>
