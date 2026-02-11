@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The You Lounge | Thank You</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Earth & Teal Color Palette - Matching Homepage */
+        :root {
+            --sand: #E6D5B8;
+            --clay: #C4A484;
+            --terracotta: #A85C32;
+            --forest: #2D5A27;
+            --teal: #008080;
+            --dark-teal: #006666;
+            --charcoal: #333333;
+            --light-clay: #E8D0B3;
+            --white: #FFFFFF;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--sand);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Hamburger Menu */
+        header {
+            background-color: var(--teal);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            color: var(--sand);
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .hamburger:hover {
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--teal);
+            padding-top: 100px;
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            border-bottom: 1px solid rgba(230, 213, 184, 0.1);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 20px;
+            color: var(--sand);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mobile-menu a:hover {
+            background-color: var(--dark-teal);
+            color: var(--white);
+        }
+
+        /* Close button for mobile menu */
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--sand);
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .close-menu:hover {
+            color: var(--white);
+        }
+
+        /* Thank You Content */
+        .thankyou-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-clay) 0%, var(--sand) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thankyou-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="%23A85C32" stroke-width="0.5" opacity="0.1" fill="none"/></svg>');
+            opacity: 0.2;
+        }
+
+        .thankyou-content {
+            max-width: 800px;
+            background-color: var(--white);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
+            border: 3px solid var(--clay);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: var(--forest);
+            margin-bottom: 30px;
+            animation: bounce 1s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        .thankyou-content h1 {
+            font-size: 3rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .thankyou-content h2 {
+            font-size: 2rem;
+            color: var(--terracotta);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .thankyou-content p {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background-color: var(--sand);
+            border-left: 4px solid var(--teal);
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .highlight-box i {
+            color: var(--teal);
+            margin-right: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            min-width: 200px;
+        }
+
+        .action-btn i {
+            margin-right: 10px;
+        }
+
+        .home-btn {
+            background-color: var(--teal);
+            color: white;
+            border-color: var(--teal);
+        }
+
+        .home-btn:hover {
+            background-color: transparent;
+            color: var(--teal);
+            transform: translateY(-3px);
+        }
+
+        .contact-btn {
+            background-color: transparent;
+            color: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        .contact-btn:hover {
+            background-color: var(--terracotta);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--teal);
+            color: var(--sand);
+            padding: 40px 20px 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo-img {
+            max-width: 250px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .footer-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--sand);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(230, 213, 184, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .thankyou-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .thankyou-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .thankyou-content {
+                padding: 40px 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .thankyou-section {
+                padding: 120px 15px 40px;
+            }
+            
+            .thankyou-content h1 {
+                font-size: 2rem;
+            }
+            
+            .thankyou-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .thankyou-content p {
+                font-size: 1.1rem;
+            }
+            
+            .hamburger {
+                font-size: 24px;
+            }
+            
+            .success-icon {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Hamburger Menu -->
+    <header>
+        <div class="header-content container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="logo-img">
+                </a>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="hubs.html">Hubs</a></li>
+                <li><a href="thinktank.html">Non-Profit & Think Tank</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Thank You Content -->
+    <section class="thankyou-section">
+        <div class="thankyou-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h1>Message Received</h1>
+            <h2>Thank You For Connecting</h2>
+            
+            <p>Your message has been successfully delivered to our Governance Architects team at The You Lounge.</p>
+            
+            <div class="highlight-box">
+                <p><i class="fas fa-clock"></i> <strong>Response Time:</strong> We aim to respond within 48-72 hours to all enquiries.</p>
+                <p><i class="fas fa-envelope"></i> <strong>Confirmation:</strong> You should receive an automated confirmation email shortly.</p>
+                <p><i class="fas fa-user-check"></i> <strong>Next Steps:</strong> Our team will review your message and connect you with the appropriate specialist.</p>
+            </div>
+            
+            <p>In the meantime, explore more about our work in governance decision architecture, NGO & think tank systems, and human agency frameworks.</p>
+            
+            <div class="action-buttons">
+                <a href="index.html" class="action-btn home-btn">
+                    <i class="fas fa-home"></i> Return to Homepage
+                </a>
+                <a href="contact.html" class="action-btn contact-btn">
+                    <i class="fas fa-envelope"></i> Send Another Message
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content container">
+            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
+            <p class="footer-tagline">Governance Architects for Complex, Multi-National Decisions</p>
+            
+            <div class="contact-info">
+                <p>Connect With Our Governance Architects:</p>
+                <p><a href="contact.html">executive@youlounge.org</a></p>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="contact.html">Contact</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(event.target) && 
+                !hamburger.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close menu when clicking links
+        const menuLinks = document.querySelectorAll('.mobile-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                if(targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
