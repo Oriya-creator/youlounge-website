@@ -533,9 +533,9 @@
                         <p>Processing your request...</p>
                     </div>
                     
-                    <!-- Success message – NO REDIRECT -->
+                    <!-- Success message – updated to indicate redirect -->
                     <div class="success-message" id="successMessage">
-                        <p>✓ Thank you. Your registration has been received. The diagnostic link will be sent to your email shortly.</p>
+                        <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
                     </div>
                 </form>
             </div>
@@ -638,21 +638,29 @@
                         console.error('❌ Fetch error:', error);
                     }
 
-                    // Hide loader, show success message – NO REDIRECT
+                    // Hide loader, show success message
                     formLoader.style.display = 'none';
                     successMessage.style.display = 'block';
 
-                    // Optional: disable the form further or hide it
-                    // form.style.display = 'none'; // uncomment if you want to hide the form entirely
+                    // ---------- REDIRECT TO DIAGNOSTIC PAGE ----------
+                    // Build a reliable absolute URL using current origin + relative path
+                    const redirectUrl = window.location.origin + '/sovereignprotocoldiagnostic.html';
+                    console.log('🔁 Redirecting to:', redirectUrl);
+
+                    // Short delay so user sees the success message
+                    setTimeout(function() {
+                        window.location.href = redirectUrl;  // Use .href for better compatibility
+                    }, 1500);
                 });
             });
         })();
     </script>
 
-    <!-- NOSCRIPT FALLBACK – also no redirect -->
+    <!-- NOSCRIPT FALLBACK – also redirects if JS is off -->
     <noscript>
+        <meta http-equiv="refresh" content="3;url=/sovereignprotocoldiagnostic.html">
         <div style="padding: 20px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 8px; margin-top: 20px;">
-            <strong>JavaScript is disabled.</strong> Please enable JavaScript to submit the form, or email us directly at contact@sovereignprotocol.com.
+            <strong>JavaScript is disabled.</strong> You are being redirected to the diagnostic page. If not, <a href="/sovereignprotocoldiagnostic.html">click here</a>.
         </div>
     </noscript>
 </body>
