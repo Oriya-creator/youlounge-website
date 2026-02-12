@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sovereign Protocol | Executive Diagnostic</title>
     <style>
-        /* ---- (your existing CSS, unchanged) ---- */
+        /* ---- (your existing CSS – unchanged, except .submit-button now for <a>) ---- */
         * {
             margin: 0;
             padding: 0;
@@ -272,7 +272,9 @@
             font-weight: 500;
             flex: 1;
         }
+        /* Button styles now applied to an <a> tag */
         .submit-button {
+            display: inline-block;
             width: 100%;
             padding: 18px;
             font-size: 18px;
@@ -286,18 +288,21 @@
             margin-top: 10px;
             box-shadow: 0 4px 15px rgba(144, 194, 24, 0.3);
             border: 2px solid #78a514;
+            text-decoration: none;
+            text-align: center;
         }
-        .submit-button:hover:not(:disabled) {
+        .submit-button:hover:not(.disabled) {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(144, 194, 24, 0.4);
         }
-        .submit-button:disabled {
+        .submit-button.disabled {
             background: #9ca3af;
             color: #6b7280;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
             border-color: #9ca3af;
+            pointer-events: none;
         }
         .footer {
             text-align: center;
@@ -464,9 +469,8 @@
                     Enter your details below to receive the diagnostic and your personalized results.
                 </p>
                 
-                <!-- IMPORTANT: NO action / method attributes – only JavaScript submission -->
+                <!-- Form – no submit action, data sent by checkbox -->
                 <form id="sovereignForm">
-                    <!-- Formspree endpoint will be used in JavaScript -->
                     <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
                     
                     <div class="form-group">
@@ -515,7 +519,7 @@
                         <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
                     </div>
                     
-                    <!-- Terms Checkbox (the "last box") -->
+                    <!-- Terms Checkbox – now the trigger to send data -->
                     <div class="checkbox-group">
                         <input type="checkbox" id="termsCheckbox" class="checkbox-input" required>
                         <label for="termsCheckbox" class="checkbox-label">
@@ -523,21 +527,21 @@
                         </label>
                     </div>
                     
-                    <!-- Submit Button -->
-                    <button type="submit" class="submit-button" id="submitButton" disabled>
-                        Begin Diagnostic Assessment
-                    </button>
-                    
+                    <!-- Loader & Success Message -->
                     <div class="loader" id="formLoader">
                         <div class="spinner"></div>
-                        <p>Processing your request...</p>
+                        <p>Sending your information...</p>
+                    </div>
+                    <div class="success-message" id="successMessage">
+                        <p>✓ Your details have been sent. You may now proceed.</p>
                     </div>
                     
-                    <!-- Success message – updated to indicate redirect -->
-                    <div class="success-message" id="successMessage">
-                        <p>✓ Thank you. Redirecting you to the diagnostic assessment...</p>
-                    </div>
                 </form>
+
+                <!-- Button is now a LINK to the diagnostic page, styled as button -->
+                <a id="diagnosticLink" href="/sovereignprotocoldiagnostic.html" class="submit-button disabled">
+                    Begin Diagnostic Assessment
+                </a>
             </div>
         </div>
         
@@ -559,24 +563,37 @@
 
                 const emailInput = document.getElementById('email');
                 const emailError = document.getElementById('emailError');
-                const submitButton = document.getElementById('submitButton');
-                const formLoader = document.getElementById('formLoader');
-                const successMessage = document.getElementById('successMessage');
                 const termsCheckbox = document.getElementById('termsCheckbox');
                 const nameInput = document.getElementById('name');
                 const roleSelect = document.getElementById('role');
+                const formLoader = document.getElementById('formLoader');
+                const successMessage = document.getElementById('successMessage');
+                const diagnosticLink = document.getElementById('diagnosticLink');
 
+                // State: has data been sent successfully?
+                let dataSent = false;
+
+                // Email validation
                 function validateEmail(email) {
                     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return re.test(String(email).toLowerCase());
                 }
 
-                function updateSubmitButtonState() {
+                // Enable/disable the link based on email validity, checkbox, and dataSent
+                function updateLinkState() {
                     const isEmailValid = validateEmail(emailInput.value);
-                    const isTermsChecked = termsCheckbox.checked;
-                    submitButton.disabled = !(isEmailValid && isTermsChecked);
+                    const isChecked = termsCheckbox.checked;
+                    
+                    if (isEmailValid && isChecked && dataSent) {
+                        diagnosticLink.classList.remove('disabled');
+                        diagnosticLink.style.pointerEvents = 'auto';
+                    } else {
+                        diagnosticLink.classList.add('disabled');
+                        diagnosticLink.style.pointerEvents = 'none';
+                    }
                 }
 
+                // Real-time email validation (visual only)
                 emailInput.addEventListener('input', function() {
                     if (validateEmail(emailInput.value)) {
                         emailError.style.display = 'none';
@@ -585,32 +602,35 @@
                         emailError.style.display = 'block';
                         emailInput.style.borderColor = '#dc2626';
                     }
-                    updateSubmitButtonState();
+                    updateLinkState();
                 });
 
-                termsCheckbox.addEventListener('change', updateSubmitButtonState);
-                updateSubmitButtonState();
+                // --- CHECKBOX: when ticked, send the data (if email valid) ---
+                termsCheckbox.addEventListener('change', async function() {
+                    // If unchecked, reset sent flag and disable link
+                    if (!termsCheckbox.checked) {
+                        dataSent = false;
+                        successMessage.style.display = 'none';
+                        updateLinkState();
+                        return;
+                    }
 
-                form.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-
+                    // Validate email before sending
                     if (!validateEmail(emailInput.value)) {
                         emailError.style.display = 'block';
                         emailInput.style.borderColor = '#dc2626';
                         emailInput.focus();
+                        // Uncheck the box – user must fix email first
+                        termsCheckbox.checked = false;
+                        alert('Please enter a valid email address before confirming.');
                         return;
                     }
 
-                    if (!termsCheckbox.checked) {
-                        alert('Please confirm that you meet the criteria and understand this is a confidential diagnostic.');
-                        return;
-                    }
-
-                    // UI: show loader, hide button
-                    submitButton.style.display = 'none';
+                    // --- Show loader, hide any old success message ---
                     formLoader.style.display = 'block';
+                    successMessage.style.display = 'none';
 
-                    // Store user data
+                    // Store user data in localStorage
                     const userData = {
                         email: emailInput.value,
                         name: nameInput ? nameInput.value : '',
@@ -629,38 +649,44 @@
                             body: formData,
                             headers: { 'Accept': 'application/json' }
                         });
+                        
                         if (response.ok) {
                             console.log('✅ Form successfully sent');
+                            dataSent = true;
+                            successMessage.style.display = 'block';
                         } else {
                             console.warn('⚠️ Formspree error:', response.status);
+                            dataSent = false;
+                            alert('There was a problem sending your details. Please try again.');
+                            // Uncheck the box so user can retry
+                            termsCheckbox.checked = false;
                         }
                     } catch (error) {
                         console.error('❌ Fetch error:', error);
+                        dataSent = false;
+                        alert('Network error. Please check your connection and try again.');
+                        termsCheckbox.checked = false;
+                    } finally {
+                        formLoader.style.display = 'none';
+                        updateLinkState();
                     }
-
-                    // Hide loader, show success message
-                    formLoader.style.display = 'none';
-                    successMessage.style.display = 'block';
-
-                    // ---------- REDIRECT TO DIAGNOSTIC PAGE ----------
-                    // Build a reliable absolute URL using current origin + relative path
-                    const redirectUrl = window.location.origin + '/sovereignprotocoldiagnostic.html';
-                    console.log('🔁 Redirecting to:', redirectUrl);
-
-                    // Short delay so user sees the success message
-                    setTimeout(function() {
-                        window.location.href = redirectUrl;  // Use .href for better compatibility
-                    }, 1500);
                 });
+
+                // Initial state: link disabled
+                updateLinkState();
+
+                // Also update link state when email changes (even if already sent)
+                emailInput.addEventListener('input', updateLinkState);
+                nameInput.addEventListener('input', updateLinkState);  // optional
+                roleSelect.addEventListener('change', updateLinkState); // optional
             });
         })();
     </script>
 
-    <!-- NOSCRIPT FALLBACK – also redirects if JS is off -->
+    <!-- NOSCRIPT FALLBACK -->
     <noscript>
-        <meta http-equiv="refresh" content="3;url=/sovereignprotocoldiagnostic.html">
         <div style="padding: 20px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 8px; margin-top: 20px;">
-            <strong>JavaScript is disabled.</strong> You are being redirected to the diagnostic page. If not, <a href="/sovereignprotocoldiagnostic.html">click here</a>.
+            <strong>JavaScript is disabled.</strong> Please enable JavaScript to submit your details. Once enabled, you can proceed to the <a href="/sovereignprotocoldiagnostic.html">diagnostic page</a>.
         </div>
     </noscript>
 </body>
