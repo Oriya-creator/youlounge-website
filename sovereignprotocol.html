@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sovereign Protocol | Executive Diagnostic</title>
     <style>
-        /* ---- (your existing CSS – unchanged, except .submit-button now for <a>) ---- */
+        /* ---- (CSS unchanged – only additions for new button) ---- */
         * {
             margin: 0;
             padding: 0;
@@ -253,26 +253,35 @@
             border-left: 3px solid #90c218;
             font-weight: 500;
         }
-        .checkbox-group {
-            margin: 30px 0;
-            display: flex;
-            align-items: flex-start;
+        /* New style for the send button */
+        .send-button {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            border: 2px solid #1d4ed8;
         }
-        .checkbox-input {
-            margin-right: 15px;
-            margin-top: 3px;
-            width: 20px;
-            height: 20px;
-            accent-color: #90c218;
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
         }
-        .checkbox-label {
-            font-size: 14px;
-            color: #000000;
-            line-height: 1.6;
-            font-weight: 500;
-            flex: 1;
+        .send-button:disabled {
+            background: #9ca3af;
+            color: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            border-color: #9ca3af;
         }
-        /* Button styles now applied to an <a> tag */
+        /* Button styles for the diagnostic link */
         .submit-button {
             display: inline-block;
             width: 100%;
@@ -469,7 +478,7 @@
                     Enter your details below to receive the diagnostic and your personalized results.
                 </p>
                 
-                <!-- Form – no submit action, data sent by checkbox -->
+                <!-- Form – no submit action, data sent by the "Send Your Details" button -->
                 <form id="sovereignForm">
                     <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
                     
@@ -519,13 +528,10 @@
                         <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
                     </div>
                     
-                    <!-- Terms Checkbox – now the trigger to send data -->
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="termsCheckbox" class="checkbox-input" required>
-                        <label for="termsCheckbox" class="checkbox-label">
-                            By proceeding, you confirm that you meet the criteria for the Sovereign Protocol and understand this is a confidential executive diagnostic.
-                        </label>
-                    </div>
+                    <!-- NEW: Send Details Button (replaces checkbox) -->
+                    <button type="button" id="sendDetailsBtn" class="send-button">
+                        Send Your Details
+                    </button>
                     
                     <!-- Loader & Success Message -->
                     <div class="loader" id="formLoader">
@@ -538,7 +544,7 @@
                     
                 </form>
 
-                <!-- Button is now a LINK to the diagnostic page, styled as button -->
+                <!-- Button is a LINK to the diagnostic page, styled as button -->
                 <a id="diagnosticLink" href="/sovereignprotocoldiagnostic.html" class="submit-button disabled">
                     Begin Diagnostic Assessment
                 </a>
@@ -563,7 +569,7 @@
 
                 const emailInput = document.getElementById('email');
                 const emailError = document.getElementById('emailError');
-                const termsCheckbox = document.getElementById('termsCheckbox');
+                const sendButton = document.getElementById('sendDetailsBtn');
                 const nameInput = document.getElementById('name');
                 const roleSelect = document.getElementById('role');
                 const formLoader = document.getElementById('formLoader');
@@ -579,12 +585,11 @@
                     return re.test(String(email).toLowerCase());
                 }
 
-                // Enable/disable the link based on email validity, checkbox, and dataSent
+                // Enable/disable the diagnostic link based on dataSent and email validity (email still needed for context)
                 function updateLinkState() {
                     const isEmailValid = validateEmail(emailInput.value);
-                    const isChecked = termsCheckbox.checked;
                     
-                    if (isEmailValid && isChecked && dataSent) {
+                    if (isEmailValid && dataSent) {
                         diagnosticLink.classList.remove('disabled');
                         diagnosticLink.style.pointerEvents = 'auto';
                     } else {
@@ -593,7 +598,13 @@
                     }
                 }
 
-                // Real-time email validation (visual only)
+                // Enable/disable send button based on email validity
+                function updateSendButtonState() {
+                    const isEmailValid = validateEmail(emailInput.value);
+                    sendButton.disabled = !isEmailValid;
+                }
+
+                // Real-time email validation
                 emailInput.addEventListener('input', function() {
                     if (validateEmail(emailInput.value)) {
                         emailError.style.display = 'none';
@@ -602,27 +613,22 @@
                         emailError.style.display = 'block';
                         emailInput.style.borderColor = '#dc2626';
                     }
-                    updateLinkState();
+                    updateSendButtonState();
+                    updateLinkState(); // link state also depends on email validity
                 });
 
-                // --- CHECKBOX: when ticked, send the data (if email valid) ---
-                termsCheckbox.addEventListener('change', async function() {
-                    // If unchecked, reset sent flag and disable link
-                    if (!termsCheckbox.checked) {
-                        dataSent = false;
-                        successMessage.style.display = 'none';
-                        updateLinkState();
-                        return;
-                    }
+                // Initial state
+                updateSendButtonState();
+                updateLinkState();
 
-                    // Validate email before sending
+                // --- SEND BUTTON: when clicked, send the data ---
+                sendButton.addEventListener('click', async function() {
+                    // Validate email before sending (should already be valid, but double-check)
                     if (!validateEmail(emailInput.value)) {
                         emailError.style.display = 'block';
                         emailInput.style.borderColor = '#dc2626';
                         emailInput.focus();
-                        // Uncheck the box – user must fix email first
-                        termsCheckbox.checked = false;
-                        alert('Please enter a valid email address before confirming.');
+                        alert('Please enter a valid email address.');
                         return;
                     }
 
@@ -658,27 +664,21 @@
                             console.warn('⚠️ Formspree error:', response.status);
                             dataSent = false;
                             alert('There was a problem sending your details. Please try again.');
-                            // Uncheck the box so user can retry
-                            termsCheckbox.checked = false;
                         }
                     } catch (error) {
                         console.error('❌ Fetch error:', error);
                         dataSent = false;
                         alert('Network error. Please check your connection and try again.');
-                        termsCheckbox.checked = false;
                     } finally {
                         formLoader.style.display = 'none';
                         updateLinkState();
                     }
                 });
 
-                // Initial state: link disabled
-                updateLinkState();
-
-                // Also update link state when email changes (even if already sent)
+                // Update link state when email changes (in case email is edited after successful send)
                 emailInput.addEventListener('input', updateLinkState);
-                nameInput.addEventListener('input', updateLinkState);  // optional
-                roleSelect.addEventListener('change', updateLinkState); // optional
+                nameInput.addEventListener('input', updateLinkState);
+                roleSelect.addEventListener('change', updateLinkState);
             });
         })();
     </script>
