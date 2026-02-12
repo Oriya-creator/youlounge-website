@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sovereign Protocol | Executive Diagnostic</title>
     <style>
-        /* ---- (your existing CSS – unchanged, except .submit-button now for <a>) ---- */
+        /* ---- (your existing CSS – unchanged) ---- */
         * {
             margin: 0;
             padding: 0;
@@ -242,17 +242,6 @@
         .form-input::placeholder {
             color: #6b7280;
         }
-        .privacy-note {
-            font-size: 14px;
-            color: #000000;
-            line-height: 1.5;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            border-left: 3px solid #90c218;
-            font-weight: 500;
-        }
         .checkbox-group {
             margin: 30px 0;
             display: flex;
@@ -317,17 +306,6 @@
             color: #dc2626;
             font-size: 14px;
             margin-top: 5px;
-            display: none;
-            font-weight: 600;
-        }
-        .success-message {
-            background: rgba(144, 194, 24, 0.15);
-            border: 2px solid #90c218;
-            color: #3f6212;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
             display: none;
             font-weight: 600;
         }
@@ -515,11 +493,9 @@
                         </select>
                     </div>
                     
-                    <div class="privacy-note">
-                        <strong>Responses are private.</strong> Results are sent directly to your email. Your information will not be shared with third parties.
-                    </div>
+                    <!-- PRIVACY NOTE REMOVED -->
                     
-                    <!-- Terms Checkbox – now the trigger to send data -->
+                    <!-- Terms Checkbox – trigger to send data -->
                     <div class="checkbox-group">
                         <input type="checkbox" id="termsCheckbox" class="checkbox-input" required>
                         <label for="termsCheckbox" class="checkbox-label">
@@ -527,18 +503,15 @@
                         </label>
                     </div>
                     
-                    <!-- Loader & Success Message -->
+                    <!-- Loader (no success message) -->
                     <div class="loader" id="formLoader">
                         <div class="spinner"></div>
                         <p>Sending your information...</p>
                     </div>
-                    <div class="success-message" id="successMessage">
-                        <p>✓ Your details have been sent. You may now proceed.</p>
-                    </div>
                     
                 </form>
 
-                <!-- Button is now a LINK to the diagnostic page, styled as button -->
+                <!-- Button is a LINK to the diagnostic page, styled as button -->
                 <a id="diagnosticLink" href="/sovereignprotocoldiagnostic.html" class="submit-button disabled">
                     Begin Diagnostic Assessment
                 </a>
@@ -567,7 +540,6 @@
                 const nameInput = document.getElementById('name');
                 const roleSelect = document.getElementById('role');
                 const formLoader = document.getElementById('formLoader');
-                const successMessage = document.getElementById('successMessage');
                 const diagnosticLink = document.getElementById('diagnosticLink');
 
                 // State: has data been sent successfully?
@@ -610,7 +582,6 @@
                     // If unchecked, reset sent flag and disable link
                     if (!termsCheckbox.checked) {
                         dataSent = false;
-                        successMessage.style.display = 'none';
                         updateLinkState();
                         return;
                     }
@@ -626,9 +597,8 @@
                         return;
                     }
 
-                    // --- Show loader, hide any old success message ---
+                    // --- Show loader ---
                     formLoader.style.display = 'block';
-                    successMessage.style.display = 'none';
 
                     // Store user data in localStorage
                     const userData = {
@@ -653,7 +623,7 @@
                         if (response.ok) {
                             console.log('✅ Form successfully sent');
                             dataSent = true;
-                            successMessage.style.display = 'block';
+                            // No success message to show – link will become active
                         } else {
                             console.warn('⚠️ Formspree error:', response.status);
                             dataSent = false;
@@ -677,8 +647,8 @@
 
                 // Also update link state when email changes (even if already sent)
                 emailInput.addEventListener('input', updateLinkState);
-                nameInput.addEventListener('input', updateLinkState);  // optional
-                roleSelect.addEventListener('change', updateLinkState); // optional
+                nameInput.addEventListener('input', updateLinkState);
+                roleSelect.addEventListener('change', updateLinkState);
             });
         })();
     </script>
