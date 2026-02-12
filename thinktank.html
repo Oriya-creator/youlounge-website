@@ -40,9 +40,9 @@
             padding: 0 20px;
         }
 
-        /* Header & Hamburger Menu - CHANGED FROM FOREST TO TEAL */
+        /* Header & Hamburger Menu - Teal */
         header {
-            background-color: var(--teal); /* CHANGED FROM FOREST */
+            background-color: var(--teal);
             position: fixed;
             width: 100%;
             top: 0;
@@ -82,17 +82,17 @@
         }
 
         .hamburger:hover {
-            color: var(--dark-teal); /* CHANGED FROM TEAL */
+            color: var(--dark-teal);
             transform: scale(1.1);
         }
 
-        /* Mobile Menu - CHANGED FROM FOREST TO TEAL */
+        /* Mobile Menu - Teal */
         .mobile-menu {
             position: fixed;
             top: 80px;
             left: 0;
             width: 100%;
-            background-color: var(--teal); /* CHANGED FROM FOREST */
+            background-color: var(--teal);
             padding: 0;
             transform: translateY(-100%);
             opacity: 0;
@@ -128,7 +128,7 @@
         }
 
         .mobile-menu a:hover {
-            background-color: var(--dark-teal); /* Already teal, changed to dark-teal */
+            background-color: var(--dark-teal);
             color: var(--white);
             padding-left: 30px;
         }
@@ -155,7 +155,7 @@
 
         .np-hero h1 {
             font-size: 3.5rem;
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            color: var(--teal);
             margin-bottom: 20px;
             font-weight: 700;
         }
@@ -167,14 +167,33 @@
             color: var(--charcoal);
         }
 
-        /* Hero section "Long-Horizon Governance Stewardship" styling */
+        /* Hero subtitle - Long-Horizon Governance Stewardship */
         .hero-subtitle {
-            color: var(--teal) !important; /* Changed from black to teal */
-            font-size: 1.6rem !important; /* Increased size to match the one in content */
+            color: var(--teal) !important;
+            font-size: 1.6rem !important;
             font-weight: 700 !important;
             margin-bottom: 15px;
             display: block;
         }
+
+        /* ---- NEW: Video styling ---- */
+        .hero-video {
+            margin-top: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-video video {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 3px solid var(--white);
+            outline: none;
+        }
+        /* ---------------------------- */
 
         /* Return to Homepage Button */
         .return-home-btn {
@@ -206,7 +225,7 @@
         .section-title {
             text-align: center;
             font-size: 2.8rem;
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            color: var(--teal);
             margin-bottom: 40px;
             position: relative;
         }
@@ -236,7 +255,7 @@
             font-weight: bold;
             border-radius: 16px;
             cursor: pointer;
-            background: linear-gradient(135deg, var(--teal), var(--dark-teal)); /* CHANGED FROM FOREST, DARK-TEAL TO TEAL, DARK-TEAL */
+            background: linear-gradient(135deg, var(--teal), var(--dark-teal));
             color: var(--sand);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
@@ -280,11 +299,10 @@
         }
 
         .content strong {
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
+            color: var(--teal);
             font-size: 1.4em;
         }
 
-        /* Content section "Long-Horizon Governance Stewardship" styling - Already has teal color and larger size */
         .content-headline {
             color: var(--teal);
             font-size: 1.6rem;
@@ -345,9 +363,9 @@
             color: var(--charcoal);
         }
 
-        /* Footer - CHANGED FROM FOREST TO TEAL */
+        /* Footer - Teal */
         footer {
-            background-color: var(--teal); /* CHANGED FROM FOREST */
+            background-color: var(--teal);
             color: var(--sand);
             padding: 60px 20px 30px;
             text-align: center;
@@ -384,7 +402,7 @@
         }
 
         .contact-info a {
-            color: var(--sand); /* CHANGED FROM TEAL TO SAND for better contrast */
+            color: var(--sand);
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -426,7 +444,7 @@
             }
             
             .hero-subtitle {
-                font-size: 1.4rem !important; /* Adjusted for mobile */
+                font-size: 1.4rem !important;
             }
             
             .collapsible {
@@ -460,6 +478,11 @@
             .logo-img {
                 height: 40px;
             }
+
+            .hero-video video {
+                max-width: 100%;
+                border-radius: 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -472,7 +495,7 @@
             }
             
             .hero-subtitle {
-                font-size: 1.2rem !important; /* Further adjusted for small mobile */
+                font-size: 1.2rem !important;
             }
             
             .collapsible {
@@ -529,10 +552,19 @@
         <div class="container">
             <h1 class="fade-in">Non-Profit & Think Tank</h1>
             <p class="fade-in delay-1">
-                <span class="hero-subtitle">Long-Horizon Governance Stewardship</span> <!-- CHANGED: Added span with class -->
-               
-                 <br>At You Lounge, We Build With & For Community Graduation. We Deploy A Comprehensive System Of Impact, Applied Research & Sustainable Solutions For Humanity.
+                <span class="hero-subtitle">Long-Horizon Governance Stewardship</span>
+                <br>At You Lounge, We Build With & For Community Graduation. We Deploy A Comprehensive System Of Impact, Applied Research & Sustainable Solutions For Humanity.
             </p>
+            
+            <!-- ========== INSERTED VIDEO ========== -->
+            <div class="hero-video">
+                <video autoplay muted loop playsinline preload="auto">
+                    <source src="thinktank.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- ===================================== -->
+            
         </div>
     </section>
 
@@ -542,7 +574,7 @@
             <!-- Non-Profit & Think Tank Systems ONLY - starts directly after hero -->
             <button class="collapsible">Non-Profit & Think Tank Systems</button>
             <div class="content">
-                <p><span class="content-headline">Long-Horizon Governance Stewardship</span></p> <!-- CHANGED: Added span with class -->
+                <p><span class="content-headline">Long-Horizon Governance Stewardship</span></p>
                 <p>At You Lounge, We Build With & For Community Graduation. Our Non-Profit & Think Tank deploys a comprehensive system of impact, applied research & sustainable solutions for humanity; a parallel structure dedicated to long-term governance capacity, applied research, & justice-aligned institutional human development.
                 It operates outside immediate commercial cycles.</p>
                 <p><strong>Purpose and Scope:</strong></p>
@@ -690,8 +722,6 @@
                 }
             });
         });
-
-        // REMOVED: All modal functionality since contact buttons now link to contact.html
     </script>
 </body>
 </html>
