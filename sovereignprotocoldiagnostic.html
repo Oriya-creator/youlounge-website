@@ -654,7 +654,7 @@
         </div>
         
         <div class="results-panel">
-            <h3>Your Urgency Score</h3>
+            <h3>Your Performance Score</h3>
             
             <!-- User Info Summary -->
             <div id="userInfoSummary" class="user-info-summary">
@@ -665,15 +665,15 @@
             
             <div class="urgency-meter">
                 <div class="urgency-label" id="urgencyLabel">Complete Diagnostic</div>
-                <div class="urgency-score" id="urgencyScore">0</div>
+                <div class="urgency-score" id="performanceScore">0%</div>
                 <div class="progress-container">
                     <div class="progress-bar" id="progressBar" style="width: 0%"></div>
                 </div>
-                <div class="score-explanation">Max Score: 21 (Highest Urgency)</div>
+                <div class="score-explanation">Max Score: 70% (Elite Performance)</div>
             </div>
             
             <div class="urgency-description" id="urgencyDescription">
-                Answer all questions to see how urgently you need the Sovereign Protocol. Your score will show your immediate need for performance optimization.
+                Answer all questions to see your performance score and personalized recommendations.
             </div>
             
             <button class="cta-button" id="ctaButton" disabled>
@@ -745,13 +745,13 @@
                 alert('Error processing your request. Please try again or contact support.');
             } finally {
                 showLoading(false);
-                // Redirect based on score after email attempt
-                redirectBasedOnScore(diagnosticResults.totalScore);
+                // Redirect based on percentage score
+                redirectBasedOnScore(diagnosticResults.percentageScore);
             }
         }
         
         function generatePDFContent(results) {
-            const { user, scores, totalScore, urgencyLevel } = results;
+            const { user, scores, totalScore, percentageScore, urgencyLevel } = results;
             
             // Create comprehensive PDF content
             const content = `
@@ -765,7 +765,7 @@
                 
                 EXECUTIVE SUMMARY
                 -----------------
-                Urgency Score: ${totalScore}/21
+                Performance Score: ${percentageScore}% / 70%
                 Urgency Level: ${urgencyLevel}
                 
                 Based on your responses, your leadership architecture requires:
@@ -866,11 +866,11 @@
         
         function getUrgencyRecommendation(level) {
             const recommendations = {
-                'CRITICAL': 'Immediate intervention within 7 days to prevent significant financial losses.',
-                'HIGH': 'Implementation within 14 days to optimize performance and recover strategic capacity.',
-                'MODERATE': 'Implementation within 30 days to achieve elite performance levels consistently.'
+                'CRITICAL': 'Immediate intervention required. Your leadership performance is significantly compromised.',
+                'HIGH': 'Prompt intervention recommended. Key performance gaps need to be addressed.',
+                'MODERATE': 'Performance optimization opportunity. Systematic protocols will elevate your leadership.'
             };
-            return recommendations[level] || 'Regular monitoring recommended.';
+            return recommendations[level] || 'Regular performance monitoring recommended.';
         }
         
         function getRecommendedActions(level) {
@@ -879,16 +879,19 @@
                     1. IMMEDIATE: Schedule executive calibration session
                     2. WITHIN 3 DAYS: Implement decision-making protocols
                     3. WITHIN 7 DAYS: Restructure strategic time allocation
+                    4. COMPLETE: Fragmented Brief Drill
                 `,
                 'HIGH': `
                     1. WITHIN 7 DAYS: Conduct leadership architecture review
                     2. WITHIN 14 DAYS: Implement strategic time recovery system
                     3. MONTHLY: Performance calibration sessions
+                    4. COMPLETE: Transition Brief Drill
                 `,
                 'MODERATE': `
                     1. WITHIN 30 DAYS: Implement systematic performance protocols
                     2. QUARTERLY: Strategic alignment reviews
                     3. CONTINUOUS: Performance optimization practices
+                    4. COMPLETE: Integrated Brief Drill
                 `
             };
             return actions[level] || 'Regular performance monitoring and adjustment.';
@@ -910,11 +913,11 @@
                     'to_email': userData.email,
                     'from_name': 'Sovereign Protocol',
                     'to_name': userData.name || 'Executive',
-                    'message': `Your Sovereign Protocol diagnostic results are attached.\n\nScore: ${results.totalScore}/21\nUrgency Level: ${results.urgencyLevel}`,
+                    'message': `Your Sovereign Protocol diagnostic results are attached.\n\nPerformance Score: ${results.percentageScore}%\nUrgency Level: ${results.urgencyLevel}`,
                     'pdf_content': pdfContent,
                     'user_email': userData.email,
                     'user_name': userData.name || 'Executive',
-                    'total_score': results.totalScore,
+                    'total_score': results.percentageScore,
                     'urgency_level': results.urgencyLevel
                 }
             };
@@ -953,25 +956,18 @@
         }
         
         // ====================
-        // REDIRECT BASED ON SCALED SCORE
+        // REDIRECT BASED ON PERCENTAGE SCORE (0-70)
         // ====================
-        function redirectBasedOnScore(rawScore) {
-            // Scale raw score (7-21) to 0-70
-            const maxRaw = 21;
-            const minRaw = 7;
-            const scaledScore = Math.round(((rawScore - minRaw) / (maxRaw - minRaw)) * 70);
-            // Ensure it's within 0-70
-            const finalScore = Math.min(Math.max(scaledScore, 0), 70);
-            
-            console.log(`Raw score: ${rawScore}, Scaled score: ${finalScore}`);
+        function redirectBasedOnScore(percentageScore) {
+            console.log(`Percentage score: ${percentageScore}%`);
             
             let redirectUrl = '';
-            if (finalScore <= 30) {
+            if (percentageScore <= 30) {
                 redirectUrl = '/fragmentedbriefdrill.html';
-            } else if (finalScore <= 50) {
+            } else if (percentageScore <= 50) {
                 redirectUrl = '/transitionbriefdrill.html';
             } else {
-                redirectUrl = '/integratedbriefdrill.html';  // ← changed from integratedbriefdrill2.html
+                redirectUrl = '/integratedbriefdrill.html';
             }
             
             console.log(`Redirecting to: ${redirectUrl}`);
@@ -1037,7 +1033,7 @@
             // DIAGNOSTIC LOGIC
             // ====================
             const riskBoxes = document.querySelectorAll('.risk-box');
-            const urgencyScore = document.getElementById('urgencyScore');
+            const performanceScoreEl = document.getElementById('performanceScore');
             const urgencyLabel = document.getElementById('urgencyLabel');
             const urgencyDescription = document.getElementById('urgencyDescription');
             const progressBar = document.getElementById('progressBar');
@@ -1114,59 +1110,68 @@
                 });
             });
             
+            function calculatePercentageScore(rawTotal) {
+                // Raw score range: 7 (best) to 21 (worst)
+                // Convert to percentage where 7 = 70%, 21 = 0%
+                const minRaw = 7;
+                const maxRaw = 21;
+                const percentage = Math.round(((maxRaw - rawTotal) / (maxRaw - minRaw)) * 70);
+                // Ensure within 0-70
+                return Math.min(Math.max(percentage, 0), 70);
+            }
+            
             function updateResults() {
-                // Calculate total score
-                let totalScore = 0;
+                // Calculate total raw score
+                let rawTotal = 0;
                 let answeredCount = 0;
                 
                 for (const [question, score] of Object.entries(userScores)) {
                     if (score !== null) {
-                        totalScore += score;
+                        rawTotal += score;
                         answeredCount++;
                     }
                 }
                 
-                // Update score display
-                urgencyScore.textContent = totalScore;
+                // Calculate percentage score (0-70)
+                const percentageScore = calculatePercentageScore(rawTotal);
                 
-                // Update progress bar
-                const maxScore = 21;
-                const progressPercentage = (totalScore / maxScore) * 100;
-                progressBar.style.width = `${progressPercentage}%`;
+                // Update score display
+                performanceScoreEl.textContent = `${percentageScore}%`;
+                
+                // Update progress bar (width = percentage of max 70)
+                const progressWidth = (percentageScore / 70) * 100;
+                progressBar.style.width = `${progressWidth}%`;
                 
                 // Update completion status
                 completionStatus.textContent = `${answeredCount}/7 questions answered`;
                 
-                // Update urgency level
+                // Update urgency level and description based on percentage
                 if (answeredCount === 7) {
                     ctaButton.disabled = false;
                     
-                    if (totalScore >= 18) {
-                        urgencyScore.className = 'urgency-score high-urgency';
+                    if (percentageScore <= 30) {
+                        performanceScoreEl.className = 'urgency-score high-urgency';
                         urgencyLabel.textContent = 'Critical Urgency';
                         urgencyDescription.innerHTML = `
-                            <strong>Immediate intervention required.</strong> You're losing significant value daily. 
-                            The Sovereign Protocol should be implemented within the next week to prevent further 
-                            financial and performance losses. Every day of delay costs approximately $1,600 in 
-                            lost strategic capacity.
+                            <strong>Immediate intervention required.</strong> Your leadership performance is significantly compromised. 
+                            You are losing substantial strategic capacity daily. The Sovereign Protocol's Fragmented Brief Drill 
+                            is designed specifically for your current state.
                         `;
-                    } else if (totalScore >= 12) {
-                        urgencyScore.className = 'urgency-score medium-urgency';
+                    } else if (percentageScore <= 50) {
+                        performanceScoreEl.className = 'urgency-score medium-urgency';
                         urgencyLabel.textContent = 'High Urgency';
                         urgencyDescription.innerHTML = `
-                            <strong>Significant performance gaps detected.</strong> You're operating below your 
-                            potential and losing valuable time and opportunities. Implementing the Sovereign 
-                            Protocol within the next 2 weeks is recommended to optimize your leadership 
-                            performance and recover lost strategic capacity.
+                            <strong>Key performance gaps detected.</strong> You are operating below your potential. 
+                            The Sovereign Protocol's Transition Brief Drill will help you systematize your leadership 
+                            approach and recover lost strategic time.
                         `;
                     } else {
-                        urgencyScore.className = 'urgency-score low-urgency';
+                        performanceScoreEl.className = 'urgency-score low-urgency';
                         urgencyLabel.textContent = 'Moderate Urgency';
                         urgencyDescription.innerHTML = `
-                            <strong>Performance optimization opportunity.</strong> You have a solid foundation 
-                            but could benefit significantly from systemizing your leadership approach. 
-                            Implementing the Sovereign Protocol within the next 30 days will help you achieve 
-                            elite performance levels consistently.
+                            <strong>Performance optimization opportunity.</strong> You have a solid foundation but can benefit 
+                            from elite-level protocols. The Sovereign Protocol's Integrated Brief Drill will elevate 
+                            your leadership to peak performance.
                         `;
                     }
                 } else {
@@ -1174,8 +1179,12 @@
                     
                     if (answeredCount > 0) {
                         urgencyLabel.textContent = `${answeredCount}/7 Complete`;
-                        urgencyDescription.textContent = `Answer all ${7 - answeredCount} remaining questions to see your urgency score and personalized recommendations.`;
+                        urgencyDescription.textContent = `Answer all ${7 - answeredCount} remaining questions to see your performance score and personalized recommendations.`;
+                    } else {
+                        urgencyLabel.textContent = 'Complete Diagnostic';
+                        urgencyDescription.textContent = 'Answer all questions to see your performance score and personalized recommendations.';
                     }
+                    performanceScoreEl.className = 'urgency-score';
                 }
             }
             
@@ -1183,22 +1192,25 @@
             ctaButton.addEventListener('click', function() {
                 if (totalAnswered === 7) {
                     // Calculate final results
-                    let totalScore = 0;
+                    let rawTotal = 0;
                     for (const score of Object.values(userScores)) {
-                        totalScore += score;
+                        rawTotal += score;
                     }
                     
-                    // Determine urgency level
+                    const percentageScore = calculatePercentageScore(rawTotal);
+                    
+                    // Determine urgency level based on percentage
                     let urgencyLevel;
-                    if (totalScore >= 18) urgencyLevel = 'CRITICAL';
-                    else if (totalScore >= 12) urgencyLevel = 'HIGH';
+                    if (percentageScore <= 30) urgencyLevel = 'CRITICAL';
+                    else if (percentageScore <= 50) urgencyLevel = 'HIGH';
                     else urgencyLevel = 'MODERATE';
                     
                     // Store diagnostic results
                     const diagnosticResults = {
                         user: userData,
                         scores: userScores,
-                        totalScore: totalScore,
+                        totalScore: rawTotal,
+                        percentageScore: percentageScore,
                         urgencyLevel: urgencyLevel,
                         completedAt: new Date().toISOString()
                     };
