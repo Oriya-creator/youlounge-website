@@ -446,75 +446,6 @@
             color: #2d3748;
             font-weight: 600;
         }
-        
-        .success-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .modal-icon {
-            font-size: 60px;
-            color: #38a169;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            font-size: 28px;
-            color: #1a365d;
-            margin-bottom: 15px;
-        }
-        
-        .modal-text {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-        
-        .paypal-button {
-            display: inline-block;
-            background: #0070ba;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .paypal-button:hover {
-            background: #005ea6;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 112, 186, 0.3);
-        }
-        
-        .email-note {
-            font-size: 14px;
-            color: #718096;
-            margin-top: 20px;
-            font-style: italic;
-        }
     </style>
 </head>
 <body>
@@ -765,37 +696,6 @@
         <div class="loading-spinner"></div>
         <div class="loading-message">Generating your PDF and sending to your email...</div>
     </div>
-    
-    <!-- Success Modal -->
-    <div class="success-modal" id="successModal">
-        <div class="modal-content">
-            <div class="modal-icon">✓</div>
-            <h2 class="modal-title">Diagnostic Submitted Successfully!</h2>
-            <p class="modal-text">
-                Your Sovereign Protocol diagnostic results have been generated and sent to your email address.<br><br>
-                <strong>Check your inbox for:</strong>
-            </p>
-            <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
-                <li>Your complete diagnostic report (PDF)</li>
-                <li>Personalized recommendations</li>
-                <li>Next steps for implementation</li>
-            </ul>
-            <p class="modal-text">
-                <strong>Ready to transform your leadership?</strong><br>
-                Enroll in our 7-Day Sovereign Protocol Mastery Course:
-            </p>
-            <a href="https://www.paypal.com/checkoutnow?token=YOUR_PAYPAL_TOKEN_HERE" 
-               class="paypal-button" 
-               target="_blank"
-               onclick="trackPaymentClick()">
-                Enroll Now - $497
-            </a>
-            <p class="email-note">
-                The PDF should arrive in your inbox within 5 minutes.<br>
-                Check your spam folder if you don't see it.
-            </p>
-        </div>
-    </div>
 
     <script>
         // ====================
@@ -836,7 +736,7 @@
                 const emailSent = await sendEmailWithPDF(diagnosticResults, pdfContent);
                 
                 if (emailSent) {
-                    showSuccessModal();
+                    console.log('Email sent successfully');
                 } else {
                     alert('PDF generated but email could not be sent. Please contact support.');
                 }
@@ -845,6 +745,8 @@
                 alert('Error processing your request. Please try again or contact support.');
             } finally {
                 showLoading(false);
+                // Redirect based on score after email attempt
+                redirectBasedOnScore(diagnosticResults.totalScore);
             }
         }
         
@@ -901,8 +803,7 @@
                 ----------
                 1. Review this report carefully
                 2. Schedule implementation within the recommended timeframe
-                3. Consider the 7-Day Sovereign Protocol Mastery Course
-                4. Implement the corrective actions systematically
+                3. Implement the corrective actions systematically
                 
                 CONFIDENTIALITY NOTICE
                 ----------------------
@@ -978,19 +879,16 @@
                     1. IMMEDIATE: Schedule executive calibration session
                     2. WITHIN 3 DAYS: Implement decision-making protocols
                     3. WITHIN 7 DAYS: Restructure strategic time allocation
-                    4. CONSIDER: 7-Day Sovereign Protocol Mastery Course
                 `,
                 'HIGH': `
                     1. WITHIN 7 DAYS: Conduct leadership architecture review
                     2. WITHIN 14 DAYS: Implement strategic time recovery system
                     3. MONTHLY: Performance calibration sessions
-                    4. RECOMMENDED: 7-Day Sovereign Protocol Mastery Course
                 `,
                 'MODERATE': `
                     1. WITHIN 30 DAYS: Implement systematic performance protocols
                     2. QUARTERLY: Strategic alignment reviews
                     3. CONTINUOUS: Performance optimization practices
-                    4. OPTIONAL: 7-Day Sovereign Protocol Mastery Course for elite results
                 `
             };
             return actions[level] || 'Regular performance monitoring and adjustment.';
@@ -1054,15 +952,30 @@
             overlay.style.display = show ? 'flex' : 'none';
         }
         
-        function showSuccessModal() {
-            const modal = document.getElementById('successModal');
-            modal.style.display = 'flex';
-        }
-        
-        function trackPaymentClick() {
-            // Track payment button clicks
-            console.log('Payment button clicked');
-            // You can add analytics tracking here
+        // ====================
+        // REDIRECT BASED ON SCALED SCORE
+        // ====================
+        function redirectBasedOnScore(rawScore) {
+            // Scale raw score (7-21) to 0-70
+            const maxRaw = 21;
+            const minRaw = 7;
+            const scaledScore = Math.round(((rawScore - minRaw) / (maxRaw - minRaw)) * 70);
+            // Ensure it's within 0-70
+            const finalScore = Math.min(Math.max(scaledScore, 0), 70);
+            
+            console.log(`Raw score: ${rawScore}, Scaled score: ${finalScore}`);
+            
+            let redirectUrl = '';
+            if (finalScore <= 30) {
+                redirectUrl = '/fragmentedbriefdrill.html';
+            } else if (finalScore <= 50) {
+                redirectUrl = '/transitionbriefdrill.html';
+            } else {
+                redirectUrl = '/integratedbriefdrill.html';  // ← changed from integratedbriefdrill2.html
+            }
+            
+            console.log(`Redirecting to: ${redirectUrl}`);
+            window.location.href = redirectUrl;
         }
         
         // ====================
@@ -1266,7 +1179,7 @@
                 }
             }
             
-            // CTA Button click handler - Generate PDF and send email
+            // CTA Button click handler - Generate PDF, send email, then redirect
             ctaButton.addEventListener('click', function() {
                 if (totalAnswered === 7) {
                     // Calculate final results
@@ -1296,7 +1209,7 @@
                     // Clear progress since we have final results
                     localStorage.removeItem('sovereignDiagnosticProgress');
                     
-                    // Generate PDF and send email
+                    // Generate PDF and send email, then redirect
                     generatePDFAndSendEmail(diagnosticResults);
                 }
             });
