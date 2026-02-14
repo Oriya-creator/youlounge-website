@@ -1,48 +1,45 @@
 // netlify/functions/paypal-webhook.js
-const fetch = require('node-fetch'); // if needed, but Netlify includes it
+const { google } = require('googleapis');
 
 exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}');
-    console.log('Event type:', body.event_type);
-
+    
     if (body.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
       const email = body.resource?.payer?.email_address;
-      const transactionId = body.resource?.id;
-
-      if (!email || !transactionId) {
-        console.error('Missing email or transaction ID');
-        return { statusCode: 200, body: 'Missing data, but still acknowledged' };
-      }
-
-      // Call your PHP endpoint
-      const phpEndpoint = 'https://yoursite.com/payment-webhook.php'; // change to your actual URL
-      const secret = 'your-secret-key-here'; // same as in PHP
-
-      const response = await fetch(phpEndpoint, {
+      
+      // FREE WAY 1: Store in Google Sheets (takes 5 mins to setup)
+      // Go to: sheet.best - free tier, connect Google Sheet
+      await fetch('https://sheet.best/api/sheets/YOUR_ID', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          secret,
-          email,
-          transaction_id: transactionId,
-          status: 'active'
+          email: email,
+          status: 'active',
+          date: new Date().toISOString()
         })
       });
-
-      if (!response.ok) {
-        console.error('PHP endpoint error:', await response.text());
-      } else {
-        console.log('Payment recorded for', email);
-      }
+      
+      // OR FREE WAY 2: Store in Airtable (even simpler)
+      // Sign up at airtable.com - free tier
+      await fetch('https://api.airtable.com/v0/YOUR_BASE_ID/Payments', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer YOUR_API_KEY',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          records: [{
+            fields: {
+              Email: email,
+              Status: 'active'
+            }
+          }]
+        })
+      });
     }
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true })
-    };
+    
+    return { statusCode: 200 };
   } catch (error) {
-    console.error('Webhook error:', error);
-    return { statusCode: 500, body: 'Error' };
+    return { statusCode: 500 };
   }
 };
