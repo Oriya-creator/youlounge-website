@@ -32,16 +32,7 @@ if (!hasPaidAccess()) {
     exit();
 }
 ?>
-<script>
-// Check if user has access
-const accessCode = localStorage.getItem('sovereign_access');
-const validCodes = ['SOVEREIGN2026-001', 'SOVEREIGN2026-002']; // Update manually
 
-if (!validCodes.includes(accessCode)) {
-    // Redirect to access gate
-    window.location.href = 'access-gate.html';
-}
-</script>
 <!DOCTYPE html>
 <html>
 <!-- Your existing course content here -->
