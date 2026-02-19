@@ -1,0 +1,217 @@
+<!-- Sovereign Protocol — Executive Seat Request (Gaborone)
+     Embed this on your custom landing page.
+     Submissions go to Formspree, but you should link people to YOUR page URL in emails.
+-->
+
+<form action="https://formspree.io/f/mdaldvwy" method="POST" id="executive-seat-request" novalidate>
+  <h3>Executive Seat Request</h3>
+
+  <p>
+    Invitation-only. Seat requests are confirmed within <strong>24–48 hours</strong>.
+    Seat holds are reserved for your organisation while invoicing is processed.
+    Invoice + logistics pack will be sent to your nominated invoice contact.
+  </p>
+
+  <!-- Identity -->
+  <label for="full_name">Full Name*</label>
+  <input id="full_name" type="text" name="full_name" required autocomplete="name" />
+
+  <label for="organisation">Organisation*</label>
+  <input id="organisation" type="text" name="organisation" required autocomplete="organization" />
+
+  <label for="role">Title/Role*</label>
+  <select id="role" name="role" required>
+    <option value="">Select…</option>
+    <option>Board Chair / Director</option>
+    <option>CEO / Managing Director</option>
+    <option>COO</option>
+    <option>CFO</option>
+    <option>Company Secretary / Head of Governance</option>
+    <option>Head of Risk / Compliance</option>
+    <option>Head of Internal Audit</option>
+    <option>Head of Strategy / Transformation</option>
+    <option>Senior Operations Leader</option>
+    <option>Other (specify)</option>
+  </select>
+
+  <label for="role_other">If Other, specify</label>
+  <input id="role_other" type="text" name="role_other" placeholder="Only required if you selected Other" />
+
+  <label for="email">Work Email*</label>
+  <input id="email" type="email" name="email" required autocomplete="email" />
+
+  <label for="mobile_whatsapp">Mobile / WhatsApp*</label>
+  <input
+    id="mobile_whatsapp"
+    type="tel"
+    name="mobile_whatsapp"
+    required
+    autocomplete="tel"
+    placeholder="+267…"
+  />
+
+  <!-- Location (optional but useful for segmentation) -->
+  <label for="city">City (optional)</label>
+  <select id="city" name="city">
+    <option value="">Select…</option>
+    <option>Gaborone</option>
+    <option>Francistown</option>
+    <option>Other</option>
+  </select>
+
+  <label for="city_other">If Other, specify</label>
+  <input id="city_other" type="text" name="city_other" placeholder="Only if City = Other" />
+
+  <!-- Segmentation -->
+  <label for="participant_type">Participant Type*</label>
+  <select id="participant_type" name="participant_type" required>
+    <option value="">Select…</option>
+    <option>Board / EXCO</option>
+    <option>Governance / Risk / Internal Audit</option>
+  </select>
+
+  <!-- Seat allocation -->
+  <label for="seats_requested">Seats Requested*</label>
+  <select id="seats_requested" name="seats_requested" required>
+    <option value="">Select…</option>
+    <option value="1">1 seat (USD $500)</option>
+    <option value="2">2 seats</option>
+    <option value="5">5 seats (Institutional Pack)</option>
+    <option value="10">10 seats (Institutional Pack + 1-hour clinic)</option>
+  </select>
+
+  <label for="attendee_names">Attendee Names (optional)</label>
+  <textarea
+    id="attendee_names"
+    name="attendee_names"
+    rows="3"
+    placeholder="If multiple seats, list names or write TBC"
+  ></textarea>
+
+  <!-- Invoicing (conditional required for multi-seat requests via JS below) -->
+  <label for="invoice_contact_name">Invoice Contact Name*</label>
+  <input
+    id="invoice_contact_name"
+    type="text"
+    name="invoice_contact_name"
+    required
+    placeholder="Required for 2/5/10 seats"
+  />
+
+  <label for="invoice_contact_email">Invoice Contact Email*</label>
+  <input
+    id="invoice_contact_email"
+    type="email"
+    name="invoice_contact_email"
+    required
+    placeholder="Required for 2/5/10 seats"
+  />
+
+  <label for="invoice_process">Invoice process*</label>
+  <select id="invoice_process" name="invoice_process" required>
+    <option value="">Select…</option>
+    <option>Invoice (EFT)</option>
+    <option>Invoice + PO required</option>
+  </select>
+
+  <label for="po_number">PO number (if available)</label>
+  <input id="po_number" type="text" name="po_number" placeholder="Optional" />
+
+  <!-- Notes -->
+  <label for="notes">Notes (optional)</label>
+  <textarea id="notes" name="notes" rows="3" placeholder="Any constraints, context, or questions"></textarea>
+
+  <!-- Redirect after submit (recommended)
+       Create this page on your website.
+  -->
+  <input type="hidden" name="_redirect" value="https://www.youlounge.org/seat-request-confirmed" />
+
+  <!-- Honeypot (spam trap) -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+  <button type="submit">Request Executive Seats</button>
+
+  <p style="margin-top:10px; font-size:0.95em; opacity:0.9;">
+    By submitting, you consent to being contacted about this cohort. We do not sell your data.
+  </p>
+</form>
+
+<script>
+  (function () {
+    const form = document.getElementById("executive-seat-request");
+
+    const role = document.getElementById("role");
+    const roleOther = document.getElementById("role_other");
+
+    const city = document.getElementById("city");
+    const cityOther = document.getElementById("city_other");
+
+    const seats = document.getElementById("seats_requested");
+
+    const invoiceName = document.getElementById("invoice_contact_name");
+    const invoiceEmail = document.getElementById("invoice_contact_email");
+    const invoiceProcess = document.getElementById("invoice_process");
+
+    function toggleRequired(field, isRequired) {
+      if (!field) return;
+      field.required = !!isRequired;
+      field.setAttribute("aria-required", isRequired ? "true" : "false");
+    }
+
+    function onRoleChange() {
+      const isOther = role.value === "Other (specify)";
+      toggleRequired(roleOther, isOther);
+      if (!isOther) roleOther.value = "";
+    }
+
+    function onCityChange() {
+      const isOther = city.value === "Other";
+      toggleRequired(cityOther, isOther);
+      if (!isOther) cityOther.value = "";
+    }
+
+    function onSeatsChange() {
+      // For 1 seat, allow the requester to submit without invoice contact details
+      // (you can follow up for invoicing if needed).
+      const seatVal = seats.value; // "1", "2", "5", "10"
+      const isMultiSeat = seatVal === "2" || seatVal === "5" || seatVal === "10";
+
+      toggleRequired(invoiceName, isMultiSeat);
+      toggleRequired(invoiceEmail, isMultiSeat);
+      toggleRequired(invoiceProcess, isMultiSeat);
+
+      if (!isMultiSeat) {
+        invoiceName.value = "";
+        invoiceEmail.value = "";
+        invoiceProcess.value = "";
+      }
+    }
+
+    // Initialize
+    onRoleChange();
+    onCityChange();
+    onSeatsChange();
+
+    // Listen
+    role.addEventListener("change", onRoleChange);
+    city.addEventListener("change", onCityChange);
+    seats.addEventListener("change", onSeatsChange);
+
+    // Lightweight client-side guardrails (optional)
+    form.addEventListener("submit", function (e) {
+      // If user picked Other role or city, ensure they specified
+      if (role.value === "Other (specify)" && !roleOther.value.trim()) {
+        e.preventDefault();
+        roleOther.focus();
+        alert("Please specify your role.");
+        return;
+      }
+      if (city.value === "Other" && !cityOther.value.trim()) {
+        e.preventDefault();
+        cityOther.focus();
+        alert("Please specify your city.");
+        return;
+      }
+    });
+  })();
+</script>
