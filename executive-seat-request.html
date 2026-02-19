@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Executive Seat Request — Sovereign Protocol (Gaborone)</title>
   <meta name="description" content="Invitation-only Executive Seat Request for Sovereign Protocol (Gaborone).">
+
   <style>
     :root{--bg:#0B0B0C;--panel:#111215;--border:#24262B;--gold:#C8A24A;--goldDeep:#A8862E;--teal:#0E7C7B;--text:#EDEDED;--muted:#B7B7B7;}
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
       background:radial-gradient(1200px 700px at 50% 10%, rgba(200,162,74,.12), transparent 60%),
-                 radial-gradient(900px 600px at 10% 30%, rgba(14,124,123,.08), transparent 55%), var(--bg);}
+               radial-gradient(900px 600px at 10% 30%, rgba(14,124,123,.08), transparent 55%), var(--bg);}
     .wrap{max-width:860px;padding:28px 16px 60px;margin:0 auto}
     .card{background:rgba(17,18,21,.92);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
     h1{margin:0 0 6px;font-size:28px;letter-spacing:-0.02em}
@@ -45,34 +46,32 @@
     <h1>Sovereign Protocol — Executive Cohort (Gaborone)</h1>
     <p class="sub">
       Seat requests are confirmed within <strong>24–48 hours</strong>. Seat holds are reserved while invoicing is processed.
-      Invoice + logistics pack will be sent to your nominated invoice contact.
+      The invoice will be issued to your nominated invoice contact.
     </p>
 
-    <!-- THANK YOU PANEL -->
     <div id="successPanel" class="success">
       <h2>Thank you — seat request received.</h2>
       <p>
-        We have received your request. If approved, we will confirm allocation within <strong>24–48 hours</strong>
-        and send the invoice + logistics pack to your nominated invoice contact.
+        We have received your Executive Seat Request. If approved, we will confirm seat allocation within <strong>24–48 hours</strong>
+        and issue the invoice to your nominated invoice contact.
       </p>
 
       <div class="hr"></div>
 
-      <p><strong>Optional: Pay now via PayPal</strong></p>
+      <p><strong>Optional: Pay by PayPal (if your organisation permits)</strong></p>
       <p class="small">
-        If your organisation prefers immediate payment, you may pay via PayPal using the link below.
-        After payment, please forward the PayPal receipt/transaction ID to your invoice contact (or reply to our confirmation email).
+        If your organisation prefers PayPal, you can use the payment link below after you receive allocation confirmation.
+        (Most corporates will proceed by invoice + EFT / PO process.)
       </p>
 
       <div class="btnRow">
-        <a class="linkBtn linkGold" href="PASTE_PAYPAL_LINK_HERE" target="_blank" rel="noopener">Pay with PayPal</a>
+        <a class="linkBtn linkGold" href="PASTE_PAYPAL_PAY_LINK_HERE" target="_blank" rel="noopener">Pay via PayPal</a>
         <a class="linkBtn linkGold" href="https://www.youlounge.org" target="_blank" rel="noopener">View You Lounge website</a>
       </div>
 
       <p class="small">For urgent matters: WhatsApp +267 7327 5526</p>
     </div>
 
-    <!-- FORM -->
     <form id="seatForm" action="https://formspree.io/f/mdaldvwy" method="POST" novalidate>
       <div class="grid">
         <div>
@@ -140,8 +139,16 @@
         </div>
       </div>
 
-      <label for="invoice_contact_email">Invoice Contact Email (where invoice should be sent)*</label>
-      <input id="invoice_contact_email" type="email" name="invoice_contact_email" required />
+      <div class="grid">
+        <div>
+          <label for="invoice_contact_name">Invoice Contact Name*</label>
+          <input id="invoice_contact_name" type="text" name="invoice_contact_name" required />
+        </div>
+        <div>
+          <label for="invoice_contact_email">Invoice Contact Email*</label>
+          <input id="invoice_contact_email" type="email" name="invoice_contact_email" required />
+        </div>
+      </div>
 
       <label for="invoice_process">Invoice process*</label>
       <select id="invoice_process" name="invoice_process" required>
@@ -150,13 +157,10 @@
         <option>Invoice + PO required</option>
       </select>
 
-      <label for="notes">Notes (optional)</label>
-      <textarea id="notes" name="notes" rows="3" placeholder="Any constraints, procurement requirements, or questions"></textarea>
-
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
       <div class="btnRow">
-        <button id="submitBtn" type="submit" class="btnPrimary">Request Executive Seats</button>
+        <button id="submitBtn" type="submit" class="btnPrimary">Submit Seat Request</button>
         <a class="linkBtn linkGold" href="https://www.youlounge.org" target="_blank" rel="noopener">View You Lounge website</a>
       </div>
 
@@ -172,7 +176,6 @@
   const submitBtn = document.getElementById("submitBtn");
   const errorMsg = document.getElementById("errorMsg");
   const successPanel = document.getElementById("successPanel");
-
   const role = document.getElementById("role");
   const roleOther = document.getElementById("role_other");
 
@@ -218,7 +221,7 @@
       errorMsg.style.display = "block";
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = "Request Executive Seats";
+      submitBtn.textContent = "Submit Seat Request";
     }
   });
 })();
