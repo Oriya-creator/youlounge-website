@@ -1,4 +1,4 @@
-// netlify/functions/paypal-webhook.js
+// netlify/functions_DISABLED/paypal-webhook.js
 const { google } = require('googleapis');
 
 exports.handler = async (event) => {
