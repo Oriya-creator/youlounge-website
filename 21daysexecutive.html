@@ -11,7 +11,13 @@
   // Initialize Supabase
   const SUPABASE_URL = 'YOUR_SUPABASE_URL';
   const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ========= PRICING (single source of truth) =========
+  // If you ever change price again, change ONLY these two values.
+  const PRICE_USD_NUMBER = 6500;                    // numeric (for display formatting)
+  const PRICE_USD_PAYPAL_VALUE = "6500.00";         // string (PayPal requires string)
+  const CURRENCY = "USD";
 </script>
 
 <style>
@@ -69,22 +75,26 @@ button:hover { background: #e0b85a; }
   <div style="margin: 25px 0;">
     <input type="email" id="login-email" placeholder="Email" style="padding: 10px; width: 220px; margin-right: 10px;">
     <input type="password" id="login-password" placeholder="Password" style="padding: 10px; width: 220px;">
-    <button onclick="signIn()">Sign In</button>
+    <button type="button" onclick="signIn()">Sign In</button>
   </div>
-  
+
   <div class="status-message" id="login-status"></div>
-  
+
   <hr>
 
   <div class="payment-tier">
     <h3>21-Day Executive Governance Installation</h3>
-    <div class="tier-price">$1</div>
+
+    <!-- Display price (fixed) -->
+    <div class="tier-price" id="tier-price">$6,500</div>
+
     <p class="tier-description">
       Complete access to the 21-Day Executive Governance Systems<br>
       One governance layer installed per day<br>
       Institutional decision architecture<br>
       Board-grade governance protocols
     </p>
+
     <div id="paypal-button-container"></div>
     <div class="status-message" id="payment-status"></div>
   </div>
@@ -105,16 +115,18 @@ button:hover { background: #e0b85a; }
     <h4>Day 1 — Final Decision Authority</h4>
     <p>Define which decisions require you — and which categorically do not.</p>
     <textarea placeholder="State the non-negotiable rule you will now enforce."></textarea>
-    <button onclick="completeDay(1)">Confirm & Install</button>
+    <button type="button" onclick="completeDay(1)">Confirm & Install</button>
     <div class="timer" id="timer-1"></div>
   </div>
+
   <div class="gov-day locked" data-day="2">
     <h4>Day 2 — Cognitive Load Governance</h4>
     <p>Codify which decisions are forbidden from entering your cognitive space.</p>
     <textarea placeholder="List decisions now barred from your attention."></textarea>
-    <button onclick="completeDay(2)">Confirm & Install</button>
+    <button type="button" onclick="completeDay(2)">Confirm & Install</button>
     <div class="timer" id="timer-2"></div>
   </div>
+
   <!-- Repeat all 21 days in the same pattern -->
 </div>
 
@@ -126,30 +138,51 @@ button:hover { background: #e0b85a; }
 </div> <!-- End program-content -->
 </div> <!-- End container -->
 
+<!-- PayPal SDK MUST load BEFORE we call paypal.Buttons() -->
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD&intent=capture"></script>
+
 <script>
-// ----------------- AUTH -----------------
-async function signIn() {
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value.trim();
-  const statusEl = document.getElementById('login-status');
+  // ----------------- PRICE DISPLAY INIT -----------------
+  (function initPrice(){
+    const el = document.getElementById("tier-price");
+    if (!el) return;
+    const formatted = new Intl.NumberFormat("en-US", { style: "currency", currency: CURRENCY, maximumFractionDigits: 0 })
+      .format(PRICE_USD_NUMBER);
+    el.textContent = formatted; // e.g., $6,500
+  })();
 
-  if (!email || !password) {
-    statusEl.className = 'status-message error';
-    statusEl.innerText = '❌ Enter both email and password.';
-    return;
-  }
+  // ----------------- AUTH -----------------
+  async function signIn() {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+    const statusEl = document.getElementById('login-status');
 
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    statusEl.className = 'status-message error';
-    statusEl.innerText = '❌ ' + error.message;
-  } else {
+    if (!email || !password) {
+      statusEl.className = 'status-message error';
+      statusEl.innerText = '❌ Enter both email and password.';
+      return;
+    }
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      statusEl.className = 'status-message error';
+      statusEl.innerText = '❌ ' + error.message;
+      return;
+    }
+
     // Check access in Supabase
-    const { data: accessData } = await supabase
+    const { data: accessData, error: accessError } = await supabaseClient
       .from('user_access')
       .select('has_access')
       .eq('user_id', data.user.id)
       .single();
+
+    if (accessError) {
+      statusEl.className = 'status-message error';
+      statusEl.innerText = '❌ Access check failed. Please contact support.';
+      return;
+    }
 
     if (accessData && accessData.has_access) {
       statusEl.className = 'status-message success';
@@ -161,52 +194,96 @@ async function signIn() {
       statusEl.innerText = '❌ Payment required to access the program.';
     }
   }
-}
 
-// ----------------- DAY UNLOCK -----------------
-const LOCK_HOURS = 24;
-function completeDay(day) {
-  const text = document.querySelector(`[data-day="${day}"] textarea`).value.trim();
-  if (!text) { alert("Please complete the prompt before proceeding."); return; }
-  localStorage.setItem("gov_day_" + day, Date.now());
-  updateAccess();
-  alert(`Day ${day} completed! Next day unlocks in 24 hours.`);
-}
+  // ----------------- DAY UNLOCK -----------------
+  const LOCK_HOURS = 24;
 
-function updateAccess() {
-  document.querySelectorAll(".gov-day").forEach(el => {
-    const day = parseInt(el.getAttribute("data-day"));
-    if (day === 1) return;
-    const prevCompleted = localStorage.getItem("gov_day_" + (day-1));
-    if (!prevCompleted) return;
-    const unlockTime = parseInt(prevCompleted) + LOCK_HOURS*60*60*1000;
-    const now = Date.now();
-    if (now >= unlockTime) { el.classList.remove('locked'); el.classList.add('active'); }
-    else {
-      const remaining = unlockTime - now;
-      const hrs = Math.floor(remaining / (1000*60*60));
-      const mins = Math.floor((remaining % (1000*60*60))/(1000*60));
-      const secs = Math.floor((remaining % (1000*60))/1000);
-      document.getElementById("timer-"+day).innerText = `Unlocks in ${hrs}h ${mins}m ${secs}s`;
-    }
+  function completeDay(day) {
+    const text = document.querySelector(`[data-day="${day}"] textarea`).value.trim();
+    if (!text) { alert("Please complete the prompt before proceeding."); return; }
+    localStorage.setItem("gov_day_" + day, Date.now());
+    updateAccess();
+    alert(`Day ${day} completed! Next day unlocks in 24 hours.`);
+  }
+
+  function updateAccess() {
+    document.querySelectorAll(".gov-day").forEach(el => {
+      const day = parseInt(el.getAttribute("data-day"), 10);
+      if (day === 1) return;
+
+      const prevCompleted = localStorage.getItem("gov_day_" + (day - 1));
+      if (!prevCompleted) return;
+
+      const unlockTime = parseInt(prevCompleted, 10) + LOCK_HOURS * 60 * 60 * 1000;
+      const now = Date.now();
+
+      if (now >= unlockTime) {
+        el.classList.remove('locked');
+        el.classList.add('active');
+        const t = document.getElementById("timer-" + day);
+        if (t) t.innerText = "";
+      } else {
+        const remaining = unlockTime - now;
+        const hrs = Math.floor(remaining / (1000 * 60 * 60));
+        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((remaining % (1000 * 60)) / 1000);
+        const t = document.getElementById("timer-" + day);
+        if (t) t.innerText = `Unlocks in ${hrs}h ${mins}m ${secs}s`;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateAccess();
+    setInterval(updateAccess, 1000);
   });
-}
 
-// Initialize day timers
-document.addEventListener('DOMContentLoaded', () => setInterval(updateAccess, 1000));
+  // ----------------- PAYPAL -----------------
+  (function initPayPal(){
+    const statusEl = document.getElementById("payment-status");
 
-// ----------------- PAYPAL -----------------
-paypal.Buttons({
-  style:{ color:'gold', shape:'rect', label:'pay', height:40 },
-  createOrder: (data, actions) => actions.order.create({ purchase_units:[{ amount:{ value:'1.00' } }] }),
-  onApprove: (data, actions) => actions.order.capture().then(details=>{
-    // Ideally call Netlify function to update Supabase table here
-    alert('✅ Payment successful! Refresh and sign in to access.');
-  }),
-  onError: err => alert('❌ Payment failed: '+err)
-}).render('#paypal-button-container');
+    if (!window.paypal || !paypal.Buttons) {
+      if (statusEl) {
+        statusEl.className = "status-message error";
+        statusEl.innerText = "❌ PayPal SDK failed to load. Check your client-id.";
+      }
+      return;
+    }
+
+    paypal.Buttons({
+      style: { color: 'gold', shape: 'rect', label: 'pay', height: 40 },
+
+      // FIXED: amount now matches $6,500
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{
+          amount: { value: PRICE_USD_PAYPAL_VALUE, currency_code: CURRENCY },
+          description: "Sovereign Protocol — 21-Day Executive Governance Installation"
+        }]
+      }),
+
+      onApprove: (data, actions) => actions.order.capture().then(details => {
+        // NOTE: This does NOT automatically grant access in Supabase yet.
+        // You still need a backend (Netlify Function / server) to mark has_access=true.
+        if (statusEl) {
+          statusEl.className = "status-message success";
+          statusEl.innerText = "✅ Payment successful. Please refresh and sign in to access.";
+        } else {
+          alert("✅ Payment successful! Refresh and sign in to access.");
+        }
+      }),
+
+      onError: err => {
+        if (statusEl) {
+          statusEl.className = "status-message error";
+          statusEl.innerText = "❌ Payment failed. Please try again.";
+        } else {
+          alert("❌ Payment failed: " + err);
+        }
+        console.error(err);
+      }
+    }).render('#paypal-button-container');
+  })();
 </script>
 
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
 </body>
 </html>
