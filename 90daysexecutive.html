@@ -6,19 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ================= SUPABASE JS (single, correct init) ================= -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL";
-  const SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_PUBLIC_KEY";
+  const SUPABASE_URL = "https://wcyojlrkoisnjltlmhgg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_PPd5S8xPtAbRU1c3w6Uclw_S9N9eljB";
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Course IDs (use THESE exact values in your Supabase purchases table)
-  const COURSE_ID_90_STANDARD = "90day_standard"; // $15,000
-  const COURSE_ID_90_PREMIUM  = "90day_premium";  // $30,000
+  const COURSE_ID_90_STANDARD = "90day_standard";
+  const COURSE_ID_90_PREMIUM  = "90day_premium";
 
-  // Where to send users if not logged in / not paid
   const LOGIN_URL = "/login.html";
-  const PAY_URL   = "/pay.html"; // we'll build this next
+  const PAY_URL   = "/pay.html";
+
+  // ✅ ADD THESE HERE (top script, not inside payment HTML block)
+  const PAYPAL_LINK_90_STANDARD = "https://www.paypal.com/ncp/payment/8MZHW4FL8SJFY";
+  const PAYPAL_LINK_90_PREMIUM  = "https://www.paypal.com/ncp/payment/977UKX7T6B6JG";
 </script>
 
 <style>
