@@ -5,6 +5,22 @@
 <title>Sovereign Protocol — 90-Day Executive Governance Systems</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ================= SUPABASE JS (single, correct init) ================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL";
+  const SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_PUBLIC_KEY";
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Course IDs (use THESE exact values in your Supabase purchases table)
+  const COURSE_ID_90_STANDARD = "90day_standard"; // $15,000
+  const COURSE_ID_90_PREMIUM  = "90day_premium";  // $30,000
+
+  // Where to send users if not logged in / not paid
+  const LOGIN_URL = "/login.html";
+  const PAY_URL   = "/pay.html"; // we'll build this next
+</script>
+
 <style>
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -13,21 +29,10 @@ body {
   margin:0;
   padding:40px;
 }
-.container {
-  max-width:980px;
-  margin:auto;
-}
-h1,h2,h3 {
-  letter-spacing:0.6px;
-}
-.confidential {
-  color:#c7a046;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-.section {
-  margin:60px 0;
-}
+.container { max-width:980px; margin:auto; }
+h1,h2,h3 { letter-spacing:0.6px; }
+.confidential { color:#c7a046; font-weight:bold; letter-spacing:1px; }
+.section { margin:60px 0; }
 
 /* ===== PAYMENT SECTION ===== */
 .payment-section {
@@ -38,62 +43,40 @@ h1,h2,h3 {
   margin: 60px 0;
   text-align: center;
 }
-.payment-tiers {
-  display: flex;
-  gap: 30px;
-  margin-top: 40px;
-}
+.payment-tiers { display:flex; gap:30px; margin-top:40px; }
 .payment-tier {
-  flex: 1;
-  min-width: 0;
-  background: #0e0e0e;
-  border-radius: 6px;
-  border: 1px solid #2a2a2a;
-  padding: 30px;
-  margin: 30px 0;
-  position: relative;
+  flex:1;
+  min-width:0;
+  background:#0e0e0e;
+  border-radius:6px;
+  border:1px solid #2a2a2a;
+  padding:30px;
+  margin:30px 0;
+  position:relative;
 }
-.payment-tier.featured {
-  border-color: #c7a046;
+.payment-tier.featured { border-color:#c7a046; }
+.payment-tier.featured:before{
+  content:"RECOMMENDED";
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#c7a046;
+  color:#000;
+  padding:4px 16px;
+  border-radius:4px;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1px;
 }
-.payment-tier.featured:before {
-  content: "RECOMMENDED";
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #c7a046;
-  color: #000;
-  padding: 4px 16px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-.tier-price {
-  font-size: 32px;
-  font-weight: bold;
-  color: #c7a046;
-  margin: 10px 0;
-}
-.tier-description {
-  color: #aaa;
-  font-size: 14px;
-  margin: 15px 0;
-}
-.paypal-container {
-  margin-top: 25px;
-  min-height: 50px;
-}
-.status-message {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 4px;
-  display: none;
-}
-.status-message.success { background: rgba(39, 174, 96, 0.1); border:1px solid #27ae60; color:#27ae60; display:block; }
-.status-message.error { background: rgba(235, 87, 87, 0.1); border:1px solid #eb5757; color:#eb5757; display:block; }
-.status-message.processing { background: rgba(241, 196, 15, 0.1); border:1px solid #f1c40f; color:#f1c40f; display:block; }
+.tier-price { font-size:32px; font-weight:bold; color:#c7a046; margin:10px 0; }
+.tier-description { color:#aaa; font-size:14px; margin:15px 0; }
+.paypal-container { margin-top:25px; min-height:50px; }
+
+.status-message { margin-top:20px; padding:15px; border-radius:4px; display:none; }
+.status-message.success{ background:rgba(39,174,96,.1); border:1px solid #27ae60; color:#27ae60; display:block; }
+.status-message.error{ background:rgba(235,87,87,.1); border:1px solid #eb5757; color:#eb5757; display:block; }
+.status-message.processing{ background:rgba(241,196,15,.1); border:1px solid #f1c40f; color:#f1c40f; display:block; }
 
 /* ===== PROGRAM CONTENT ===== */
 .protocol-day {
@@ -103,13 +86,8 @@ h1,h2,h3 {
   padding:26px;
   margin-bottom:26px;
 }
-.protocol-day.locked {
-  opacity:0.35;
-  pointer-events:none;
-}
-.protocol-day.active {
-  border-color:#c7a046;
-}
+.protocol-day.locked { opacity:0.35; pointer-events:none; }
+.protocol-day.active { border-color:#c7a046; }
 textarea {
   width:100%;
   min-height:90px;
@@ -148,13 +126,13 @@ button:hover { background:#e0b85a; }
 
 <h1>SOVEREIGN PROTOCOL</h1>
 <h2>90-Day Executive Governance Systems</h2>
-<p class="confidential">CONFIDENTIAL — C-SUITE & BOARD-GRADE ARCHITECTURE</p>
+<p class="confidential">CONFIDENTIAL — C-SUITE &amp; BOARD-GRADE ARCHITECTURE</p>
 <p>This is not development. This is <strong>operating altitude</strong>.</p>
 
 <!-- ================= PAYMENT SECTION ================= -->
 <div class="payment-section" id="payment-section">
   <h2>ACTIVATE 90-DAY SOVEREIGN PROTOCOL</h2>
-  <p class="confidential">CONFIDENTIAL — C-SUITE & BOARD-GRADE ARCHITECTURE</p>
+  <p class="confidential">CONFIDENTIAL — C-SUITE &amp; BOARD-GRADE ARCHITECTURE</p>
   <p>Select your access tier to begin the 90-Day Executive Governance Systems.</p>
 
   <div class="payment-tiers">
@@ -165,7 +143,13 @@ button:hover { background:#e0b85a; }
       <p class="tier-description">Full 90-day access to Executive Governance Systems</p>
       <div id="payment-status-90-standard" class="status-message"></div>
       <div class="paypal-container" id="paypal-container-8MZHW4FL8SJFY"></div>
-      <button onclick="verifyPaymentManually('90-day','standard')" style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:20px;">Verify Payment Manually</button>
+
+      <!-- Optional: send to pay.html for activation (we build next) -->
+      <button type="button"
+        onclick="window.location.href = `${PAY_URL}?course=${encodeURIComponent(COURSE_ID_90_STANDARD)}&return=${encodeURIComponent(window.location.pathname)}`"
+        style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:20px;">
+        Already paid? Activate access
+      </button>
     </div>
 
     <!-- Premium Tier -->
@@ -175,7 +159,12 @@ button:hover { background:#e0b85a; }
       <p class="tier-description">Includes personalized implementation guidance and priority support</p>
       <div id="payment-status-90-premium" class="status-message"></div>
       <div class="paypal-container" id="paypal-container-BTYGGLQLY5KVS"></div>
-      <button onclick="verifyPaymentManually('90-day','premium')" style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:20px;">Verify Payment Manually</button>
+
+      <button type="button"
+        onclick="window.location.href = `${PAY_URL}?course=${encodeURIComponent(COURSE_ID_90_PREMIUM)}&return=${encodeURIComponent(window.location.pathname)}`"
+        style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:20px;">
+        Already paid? Activate access
+      </button>
     </div>
   </div>
 </div>
@@ -188,21 +177,21 @@ button:hover { background:#e0b85a; }
     <h2>FOUNDATION — INTERNAL SOVEREIGNTY (Days 1–7)</h2>
     <p>These days stabilize identity, authority, emotional order, and decision coherence. Without this, governance collapses under pressure.</p>
   </div>
+
   <div id="days-1-7">
     <div class="protocol-day active" data-day="1">
       <h3>Day 1 — Identity Lock</h3>
       <p>Who you are must precede what you govern.</p>
       <textarea placeholder="State the identity you are now locking as default."></textarea>
-      <button onclick="completeDay(1)">Confirm Installation</button>
+      <button type="button" onclick="completeDay(1)">Confirm Installation</button>
       <div class="timer" id="timer-1"></div>
     </div>
 
-    <!-- Days 2-7 -->
     <div class="protocol-day locked" data-day="2">
       <h3>Day 2 — Authority Alignment</h3>
       <p>Align internal authority with external mandate.</p>
       <textarea placeholder="Define your authority boundaries."></textarea>
-      <button onclick="completeDay(2)">Confirm Installation</button>
+      <button type="button" onclick="completeDay(2)">Confirm Installation</button>
       <div class="timer" id="timer-2"></div>
     </div>
 
@@ -210,7 +199,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 3 — Emotional Order Protocol</h3>
       <p>Govern emotional responses before they govern you.</p>
       <textarea placeholder="Establish your emotional governance framework."></textarea>
-      <button onclick="completeDay(3)">Confirm Installation</button>
+      <button type="button" onclick="completeDay(3)">Confirm Installation</button>
       <div class="timer" id="timer-3"></div>
     </div>
 
@@ -218,7 +207,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 4 — Decision Coherence Framework</h3>
       <p>Ensure decisions align across all domains.</p>
       <textarea placeholder="Define your decision coherence rules."></textarea>
-      <button onclick="completeDay(4)">Confirm Installation</button>
+      <button type="button" onclick="completeDay(4)">Confirm Installation</button>
       <div class="timer" id="timer-4"></div>
     </div>
 
@@ -226,7 +215,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 5 — Value Architecture</h3>
       <p>Lock core values as decision filters.</p>
       <textarea placeholder="State your non-negotiable values."></textarea>
-      <button onclick="completeDay(5)">Confirm Installation</button>
+      <button type="button" onclick="completeDay(5)">Confirm Installation</button>
       <div class="timer" id="timer-5"></div>
     </div>
 
@@ -234,7 +223,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 6 — Time Sovereignty</h3>
       <p>Govern time as your primary asset.</p>
       <textarea placeholder="Define your time governance rules."></textarea>
-      <button onclick="completeDay(6)">Confirm Installation</button>
+      <button type="button" onclick="completeDay(6)">Confirm Installation</button>
       <div class="timer" id="timer-6"></div>
     </div>
 
@@ -242,7 +231,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 7 — Internal Sovereignty Lock</h3>
       <p>Seal internal governance as permanent operating state.</p>
       <textarea placeholder="Declare your sovereignty statement."></textarea>
-      <button onclick="completeDay(7)">Complete Foundation</button>
+      <button type="button" onclick="completeDay(7)">Complete Foundation</button>
       <div class="timer" id="timer-7"></div>
     </div>
   </div>
@@ -261,7 +250,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 8 — Decision Rights Architecture</h3>
       <p>Clarify who decides, who influences, and who executes — permanently.</p>
       <textarea placeholder="Document your decision-rights doctrine."></textarea>
-      <button onclick="completeDay(8)">Install Governance Layer</button>
+      <button type="button" onclick="completeDay(8)">Install Governance Layer</button>
       <div class="timer" id="timer-8"></div>
     </div>
 
@@ -269,7 +258,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 12 — Board Signal Integrity</h3>
       <p>What information reaches you — and what never should.</p>
       <textarea placeholder="Define the signal standard for board-level information."></textarea>
-      <button onclick="completeDay(12)">Confirm Standard</button>
+      <button type="button" onclick="completeDay(12)">Confirm Standard</button>
       <div class="timer" id="timer-12"></div>
     </div>
 
@@ -277,7 +266,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 18 — Crisis Immunity Design</h3>
       <p>Your system must remain sovereign under shock.</p>
       <textarea placeholder="Describe how crisis decisions will be governed."></textarea>
-      <button onclick="completeDay(18)">Install Safeguard</button>
+      <button type="button" onclick="completeDay(18)">Install Safeguard</button>
       <div class="timer" id="timer-18"></div>
     </div>
 
@@ -285,7 +274,7 @@ button:hover { background:#e0b85a; }
       <h3>Day 21 — Governance Lock</h3>
       <p>You now operate as a governance system — not a personality.</p>
       <textarea placeholder="Declare the governance principles you will not violate."></textarea>
-      <button onclick="completeDay(21)">Seal Governance</button>
+      <button type="button" onclick="completeDay(21)">Seal Governance</button>
       <div class="timer" id="timer-21"></div>
     </div>
   </div>
@@ -306,16 +295,59 @@ button:hover { background:#e0b85a; }
     <p class="confidential">This phase is not unlocked by payment. It is unlocked by <strong>order</strong>.</p>
   </div>
 
-  <div class="footer">
-    © Sovereign Protocol — Executive Governance Architecture
-  </div>
+  <div class="footer">© Sovereign Protocol — Executive Governance Architecture</div>
 </div>
 
 </div> <!-- End of container -->
 
-<!-- ================= SCRIPTS ================= -->
+<!-- ================= ACCESS GATE (hide content unless paid) ================= -->
+<script>
+  async function hasPaidForAny90Day(userId) {
+    const { data, error } = await supabaseClient
+      .from("purchases")
+      .select("course_id, paid")
+      .eq("user_id", userId)
+      .in("course_id", [COURSE_ID_90_STANDARD, COURSE_ID_90_PREMIUM])
+      .eq("paid", true)
+      .limit(1);
+
+    if (error) {
+      console.error("Purchase check failed:", error);
+      return false;
+    }
+    return !!(data && data.length > 0);
+  }
+
+  async function gate90Day() {
+    const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+    if (error) console.error("Session error:", error);
+
+    // Not logged in -> send to login
+    if (!session || !session.user) {
+      // Keep user on page (payment section visible), but you can force login if you want:
+      // window.location.href = LOGIN_URL;
+      return;
+    }
+
+    const ok = await hasPaidForAny90Day(session.user.id);
+
+    if (ok) {
+      document.getElementById("payment-section").style.display = "none";
+      document.getElementById("program-content").style.display = "block";
+    } else {
+      // Not paid: keep payment visible
+      document.getElementById("payment-section").style.display = "block";
+      document.getElementById("program-content").style.display = "none";
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", gate90Day);
+</script>
+
+<!-- ================= PAYPAL + YOUR EXISTING LOGIC ================= -->
 <script src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
-<script src="sovereign-90day.js"></script> <!-- All JS logic separated -->
+<script src="sovereign-90day.js"></script>
 
 </body>
 </html>
