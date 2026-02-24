@@ -1,3 +1,7 @@
+<!-- =========================
+FILE 1: fragmented-result.html
+(Fragmented Executive Profile)
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,22 +245,13 @@ strong {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .top-banner {
-        height: 200px;
-    }
-    
+    .top-banner { height: 200px; }
     .container {
         padding: 25px;
         margin: -20px 15px 20px 15px;
     }
-    
-    h1 {
-        font-size: 2em;
-    }
-    
-    h2 {
-        font-size: 1.6em;
-    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
 }
 
 /* Button styling to match teal theme */
@@ -293,22 +288,15 @@ strong {
 </head>
 
 <body>
-<!-- Simple status indicator -->
 <div class="status" id="status">🔄 Loading fragmented.jpg...</div>
 
-<!-- TOP BANNER - IMAGE AT THE TOP (FULL WIDTH) -->
 <div class="top-banner">
     <img src="fragmented.jpg" alt="Fragmented Executive Profile" id="bannerImage"
          onload="document.getElementById('status').innerHTML='✅ Image loaded'; setTimeout(()=>{const s=document.getElementById('status');s.style.opacity='0';setTimeout(()=>s.style.display='none',300)},2000)"
          onerror="handleImageError(this)">
 </div>
 
-<!-- Main content -->
 <div class="container">
-
-<!-- ===================== -->
-<!-- FRAGMENTED PROFILE -->
-<!-- ===================== -->
 
 <div class="title-section">
     <p class="classified">CONFIDENTIAL — C-SUITE EYES ONLY</p>
@@ -354,10 +342,6 @@ Remaining trapped in execution mode while market-defining opportunities pass unn
 Review the Executive Brief below. Begin installation.</p>
 
 <hr>
-
-<!-- ===================== -->
-<!-- EXECUTIVE BRIEF -->
-<!-- ===================== -->
 
 <h1>The Executive Brief</h1>
 
@@ -423,10 +407,6 @@ delegate, and command under pressure.
 
 <hr>
 
-<!-- ===================== -->
-<!-- DAY 1 DRILL -->
-<!-- ===================== -->
-
 <h1>Day 1 Installation Preview — The Decision Filter Drill</h1>
 <p class="classified">PRE-INSTALL EXERCISE | TIME: 10 MINUTES</p>
 
@@ -476,56 +456,51 @@ Hiring · Budget approvals · Board responses · Team conflicts · Capital alloc
 <li>Experience the core mechanism of the Protocol</li>
 </ul>
 
-<!-- ===================== -->
-<!-- PAYMENT SECTION -->
-<!-- ===================== -->
-
 <div class="cta">
     <h2>Begin Installation</h2>
     <p class="price">$1,700 · One-time investment</p>
     
     <div class="pp-button-container">
-        <div>
+        <div style="display:grid; gap:12px; justify-items:center;">
             <form action="https://www.paypal.com/ncp/payment/Y6B89NSN9RDS8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
                 <input class="pp-Y6B89NSN9RDS8" type="submit" value="Begin Installation" />
                 <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" />
-                <section style="font-size: 0.75rem; color: var(--dark-teal);"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                <section style="font-size: 0.75rem; color: var(--dark-teal);">
+                    Powered by
+                    <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/>
+                </section>
             </form>
+
+            <button
+              type="button"
+              onclick="window.location.href='/pay.html?course=' + encodeURIComponent('7day_executive') + '&return=' + encodeURIComponent('/7daysexecutive.html')"
+              style="background: var(--teal); color: #fff; border:none; border-radius:6px; padding:12px 18px; font-weight:700; cursor:pointer;">
+              I’ve Paid — Open 7-Day Executive Alignment
+            </button>
         </div>
     </div>
     
     <p class="security-note">
-        Secure payment via PayPal • Instant access upon completion • Confidential transaction
+        Secure payment via PayPal • After payment, click “I’ve Paid — Open 7-Day Executive Alignment” • Confidential transaction
     </p>
 </div>
 </div>
 
 <script>
-// Image error handler function
 function handleImageError(imgElement) {
-    // Hide the broken image
     imgElement.style.display = 'none';
-    
-    // Update status
     const status = document.getElementById('status');
     status.innerHTML = '⚠️ Using fallback banner';
     status.style.background = 'var(--terracotta)';
-    
-    // Create fallback banner
     const banner = document.createElement('div');
     banner.className = 'fallback-banner';
     banner.innerHTML = 'FRAGMENTED EXECUTIVE PROFILE<br><small>Score: 0–30</small><br><small style="opacity:0.8;margin-top:20px;">Leadership Architecture Analysis</small>';
-    
-    // Add banner to the top-banner div
     imgElement.parentNode.appendChild(banner);
 }
 
-// Simple check
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Fragmented Executive page loaded');
     console.log('Looking for fragmented.jpg in same folder...');
-    
-    // Check if image loaded after 2 seconds
     setTimeout(function() {
         const img = document.getElementById('bannerImage');
         if (img && img.complete && img.naturalHeight !== 0) {
