@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ================= SUPABASE JS (single, correct init) ================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const SUPABASE_URL = "https://wcyojlrkoisnjltlmhgg.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_PPd5S8xPtAbRU1c3w6Uclw_S9N9eljB";
@@ -17,7 +18,7 @@
   const LOGIN_URL = "/login.html";
   const PAY_URL   = "/pay.html";
 
-  // ✅ ADD THESE HERE (top script, not inside payment HTML block)
+  // PayPal NCP payment links
   const PAYPAL_LINK_90_STANDARD = "https://www.paypal.com/ncp/payment/8MZHW4FL8SJFY";
   const PAYPAL_LINK_90_PREMIUM  = "https://www.paypal.com/ncp/payment/977UKX7T6B6JG";
 </script>
@@ -72,12 +73,6 @@ h1,h2,h3 { letter-spacing:0.6px; }
 }
 .tier-price { font-size:32px; font-weight:bold; color:#c7a046; margin:10px 0; }
 .tier-description { color:#aaa; font-size:14px; margin:15px 0; }
-.paypal-container { margin-top:25px; min-height:50px; }
-
-.status-message { margin-top:20px; padding:15px; border-radius:4px; display:none; }
-.status-message.success{ background:rgba(39,174,96,.1); border:1px solid #27ae60; color:#27ae60; display:block; }
-.status-message.error{ background:rgba(235,87,87,.1); border:1px solid #eb5757; color:#eb5757; display:block; }
-.status-message.processing{ background:rgba(241,196,15,.1); border:1px solid #f1c40f; color:#f1c40f; display:block; }
 
 /* ===== PROGRAM CONTENT ===== */
 .protocol-day {
@@ -97,6 +92,7 @@ textarea {
   border:1px solid #333;
   padding:12px;
   margin-top:12px;
+  box-sizing: border-box;
 }
 button {
   background:#c7a046;
@@ -142,35 +138,48 @@ button:hover { background:#e0b85a; }
       <h3>90-Day Protocol Access</h3>
       <div class="tier-price">$15,000</div>
       <p class="tier-description">Full 90-day access to Executive Governance Systems</p>
-      <div id="payment-status-90-standard" class="status-message"></div>
-      <div class="paypal-container" id="paypal-container-8MZHW4FL8SJFY"></div>
 
-      <!-- Optional: send to pay.html for activation (we build next) -->
       <button type="button"
-        onclick="window.location.href = `${PAY_URL}?course=${encodeURIComponent(COURSE_ID_90_STANDARD)}&return=${encodeURIComponent(window.location.pathname)}`"
-        style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:20px;">
+        onclick="window.location.href = PAYPAL_LINK_90_STANDARD;"
+        style="width:100%;font-size:14px;">
+        Pay $15,000 Securely via PayPal
+      </button>
+
+      <button type="button"
+        onclick="window.location.href = PAY_URL + '?course=' + encodeURIComponent(COURSE_ID_90_STANDARD) + '&return=' + encodeURIComponent(window.location.pathname)"
+        style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:14px;">
         Already paid? Activate access
       </button>
+
+      <p style="margin-top:12px;font-size:12px;color:#aaa;">
+        After payment, return here and click “Activate access”.
+      </p>
     </div>
 
-  <!-- Premium Tier -->
-<div class="payment-tier featured">
-  <h3>90-Day Protocol + Implementation</h3>
-  <div class="tier-price">$30,000</div>
-  <p class="tier-description">
-    Includes personalized implementation guidance and priority support
-  </p>
+    <!-- Premium Tier -->
+    <div class="payment-tier featured">
+      <h3>90-Day Protocol + Implementation</h3>
+      <div class="tier-price">$30,000</div>
+      <p class="tier-description">
+        Includes personalized implementation guidance and priority support
+      </p>
 
-  <button type="button"
-    onclick="window.location.href='https://www.paypal.com/ncp/payment/977UKX7T6B6JG';"
-    style="width:100%;font-size:14px;">
-    Pay $30,000 Securely via PayPal
-  </button>
+      <button type="button"
+        onclick="window.location.href = PAYPAL_LINK_90_PREMIUM;"
+        style="width:100%;font-size:14px;">
+        Pay $30,000 Securely via PayPal
+      </button>
 
-  <p style="margin-top:15px;font-size:12px;color:#aaa;">
-    After payment you will be automatically redirected to activate access.
-  </p>
-</div>
+      <button type="button"
+        onclick="window.location.href = PAY_URL + '?course=' + encodeURIComponent(COURSE_ID_90_PREMIUM) + '&return=' + encodeURIComponent(window.location.pathname)"
+        style="background:#333;color:#fff;width:100%;font-size:12px;padding:8px 16px;margin-top:14px;">
+        Already paid? Activate access
+      </button>
+
+      <p style="margin-top:12px;font-size:12px;color:#aaa;">
+        After payment, return here and click “Activate access”.
+      </p>
+    </div>
   </div>
 </div>
 
@@ -328,10 +337,10 @@ button:hover { background:#e0b85a; }
 
     if (error) console.error("Session error:", error);
 
-    // Not logged in -> send to login
+    // Not logged in: keep payment visible
     if (!session || !session.user) {
-      // Keep user on page (payment section visible), but you can force login if you want:
-      // window.location.href = LOGIN_URL;
+      document.getElementById("payment-section").style.display = "block";
+      document.getElementById("program-content").style.display = "none";
       return;
     }
 
@@ -341,7 +350,6 @@ button:hover { background:#e0b85a; }
       document.getElementById("payment-section").style.display = "none";
       document.getElementById("program-content").style.display = "block";
     } else {
-      // Not paid: keep payment visible
       document.getElementById("payment-section").style.display = "block";
       document.getElementById("program-content").style.display = "none";
     }
@@ -350,9 +358,29 @@ button:hover { background:#e0b85a; }
   document.addEventListener("DOMContentLoaded", gate90Day);
 </script>
 
-<!-- ================= PAYPAL + YOUR EXISTING LOGIC ================= -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAsUKas1bRwD8Xcutb32q6ayB6kyjk5k80pwwrwsruH41PXW6h7_GgsW67P9CPOE5LkJ1i24SHPU5iMKE&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
-<script src="sovereign-90day.js"></script>
+<!-- ================= SIMPLE DAY SAVE LOGIC (optional local progress) ================= -->
+<script>
+  function completeDay(day) {
+    const box = document.querySelector(`[data-day="${day}"] textarea`);
+    const text = box ? box.value.trim() : "";
+
+    if (!text) {
+      alert("Please complete the prompt before proceeding.");
+      return;
+    }
+
+    try {
+      localStorage.setItem("sp90_day_" + day, JSON.stringify({
+        completedAt: new Date().toISOString(),
+        response: text
+      }));
+    } catch (e) {
+      console.warn("Local save failed:", e);
+    }
+
+    alert(`Day ${day} saved.`);
+  }
+</script>
 
 </body>
 </html>
