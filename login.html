@@ -7,9 +7,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // ✅ Frontend-safe keys only (publishable key)
-    const SUPABASE_URL = "https://wcyojlrkoisnjltlmhgg.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_PPd5S8xPtAbRU1c3w6Uclw_S9N9eljB";
+    // ✅ Frontend-safe keys only (publishable key) — USE THE CORRECT PROJECT
+    const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_V3grWnNdIA1Y7f9JeRRgbA_SfkJ6wJW";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     function qp(name){
@@ -121,15 +121,25 @@
   }
 
   function getReturnUrl(){
-    // Example: /login.html?return=/pay.html%3Fcourse%3D7day_executive%26return%3D%252F7daysexecutive.html
+    // Example:
+    // /login.html?return=/pay.html%3Fcourse%3D7day_executive%26return%3D%252F7daysexecutive.html
     const r = qp("return");
     return (r && r.startsWith("/")) ? r : "/hubs.html";
+  }
+
+  function buildPostConfirmRedirect(){
+    // Where user lands after clicking email confirmation link
+    // We send them back to login with the same intended return destination preserved.
+    return window.location.origin + "/login.html?return=" + encodeURIComponent(getReturnUrl());
   }
 
   async function signIn(){
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    if(!email || !password) return setStatus("err","Enter email + password.");
+
+    if(!email || !password){
+      return setStatus("err","Enter email + password.");
+    }
 
     const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if(error) return setStatus("err", error.message);
@@ -141,20 +151,36 @@
   async function signUp(){
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    if(!email || !password) return setStatus("err","Enter email + password.");
-    if(password.length < 6) return setStatus("err","Password should be at least 6 characters.");
 
-    const { error } = await supabaseClient.auth.signUp({ email, password });
+    if(!email || !password){
+      return setStatus("err","Enter email + password.");
+    }
+    if(password.length < 6){
+      return setStatus("err","Password should be at least 6 characters.");
+    }
+
+    const { error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        // ✅ Prevent localhost redirect issue after email confirmation
+        emailRedirectTo: buildPostConfirmRedirect()
+      }
+    });
+
     if(error) return setStatus("err", error.message);
 
-    setStatus("ok","Account created. If email confirmation is enabled, check your inbox, then sign in.");
+    setStatus(
+      "ok",
+      "Account created.\nCheck your email and confirm your account.\nAfter confirmation, return here and sign in if not redirected automatically."
+    );
   }
 
   async function resetPassword(){
     const email = document.getElementById("email").value.trim();
     if(!email) return setStatus("err","Enter your email first.");
 
-    // If you later build reset-password.html, use that instead.
+    // If you later build reset-password.html, point this there instead.
     const redirectTo = window.location.origin + "/login.html";
     const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
     if(error) return setStatus("err", error.message);
@@ -162,10 +188,16 @@
     setStatus("ok","Password reset email sent (if the address exists).");
   }
 
-  // Optional: auto-forward if already signed in and return provided
+  // If user is already signed in, forward them immediately when a valid return URL exists
   document.addEventListener("DOMContentLoaded", async () => {
     try {
-      const { data: { session } } = await supabaseClient.auth.getSession();
+      const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+      if (error) {
+        console.warn("Session check failed:", error);
+        return;
+      }
+
       const r = qp("return");
       if (session && session.user && r && r.startsWith("/")) {
         window.location.href = r;
