@@ -7,8 +7,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL";
-    const SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_PUBLIC_KEY";
+    // ✅ Frontend-safe keys only (publishable key)
+    const SUPABASE_URL = "https://wcyojlrkoisnjltlmhgg.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_PPd5S8xPtAbRU1c3w6Uclw_S9N9eljB";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     function qp(name){
@@ -18,29 +19,75 @@
   </script>
 
   <style>
-    :root{--bg:#0b0b0b;--panel:#141414;--gold:#c7a046;--text:#f2f2f2;--muted:#bdbdbd;--border:#2a2a2a;}
-    body{margin:0;padding:40px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    :root{
+      --bg:#0b0b0b;
+      --panel:#141414;
+      --gold:#c7a046;
+      --text:#f2f2f2;
+      --muted:#bdbdbd;
+      --border:#2a2a2a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;padding:40px;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);color:var(--text);
+    }
     .wrap{max-width:720px;margin:0 auto;}
-    .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:28px;}
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:28px;
+    }
     h1{margin:0 0 8px;letter-spacing:.4px;}
     p{margin:0 0 18px;color:var(--muted);line-height:1.5;}
     label{display:block;margin:12px 0 6px;color:var(--muted);font-size:14px;}
-    input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#0e0e0e;color:var(--text);outline:none;}
-    input:focus{border-color:rgba(199,160,70,.7);box-shadow:0 0 0 4px rgba(199,160,70,.12);}
+    input{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#0e0e0e;color:var(--text);
+      outline:none;
+    }
+    input:focus{
+      border-color:rgba(199,160,70,.7);
+      box-shadow:0 0 0 4px rgba(199,160,70,.12);
+    }
     .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
-    button{border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;background:var(--gold);color:#000;}
-    button.secondary{background:#222;color:#fff;border:1px solid #333;}
-    .status{margin-top:14px;padding:12px;border-radius:10px;display:none;}
-    .ok{display:block;border:1px solid rgba(39,174,96,.6);color:#27ae60;background:rgba(39,174,96,.08);}
-    .err{display:block;border:1px solid rgba(235,87,87,.6);color:#eb5757;background:rgba(235,87,87,.08);}
+    button{
+      border:0;border-radius:10px;padding:12px 16px;
+      font-weight:800;cursor:pointer;background:var(--gold);color:#000;
+    }
+    button.secondary{
+      background:#222;color:#fff;border:1px solid #333;
+    }
+    .status{
+      margin-top:14px;padding:12px;border-radius:10px;display:none;
+      white-space:pre-line;
+    }
+    .ok{
+      display:block;border:1px solid rgba(39,174,96,.6);
+      color:#27ae60;background:rgba(39,174,96,.08);
+    }
+    .err{
+      display:block;border:1px solid rgba(235,87,87,.6);
+      color:#eb5757;background:rgba(235,87,87,.08);
+    }
     .small{font-size:12px;color:var(--muted);margin-top:16px;}
     a{color:var(--gold);text-decoration:none;}
     a:hover{text-decoration:underline;}
+    .top-link{margin-bottom:12px;font-size:13px}
   </style>
 </head>
 
 <body>
 <div class="wrap">
+  <div class="top-link">
+    <a href="/hubs.html">← Back to hub</a>
+  </div>
+
   <div class="card">
     <h1>Secure Login</h1>
     <p>Sign in to access your Sovereign Protocol programs. If you don’t have an account yet, create one.</p>
@@ -60,7 +107,7 @@
     <div id="status" class="status"></div>
 
     <p class="small">
-      After login, you’ll be returned to your course or the payment page automatically.
+      After login, you’ll be returned to your course or payment page automatically.
     </p>
   </div>
 </div>
@@ -74,9 +121,9 @@
   }
 
   function getReturnUrl(){
-    // optional: ?return=/90daysexecutive.html
+    // Example: /login.html?return=/pay.html%3Fcourse%3D7day_executive%26return%3D%252F7daysexecutive.html
     const r = qp("return");
-    return r && r.startsWith("/") ? r : "/hubs.html";
+    return (r && r.startsWith("/")) ? r : "/hubs.html";
   }
 
   async function signIn(){
@@ -84,7 +131,7 @@
     const password = document.getElementById("password").value.trim();
     if(!email || !password) return setStatus("err","Enter email + password.");
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if(error) return setStatus("err", error.message);
 
     setStatus("ok","Signed in. Redirecting…");
@@ -95,25 +142,38 @@
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
     if(!email || !password) return setStatus("err","Enter email + password.");
+    if(password.length < 6) return setStatus("err","Password should be at least 6 characters.");
 
-    const { data, error } = await supabaseClient.auth.signUp({ email, password });
+    const { error } = await supabaseClient.auth.signUp({ email, password });
     if(error) return setStatus("err", error.message);
 
-    // If email confirmation is ON, user must confirm first.
-    setStatus("ok","Account created. If email confirmation is enabled, check your inbox. Then sign in.");
+    setStatus("ok","Account created. If email confirmation is enabled, check your inbox, then sign in.");
   }
 
   async function resetPassword(){
     const email = document.getElementById("email").value.trim();
     if(!email) return setStatus("err","Enter your email first.");
 
-    // IMPORTANT: set this to your real reset page later if you build one
+    // If you later build reset-password.html, use that instead.
     const redirectTo = window.location.origin + "/login.html";
-    const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
     if(error) return setStatus("err", error.message);
 
     setStatus("ok","Password reset email sent (if the address exists).");
   }
+
+  // Optional: auto-forward if already signed in and return provided
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const r = qp("return");
+      if (session && session.user && r && r.startsWith("/")) {
+        window.location.href = r;
+      }
+    } catch (e) {
+      console.warn("Session check failed:", e);
+    }
+  });
 </script>
 </body>
 </html>
