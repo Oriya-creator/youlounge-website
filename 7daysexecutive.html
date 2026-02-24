@@ -8,12 +8,35 @@
   <!-- ================= SUPABASE JS (single, correct init) ================= -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // --- REPLACE THESE WITH YOUR SUPABASE KEYS ---
-    const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL";
-    const SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_PUBLIC_KEY";
-
-    // IMPORTANT: use a different variable name so we don't overwrite the global "supabase"
+    // ================= SUPABASE CONFIG =================
+    // Your live project values inserted
+    const SUPABASE_URL = "https://wcyojlrkoisnjltlmhgg.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_PPd5S8xPtAbRU1c3w6Uclw_S9N9eljB";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ================= COURSE CONFIG =================
+    // Make sure this EXACTLY matches purchases.course_id in Supabase for the 7-day product
+    const COURSE_ID = "7day_executive";
+
+    const LOGIN_URL = "/login.html";
+    const PAY_URL = "/pay.html";
+    const DASHBOARD_URL = "/hubs.html";
+
+    function buildLoginUrl() {
+      return (
+        LOGIN_URL +
+        "?return=" +
+        encodeURIComponent(window.location.pathname)
+      );
+    }
+
+    function buildPayUrl(courseId, returnPath) {
+      return (
+        PAY_URL +
+        "?course=" + encodeURIComponent(courseId) +
+        "&return=" + encodeURIComponent(returnPath || window.location.pathname)
+      );
+    }
   </script>
 
   <style>
@@ -28,68 +51,91 @@
     h1, h2, h3 { letter-spacing: 0.6px; }
     .confidential { color: #c7a046; font-weight: bold; letter-spacing: 1px; }
     .section { margin-bottom: 60px; }
-    .protocol-day { border: 1px solid #2a2a2a; padding: 26px; margin-bottom: 26px; border-radius: 8px; background: #141414; }
+    .protocol-day {
+      border: 1px solid #2a2a2a;
+      padding: 26px;
+      margin-bottom: 26px;
+      border-radius: 8px;
+      background: #141414;
+      transition: border-color .2s ease, opacity .2s ease;
+    }
     .protocol-day.locked { opacity: 0.35; pointer-events: none; }
     .protocol-day.active { border-color: #c7a046; }
-    textarea { width: 100%; min-height: 85px; margin-top: 14px; background: #0e0e0e; color: #f2f2f2; border: 1px solid #333; padding: 10px; }
-    button { background: #c7a046; color: #000; padding: 12px 22px; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 18px; }
+    .protocol-day.done { border-color: #27ae60; }
+    textarea {
+      width: 100%;
+      min-height: 85px;
+      margin-top: 14px;
+      background: #0e0e0e;
+      color: #f2f2f2;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background: #c7a046;
+      color: #000;
+      padding: 12px 22px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 18px;
+    }
     button:hover { background: #e0b85a; }
     .timer { font-size: 12px; color: #aaa; margin-top: 8px; }
     .footer { text-align: center; font-size: 12px; color: #777; margin-top: 80px; }
     hr { border: none; border-top: 1px solid #2a2a2a; margin: 28px 0; }
+    ul { margin: 10px 0 0 18px; line-height: 1.6; color: #d6d6d6; }
+    li { margin-bottom: 8px; }
+
+    /* Next-step panel */
+    .next-step-panel-wrap {
+      display: none;
+      margin-top: 36px;
+      margin-bottom: 36px;
+    }
+    .next-step-panel {
+      background: #141414;
+      border: 1px solid #c7a046;
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .next-step-panel h3 {
+      margin: 0 0 10px 0;
+      color: #c7a046;
+      letter-spacing: .4px;
+    }
+    .next-step-panel p {
+      margin: 0 0 16px 0;
+      color: #d0d0d0;
+      line-height: 1.55;
+    }
+    .next-step-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-secondary {
+      background: #222 !important;
+      color: #fff !important;
+      border: 1px solid #333 !important;
+    }
+    .next-step-note {
+      margin: 12px 0 0 0 !important;
+      color: #9c9c9c !important;
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 20px; }
+      .next-step-actions button { width: 100%; }
+    }
   </style>
 </head>
 
 <body>
-  <script>
-    // =================== COURSE ACCESS PROTECTION ===================
-    // This expects a table "purchases" with:
-    // user_id (uuid), course_id (text or uuid), paid (boolean)
-    // If you're using a different table (e.g., user_access), tell me and I’ll swap it cleanly.
-
-    const COURSE_ID = "7day"; // <-- change to your real course id/slug/uuid used in your purchases table
-
-    async function checkCourseAccess(courseId) {
-      const { data: { session }, error: sessionErr } = await supabaseClient.auth.getSession();
-
-      if (sessionErr) {
-        console.error("Session error:", sessionErr);
-      }
-
-      if (!session || !session.user) {
-        // Not logged in → redirect to login page
-        window.location.href = "/login.html";
-        return;
-      }
-
-      const { data, error } = await supabaseClient
-        .from("purchases")
-        .select("id, paid")
-        .eq("user_id", session.user.id)
-        .eq("course_id", courseId)
-        .eq("paid", true)
-        .limit(1);
-
-      if (error) {
-        console.error("Purchase check error:", error);
-        // Fail closed: treat as no access
-        window.location.href = "/payment-page.html";
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        // Has not purchased → redirect to payment page
-        window.location.href = "/payment-page.html";
-        return;
-      }
-
-      // Access OK → stay on page
-    }
-
-    // Run immediately
-    checkCourseAccess(COURSE_ID);
-  </script>
-
   <div class="container">
     <h1>SOVEREIGN PROTOCOL</h1>
     <h2>7-Day Executive Alignment Installation</h2>
@@ -116,7 +162,7 @@
         <h3>Day 1 — Identity Alignment</h3>
         <p>Clarify who you are operating as — not aspirationally, but functionally.</p>
         <textarea placeholder="State the identity you will now operate from."></textarea>
-        <button onclick="completeDay(1)">Confirm & Install</button>
+        <button type="button" onclick="completeDay(1)">Confirm &amp; Install</button>
         <div class="timer" id="timer-1"></div>
       </div>
 
@@ -124,7 +170,7 @@
         <h3>Day 2 — Authority Alignment</h3>
         <p>Define where authority is held, expressed, and restrained.</p>
         <textarea placeholder="Describe how authority will now be exercised."></textarea>
-        <button onclick="completeDay(2)">Confirm & Install</button>
+        <button type="button" onclick="completeDay(2)">Confirm &amp; Install</button>
         <div class="timer" id="timer-2"></div>
       </div>
 
@@ -132,7 +178,7 @@
         <h3>Day 3 — Decision Coherence</h3>
         <p>Eliminate contradiction across decisions.</p>
         <textarea placeholder="State the rule governing your decisions."></textarea>
-        <button onclick="completeDay(3)">Confirm & Install</button>
+        <button type="button" onclick="completeDay(3)">Confirm &amp; Install</button>
         <div class="timer" id="timer-3"></div>
       </div>
 
@@ -140,7 +186,7 @@
         <h3>Day 4 — Emotional Sovereignty</h3>
         <p>Ensure emotions inform but never govern.</p>
         <textarea placeholder="Describe the emotional standard you will uphold."></textarea>
-        <button onclick="completeDay(4)">Confirm & Install</button>
+        <button type="button" onclick="completeDay(4)">Confirm &amp; Install</button>
         <div class="timer" id="timer-4"></div>
       </div>
 
@@ -148,7 +194,7 @@
         <h3>Day 5 — Energy Discipline</h3>
         <p>Direct energy only where authority is required.</p>
         <textarea placeholder="Define where your energy is now prohibited."></textarea>
-        <button onclick="completeDay(5)">Confirm & Install</button>
+        <button type="button" onclick="completeDay(5)">Confirm &amp; Install</button>
         <div class="timer" id="timer-5"></div>
       </div>
 
@@ -156,7 +202,7 @@
         <h3>Day 6 — Internal Order</h3>
         <p>Resolve internal fragmentation.</p>
         <textarea placeholder="State the order you are enforcing internally."></textarea>
-        <button onclick="completeDay(6)">Confirm & Install</button>
+        <button type="button" onclick="completeDay(6)">Confirm &amp; Install</button>
         <div class="timer" id="timer-6"></div>
       </div>
 
@@ -164,8 +210,34 @@
         <h3>Day 7 — Sovereign Lock</h3>
         <p>Seal alignment as default operating state.</p>
         <textarea placeholder="Declare the standard you will not violate."></textarea>
-        <button onclick="completeDay(7)">Lock Installation</button>
+        <button type="button" onclick="completeDay(7)">Lock Installation</button>
         <div class="timer" id="timer-7"></div>
+      </div>
+    </div>
+
+    <!-- ===== NEXT STEP PANEL (shown after Day 7 completion) ===== -->
+    <div id="next-step-panel" class="next-step-panel-wrap">
+      <div class="next-step-panel">
+        <h3>7-Day Executive Alignment Complete</h3>
+
+        <p>
+          Your 7-day installation sequence is complete. Continue into the 21-Day Executive Installation
+          to deepen decision architecture, execution coherence, and command-level operating rhythm.
+        </p>
+
+        <div class="next-step-actions">
+          <button type="button" onclick="goTo21DayPayment()">
+            Continue to 21-Day Now
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="returnToDashboard()">
+            Return to Dashboard
+          </button>
+        </div>
+
+        <p class="next-step-note">
+          You can continue now or return later. Your completion is saved.
+        </p>
       </div>
     </div>
 
@@ -182,35 +254,160 @@
   </div>
 
   <script>
+    // =================== COURSE ACCESS PROTECTION ===================
+    // Expects table "purchases" with: user_id, course_id, paid
+    async function checkCourseAccess(courseId) {
+      try {
+        const { data: { session }, error: sessionErr } = await supabaseClient.auth.getSession();
+
+        if (sessionErr) {
+          console.error("Session error:", sessionErr);
+        }
+
+        if (!session || !session.user) {
+          // Not logged in -> send to login then back to this page
+          window.location.href = buildLoginUrl();
+          return false;
+        }
+
+        const { data, error } = await supabaseClient
+          .from("purchases")
+          .select("paid")
+          .eq("user_id", session.user.id)
+          .eq("course_id", courseId)
+          .eq("paid", true)
+          .limit(1);
+
+        if (error) {
+          console.error("Purchase check error:", error);
+          // Fail closed -> send to pay flow for this course
+          window.location.href = buildPayUrl(COURSE_ID, window.location.pathname);
+          return false;
+        }
+
+        if (!data || data.length === 0) {
+          // Not purchased -> send to pay flow for this course
+          window.location.href = buildPayUrl(COURSE_ID, window.location.pathname);
+          return false;
+        }
+
+        return true;
+      } catch (e) {
+        console.error("Access check failed:", e);
+        window.location.href = buildPayUrl(COURSE_ID, window.location.pathname);
+        return false;
+      }
+    }
+
+    // =================== 7-DAY PROTOCOL LOGIC ===================
     const LOCK_HOURS = 24;
 
+    function goTo21DayPayment() {
+      window.location.href = buildPayUrl("21day_executive", "/21daysexecutive.html");
+    }
+
+    function returnToDashboard() {
+      window.location.href = DASHBOARD_URL;
+    }
+
+    function showNextStepPanel() {
+      const panel = document.getElementById("next-step-panel");
+      if (!panel) return;
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function markCompletedDaysVisuals() {
+      document.querySelectorAll(".protocol-day").forEach(el => {
+        const day = parseInt(el.getAttribute("data-day"), 10);
+        const saved = localStorage.getItem("sp7_day_" + day);
+        if (saved) {
+          el.classList.remove("active");
+          el.classList.remove("locked");
+          el.classList.add("done");
+          const t = document.getElementById("timer-" + day);
+          if (t) t.innerText = "Installed";
+        }
+      });
+    }
+
     function completeDay(day) {
-      const text = document.querySelector(`[data-day="${day}"] textarea`).value.trim();
+      const box = document.querySelector(`[data-day="${day}"] textarea`);
+      const text = box ? box.value.trim() : "";
+
       if (!text) {
         alert("Integration is required before proceeding.");
         return;
       }
-      localStorage.setItem("sp7_day_" + day, Date.now());
+
+      // Prevent re-saving same completed day unnecessarily
+      if (!localStorage.getItem("sp7_day_" + day)) {
+        localStorage.setItem("sp7_day_" + day, String(Date.now()));
+      }
+
+      // Day 7 completion -> show UX panel (no forced redirect)
+      if (day === 7) {
+        localStorage.setItem("sp7_complete", "true");
+        localStorage.setItem("sp7_completed_at", new Date().toISOString());
+        alert("7-Day Executive Alignment complete.");
+      } else {
+        alert(`Day ${day} installation saved.`);
+      }
+
       updateAccess();
+
+      if (day === 7) {
+        showNextStepPanel();
+      }
     }
 
     function updateAccess() {
+      // First mark completed days
+      markCompletedDaysVisuals();
+
       document.querySelectorAll(".protocol-day").forEach(el => {
         const day = parseInt(el.getAttribute("data-day"), 10);
-        if (day === 1) return;
+
+        // Day 1 is active unless already completed
+        if (day === 1) {
+          if (!localStorage.getItem("sp7_day_1")) {
+            el.classList.remove("locked", "done");
+            el.classList.add("active");
+          }
+          return;
+        }
+
+        // If this day already completed, keep it done
+        if (localStorage.getItem("sp7_day_" + day)) {
+          el.classList.remove("locked", "active");
+          el.classList.add("done");
+          const t = document.getElementById("timer-" + day);
+          if (t) t.innerText = "Installed";
+          return;
+        }
 
         const prevCompleted = localStorage.getItem("sp7_day_" + (day - 1));
-        if (!prevCompleted) return;
+        if (!prevCompleted) {
+          // Previous day incomplete -> remain locked
+          el.classList.remove("active", "done");
+          el.classList.add("locked");
+          const t = document.getElementById("timer-" + day);
+          if (t) t.innerText = "Complete previous installation first";
+          return;
+        }
 
         const unlockTime = parseInt(prevCompleted, 10) + LOCK_HOURS * 60 * 60 * 1000;
         const now = Date.now();
 
         if (now >= unlockTime) {
-          el.classList.remove("locked");
+          el.classList.remove("locked", "done");
           el.classList.add("active");
           const t = document.getElementById("timer-" + day);
           if (t) t.innerText = "";
         } else {
+          el.classList.remove("active", "done");
+          el.classList.add("locked");
+
           const remaining = unlockTime - now;
           const hrs = Math.floor(remaining / (1000 * 60 * 60));
           const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
@@ -218,10 +415,30 @@
           if (t) t.innerText = `Next installation unlocks in ${hrs}h ${mins}m`;
         }
       });
+
+      // If full course complete, keep next-step panel visible
+      if (localStorage.getItem("sp7_complete") === "true") {
+        const panel = document.getElementById("next-step-panel");
+        if (panel) panel.style.display = "block";
+      }
     }
 
-    updateAccess();
-    setInterval(updateAccess, 60000);
+    async function initPage() {
+      // Enforce paid access before interacting with content
+      const ok = await checkCourseAccess(COURSE_ID);
+      if (!ok) return;
+
+      updateAccess();
+      setInterval(updateAccess, 60000);
+
+      // Re-show next-step panel on refresh if already completed
+      if (localStorage.getItem("sp7_complete") === "true") {
+        const panel = document.getElementById("next-step-panel");
+        if (panel) panel.style.display = "block";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", initPage);
   </script>
 </body>
 </html>
