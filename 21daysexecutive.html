@@ -10,10 +10,9 @@
 <script>
   // ✅ Use the SAME Supabase project as login.html / pay.html
   // If your live auth project is different, replace these two values everywhere consistently.
-  const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
+const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_V3grWnNdIA1Y7f9JeRRgbA_SfkJ6wJW";
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
   // ========= COURSE / PRICING (single source of truth) =========
   const COURSE_ID_21 = "21day_executive";
   const PRICE_USD_NUMBER = 6500;
