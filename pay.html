@@ -7,9 +7,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // ✅ Frontend-safe keys only
-    const SUPABASE_URL = "https://wcyojlrkoisnjltlmhgg.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_PPd5S8xPtAbRU1c3w6Uclw_S9N9eljB";
+    // ✅ Frontend-safe keys only (publishable key)
+    // IMPORTANT: Use the SAME Supabase project as your login.html
+    const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_V3grWnNdIA1Y7f9JeRRgbA_SfkJ6wJW";
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     function qp(name){
@@ -19,32 +20,31 @@
 
     // ===== COURSE CATALOG =====
     const COURSES = {
-    const COURSES = {
-  "7day_executive": {
-    title: "7-Day Executive Alignment",
-    price: "$1,700",
-    description: "7-day leadership OS installation (executive alignment sequence).",
-    paypalLink: "https://www.paypal.com/ncp/payment/Y6B89NSN9RDS8"
-  },
-  "21day_executive": {
-    title: "21-Day Executive Installation",
-    price: "$6,500", // <-- change to your real price
-    description: "21-day executive installation and governance alignment sequence.",
-    paypalLink: "https://www.paypal.com/ncp/payment/TQ8MBDUY87G6S"
-  },
-  "90day_standard": {
-    title: "90-Day Protocol Access",
-    price: "$15,000",
-    description: "Full 90-day access to Executive Governance Systems.",
-    paypalLink: "https://www.paypal.com/ncp/payment/8MZHW4FL8SJFY"
-  },
-  "90day_premium": {
-    title: "90-Day Protocol + Implementation",
-    price: "$30,000",
-    description: "90-day access plus implementation guidance and priority support.",
-    paypalLink: "https://www.paypal.com/ncp/payment/977UKX7T6B6JG"
-  }
-};
+      "7day_executive": {
+        title: "7-Day Executive Alignment",
+        price: "$1,700",
+        description: "7-day leadership OS installation (executive alignment sequence).",
+        paypalLink: "https://www.paypal.com/ncp/payment/Y6B89NSN9RDS8"
+      },
+      "21day_executive": {
+        title: "21-Day Executive Installation",
+        price: "$6,500", // <-- change to your real price if needed
+        description: "21-day executive installation and governance alignment sequence.",
+        paypalLink: "https://www.paypal.com/ncp/payment/TQ8MBDUY87G6S"
+      },
+      "90day_standard": {
+        title: "90-Day Protocol Access",
+        price: "$15,000",
+        description: "Full 90-day access to Executive Governance Systems.",
+        paypalLink: "https://www.paypal.com/ncp/payment/8MZHW4FL8SJFY"
+      },
+      "90day_premium": {
+        title: "90-Day Protocol + Implementation",
+        price: "$30,000",
+        description: "90-day access plus implementation guidance and priority support.",
+        paypalLink: "https://www.paypal.com/ncp/payment/977UKX7T6B6JG"
+      }
+    };
   </script>
 
   <style>
@@ -67,6 +67,7 @@
     }
     h1{margin:0 0 10px; letter-spacing:.4px;}
     h2{margin:0 0 8px;}
+    h3{margin:0 0 8px;}
     p{color:var(--muted); line-height:1.5;}
     .badge{
       display:inline-block;
@@ -132,6 +133,13 @@
     }
     a{color:var(--gold); text-decoration:none;}
     a:hover{text-decoration:underline;}
+
+    @media (max-width: 640px){
+      body{padding:20px;}
+      .card{padding:20px;}
+      .row > *{width:100%;}
+      .btn, button{text-align:center;}
+    }
   </style>
 </head>
 
@@ -210,7 +218,7 @@
 
   function buildLoginReturn(){
     // Return user to THIS pay page after login (preserving course + final return)
-    const payUrl = `/pay.html?course=${encodeURIComponent(currentCourseId)}&return=${encodeURIComponent(currentReturnUrl)}`;
+    const payUrl = `/pay.html?course=${encodeURIComponent(currentCourseId || "")}&return=${encodeURIComponent(currentReturnUrl)}`;
     return `/login.html?return=${encodeURIComponent(payUrl)}`;
   }
 
@@ -239,8 +247,7 @@
   }
 
   async function hasPaidForCourse(userId, courseId){
-    // This only works if your system marks purchases in Supabase (purchases table).
-    // Expected columns: user_id, course_id, paid (boolean)
+    // Expected columns in public.purchases: user_id, course_id, paid (boolean)
     const { data, error } = await supabaseClient
       .from("purchases")
       .select("course_id, paid")
@@ -251,7 +258,6 @@
 
     if (error) {
       console.warn("Purchase check error:", error);
-      // Do not hard-fail here; user may still need manual verification flow
       return { ok: false, reason: "db_error", error };
     }
 
@@ -283,14 +289,15 @@
     if (result.reason === "db_error") {
       setStatus("err",
         "We could not verify payment automatically right now.\n\n" +
-        "If you have completed payment, contact support or verify your purchase record process is writing to Supabase purchases (paid=true)."
+        "Check your Supabase table structure and RLS policies for public.purchases, and ensure your payment process writes: user_id + course_id + paid=true."
       );
       return;
     }
 
     setStatus("err",
       "Payment not yet found for this account.\n\n" +
-      "If you just paid, wait a moment and try again. Make sure you paid using the same email/account you are signed in with."
+      "If you just paid, wait a moment and try again.\n" +
+      "Make sure you paid using the same email/account you are signed in with."
     );
   }
 
@@ -309,11 +316,13 @@
       coursePriceEl.textContent = "—";
       courseDescEl.textContent = "Open this page from a valid course/result page.";
       courseIdCodeEl.textContent = currentCourseId || "(none)";
+
       paypalBtnEl.removeAttribute("href");
       paypalBtnEl.classList.remove("btn-primary");
       paypalBtnEl.classList.add("btn-secondary");
       paypalBtnEl.textContent = "No payment link available";
-      paypalBtnEl.onclick = (e) => e.preventDefault();
+      paypalBtnEl.addEventListener("click", (e) => e.preventDefault());
+
       setStatus("err", "Missing or invalid course parameter.");
       await refreshSessionUi();
       return;
@@ -328,7 +337,7 @@
 
     await refreshSessionUi();
 
-    // If not signed in, force login (this avoids orphan payments with no account context)
+    // If not signed in, force login to tie access to a user account
     if (!currentSessionUser) {
       setStatus("err", "Please sign in before paying so your access can be activated correctly. Redirecting to login…");
       setTimeout(() => goToLogin(), 900);
