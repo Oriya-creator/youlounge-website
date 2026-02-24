@@ -1,3 +1,7 @@
+<!-- =========================
+FILE 2: transitioning-result.html
+(Transitioning Leader Profile)
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +9,6 @@
 <title>Sovereign Protocol — Executive Installation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* Earth & Teal Color Palette - MATCHING HOMEPAGE */
 :root {
     --sand: #E6D5B8;
     --clay: #C4A484;
@@ -34,12 +37,11 @@ body {
     min-height: 100vh;
 }
 
-/* TOP BANNER IMAGE */
 .top-banner {
     width: 100%;
     height: 300px;
     overflow: hidden;
-    background: var(--teal); /* Teal fallback color */
+    background: var(--teal);
     position: relative;
 }
 
@@ -50,7 +52,6 @@ body {
     display: block;
 }
 
-/* Main content container */
 .container {
     max-width: 880px;
     margin: -30px auto 40px auto;
@@ -74,9 +75,7 @@ body {
     margin-bottom: 10px;
 }
 
-h1, h2, h3 {
-    font-weight: 600;
-}
+h1, h2, h3 { font-weight: 600; }
 
 h1 {
     color: var(--teal);
@@ -136,9 +135,7 @@ li {
     font-weight: 600;
 }
 
-.metric-table tr:last-child td {
-    border-bottom: none;
-}
+.metric-table tr:last-child td { border-bottom: none; }
 
 .section-label {
     text-transform: uppercase;
@@ -178,9 +175,7 @@ a:hover {
     font-weight: 700;
 }
 
-.pp-button-container {
-    margin: 25px 0;
-}
+.pp-button-container { margin: 25px 0; }
 
 .security-note {
     font-size: 0.8em;
@@ -195,7 +190,6 @@ strong {
     font-weight: 700;
 }
 
-/* Title section */
 .title-section {
     text-align: center;
     margin-bottom: 30px;
@@ -203,7 +197,6 @@ strong {
     border-bottom: 1px solid var(--clay);
 }
 
-/* Simple status */
 .status {
     position: fixed;
     top: 10px;
@@ -218,7 +211,6 @@ strong {
     box-shadow: 0 3px 10px rgba(0, 128, 128, 0.3);
 }
 
-/* Fallback banner */
 .fallback-banner {
     background: linear-gradient(135deg, var(--teal) 0%, var(--dark-teal) 100%);
     color: var(--white);
@@ -239,27 +231,16 @@ strong {
     margin-top: 10px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .top-banner {
-        height: 200px;
-    }
-    
+    .top-banner { height: 200px; }
     .container {
         padding: 25px;
         margin: -20px 15px 20px 15px;
     }
-    
-    h1 {
-        font-size: 2em;
-    }
-    
-    h2 {
-        font-size: 1.6em;
-    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
 }
 
-/* Button styling to match teal theme */
 .pp-Y6B89NSN9RDS8 {
     text-align: center;
     border: none;
@@ -277,11 +258,8 @@ strong {
     transition: all 0.3s ease;
 }
 
-.pp-Y6B89NSN9RDS8:hover {
-    background-color: var(--teal) !important;
-}
+.pp-Y6B89NSN9RDS8:hover { background-color: var(--teal) !important; }
 
-/* Callout for important sections */
 .callout {
     background: rgba(230, 213, 184, 0.2);
     border-left: 4px solid var(--terracotta);
@@ -293,22 +271,15 @@ strong {
 </head>
 
 <body>
-<!-- Simple status indicator -->
 <div class="status" id="status">🔄 Loading transitioning.jpg...</div>
 
-<!-- TOP BANNER - IMAGE AT THE TOP -->
 <div class="top-banner">
     <img src="transitioning.jpg" alt="Transitioning Leader Profile" id="bannerImage"
          onload="document.getElementById('status').innerHTML='✅ Image loaded'; setTimeout(()=>{const s=document.getElementById('status');s.style.opacity='0';setTimeout(()=>s.style.display='none',300)},2000)"
          onerror="handleImageError(this)">
 </div>
 
-<!-- Main content -->
 <div class="container">
-
-<!-- ===================== -->
-<!-- TRANSITIONING PROFILE -->
-<!-- ===================== -->
 
 <div class="title-section">
     <p class="classified">CONFIDENTIAL — C-SUITE EYES ONLY</p>
@@ -355,10 +326,6 @@ influence, and long-term impact.
 Review the Executive Brief below. Begin installation.</p>
 
 <hr>
-
-<!-- ===================== -->
-<!-- EXECUTIVE BRIEF -->
-<!-- ===================== -->
 
 <h1>The Executive Brief</h1>
 
@@ -424,10 +391,6 @@ decision-making, energy regulation, and strategic foresight under pressure.
 
 <hr>
 
-<!-- ===================== -->
-<!-- DAY 1 DRILL -->
-<!-- ===================== -->
-
 <h1>Day 1 Installation Preview — The Decision Filter Drill</h1>
 <p class="classified">PRE-INSTALL EXERCISE | TIME: 10 MINUTES</p>
 
@@ -478,57 +441,52 @@ Hiring · Budget approvals · Board responses · Team conflicts · Capital alloc
 <li>Experience the Protocol's core mechanism in action</li>
 </ul>
 
-<!-- ===================== -->
-<!-- PAYMENT SECTION -->
-<!-- ===================== -->
-
 <div class="cta">
     <h2>Begin Installation</h2>
     <p class="price">$1,700 · One-time investment</p>
     
     <div class="pp-button-container">
-        <div>
+        <div style="display:grid; gap:12px; justify-items:center;">
             <form action="https://www.paypal.com/ncp/payment/Y6B89NSN9RDS8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
                 <input class="pp-Y6B89NSN9RDS8" type="submit" value="Begin Installation" />
                 <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" />
-                <section style="font-size: 0.75rem; color: var(--dark-teal);"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                <section style="font-size: 0.75rem; color: var(--dark-teal);">
+                    Powered by
+                    <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/>
+                </section>
             </form>
+
+            <button
+              type="button"
+              onclick="window.location.href='/pay.html?course=' + encodeURIComponent('7day_executive') + '&return=' + encodeURIComponent('/7daysexecutive.html')"
+              style="background: var(--teal); color: #fff; border:none; border-radius:6px; padding:12px 18px; font-weight:700; cursor:pointer;">
+              I’ve Paid — Open 7-Day Executive Alignment
+            </button>
         </div>
     </div>
     
     <p class="security-note">
-        Secure payment via PayPal • Instant access upon completion • Confidential transaction
+        Secure payment via PayPal • After payment, click “I’ve Paid — Open 7-Day Executive Alignment” • Confidential transaction
     </p>
 </div>
 
 </div>
 
 <script>
-// Image error handler function
 function handleImageError(imgElement) {
-    // Hide the broken image
     imgElement.style.display = 'none';
-    
-    // Update status
     const status = document.getElementById('status');
     status.innerHTML = '⚠️ Using fallback banner';
     status.style.background = 'var(--terracotta)';
-    
-    // Create fallback banner
     const banner = document.createElement('div');
     banner.className = 'fallback-banner';
     banner.innerHTML = 'TRANSITIONING LEADER PROFILE<br><small>Score: 31–50</small><br><small style="opacity:0.8;margin-top:20px;">Leadership Architecture Analysis</small>';
-    
-    // Add banner to the top-banner div
     imgElement.parentNode.appendChild(banner);
 }
 
-// Simple check
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Transitioning Leader page loaded');
     console.log('Looking for transitioning.jpg in same folder...');
-    
-    // Check if image loaded after 2 seconds
     setTimeout(function() {
         const img = document.getElementById('bannerImage');
         if (img && img.complete && img.naturalHeight !== 0) {
