@@ -8,19 +8,24 @@
 <!-- ================= SUPABASE JS (single, correct init) ================= -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
- const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
+  const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_V3grWnNdIA1Y7f9JeRRgbA_SfkJ6wJW";
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+  // Course IDs (must match purchases.course_id exactly)
   const COURSE_ID_90_STANDARD = "90day_standard";
   const COURSE_ID_90_PREMIUM  = "90day_premium";
 
   const LOGIN_URL = "/login.html";
-  const PAY_URL   = "/pay.html";
+  const PAY_URL   = "/pay.html"; // optional fallback
 
-  // PayPal NCP payment links
-  const PAYPAL_LINK_90_STANDARD = "https://www.paypal.com/ncp/payment/8MZHW4FL8SJFY";
-  const PAYPAL_LINK_90_PREMIUM  = "https://www.paypal.com/ncp/payment/977UKX7T6B6JG";
+  // Pricing
+  const CURRENCY = "USD";
+  const PRICE_90_STANDARD = "15000.00";
+  const PRICE_90_PREMIUM  = "30000.00";
+
+  const LABEL_90_STANDARD = "90-Day Protocol Access";
+  const LABEL_90_PREMIUM  = "90-Day Protocol + Implementation";
 </script>
 
 <style>
@@ -73,6 +78,12 @@ h1,h2,h3 { letter-spacing:0.6px; }
 }
 .tier-price { font-size:32px; font-weight:bold; color:#c7a046; margin:10px 0; }
 .tier-description { color:#aaa; font-size:14px; margin:15px 0; }
+
+.paypal-container { margin-top: 18px; min-height: 55px; }
+.status-message { margin-top: 14px; padding: 12px; border-radius: 4px; display: none; white-space: pre-line; font-size: 13px; }
+.status-message.success { background: rgba(39, 174, 96, 0.1); border: 1px solid #27ae60; color: #27ae60; display: block; }
+.status-message.error { background: rgba(235, 87, 87, 0.1); border: 1px solid #eb5757; color: #eb5757; display: block; }
+.status-message.processing { background: rgba(241, 196, 15, 0.1); border: 1px solid #f1c40f; color: #f1c40f; display: block; }
 
 /* ===== PROGRAM CONTENT ===== */
 .protocol-day {
@@ -139,11 +150,8 @@ button:hover { background:#e0b85a; }
       <div class="tier-price">$15,000</div>
       <p class="tier-description">Full 90-day access to Executive Governance Systems</p>
 
-      <button type="button"
-        onclick="window.location.href = PAYPAL_LINK_90_STANDARD;"
-        style="width:100%;font-size:14px;">
-        Pay $15,000 Securely via PayPal
-      </button>
+      <div id="paypal-button-standard" class="paypal-container"></div>
+      <div class="status-message" id="status-standard"></div>
 
       <button type="button"
         onclick="window.location.href = PAY_URL + '?course=' + encodeURIComponent(COURSE_ID_90_STANDARD) + '&return=' + encodeURIComponent(window.location.pathname)"
@@ -152,7 +160,8 @@ button:hover { background:#e0b85a; }
       </button>
 
       <p style="margin-top:12px;font-size:12px;color:#aaa;">
-        After payment, return here and click “Activate access”.
+        Access unlocks automatically only if your PayPal webhook writes purchases.<br>
+        Expected: <strong>course_id = 90day_standard</strong>, <strong>paid = true</strong>.
       </p>
     </div>
 
@@ -164,11 +173,8 @@ button:hover { background:#e0b85a; }
         Includes personalized implementation guidance and priority support
       </p>
 
-      <button type="button"
-        onclick="window.location.href = PAYPAL_LINK_90_PREMIUM;"
-        style="width:100%;font-size:14px;">
-        Pay $30,000 Securely via PayPal
-      </button>
+      <div id="paypal-button-premium" class="paypal-container"></div>
+      <div class="status-message" id="status-premium"></div>
 
       <button type="button"
         onclick="window.location.href = PAY_URL + '?course=' + encodeURIComponent(COURSE_ID_90_PREMIUM) + '&return=' + encodeURIComponent(window.location.pathname)"
@@ -177,7 +183,8 @@ button:hover { background:#e0b85a; }
       </button>
 
       <p style="margin-top:12px;font-size:12px;color:#aaa;">
-        After payment, return here and click “Activate access”.
+        Access unlocks automatically only if your PayPal webhook writes purchases.<br>
+        Expected: <strong>course_id = 90day_premium</strong>, <strong>paid = true</strong>.
       </p>
     </div>
   </div>
@@ -334,10 +341,8 @@ button:hover { background:#e0b85a; }
 
   async function gate90Day() {
     const { data: { session }, error } = await supabaseClient.auth.getSession();
-
     if (error) console.error("Session error:", error);
 
-    // Not logged in: keep payment visible
     if (!session || !session.user) {
       document.getElementById("payment-section").style.display = "block";
       document.getElementById("program-content").style.display = "none";
@@ -345,7 +350,6 @@ button:hover { background:#e0b85a; }
     }
 
     const ok = await hasPaidForAny90Day(session.user.id);
-
     if (ok) {
       document.getElementById("payment-section").style.display = "none";
       document.getElementById("program-content").style.display = "block";
@@ -380,6 +384,123 @@ button:hover { background:#e0b85a; }
 
     alert(`Day ${day} saved.`);
   }
+</script>
+
+<!-- ================= PAYPAL SDK + BUTTONS (AUTOMATION-SAFE) ================= -->
+<script src="https://www.paypal.com/sdk/js?client-id=AS-jIAw2qHOmSVXguxfUHoYbiL-S2ugGD_ASH2u9lYFYqVokSKLn9TN3BALdogBIyMKzbMBaTYEF91bW&currency=USD&intent=capture"></script>
+
+<script>
+  function setMsg(el, type, text){
+    if (!el) return;
+    el.className = "status-message " + type;
+    el.innerText = text;
+  }
+
+  async function getSession(){
+    const { data: { session }, error } = await supabaseClient.auth.getSession();
+    if (error) {
+      console.error("Session error:", error);
+      return null;
+    }
+    return session;
+  }
+
+  function formatYMD(d){
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}${m}${day}`;
+  }
+
+  function makeInvoiceId(courseId){
+    const short = Math.random().toString(36).slice(2, 8).toUpperCase();
+    return `YL-${courseId}-${formatYMD(new Date())}-${short}`;
+  }
+
+  function renderTierButton(opts){
+    const {
+      containerId,
+      statusId,
+      courseId,
+      amountValue,
+      label
+    } = opts;
+
+    const statusEl = document.getElementById(statusId);
+
+    if (!window.paypal || !paypal.Buttons) {
+      setMsg(statusEl, "error", "❌ PayPal SDK failed to load. Check your PayPal client-id.");
+      return;
+    }
+
+    paypal.Buttons({
+      style: { color: 'gold', shape: 'rect', label: 'pay', height: 40 },
+
+      createOrder: async (data, actions) => {
+        const session = await getSession();
+        if (!session || !session.user) {
+          setMsg(statusEl, "error", "❌ Please sign in before paying so access can be linked to your account.");
+          throw new Error("User not signed in");
+        }
+
+        const userId = session.user.id;
+        const invoiceId = makeInvoiceId(courseId);
+
+        return actions.order.create({
+          intent: "CAPTURE",
+          purchase_units: [{
+            reference_id: "default",
+            amount: { currency_code: CURRENCY, value: amountValue },
+            description: label,
+            custom_id: `${userId}|${courseId}`,
+            invoice_id: invoiceId
+          }],
+          application_context: {
+            return_url: "https://www.youlounge.org/hubs.html?paypal=success",
+            cancel_url: "https://www.youlounge.org/hubs.html?paypal=cancel"
+          }
+        });
+      },
+
+      onApprove: async (data, actions) => {
+        try {
+          const capture = await actions.order.capture();
+          console.log("PayPal capture:", capture);
+          setMsg(statusEl, "success",
+            "✅ Payment captured in PayPal.\n\n" +
+            "If the webhook is live, access will unlock automatically within seconds.\n" +
+            "If not, use 'Activate access' after your system records purchases."
+          );
+        } catch (e) {
+          console.error("Capture error:", e);
+          setMsg(statusEl, "error", "❌ Capture failed. Please try again or contact support.");
+        }
+      },
+
+      onError: (err) => {
+        console.error("PayPal error:", err);
+        setMsg(statusEl, "error", "❌ Payment failed. Please try again.");
+      }
+    }).render(`#${containerId}`);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderTierButton({
+      containerId: "paypal-button-standard",
+      statusId: "status-standard",
+      courseId: COURSE_ID_90_STANDARD,
+      amountValue: PRICE_90_STANDARD,
+      label: LABEL_90_STANDARD
+    });
+
+    renderTierButton({
+      containerId: "paypal-button-premium",
+      statusId: "status-premium",
+      courseId: COURSE_ID_90_PREMIUM,
+      amountValue: PRICE_90_PREMIUM,
+      label: LABEL_90_PREMIUM
+    });
+  });
 </script>
 
 </body>
