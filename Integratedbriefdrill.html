@@ -1,7 +1,3 @@
-<!-- =========================
-FILE 3: integrated-result.html
-(Integrated Leader Profile)
-========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +5,24 @@ FILE 3: integrated-result.html
 <title>Sovereign Protocol — Integrated Leader Installation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- ================= SUPABASE JS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_V3grWnNdIA1Y7f9JeRRgbA_SfkJ6wJW";
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // 7-Day course settings
+  const COURSE_ID = "7day_executive";
+  const COURSE_LABEL = "7-Day Executive Alignment";
+  const CURRENCY = "USD";
+  const PRICE_VALUE = "1700.00";
+
+  const LOGIN_URL = "/login.html";
+  const COURSE_URL = "/7daysexecutive.html";
+</script>
+
 <style>
 :root {
     --sand: #E6D5B8;
@@ -170,19 +184,6 @@ li {
     border-radius: 8px;
 }
 
-a {
-    color: var(--teal);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s ease;
-    font-weight: 600;
-}
-
-a:hover {
-    color: var(--dark-teal);
-    border-bottom-color: var(--teal);
-}
-
 .price {
     font-size: 2em;
     color: var(--terracotta);
@@ -190,7 +191,7 @@ a:hover {
     font-weight: 700;
 }
 
-.pp-button-container { margin: 30px 0; }
+.pp-button-container { margin: 22px 0; display:flex; flex-direction:column; gap:12px; align-items:center; }
 
 .security-note {
     font-size: 0.85em;
@@ -239,6 +240,43 @@ strong {
     margin-top: 15px;
 }
 
+.callout {
+    background: rgba(230, 213, 184, 0.2);
+    border-left: 4px solid var(--terracotta);
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.msg {
+  width:100%;
+  max-width:540px;
+  display:none;
+  padding:12px 14px;
+  border-radius:8px;
+  font-size:13px;
+  white-space:pre-line;
+  border:1px solid rgba(0,0,0,0.12);
+}
+.msg.error { display:block; background:rgba(235,87,87,0.08); border-color:#eb5757; color:#b53131; }
+.msg.success { display:block; background:rgba(39,174,96,0.08); border-color:#27ae60; color:#1d7c43; }
+.msg.processing { display:block; background:rgba(241,196,15,0.12); border-color:#f1c40f; color:#7a6500; }
+
+.btn {
+  background: var(--teal);
+  color: #fff;
+  border:none;
+  border-radius:6px;
+  padding:12px 18px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn:hover { background: var(--dark-teal); }
+.btn.secondary {
+  background: #1f1f1f;
+}
+.btn.secondary:hover { background:#2b2b2b; }
+
 @media (max-width: 768px) {
     .top-banner { height: 200px; }
     .container {
@@ -247,33 +285,6 @@ strong {
     }
     h1 { font-size: 2em; }
 }
-
-.pp-Y6B89NSN9RDS8 {
-    text-align: center;
-    border: none;
-    border-radius: 0.25rem;
-    min-width: 11.625rem;
-    padding: 0 2rem;
-    height: 2.625rem;
-    font-weight: bold;
-    background-color: var(--terracotta) !important;
-    color: var(--white) !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.pp-Y6B89NSN9RDS8:hover { background-color: var(--teal) !important; }
-
-.callout {
-    background: rgba(230, 213, 184, 0.2);
-    border-left: 4px solid var(--terracotta);
-    padding: 20px;
-    margin: 25px 0;
-    border-radius: 0 8px 8px 0;
-}
 </style>
 </head>
 
@@ -281,8 +292,7 @@ strong {
 <div class="status" id="status">🔄 Loading integrated.jpg...</div>
 
 <div class="top-banner">
-    <!-- FIXED TYPO: integrated.jpg -->
-    <img src="integrated.jpg" alt="Integrated Leader Profile" id="bannerImage" 
+    <img src="integrated.jpg" alt="Integrated Leader Profile" id="bannerImage"
          onload="document.getElementById('status').innerHTML='✅ Image loaded'; setTimeout(()=>document.getElementById('status').style.opacity='0',2000)"
          onerror="handleImageError(this)">
 </div>
@@ -451,33 +461,29 @@ Executive approvals · Capital allocation · Senior hires · Board responses · 
 <div class="cta">
     <h2>Begin Installation</h2>
     <p class="price">$1,700 · One-time investment</p>
-    
-    <div class="pp-button-container">
-        <div style="display:grid; gap:12px; justify-items:center;">
-            <form action="https://www.paypal.com/ncp/payment/Y6B89NSN9RDS8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-                <input class="pp-Y6B89NSN9RDS8" type="submit" value="Begin Installation" />
-                <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" />
-                <section style="font-size: 0.75rem; color: var(--dark-teal);">
-                    Powered by
-                    <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/>
-                </section>
-            </form>
 
-            <button
-              type="button"
-              onclick="window.location.href='/pay.html?course=' + encodeURIComponent('7day_executive') + '&return=' + encodeURIComponent('/7daysexecutive.html')"
-              style="background: var(--teal); color: #fff; border:none; border-radius:6px; padding:12px 18px; font-weight:700; cursor:pointer;">
-              I’ve Paid — Open 7-Day Executive Alignment
-            </button>
-        </div>
+    <div class="pp-button-container">
+      <div class="msg" id="pay-msg"></div>
+      <div id="paypal-button-container" style="width:100%;max-width:540px;"></div>
+
+      <button type="button" class="btn secondary" onclick="checkAccessAndOpen()">
+        I’ve Already Paid — Check Access
+      </button>
+
+      <button type="button" class="btn" onclick="window.location.href=LOGIN_URL">
+        Sign In (Required to Pay)
+      </button>
     </div>
-    
+
     <p class="security-note">
-        Secure payment via PayPal • After payment, click “I’ve Paid — Open 7-Day Executive Alignment” • Confidential transaction
+      Secure payment via PayPal • Access unlocks when the system records <strong>course_id = 7day_executive</strong> with <strong>paid = true</strong>.
     </p>
 </div>
 
 </div>
+
+<!-- PayPal JS SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AS-jIAw2qHOmSVXguxfUHoYbiL-S2ugGD_ASH2u9lYFYqVokSKLn9TN3BALdogBIyMKzbMBaTYEF91bW&currency=USD&intent=capture"></script>
 
 <script>
 function handleImageError(imgElement) {
@@ -491,16 +497,137 @@ function handleImageError(imgElement) {
     imgElement.parentNode.appendChild(banner);
 }
 
+function setMsg(type, text){
+  const el = document.getElementById("pay-msg");
+  if (!el) return;
+  el.className = "msg " + type;
+  el.innerText = text;
+}
+
+async function getSession(){
+  const { data: { session }, error } = await supabaseClient.auth.getSession();
+  if (error) {
+    console.error("Session error:", error);
+    return null;
+  }
+  return session;
+}
+
+function formatYMD(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}${m}${day}`;
+}
+
+function makeInvoiceId(courseId){
+  const short = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return `YL-${courseId}-${formatYMD(new Date())}-${short}`;
+}
+
+async function hasPaid(userId){
+  const { data, error } = await supabaseClient
+    .from("purchases")
+    .select("course_id, paid")
+    .eq("user_id", userId)
+    .eq("course_id", COURSE_ID)
+    .eq("paid", true)
+    .limit(1);
+
+  if (error) {
+    console.error("Purchase check failed:", error);
+    return { ok: false, error };
+  }
+  return { ok: !!(data && data.length > 0) };
+}
+
+async function checkAccessAndOpen(){
+  setMsg("processing", "Checking access...");
+  const session = await getSession();
+  if (!session || !session.user) {
+    setMsg("error", "❌ You are not signed in. Please sign in first.");
+    return;
+  }
+
+  const access = await hasPaid(session.user.id);
+  if (access.error) {
+    setMsg("error", "❌ Access check failed. Check purchases table / RLS.");
+    return;
+  }
+
+  if (access.ok) {
+    setMsg("success", "✅ Access granted. Opening program...");
+    window.location.href = COURSE_URL;
+  } else {
+    setMsg("error", "❌ No paid 7-day access found for this account yet.");
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Page loaded. Looking for integrated.jpg...');
-    setTimeout(function() {
-        const img = document.getElementById('bannerImage');
-        if (img && img.complete && img.naturalHeight !== 0) {
-            console.log('✅ Image loaded successfully');
-        } else {
-            console.log('⚠️ Image may not have loaded');
+  console.log('Page loaded. Looking for integrated.jpg...');
+  setTimeout(function() {
+    const img = document.getElementById('bannerImage');
+    if (img && img.complete && img.naturalHeight !== 0) {
+      console.log('✅ Image loaded successfully');
+    } else {
+      console.log('⚠️ Image may not have loaded');
+    }
+  }, 2000);
+
+  if (!window.paypal || !paypal.Buttons) {
+    setMsg("error", "❌ PayPal SDK failed to load. Check client-id.");
+    return;
+  }
+
+  paypal.Buttons({
+    style: { color: 'gold', shape: 'rect', label: 'pay', height: 42 },
+
+    createOrder: async (data, actions) => {
+      const session = await getSession();
+      if (!session || !session.user) {
+        setMsg("error", "❌ Please sign in before paying so access can be linked to your account.");
+        throw new Error("User not signed in");
+      }
+
+      const userId = session.user.id;
+      const invoiceId = makeInvoiceId(COURSE_ID);
+
+      return actions.order.create({
+        intent: "CAPTURE",
+        purchase_units: [{
+          reference_id: "default",
+          amount: { currency_code: CURRENCY, value: PRICE_VALUE },
+          description: COURSE_LABEL,
+          custom_id: `${userId}|${COURSE_ID}`,
+          invoice_id: invoiceId
+        }],
+        application_context: {
+          return_url: "https://www.youlounge.org/hubs.html?paypal=success",
+          cancel_url: "https://www.youlounge.org/hubs.html?paypal=cancel"
         }
-    }, 2000);
+      });
+    },
+
+    onApprove: async (data, actions) => {
+      try {
+        const capture = await actions.order.capture();
+        console.log("PayPal capture:", capture);
+        setMsg("success",
+          "✅ Payment captured in PayPal.\n\n" +
+          "If webhook automation is live, access will unlock automatically within seconds.\n" +
+          "If not, click 'I’ve Already Paid — Check Access' after your system records purchases."
+        );
+      } catch (e) {
+        console.error("Capture error:", e);
+        setMsg("error", "❌ Capture failed. Please try again.");
+      }
+    },
+
+    onError: (err) => {
+      console.error("PayPal error:", err);
+      setMsg("error", "❌ Payment failed. Please try again.");
+    }
+  }).render('#paypal-button-container');
 });
 </script>
 
