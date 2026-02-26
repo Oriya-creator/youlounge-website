@@ -8,13 +8,14 @@
 <!-- Supabase JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // ✅ Use the SAME Supabase project as login.html / pay.html
-  // If your live auth project is different, replace these two values everywhere consistently.
-const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
+  // ✅ Supabase project must match login.html / other pages
+  const SUPABASE_URL = "https://tinfpnlceskscfxaigif.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_V3grWnNdIA1Y7f9JeRRgbA_SfkJ6wJW";
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
   // ========= COURSE / PRICING (single source of truth) =========
-  const COURSE_ID_21 = "21day_executive";
+  const COURSE_ID = "21day_executive";
+  const COURSE_LABEL = "21-Day Executive Governance Installation";
   const PRICE_USD_NUMBER = 6500;
   const PRICE_USD_PAYPAL_VALUE = "6500.00";
   const CURRENCY = "USD";
@@ -179,7 +180,6 @@ input[type="email"], input[type="password"]{
   <div class="payment-tier">
     <h3>21-Day Executive Governance Installation</h3>
 
-    <!-- Display price (fixed) -->
     <div class="tier-price" id="tier-price">$6,500</div>
 
     <p class="tier-description">
@@ -193,9 +193,8 @@ input[type="email"], input[type="password"]{
     <div class="status-message" id="payment-status"></div>
 
     <div class="action-row">
-      <!-- Recommended unified flow fallback -->
       <button type="button" class="secondary"
-        onclick="window.location.href = `${PAY_URL}?course=${encodeURIComponent(COURSE_ID_21)}&return=${encodeURIComponent('/21daysexecutive.html')}`">
+        onclick="window.location.href = `${PAY_URL}?course=${encodeURIComponent(COURSE_ID)}&return=${encodeURIComponent('/21daysexecutive.html')}`">
         Open Secure Payment / Activation Page
       </button>
 
@@ -205,8 +204,7 @@ input[type="email"], input[type="password"]{
     </div>
 
     <p class="small-note">
-      Payment alone does not unlock access unless your system writes a matching purchase record in Supabase.<br>
-      Expected record: <strong>course_id = 21day_executive</strong> and <strong>paid = true</strong>.
+      Expected Supabase record: <strong>course_id = 21day_executive</strong> and <strong>paid = true</strong> for your account.
     </p>
   </div>
 </div>
@@ -251,8 +249,7 @@ input[type="email"], input[type="password"]{
 </div> <!-- End container -->
 
 <!-- PayPal SDK MUST load BEFORE paypal.Buttons() -->
-<!-- Replace YOUR_PAYPAL_CLIENT_ID with your real PayPal client ID -->
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD&intent=capture"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AS-jIAw2qHOmSVXguxfUHoYbiL-S2ugGD_ASH2u9lYFYqVokSKLn9TN3BALdogBIyMKzbMBaTYEF91bW&currency=USD&intent=capture"></script>
 
 <script>
   // ----------------- HELPERS -----------------
@@ -271,14 +268,24 @@ input[type="email"], input[type="password"]{
     return session;
   }
 
-  async function hasPaidFor21Day(userId){
-    // Uses your existing public.purchases approach
-    // Expected columns: user_id, course_id, paid (boolean)
+  function formatYMD(d){
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}${m}${day}`;
+  }
+
+  function makeInvoiceId(courseId){
+    const short = Math.random().toString(36).slice(2, 8).toUpperCase();
+    return `YL-${courseId}-${formatYMD(new Date())}-${short}`;
+  }
+
+  async function hasPaid(userId){
     const { data, error } = await supabaseClient
       .from("purchases")
       .select("course_id, paid")
       .eq("user_id", userId)
-      .eq("course_id", COURSE_ID_21)
+      .eq("course_id", COURSE_ID)
       .eq("paid", true)
       .limit(1);
 
@@ -286,7 +293,6 @@ input[type="email"], input[type="password"]{
       console.error("Purchase check error:", error);
       return { ok: false, error };
     }
-
     return { ok: !!(data && data.length > 0) };
   }
 
@@ -309,7 +315,7 @@ input[type="email"], input[type="password"]{
       currency: CURRENCY,
       maximumFractionDigits: 0
     }).format(PRICE_USD_NUMBER);
-    el.textContent = formatted; // e.g., $6,500
+    el.textContent = formatted;
   })();
 
   // ----------------- AUTH -----------------
@@ -324,7 +330,6 @@ input[type="email"], input[type="password"]{
     }
 
     const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-
     if (error) {
       setMsg(statusEl, 'error', '❌ ' + error.message);
       return;
@@ -336,8 +341,7 @@ input[type="email"], input[type="password"]{
       return;
     }
 
-    const access = await hasPaidFor21Day(user.id);
-
+    const access = await hasPaid(user.id);
     if (access.error) {
       setMsg(statusEl, 'error', '❌ Access check failed. Check purchases table / RLS policies.');
       return;
@@ -366,7 +370,6 @@ input[type="email"], input[type="password"]{
     }
 
     const { error } = await supabaseClient.auth.signUp({ email, password });
-
     if (error) {
       setMsg(statusEl, 'error', '❌ ' + error.message);
       return;
@@ -384,10 +387,8 @@ input[type="email"], input[type="password"]{
       return;
     }
 
-    // Replace with your real domain page (not localhost)
     const redirectTo = window.location.origin + "/login.html";
     const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
-
     if (error) {
       setMsg(statusEl, 'error', '❌ ' + error.message);
       return;
@@ -406,7 +407,7 @@ input[type="email"], input[type="password"]{
       return;
     }
 
-    const access = await hasPaidFor21Day(session.user.id);
+    const access = await hasPaid(session.user.id);
     if (access.error) {
       setMsg(loginStatus, "error", "❌ Access check failed. Check purchases table / RLS.");
       return;
@@ -424,13 +425,10 @@ input[type="email"], input[type="password"]{
   document.addEventListener('DOMContentLoaded', async () => {
     showLoginPayment();
 
-    // If already signed in and already paid, skip login/payment panel
     const session = await getSession();
     if (session?.user) {
-      const access = await hasPaidFor21Day(session.user.id);
-      if (access.ok) {
-        showProgram();
-      }
+      const access = await hasPaid(session.user.id);
+      if (access.ok) showProgram();
     }
 
     updateAccess();
@@ -453,11 +451,8 @@ input[type="email"], input[type="password"]{
     localStorage.setItem("gov21_day_" + day, Date.now());
     updateAccess();
 
-    if (day < 21) {
-      alert(`Day ${day} completed. Next day unlocks in 24 hours.`);
-    } else {
-      alert("21-Day Executive Governance Systems complete.");
-    }
+    if (day < 21) alert(`Day ${day} completed. Next day unlocks in 24 hours.`);
+    else alert("21-Day Executive Governance Systems complete.");
   }
 
   function updateAccess() {
@@ -499,34 +494,47 @@ input[type="email"], input[type="password"]{
     paypal.Buttons({
       style: { color: 'gold', shape: 'rect', label: 'pay', height: 40 },
 
-      createOrder: (data, actions) => actions.order.create({
-        purchase_units: [{
-          amount: { value: PRICE_USD_PAYPAL_VALUE, currency_code: CURRENCY },
-          description: "Sovereign Protocol — 21-Day Executive Governance Installation"
-        }]
-      }),
-
-      onClick: async () => {
-        // Optional guard: require sign-in before payment
+      // IMPORTANT: enforce sign-in BEFORE order creation so we can bind custom_id to Supabase UID.
+      createOrder: async (data, actions) => {
         const session = await getSession();
         if (!session || !session.user) {
           setMsg(statusEl, "error", "❌ Please sign in before paying so access can be linked to your account.");
           throw new Error("User not signed in");
         }
+
+        const userId = session.user.id;
+        const invoiceId = makeInvoiceId(COURSE_ID);
+
+        return actions.order.create({
+          intent: "CAPTURE",
+          purchase_units: [{
+            reference_id: "default",
+            amount: { currency_code: CURRENCY, value: PRICE_USD_PAYPAL_VALUE },
+            description: COURSE_LABEL,
+            custom_id: `${userId}|${COURSE_ID}`,
+            invoice_id: invoiceId
+          }],
+          application_context: {
+            return_url: "https://www.youlounge.org/hubs.html?paypal=success",
+            cancel_url: "https://www.youlounge.org/hubs.html?paypal=cancel"
+          }
+        });
       },
 
       onApprove: async (data, actions) => {
-        await actions.order.capture();
+        try {
+          const capture = await actions.order.capture();
+          console.log("PayPal capture:", capture);
 
-        // IMPORTANT:
-        // This captures payment in PayPal, but DOES NOT create the Supabase purchases row automatically.
-        // You still need backend/webhook/manual insert to write:
-        // user_id + course_id='21day_executive' + paid=true
-        setMsg(statusEl, "success",
-          "✅ Payment successful in PayPal.\n\n" +
-          "Next step: your system must record the purchase in Supabase (purchases table) before access unlocks.\n" +
-          "Then click 'I’ve Already Paid — Check Access'."
-        );
+          setMsg(statusEl, "success",
+            "✅ Payment captured in PayPal.\n\n" +
+            "If you have the webhook installed, access will unlock automatically within seconds.\n" +
+            "If not, click 'I’ve Already Paid — Check Access' after your system records the purchase."
+          );
+        } catch (e) {
+          console.error("Capture error:", e);
+          setMsg(statusEl, "error", "❌ Capture failed. Please try again or contact support.");
+        }
       },
 
       onError: (err) => {
