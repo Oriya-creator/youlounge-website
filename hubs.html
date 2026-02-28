@@ -298,10 +298,10 @@
       box-shadow: 0 5px 15px rgba(0, 128, 128, 0.3);
     }
 
-    /* NEW: IP Licensing Button (placed next to Sovereign Protocol name) */
+    /* NEW: IP Licensing Button (placed next to Explore button) */
     .ip-licensing-btn {
       display: inline-block;
-      padding: 8px 14px;
+      padding: 12px 20px;
       text-decoration: none;
       background-color: var(--terracotta);
       color: white;
@@ -310,18 +310,27 @@
       font-weight: 800;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-left: 10px;
-      font-size: 0.95rem;
-      line-height: 1;
-      vertical-align: middle;
+      text-align: center;
+      margin: 15px 0 15px 12px; /* space to the left so it sits "next to" */
+      font-size: 1.05rem;
       white-space: nowrap;
     }
 
     .ip-licensing-btn:hover {
       background-color: transparent;
       color: var(--terracotta);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(168, 92, 50, 0.25);
+    }
+
+    /* NEW: Button Row so they sit side-by-side and wrap nicely on mobile */
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 10px 0 6px;
     }
 
     /* Think Tank Link Button */
@@ -520,15 +529,13 @@
         height: 40px;
       }
 
-      .diagnostic-btn, .thinktank-link {
+      .diagnostic-btn, .thinktank-link, .ip-licensing-btn {
         font-size: 1rem;
         padding: 12px 20px;
       }
 
-      .ip-licensing-btn{
-        display: block;
-        width: fit-content;
-        margin: 10px auto 0;
+      .ip-licensing-btn {
+        margin-left: 0;
       }
     }
 
@@ -614,12 +621,7 @@ Each intervention system; hub, functions as an architectural intervention, not a
           <strong>When the internal signal governing-identity is clear, decisions become decisive, authority stabilizes, and governance clarity regains integrity.</strong>
         </p>
 
-        <p>
-          <strong>The Sovereign Protocol</strong>
-          <!-- NEW BUTTON: placed right next to the Sovereign Protocol name -->
-          <a href="iplicensing.html" class="ip-licensing-btn">IP Licensing — Sovereign Protocol</a>
-          restores this clarity at the level where governance-identity, authority, and action originate.
-        </p>
+        <p><strong>The Sovereign Protocol</strong> restores this clarity at the level where governance-identity, authority, and action originate.</p>
 
         <p>
           This is not performance optimization.</br>
@@ -634,10 +636,14 @@ Each intervention system; hub, functions as an architectural intervention, not a
           Because no external system outperforms the internal decision-architecture governing it.
         </p>
 
-        <!-- Sovereign Protocol Button -->
-        <div style="text-align: center;">
+        <!-- Sovereign Protocol Button Row (Explore + IP Licensing side-by-side) -->
+        <div class="btn-row">
           <a href="sovereignprotocol.html" class="diagnostic-btn">
             🎯 Explore The Sovereign Protocol
+          </a>
+
+          <a href="iplicensing.html" class="ip-licensing-btn">
+            📄 IP Licensing — Sovereign Protocol
           </a>
         </div>
 
