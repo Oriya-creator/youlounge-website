@@ -298,6 +298,32 @@
       box-shadow: 0 5px 15px rgba(0, 128, 128, 0.3);
     }
 
+    /* NEW: IP Licensing Button (placed next to Sovereign Protocol name) */
+    .ip-licensing-btn {
+      display: inline-block;
+      padding: 8px 14px;
+      text-decoration: none;
+      background-color: var(--terracotta);
+      color: white;
+      border-radius: 8px;
+      border: 2px solid var(--terracotta);
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: 10px;
+      font-size: 0.95rem;
+      line-height: 1;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .ip-licensing-btn:hover {
+      background-color: transparent;
+      color: var(--terracotta);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(168, 92, 50, 0.25);
+    }
+
     /* Think Tank Link Button */
     .thinktank-link {
       display: inline-block;
@@ -461,42 +487,48 @@
       .hubs-hero h1 {
         font-size: 2.5rem;
       }
-      
+
       .hubs-hero p {
         font-size: 1.1rem;
       }
-      
+
       .collapsible {
         font-size: 22px;
         padding: 18px;
         border-radius: 12px;
       }
-      
+
       .section-title {
         font-size: 2.2rem;
       }
-      
+
       .content {
         padding: 20px;
       }
-      
+
       .nested-collapsible {
         font-size: 16px;
         padding: 15px;
       }
-      
+
       .mobile-menu a {
         padding: 18px;
         font-size: 16px;
       }
-      
+
       .logo-img {
         height: 40px;
       }
-      
+
       .diagnostic-btn, .thinktank-link {
         font-size: 1rem;
         padding: 12px 20px;
+      }
+
+      .ip-licensing-btn{
+        display: block;
+        width: fit-content;
+        margin: 10px auto 0;
       }
     }
 
@@ -504,29 +536,29 @@
       .hubs-hero {
         padding: 120px 15px 50px;
       }
-      
+
       .hubs-hero h1 {
         font-size: 2rem;
       }
-      
+
       .collapsible {
         font-size: 20px;
         padding: 16px;
       }
-      
+
       .content p {
         font-size: 1rem;
       }
-      
+
       .nested-collapsible {
         font-size: 15px;
         padding: 12px;
       }
-      
+
       .footer-logo-img {
         max-width: 200px;
       }
-      
+
       .special-note {
         font-size: 1rem;
         padding: 12px;
@@ -547,7 +579,7 @@
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    
+
     <!-- Mobile Menu - Same as thinktank.html -->
     <nav class="mobile-menu" id="mobileMenu">
       <ul>
@@ -572,26 +604,36 @@ Each intervention system; hub, functions as an architectural intervention, not a
   <section class="hubs-section">
     <div class="container">
       <h2 class="section-title fade-in">Governance Decision Architect Intervention System</h2>
-      
+
       <!-- Human Agency Systems - Updated with Sovereign Protocol -->
       <button class="collapsible">Human Agency Systems</button>
       <div class="content">
         <p><strong>Governance Decision Coherence At Executive-Individual, Institutional & National Level</strong><br></p>
-        
-        <p>Human Agency Systems Core Principle:
-      <strong>When the internal signal governing-identity is clear, decisions become decisive, authority stabilizes, and governance clarity regains integrity.</strong></p>
-        
-        <p><strong>The Sovereign Protocol</strong> restores this clarity at the level where governance-identity, authority, and action originate.</p>
-        
-       This is not performance optimization.</br>
-       This is not leadership coaching.</br>
-       This is not performance optimisation.</br>
-       This is not cultural transformation.</br>
-       This is <strong>Governance Architecture.</strong></p>
 
-       This work happens before strategy, before delegation, and before execution.</br>
-       Because no external system outperforms the internal decision-architecture governing it.
-        
+        <p>Human Agency Systems Core Principle:
+          <strong>When the internal signal governing-identity is clear, decisions become decisive, authority stabilizes, and governance clarity regains integrity.</strong>
+        </p>
+
+        <p>
+          <strong>The Sovereign Protocol</strong>
+          <!-- NEW BUTTON: placed right next to the Sovereign Protocol name -->
+          <a href="iplicensing.html" class="ip-licensing-btn">IP Licensing — Sovereign Protocol</a>
+          restores this clarity at the level where governance-identity, authority, and action originate.
+        </p>
+
+        <p>
+          This is not performance optimization.</br>
+          This is not leadership coaching.</br>
+          This is not performance optimisation.</br>
+          This is not cultural transformation.</br>
+          This is <strong>Governance Architecture.</strong>
+        </p>
+
+        <p>
+          This work happens before strategy, before delegation, and before execution.</br>
+          Because no external system outperforms the internal decision-architecture governing it.
+        </p>
+
         <!-- Sovereign Protocol Button -->
         <div style="text-align: center;">
           <a href="sovereignprotocol.html" class="diagnostic-btn">
@@ -599,21 +641,20 @@ Each intervention system; hub, functions as an architectural intervention, not a
           </a>
         </div>
 
-     <!-- Executive Seat Request Button -->
-<div style="text-align:center; margin: 18px 0;">
-  <a href="/executive-seat-request.html"
-     style="display:inline-block; padding: 14px 26px; background: #A85C32; color: #fff; border-radius: 10px;
-            font-weight: 800; text-decoration: none; border: 2px solid #A85C32;">
-    🟡 Executive Seat Request
-  </a>
-</div>
+        <!-- Executive Seat Request Button -->
+        <div style="text-align:center; margin: 18px 0;">
+          <a href="/executive-seat-request.html"
+             style="display:inline-block; padding: 14px 26px; background: #A85C32; color: #fff; border-radius: 10px;
+                    font-weight: 800; text-decoration: none; border: 2px solid #A85C32;">
+            🟡 Executive Seat Request
+          </a>
+        </div>
 
-        
         <div class="special-note">
           <strong>The Operating System Coherently Aligning Decisive Governance.</strong></br>
           The Sovereign Protocol is the core decision architecture underpinning the Human Agency System.
           It redesigns the internal decision structural-systems through which governance is executed.<br>
-          
+
           This Work Is Fundamental.<br>
           <strong>It governs how decisions are made; not what decisions are made.</strong></br>
           It re-architects the internal structures from which executives govern:<br>
@@ -627,51 +668,55 @@ Each intervention system; hub, functions as an architectural intervention, not a
       <!-- Media & Creative Systems -->
       <button class="collapsible">Media & Creative Systems</button>
       <div class="content">
-        <p><strong>Narrative Architecture For Individual-Executives, Institutional and National Coherence</strong><br> 
-        A Meaning-Shaping Governance Discipline That Operates Upstream Of Opinion, Socio-Economic Culture And Policy.<br>
+        <p><strong>Narrative Architecture For Individual-Executives, Institutional and National Coherence</strong><br>
+          A Meaning-Shaping Governance Discipline That Operates Upstream Of Opinion, Socio-Economic Culture And Policy.<br>
 
-      <br>This Governance Discipline:
-      <br>• Interprets Complexity<br>
+          <br>This Governance Discipline:
+          <br>• Interprets Complexity<br>
           • Holds Shared Meaning Under Pressured-Consequences<br>
           • Navigates Transition Without Fragmentation<br>
-<strong>Media As Governance Communication Output.</strong></br>
+          <strong>Media As Governance Communication Output.</strong></br>
 
- <br>The System Works Through Tightly Governed Narrative Forms, Including:
-        <br>■ Animation
-        <br>■ Gaming
-        <br>■ Talkshows & Films</p>
-        
-<br>Precision Is Prioritised Over Reach.</br>
-<strong>The Objective Is Coherence - Not Visibility.</strong>
+          <br>The System Works Through Tightly Governed Narrative Forms, Including:
+          <br>■ Animation
+          <br>■ Gaming
+          <br>■ Talkshows & Films
+        </p>
+
+        <br>Precision Is Prioritised Over Reach.</br>
+        <strong>The Objective Is Coherence - Not Visibility.</strong>
       </div>
 
       <!-- M.I.C.E Systems -->
       <button class="collapsible">M.I.C.E Systems</button>
       <div class="content">
         <p><strong>Meetings, Incentives, Decision Containment, and Execution; Re-Designed</strong>
-        <br>Governance-Execution Breaks Down Not Because Leadership Decides Poorly But, Systems Translate Decisions Inconsistently.<br>
-        <br><strong>M.I.C.E. Re-Designs The Structures Where Execution Fails - So Decisions Move Swiftly Into Reality.</strong></br></p> 
-     
-        <p>Governance-Execution Break Down Typically Arises From Structural & System Misalignment Within The Governance-Execution Environment:</br> 
-            • Execution failure at scale is rarely the result of poor leadership judgment or inadequate governance intent.<br>
-            • Decision ambiguity embedded in meeting design<br>
-            • Incentive structures that unintentionally contradict stated objectives<br>
-            • Legacy control mechanisms that introduce friction and delay<br>
-            • Accountability frameworks that exceed delegated authority<br>
-        <br><strong>The M.I.C.E. System Re-Designs For Strurctural-Systematic Coherence - Not Behavioural Pressure, Additional Oversight, Or Executive Strain.</strong></br>
+          <br>Governance-Execution Breaks Down Not Because Leadership Decides Poorly But, Systems Translate Decisions Inconsistently.<br>
+          <br><strong>M.I.C.E. Re-Designs The Structures Where Execution Fails - So Decisions Move Swiftly Into Reality.</strong></br>
+        </p>
 
-        <br>Why Redesign Is Required
-        <br> M.I.C.E Coherently Re-Aligns:<br>
+        <p>
+          Governance-Execution Break Down Typically Arises From Structural & System Misalignment Within The Governance-Execution Environment:</br>
+          • Execution failure at scale is rarely the result of poor leadership judgment or inadequate governance intent.<br>
+          • Decision ambiguity embedded in meeting design<br>
+          • Incentive structures that unintentionally contradict stated objectives<br>
+          • Legacy control mechanisms that introduce friction and delay<br>
+          • Accountability frameworks that exceed delegated authority<br>
+          <br><strong>The M.I.C.E. System Re-Designs For Strurctural-Systematic Coherence - Not Behavioural Pressure, Additional Oversight, Or Executive Strain.</strong></br>
+
+          <br>Why Redesign Is Required
+          <br> M.I.C.E Coherently Re-Aligns:<br>
           • How Meetings Produce Decisions<br>
           • How Incentives Reinforce Mandates<br>
           • How Decision Containment Protects Momentum Without Constraining Coherence<br>
           • How Execution Proceeds Without Rework Or Escalation<br>
-<br><strong>Decision Containment Ensures Authority, Accountability, & Execution Remain Aligned As Decisions Move In Governed Action - Coherently</strong></p>
+          <br><strong>Decision Containment Ensures Authority, Accountability, & Execution Remain Aligned As Decisions Move In Governed Action - Coherently</strong>
+        </p>
       </div>
 
       <!-- Non-Profit & Think Tank Systems - Now links to thinktank.html -->
       <button class="collapsible">Non-Profit & Think Tank Systems</button>
-      <div class="content"> 
+      <div class="content">
         <p><strong>Long-Horizon Governance Stewardship</strong> - At You Lounge, We Build With & For Community Graduation. </p>
 
         <div style="text-align: center; margin: 30px 0;">
@@ -680,7 +725,7 @@ Each intervention system; hub, functions as an architectural intervention, not a
           </a>
         </div>
       </div>
-      
+
       <!-- Additional Return to Homepage Button at Bottom -->
       <div style="text-align: center; margin-top: 50px;">
         <a href="index.html" class="return-home-btn">
@@ -695,12 +740,12 @@ Each intervention system; hub, functions as an architectural intervention, not a
     <div class="footer-content container">
       <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
       <p class="footer-tagline">Governance Architects for Complex, Multi-National Decisions</p>
-      
+
       <div class="contact-info">
         <p>Connect With Our Governance Architects:</p>
         <p><a href="#" id="openContactForm">executive@youlounge.org</a></p>
       </div>
-      
+
       <div class="copyright">
         <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="#" id="footerContact">Contact</a></p>
       </div>
@@ -711,7 +756,7 @@ Each intervention system; hub, functions as an architectural intervention, not a
     // Hamburger Menu Toggle - Matching thinktank.html
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-    
+
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('active');
       const icon = hamburger.querySelector('i');
@@ -723,7 +768,7 @@ Each intervention system; hub, functions as an architectural intervention, not a
         icon.classList.add('fa-bars');
       }
     });
-    
+
     // Close menu when clicking a link
     const menuLinks = document.querySelectorAll('.mobile-menu a');
     menuLinks.forEach(link => {
