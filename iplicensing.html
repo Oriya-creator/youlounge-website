@@ -3,373 +3,926 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Licensing — Sovereign Protocol™</title>
-  <meta name="description" content="Sovereign Protocol™ is proprietary governance infrastructure licensed for structured institutional use. Access pathways: Pilot, Institutional, Charter." />
-
+  <title>Sovereign Protocol™ | Licensing</title>
   <style>
-    :root{
-      --bg:#0e0f11;
-      --panel:#14161a;
-      --text:#f2f2f2;
-      --muted:#b7bcc6;
-      --line:rgba(255,255,255,.10);
-      --accent:#e8e3d4;
-      --accent2:#9aa4b2;
-      --btn:#f2f2f2;
-      --btnText:#0e0f11;
-      --shadow:0 18px 40px rgba(0,0,0,.35);
-      --radius:18px;
+    :root {
+      --bg: #f5f1e8;
+      --surface: #ffffff;
+      --surface-2: #f8f6f1;
+      --text: #1e2430;
+      --muted: #5f6774;
+      --line: #d9d3c7;
+      --primary: #143a63;
+      --primary-2: #1f5a96;
+      --accent: #8c6a2a;
+      --green: #2f6d52;
+      --shadow: 0 14px 40px rgba(20, 58, 99, 0.08);
+      --radius: 20px;
+      --max: 1200px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 700px at 10% 0%, rgba(232,227,212,.10), transparent 55%),
-                  radial-gradient(900px 600px at 90% 10%, rgba(154,164,178,.10), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.55;
+    * {
+      box-sizing: border-box;
     }
 
-    a{color:inherit}
-    .wrap{
-      max-width: 1040px;
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(180deg, #f8f5ee 0%, #f3efe6 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max));
       margin: 0 auto;
-      padding: 42px 20px 80px;
     }
 
-    header{
-      padding: 22px 0 14px;
-      border-bottom:1px solid var(--line);
-      margin-bottom: 26px;
+    .topbar {
+      border-bottom: 1px solid rgba(217, 211, 199, 0.7);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
-    .kicker{
-      color:var(--muted);
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:.78rem;
-      margin:0 0 10px;
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
     }
-    h1{
-      font-size: clamp(2rem, 3.3vw, 3rem);
-      margin: 0 0 10px;
+
+    .brand {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
       font-weight: 700;
     }
-    .sub{
-      color:var(--muted);
-      font-size: 1.06rem;
-      max-width: 70ch;
-      margin: 0;
-    }
 
-    .grid{
-      display:grid;
-      gap: 18px;
-      grid-template-columns: 1.2fr .8fr;
-      margin-top: 22px;
-    }
-    @media (max-width: 900px){
-      .grid{grid-template-columns:1fr}
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-
-    h2{
-      margin: 0 0 10px;
-      font-size: 1.25rem;
-      letter-spacing:.02em;
-    }
-    h3{
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-      letter-spacing:.01em;
-    }
-    p{margin: 0 0 12px}
-    ul{
-      margin: 10px 0 0 18px;
-      padding:0;
-      color:var(--muted);
-    }
-    li{margin: 6px 0}
-
-    .pillrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 12px;
-    }
-    .pill{
-      border:1px solid var(--line);
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.95rem;
       color: var(--muted);
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size:.9rem;
-      background: rgba(0,0,0,.18);
-      white-space:nowrap;
     }
 
-    .pathways{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 14px;
+    .nav a:hover {
+      color: var(--primary);
     }
-    @media (max-width: 900px){
-      .pathways{grid-template-columns:1fr}
+
+    .hero {
+      padding: 80px 0 56px;
     }
-    .path{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-      background: rgba(0,0,0,.18);
-    }
-    .path .tag{
-      display:inline-block;
-      padding: 6px 10px;
-      border:1px solid var(--line);
-      border-radius: 999px;
-      color: var(--accent);
-      font-size: .78rem;
-      letter-spacing:.08em;
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 10px;
-      background: rgba(232,227,212,.06);
-    }
-    .path p{
-      color: var(--muted);
-      margin: 0;
-      font-size: .98rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+      font-weight: 700;
     }
 
-    .rules{
-      display:grid;
+    h1, h2, h3, h4 {
+      margin: 0 0 16px;
+      line-height: 1.15;
+      color: var(--primary);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .lead {
+      font-size: 1.14rem;
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid rgba(217, 211, 199, 0.7);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-tags {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-top: 14px;
+      margin-top: 28px;
     }
-    @media (max-width: 900px){
-      .rules{grid-template-columns:1fr}
-    }
-    .rule{
-      border:1px solid var(--line);
+
+    .tag {
+      background: var(--surface);
+      border: 1px solid rgba(20, 58, 99, 0.12);
       border-radius: 16px;
-      padding: 16px;
-      background: rgba(0,0,0,.18);
-    }
-    .rule strong{
-      display:block;
-      margin-bottom: 8px;
-      font-size: .98rem;
-      letter-spacing:.01em;
-    }
-    .rule span{color:var(--muted)}
-
-    .cta{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      align-items:flex-start;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: var(--btn);
-      color: var(--btnText);
-      text-decoration:none;
+      padding: 16px 18px;
+      font-size: 0.95rem;
+      color: var(--primary);
       font-weight: 700;
-      letter-spacing:.01em;
-      transition: transform .08s ease, opacity .2s ease;
+      box-shadow: 0 6px 20px rgba(20, 58, 99, 0.05);
     }
-    .btn:hover{transform: translateY(-1px)}
-    .btn:active{transform: translateY(0)}
-    .btn.secondary{
+
+    section {
+      padding: 28px 0 32px;
+    }
+
+    .section-card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(217, 211, 199, 0.7);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(20, 58, 99, 0.1);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .card h3,
+    .card h4 {
+      color: var(--primary);
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .domain-card {
+      border-left: 4px solid var(--primary);
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .process-step::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .quote-box {
+      background: linear-gradient(135deg, rgba(20, 58, 99, 0.06), rgba(31, 90, 150, 0.03));
+      border: 1px solid rgba(20, 58, 99, 0.08);
+      border-radius: 18px;
+      padding: 22px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #143a63 0%, #1a4f83 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 38px;
+      box-shadow: 0 18px 40px rgba(20, 58, 99, 0.2);
+    }
+
+    .cta h2,
+    .cta p,
+    .cta a {
+      color: #fff;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #fff;
       background: transparent;
-      color: var(--text);
-      border:1px solid var(--line);
-      font-weight: 600;
     }
 
-    .note{
-      color: var(--muted);
-      font-size: .95rem;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-      margin-top: 14px;
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    footer{
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .92rem;
+    .snapshot {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
     }
-    .small{
-      font-size: .9rem;
-      color: var(--muted);
+
+    .snapshot .card {
+      background: var(--surface-2);
     }
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      font-size: .92em;
+
+    footer {
+      padding: 28px 0 60px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .two-col,
+      .grid-2,
+      .grid-3,
+      .snapshot {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      .section-card,
+      .hero-card,
+      .cta {
+        padding: 24px;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <p class="kicker">Licensing</p>
-      <h1>Sovereign Protocol™</h1>
-      <p class="sub">
-        Global decision architecture licensed for structured institutional use. Sovereign Protocol™ governs decision coherence in environments of political, structural, and operational complexity.
-      </p>
-      <div class="pillrow" aria-label="Key attributes">
-        <span class="pill">Proprietary governance infrastructure</span>
-        <span class="pill">Licensed access</span>
-        <span class="pill">Scope-bounded use</span>
-        <span class="pill">Integrity oversight</span>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">Sovereign Protocol™</div>
+      <nav class="nav">
+        <a href="#problem">Institutional Problem</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#receive">What Institutions Receive</a>
+        <a href="#licensed">Licensed, Not Sold</a>
+        <a href="#pathways">Access Pathways</a>
+        <a href="#process">Licensing Process</a>
+        <a href="#contact">Request Discussion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Licensing</div>
+            <h1>Sovereign Protocol™</h1>
+            <p class="lead">
+              <span class="highlight">Proprietary decision architecture licensed for disciplined institutional use.</span>
+            </p>
+            <p class="lead">
+              Sovereign Protocol™ is a proprietary governance framework designed to stabilise decision coherence in environments where political, structural, and operational complexity erode authority, escalation discipline, and decision closure.
+            </p>
+            <p class="lead">
+              The framework is licensed to institutions responsible for high-impact decision environments where coherence must be maintained under pressure.
+            </p>
+
+            <div class="hero-tags">
+              <div class="tag">Proprietary governance infrastructure</div>
+              <div class="tag">Licensed institutional access</div>
+              <div class="tag">Scope-bounded deployment</div>
+              <div class="tag">Integrity oversight</div>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <h3>Licensing Conditions Snapshot</h3>
+            <ul>
+              <li>Time-bound access</li>
+              <li>Purpose-limited use</li>
+              <li>Entity-specific rights</li>
+              <li>Non-transferable license</li>
+              <li>Review-based continuation</li>
+              <li>Expansion by written approval only</li>
+            </ul>
+          </aside>
+        </div>
       </div>
-    </header>
-
-    <section class="grid" aria-label="Licensing Overview">
-      <div class="card">
-        <h2>Licensed, Not Sold</h2>
-        <p>
-          Sovereign Protocol™ is not advisory support, facilitation, or training content. It is a proprietary decision-architecture framework
-          licensed to institutions that steward high-impact decisions under complexity.
-        </p>
-        <p class="small">
-          Governance architecture cannot be distributed informally. Licensing protects integrity of design, disciplined application, and controlled expansion.
-        </p>
-
-        <h2 style="margin-top:18px;">Why It Is Licensed</h2>
-        <ul>
-          <li>Preserves architectural integrity and coherence under real institutional conditions</li>
-          <li>Prevents misuse, over-extension, dilution, and informal replication</li>
-          <li>Maintains accountability through bounded rights and periodic review</li>
-          <li>Enables measured scaling without collapsing the category into consultancy</li>
-        </ul>
-
-        <h2 style="margin-top:18px;">Access Pathways</h2>
-        <div class="pathways">
-          <div class="path">
-            <span class="tag">Pilot License</span>
-            <h3>Structured institutional evaluation</h3>
-            <p>Time-bound, scope-limited access within a defined decision domain. Designed to determine suitability before embedding.</p>
-          </div>
-
-          <div class="path">
-            <span class="tag">Institutional License</span>
-            <h3>Annual structured embedding</h3>
-            <p>For disciplined multi-domain use across named governance functions, with custodianship and continued oversight.</p>
-          </div>
-
-          <div class="path">
-            <span class="tag">Charter License</span>
-            <h3>Strategic deployment</h3>
-            <p>Reserved for national, cross-sectoral, or multinational alignment. Bespoke terms with strict structural governance.</p>
-          </div>
-        </div>
-
-        <h2 style="margin-top:18px;">What Licensing Does Not Provide</h2>
-        <div class="rules">
-          <div class="rule">
-            <strong>No advisory services</strong>
-            <span>Licensing grants architectural access; it does not constitute consultancy or outsourced decision-making.</span>
-          </div>
-          <div class="rule">
-            <strong>No ownership transfer</strong>
-            <span>All intellectual property remains exclusively vested in the Licensor.</span>
-          </div>
-          <div class="rule">
-            <strong>No white-labelling</strong>
-            <span>The protocol is not repackaged, rebranded, or presented as another party’s work.</span>
-          </div>
-          <div class="rule">
-            <strong>No accreditation rights</strong>
-            <span>Submission of the protocol for certification or standardisation is prohibited without written consent.</span>
-          </div>
-          <div class="rule">
-            <strong>No unrestricted use</strong>
-            <span>Use is bounded by scope, purpose, and term. Expansion requires explicit relicensing.</span>
-          </div>
-          <div class="rule">
-            <strong>No sublicensing</strong>
-            <span>Rights are non-transferable and non-sublicensable unless expressly granted.</span>
-          </div>
-        </div>
-
-        <p class="note">
-          <strong>Integrity & Oversight:</strong> All licenses are time-bound, purpose-specific, and subject to review. Unauthorized replication or integration is prohibited.
-        </p>
-      </div>
-
-      <aside class="card">
-        <h2>Request Exploratory Discussion</h2>
-        <p class="small">
-          Institutions stewarding complex governance environments may request a licensing discussion. Access is selective.
-        </p>
-
-        <div class="cta" style="margin-top:14px;">
-          <!-- Replace href with your preferred flow:
-               - mailto
-               - a form page like /licensing-inquiry
-               - a calendly link
-          -->
-          <a class="btn" href="mailto:laonetsimakoko@gmail.com?subject=Licensing%20Inquiry%20—%20Sovereign%20Protocol™&body=Hello%20Laone%2C%0D%0A%0D%0AWe%20would%20like%20to%20request%20an%20exploratory%20licensing%20discussion%20for%20Sovereign%20Protocol™.%0D%0A%0D%0AOrganisation%3A%20%0D%0ACountry%3A%20%0D%0ADecision%20domain%3A%20%0D%0AContact%20person%3A%20%0D%0A%0D%0ARegards%2C">
-            Request Discussion
-          </a>
-          <a class="btn secondary" href="/contact">Alternative: Contact Page</a>
-        </div>
-
-        <div class="note">
-          <p class="small">
-            <strong>Suggested preparation:</strong><br/>
-            1) Your governance context and decision domain<br/>
-            2) Where decision coherence breaks under complexity<br/>
-            3) Internal custodianship capability<br/>
-          </p>
-        </div>
-
-        <h2 style="margin-top:18px;">Licensing Conditions (Snapshot)</h2>
-        <ul>
-          <li>Time-bound access</li>
-          <li>Purpose-limited usage</li>
-          <li>Non-transferable rights</li>
-          <li>Review-based continuation</li>
-        </ul>
-
-        <p class="small" style="margin-top:14px;">
-          <span class="mono">Note:</span> This page intentionally does not publish pricing. Licensing fees are determined by scope, jurisdiction, and institutional scale.
-        </p>
-      </aside>
     </section>
 
-    <footer>
-      <div><strong>IP Notice</strong></div>
-      <p>
-        Sovereign Protocol™ is proprietary intellectual property licensed under defined conditions. Unauthorized use, replication, standardisation,
-        or derivative re-publication is prohibited. © <span id="y"></span> You Lounge / Licensor. All rights reserved.
-      </p>
-    </footer>
-  </div>
+    <section id="problem">
+      <div class="container">
+        <div class="section-card">
+          <h2>The Institutional Problem</h2>
+          <div class="two-col">
+            <div>
+              <p>
+                Complex institutions rarely fail because leaders lack intelligence.
+              </p>
+              <p class="quote-box">
+                They fail when structural conditions allow decision drift.
+              </p>
+              <p>
+                Under pressure, organisations commonly experience:
+              </p>
+              <ul>
+                <li>decisions reopening repeatedly</li>
+                <li>authority boundaries becoming unclear</li>
+                <li>escalation circulating across committees</li>
+                <li>duplicated analysis across governance layers</li>
+                <li>operational execution slowed by governance friction</li>
+                <li>quiet erosion of accountability</li>
+              </ul>
+            </div>
+            <div>
+              <p>Over time, these conditions generate measurable institutional costs:</p>
+              <ul>
+                <li>executive time loss</li>
+                <li>delayed strategic execution</li>
+                <li>duplicated institutional effort</li>
+                <li>unresolved cross-functional conflict</li>
+                <li>erosion of governance credibility</li>
+              </ul>
+              <p class="muted" style="margin-top: 16px;">
+                Sovereign Protocol™ addresses these structural conditions by introducing disciplined decision architecture into complex governance environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <script>
-    // Update footer year automatically
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+    <section id="architecture">
+      <div class="container">
+        <div class="section-card">
+          <h2>Sovereign Protocol Architecture</h2>
+          <p>
+            Sovereign Protocol™ is designed as <span class="highlight">decision architecture</span>, not consultancy methodology.
+          </p>
+          <p>
+            It establishes structural conditions that allow institutions to:
+          </p>
+          <ul>
+            <li>clarify authority boundaries</li>
+            <li>contain escalation pathways</li>
+            <li>maintain decision closure</li>
+            <li>reduce circular governance processes</li>
+            <li>sustain coherence across governance layers</li>
+          </ul>
+          <p class="muted" style="margin-top: 16px;">
+            The architecture does not replace existing governance systems. It introduces structural discipline within them.
+          </p>
+
+          <div style="height: 24px;"></div>
+
+          <h3>Core Architectural Domains</h3>
+          <div class="grid-2">
+            <div class="card domain-card">
+              <h4>Authority Structure</h4>
+              <p>
+                Clarifies where formal authority sits and how decision rights operate across governance levels.
+              </p>
+              <p class="muted">Ambiguous authority is one of the most common drivers of institutional drift.</p>
+            </div>
+
+            <div class="card domain-card">
+              <h4>Escalation Pathways</h4>
+              <p>
+                Defines structured escalation mechanisms so unresolved issues move upward with clarity rather than circulating indefinitely.
+              </p>
+              <p class="muted">Escalation discipline prevents governance paralysis.</p>
+            </div>
+
+            <div class="card domain-card">
+              <h4>Decision Closure</h4>
+              <p>
+                Establishes formal mechanisms ensuring decisions remain closed once made by the appropriate authority unless formally reopened.
+              </p>
+              <p class="muted">This protects institutional momentum and prevents endless reconsideration cycles.</p>
+            </div>
+
+            <div class="card domain-card">
+              <h4>Institutional Memory</h4>
+              <p>
+                Provides structured recording of decisions, ownership, and rationale so organisations do not repeatedly revisit already-resolved matters.
+              </p>
+              <p class="muted">This preserves accountability and reduces duplicated analysis.</p>
+            </div>
+
+            <div class="card domain-card" style="grid-column: 1 / -1;">
+              <h4>Governance Rhythm</h4>
+              <p>
+                Introduces structured review cycles that maintain coherence over time rather than allowing drift to accumulate.
+              </p>
+              <p class="muted">Sustained rhythm prevents decision systems from degrading under operational pressure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="receive">
+      <div class="container">
+        <div class="section-card">
+          <h2>What Institutions Receive Under License</h2>
+          <p>
+            Institutions licensed to use Sovereign Protocol™ receive bounded access to the architecture and its operational components required for disciplined institutional deployment.
+          </p>
+          <p>
+            Licensing does not transfer ownership of the intellectual property.
+          </p>
+          <p class="muted">
+            Licensed access may include the following structural components.
+          </p>
+
+          <div class="grid-2" style="margin-top: 22px;">
+            <div class="card">
+              <h3>Structural Doctrine</h3>
+              <p>
+                The Structural Doctrine establishes the conceptual foundation governing how Sovereign Protocol™ operates.
+              </p>
+              <p>The doctrine includes:</p>
+              <ul>
+                <li>governing principles of decision coherence under complexity</li>
+                <li>definitions of core architectural concepts</li>
+                <li>boundaries preventing interpretive drift</li>
+                <li>structural logic guiding institutional deployment</li>
+              </ul>
+              <p class="muted" style="margin-top: 14px;">
+                The doctrine functions as the authoritative reference preserving architectural consistency across licensed environments.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Decision Architecture Framework</h3>
+              <p>
+                Licensed institutions receive access to the structural framework that addresses the institutional conditions where decision coherence typically breaks down.
+              </p>
+              <p>The framework supports:</p>
+              <ul>
+                <li>decision containment</li>
+                <li>authority clarity</li>
+                <li>escalation discipline</li>
+                <li>documented closure</li>
+                <li>institutional coherence across governance layers</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Governance Operating Structures</h3>
+              <p>
+                Licensed institutions receive structured components designed to stabilise decision flow within complex organisations.
+              </p>
+              <p>These structures may include:</p>
+              <ul>
+                <li>decision rights mapping frameworks</li>
+                <li>escalation containment protocols</li>
+                <li>executive meeting closure formats</li>
+                <li>institutional decision logging structures</li>
+                <li>governance rhythm frameworks</li>
+              </ul>
+              <p class="muted" style="margin-top: 14px;">
+                These structures integrate with existing governance systems rather than replacing them.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Implementation Methodology</h3>
+              <p>
+                Licensed institutions receive access to the structured methodology used to introduce the architecture into operational governance environments.
+              </p>
+              <p>Implementation guidance may include:</p>
+              <ul>
+                <li>preparation protocols for institutional adoption</li>
+                <li>structured assessment of decision environments</li>
+                <li>installation sequencing for stabilising decision architecture</li>
+                <li>internal custodianship models</li>
+                <li>sustainment guidance following deployment</li>
+              </ul>
+              <p class="muted" style="margin-top: 14px;">
+                This ensures disciplined implementation rather than informal interpretation.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Institutional Documentation and Templates</h3>
+              <p>Licensed use may include operational materials supporting implementation.</p>
+              <p>Examples may include:</p>
+              <ul>
+                <li>decision architecture templates</li>
+                <li>escalation mapping documentation</li>
+                <li>governance rhythm frameworks</li>
+                <li>executive decision logging structures</li>
+                <li>coherence review documentation</li>
+              </ul>
+              <p class="muted" style="margin-top: 14px;">
+                These materials support operational use while preserving architectural integrity.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>Framework Updates</h3>
+              <p>
+                Where necessary, licensed institutions may receive structural clarification notices or documentation updates designed to maintain architectural coherence across deployments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="licensed">
+      <div class="container">
+        <div class="section-card">
+          <div class="two-col">
+            <div>
+              <h2>Licensed, Not Sold</h2>
+              <p>
+                Sovereign Protocol™ is licensed under defined contractual terms.
+              </p>
+              <p>
+                It is not sold, transferred, assigned, or distributed informally.
+              </p>
+              <p>A license grants a limited right to use the framework within:</p>
+              <ul>
+                <li>a defined institutional entity</li>
+                <li>a defined scope of use</li>
+                <li>a defined decision environment</li>
+                <li>a defined licensing term</li>
+              </ul>
+              <p class="muted" style="margin-top: 14px;">
+                All intellectual property, architecture, and structural design remain exclusively owned by the Licensor.
+              </p>
+            </div>
+
+            <div>
+              <h2>Why Sovereign Protocol Is Licensed</h2>
+              <p>
+                Licensing exists to protect the framework’s structural integrity.
+              </p>
+              <p>It ensures that the architecture:</p>
+              <ul>
+                <li>remains coherent across institutional use</li>
+                <li>is not diluted through informal replication</li>
+                <li>is applied within disciplined governance environments</li>
+                <li>maintains accountability through bounded use rights</li>
+                <li>scales responsibly without collapsing into consultancy or training content</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pathways">
+      <div class="container">
+        <div class="section-card">
+          <h2>Access Pathways</h2>
+          <div class="grid-3">
+            <div class="card">
+              <h3>Pilot License</h3>
+              <p><strong>Structured institutional evaluation</strong></p>
+              <p>
+                Provides time-bound, scope-limited access within a defined governance or decision domain.
+              </p>
+              <p>
+                Pilot licenses allow institutions to evaluate the architecture under real operational conditions before broader adoption.
+              </p>
+              <p>Typical pilot environments include:</p>
+              <ul>
+                <li>executive decision environments</li>
+                <li>governance or risk functions</li>
+                <li>cross-functional strategic initiatives</li>
+                <li>complex programme oversight</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Institutional License</h3>
+              <p><strong>Annual structured embedding</strong></p>
+              <p>
+                Provides licensed internal use across defined governance functions or decision domains.
+              </p>
+              <p>
+                Institutional licenses support disciplined embedding of the architecture within organisational decision systems.
+              </p>
+              <p>These licenses require:</p>
+              <ul>
+                <li>defined internal custodianship</li>
+                <li>disciplined application</li>
+                <li>continued structural oversight</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Charter License</h3>
+              <p><strong>Strategic deployment</strong></p>
+              <p>
+                Reserved for national, cross-sectoral, multinational, or system-level deployment environments.
+              </p>
+              <p>
+                Charter licenses operate under bespoke structural governance conditions and heightened oversight.
+              </p>
+              <p class="muted">Availability is selective.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-card">
+          <h2>What Licensing Does Not Provide</h2>
+          <p>
+            Licensing grants architectural use. It does not provide the following unless separately contracted.
+          </p>
+
+          <div class="grid-2" style="margin-top: 20px;">
+            <div class="card">
+              <h4>No advisory services</h4>
+              <p>Licensing does not constitute consultancy, facilitation, or outsourced governance support.</p>
+            </div>
+
+            <div class="card">
+              <h4>No ownership transfer</h4>
+              <p>All intellectual property remains exclusively vested in the Licensor.</p>
+            </div>
+
+            <div class="card">
+              <h4>No white-labelling</h4>
+              <p>Sovereign Protocol™ may not be repackaged, rebranded, or presented as another organisation’s proprietary framework.</p>
+            </div>
+
+            <div class="card">
+              <h4>No accreditation submission</h4>
+              <p>The framework may not be submitted to third-party accreditation or standardisation bodies without written consent.</p>
+            </div>
+
+            <div class="card">
+              <h4>No unrestricted use</h4>
+              <p>Use is bounded by defined scope, entity, purpose, and term.</p>
+            </div>
+
+            <div class="card">
+              <h4>No sublicensing</h4>
+              <p>Licenses may not be transferred or sublicensed unless explicitly authorised.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-card">
+          <h2>Licensing Process</h2>
+          <p>
+            Licensing Sovereign Protocol™ follows a structured process designed to ensure the architecture is deployed only in environments where disciplined stewardship is possible.
+          </p>
+
+          <div class="grid-2" style="margin-top: 22px;">
+            <div class="card process-step">
+              <h3>Step 1 — Request Discussion</h3>
+              <p>
+                Institutions begin by requesting an exploratory licensing discussion.
+              </p>
+              <p>
+                This initial step allows evaluation of the governance environment and the decision conditions involved.
+              </p>
+              <p>Institutions typically outline:</p>
+              <ul>
+                <li>governance context</li>
+                <li>decision domains affected by complexity</li>
+                <li>organisational scale</li>
+                <li>internal custodianship capability</li>
+              </ul>
+            </div>
+
+            <div class="card process-step">
+              <h3>Step 2 — Institutional Evaluation</h3>
+              <p>
+                Where appropriate, a deeper evaluation discussion may occur to determine suitability.
+              </p>
+              <p>Evaluation may consider:</p>
+              <ul>
+                <li>sources of decision drift</li>
+                <li>structural complexity of the environment</li>
+                <li>readiness for disciplined architectural deployment</li>
+              </ul>
+            </div>
+
+            <div class="card process-step">
+              <h3>Step 3 — Licensing Agreement</h3>
+              <p>
+                Where both parties agree to proceed, a licensing agreement defines:
+              </p>
+              <ul>
+                <li>the licensed institutional entity</li>
+                <li>scope of use</li>
+                <li>decision domains covered</li>
+                <li>licensing term</li>
+                <li>integrity and oversight conditions</li>
+              </ul>
+            </div>
+
+            <div class="card process-step">
+              <h3>Step 4 — Deployment</h3>
+              <p>
+                Once licensed, the architecture may be introduced into the approved governance environment.
+              </p>
+              <p>Deployment involves:</p>
+              <ul>
+                <li>identifying internal custodianship</li>
+                <li>introducing structural decision components</li>
+                <li>establishing governance rhythm for sustained coherence</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-card">
+          <div class="two-col">
+            <div>
+              <h2>Integrity Oversight</h2>
+              <p>All licenses operate under structural governance conditions.</p>
+              <p>Licensed use is:</p>
+              <ul>
+                <li>time-bound</li>
+                <li>purpose-specific</li>
+                <li>entity-specific</li>
+                <li>subject to compliance review</li>
+              </ul>
+              <p class="muted" style="margin-top: 16px;">
+                Unauthorized replication, derivative deployment, or republication is prohibited.
+              </p>
+            </div>
+
+            <div>
+              <h2>Suggested Preparation</h2>
+              <p>Institutions requesting discussion should be prepared to clarify:</p>
+              <ul>
+                <li>their governance context and relevant decision domain</li>
+                <li>where decision coherence breaks down under complexity</li>
+                <li>the internal custodianship capability available to hold licensed use responsibly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <h2>Request an Exploratory Licensing Discussion</h2>
+          <p>
+            Institutions responsible for complex decision environments may request an exploratory licensing discussion.
+          </p>
+          <p>
+            Licensing discussions are intended for organisations seeking disciplined institutional deployment.
+          </p>
+
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary">Request Discussion</a>
+            <a href="contact.html" class="btn btn-secondary">Alternative: Contact Page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="snapshot">
+          <div class="card">
+            <h4>Time-bound</h4>
+            <p class="muted">Access is granted for a defined term only.</p>
+          </div>
+          <div class="card">
+            <h4>Purpose-limited</h4>
+            <p class="muted">Use is restricted to the approved institutional context.</p>
+          </div>
+          <div class="card">
+            <h4>Entity-specific</h4>
+            <p class="muted">Rights apply only to the licensed institution.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <h3 style="margin-bottom: 10px;">Intellectual Property Notice</h3>
+      <p>
+        Sovereign Protocol™ is proprietary intellectual property licensed under defined conditions.
+      </p>
+      <p>
+        Unauthorized use, replication, publication, derivative deployment, or redistribution is prohibited.
+      </p>
+      <p>© 2026 You Lounge / Licensor. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
