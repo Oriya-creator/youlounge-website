@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Protocol | Executive Diagnostic</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sovereign Protocol | Governance Coherence Architecture</title>
+    <meta
+        name="description"
+        content="Sovereign Protocol is a staged governance coherence architecture designed to stabilise executive posture, organisational containment, and board-level authority coherence under complexity."
+    />
     <style>
-        /* ---- (your existing CSS – unchanged) ---- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
         }
+
         body {
             background: #ffffff;
             color: #000000;
             min-height: 100vh;
             padding: 20px;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
+
         .header {
             text-align: center;
             padding: 40px 20px;
             margin-bottom: 40px;
             background: #ffffff;
         }
+
         .logo {
             font-size: 14px;
             font-weight: 600;
@@ -36,6 +43,7 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
+
         .header h1 {
             font-size: 42px;
             color: #000000;
@@ -43,22 +51,35 @@
             line-height: 1.2;
             font-weight: 300;
         }
+
         .header h1 span {
             font-weight: 700;
             color: #000000;
         }
+
+        .hero-subtitle {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 20px;
+            line-height: 1.7;
+            color: #111111;
+            font-weight: 500;
+        }
+
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             margin-bottom: 60px;
         }
+
         @media (max-width: 900px) {
             .main-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
         }
+
         .protocol-description {
             background: #ffffff;
             border-radius: 20px;
@@ -66,29 +87,41 @@
             border: 1px solid #e5e7eb;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
         .description-section {
             margin-bottom: 40px;
             padding: 30px;
             border-radius: 12px;
         }
+
         .description-section:last-child {
             margin-bottom: 0;
         }
+
         .sovereign-section {
             background-color: #90c218;
             color: #000000;
             border: 3px solid #78a514;
         }
+
         .who-section {
             background-color: #23dfc8;
             color: #000000;
             border: 3px solid #1cc0ab;
         }
+
         .expect-section {
             background-color: #8b5cf6;
             color: #000000;
             border: 3px solid #7c3aed;
         }
+
+        .neutral-section {
+            background-color: #f8fafc;
+            color: #000000;
+            border: 2px solid #dbe1e8;
+        }
+
         .section-title {
             font-size: 24px;
             margin-bottom: 20px;
@@ -96,22 +129,23 @@
             border-bottom: 2px solid rgba(0, 0, 0, 0.3);
             font-weight: 700;
         }
-        .sovereign-section .section-title,
-        .who-section .section-title,
-        .expect-section .section-title {
-            color: #000000;
-        }
+
         .protocol-definition {
             font-size: 18px;
             line-height: 1.8;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
             color: #000000;
         }
-        .protocol-list {
+
+        .protocol-list,
+        .deliverables-list {
             list-style: none;
             padding-left: 0;
+            margin: 20px 0;
         }
-        .protocol-list li {
+
+        .protocol-list li,
+        .deliverables-list li {
             margin-bottom: 15px;
             padding-left: 25px;
             position: relative;
@@ -120,7 +154,9 @@
             font-weight: 500;
             color: #000000;
         }
-        .protocol-list li:before {
+
+        .protocol-list li:before,
+        .deliverables-list li:before {
             content: "•";
             font-size: 24px;
             position: absolute;
@@ -129,13 +165,15 @@
             font-weight: bold;
             color: #000000;
         }
+
         .emphasis-box {
             padding: 25px;
             border-radius: 8px;
-            margin: 30px 0;
+            margin: 25px 0;
             border-left: 4px solid rgba(0, 0, 0, 0.4);
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.35);
         }
+
         .emphasis-text {
             font-size: 18px;
             line-height: 1.7;
@@ -143,25 +181,97 @@
             font-weight: 500;
             color: #000000;
         }
+
+        .clarity-box {
+            padding: 22px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #000000;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .clarity-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .clarity-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #000000;
+            font-weight: 500;
+        }
+
         .who-subsection {
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 25px;
             border: 2px solid rgba(0, 0, 0, 0.3);
         }
+
         .who-not-for {
             background: rgba(0, 0, 0, 0.15);
             margin-bottom: 30px;
         }
+
         .who-for {
             background: rgba(255, 255, 255, 0.4);
         }
+
         .who-title {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
             color: #000000;
         }
+
+        .stage-block {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            background: rgba(255, 255, 255, 0.42);
+            border: 2px solid rgba(0, 0, 0, 0.22);
+        }
+
+        .stage-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .stage-subtitle {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000000;
+        }
+
+        .stage-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #000000;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .key-points {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .key-point {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #000000;
+            line-height: 1.6;
+        }
+
         .form-container {
             background: url('youlounge/formsimage.jpg') no-repeat center center;
             background-size: cover;
@@ -176,34 +286,49 @@
             color: #000000;
             min-height: 600px;
         }
+
         @media (max-width: 900px) {
             .form-container {
                 min-height: 500px;
+                position: static;
             }
         }
+
         @media (max-width: 600px) {
             .form-container {
                 min-height: 450px;
                 padding: 30px 20px;
             }
         }
-        .form-header, .form-subtitle {
+
+        .form-header,
+        .form-subtitle,
+        .form-note {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
             border: 2px solid rgba(255, 255, 255, 0.9);
         }
+
         .form-title {
             font-size: 28px;
             color: #000000;
             margin-bottom: 10px;
         }
+
         .form-subtitle {
             font-size: 18px;
             color: #000000;
             line-height: 1.6;
         }
+
+        .form-note {
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
         #sovereignForm {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -213,9 +338,11 @@
             z-index: 2;
             backdrop-filter: blur(2px);
         }
+
         .form-group {
             margin-bottom: 25px;
         }
+
         .form-label {
             display: block;
             font-size: 16px;
@@ -223,6 +350,7 @@
             color: #000000;
             margin-bottom: 8px;
         }
+
         .form-input {
             width: 100%;
             padding: 16px 20px;
@@ -234,19 +362,23 @@
             transition: all 0.3s ease;
             font-weight: 500;
         }
+
         .form-input:focus {
             outline: none;
             border-color: #90c218;
             box-shadow: 0 0 0 3px rgba(144, 194, 24, 0.3);
         }
+
         .form-input::placeholder {
             color: #6b7280;
         }
+
         .checkbox-group {
             margin: 30px 0;
             display: flex;
             align-items: flex-start;
         }
+
         .checkbox-input {
             margin-right: 15px;
             margin-top: 3px;
@@ -254,6 +386,7 @@
             height: 20px;
             accent-color: #90c218;
         }
+
         .checkbox-label {
             font-size: 14px;
             color: #000000;
@@ -261,7 +394,7 @@
             font-weight: 500;
             flex: 1;
         }
-        /* Button styles now applied to an <a> tag */
+
         .submit-button {
             display: inline-block;
             width: 100%;
@@ -280,10 +413,12 @@
             text-decoration: none;
             text-align: center;
         }
+
         .submit-button:hover:not(.disabled) {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(144, 194, 24, 0.4);
         }
+
         .submit-button.disabled {
             background: #9ca3af;
             color: #6b7280;
@@ -293,6 +428,23 @@
             border-color: #9ca3af;
             pointer-events: none;
         }
+
+        .secondary-button {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            background: #000000;
+            color: #ffffff;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .secondary-button:hover {
+            opacity: 0.92;
+        }
+
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -302,6 +454,7 @@
             margin-top: 40px;
             background: #ffffff;
         }
+
         .error-message {
             color: #dc2626;
             font-size: 14px;
@@ -309,11 +462,13 @@
             display: none;
             font-weight: 600;
         }
+
         .loader {
             display: none;
             text-align: center;
             margin: 20px 0;
         }
+
         .spinner {
             border: 3px solid rgba(144, 194, 24, 0.3);
             border-top: 3px solid #90c218;
@@ -323,43 +478,31 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 10px;
         }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .deliverables-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 20px 0;
+
+        .small-link-block {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 22px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.9);
         }
-        .deliverables-list li {
+
+        .small-link-block h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .small-link-block p {
+            font-size: 15px;
+            line-height: 1.7;
             margin-bottom: 12px;
-            padding-left: 30px;
-            position: relative;
-            font-size: 16px;
-            line-height: 1.6;
+            color: #000000;
             font-weight: 500;
-            color: #000000;
-        }
-        .deliverables-list li:before {
-            content: "•";
-            font-size: 24px;
-            position: absolute;
-            left: 0;
-            top: -3px;
-            font-weight: bold;
-            color: #000000;
-        }
-        .key-points {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0, 0, 0, 0.2);
-        }
-        .key-point {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #000000;
         }
     </style>
 </head>
@@ -367,114 +510,225 @@
     <div class="container">
         <div class="header">
             <div class="logo">SOVEREIGN PROTOCOL</div>
-            <h1>For Executives Whose Decisions <span>Carry Weight</span></h1>
+            <h1>Sovereign Protocol <span>Governance Coherence Architecture</span></h1>
+            <p class="hero-subtitle">
+                A staged governance decision architecture designed to stabilise executive posture,
+                organisational containment, and board-level authority coherence under complexity.
+            </p>
         </div>
-        
+
         <div class="main-content">
             <div class="protocol-description">
-                <!-- Sovereign Protocol Section -->
+
                 <div class="description-section sovereign-section">
-                    <h2 class="section-title">The Sovereign Protocol</h2>
+                    <h2 class="section-title">What Sovereign Protocol Is</h2>
                     <p class="protocol-definition">
-                        This protocol is designed for Executives whose decisions carry weight beyond their role.
+                        Sovereign Protocol is a staged governance coherence architecture designed to
+                        stabilise decision authority across three interdependent layers:
+                        executive posture, organisational containment, and board-level structural alignment.
                     </p>
                     <p class="protocol-definition">
-                        It assesses internal alignment at the level where authority, clarity, and responsibility intersect; particularly where decision fatigue, fragmentation, or misalignment are present but rarely named.
+                        It is designed for environments where decision drift, escalation ambiguity,
+                        cognitive overload, and authority fragmentation quietly erode execution quality.
                     </p>
+
                     <div class="emphasis-box">
                         <p class="emphasis-text">
-                            The Sovereign Protocol is not a personality assessment.<br>
-                            It is not performance coaching.<br>
-                            It is not public.
+                            It is not a personality assessment.<br />
+                            It is not leadership coaching.<br />
+                            It is not a public development tool.
                         </p>
                     </div>
+
                     <p class="protocol-definition">
-                        It uses a confidential diagnostic to identify how authority is currently structured, and what must be stabilized before growth, strategy, or execution can advance.
+                        It is governance architecture delivered through staged diagnostic and stabilisation
+                        pathways, with institutional application where structural conditions require installation.
                     </p>
+
+                    <div class="clarity-box">
+                        <div class="clarity-title">Important Clarification</div>
+                        <div class="clarity-text">
+                            Sovereign Protocol is not a course sequence. The 7-day, 21-day, and
+                            90-day stages are structured governance deployment windows.
+                            Each stage stabilises the conditions required for the next.
+                            They are cumulative by design and applied according to structural readiness,
+                            not treated as isolated learning products.
+                        </div>
+                    </div>
                 </div>
-                
-                <!-- Who This Protocol Is For Section -->
+
                 <div class="description-section who-section">
-                    <h2 class="section-title">Who This Protocol Is For</h2>
+                    <h2 class="section-title">Deployment Structure</h2>
+
+                    <div class="stage-block">
+                        <div class="stage-title">Level I — 7-Day Executive Decision Stabilisation</div>
+                        <div class="stage-subtitle">Confidential Deployment Window</div>
+                        <p class="stage-text">
+                            This is the private executive threshold. It assesses decision posture,
+                            cognitive load, and authority strain under pressure.
+                        </p>
+                        <ul class="deliverables-list">
+                            <li>Decision posture assessment</li>
+                            <li>Cognitive and authority strain visibility</li>
+                            <li>Private executive coherence brief</li>
+                        </ul>
+                        <p class="stage-text">
+                            This stage does not function as a course or self-improvement challenge.
+                            It exists to establish whether further structural escalation is required.
+                        </p>
+                    </div>
+
+                    <div class="stage-block">
+                        <div class="stage-title">Level II — 21-Day Organisational Containment Calibration</div>
+                        <div class="stage-subtitle">Structured Deployment Window</div>
+                        <p class="stage-text">
+                            This stage aligns internal governance mechanics within a defined decision domain
+                            before broader executive-level deployment.
+                        </p>
+                        <ul class="deliverables-list">
+                            <li>Escalation clarity review</li>
+                            <li>Decision-flow friction identification</li>
+                            <li>Containment calibration across operational governance layers</li>
+                        </ul>
+                        <p class="stage-text">
+                            This is not a workshop series. It is a structured containment layer that
+                            prepares the ground for institutional coherence.
+                        </p>
+                    </div>
+
+                    <div class="stage-block">
+                        <div class="stage-title">Level III — 90-Day Executive &amp; Board Installation Arc</div>
+                        <div class="stage-subtitle">Institutional Governance Stabilisation</div>
+                        <p class="stage-text">
+                            This is the visible structural deployment phase across the executive and board
+                            decision environment.
+                        </p>
+                        <ul class="deliverables-list">
+                            <li>Authority mapping</li>
+                            <li>Escalation containment logic</li>
+                            <li>Closure and reversal protocol</li>
+                            <li>Governance rhythm and operating cadence</li>
+                        </ul>
+                        <p class="stage-text">
+                            This stage is not coaching. It is institutional governance installation.
+                        </p>
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-point">The stages are sequential by design.</div>
+                        <div class="key-point">Each level builds on structural clarity established in the previous one.</div>
+                        <div class="key-point">Institutional installation remains the flagship application of Sovereign Protocol.</div>
+                    </div>
+                </div>
+
+                <div class="description-section who-section">
+                    <h2 class="section-title">Who This Architecture Is For</h2>
+
                     <div class="who-subsection who-not-for">
-                        <div class="who-title">Who The Sovereign Protocol Is Not For</div>
+                        <div class="who-title">Not Designed For</div>
                         <ul class="protocol-list">
-                            <li>Individuals seeking motivation, inspiration, or reassurance</li>
-                            <li>Early-stage professionals exploring identity or direction</li>
-                            <li>Those looking for rapid solutions, templates, or productivity hacks</li>
-                            <li>Anyone unwilling to engage in private, rigorous self-assessment</li>
+                            <li>General leadership development</li>
+                            <li>Motivational growth or reassurance-seeking</li>
+                            <li>Early-stage professionals exploring direction</li>
+                            <li>Those seeking templates, hacks, or productivity optimisation</li>
                         </ul>
                     </div>
+
                     <div class="who-subsection who-for">
-                        <div class="who-title">Who The Sovereign Protocol Is For</div>
+                        <div class="who-title">Designed For</div>
                         <ul class="protocol-list">
                             <li>C-suite executives</li>
-                            <li>Board-level leaders</li>
-                            <li>Senior decision-makers operating under sustained pressure</li>
-                            <li>Individuals whose decisions materially affect people, capital, or direction</li>
+                            <li>Board members and senior institutional leaders</li>
+                            <li>Heads of governance, risk, strategy, or operational decision flow</li>
+                            <li>Leaders whose decisions materially affect capital, risk, people, or institutional direction</li>
                         </ul>
                     </div>
                 </div>
-                
-                <!-- What You Will Receive Section -->
+
                 <div class="description-section expect-section">
-                    <h2 class="section-title">What You Will Receive</h2>
+                    <h2 class="section-title">What This Produces</h2>
                     <p class="protocol-definition">
-                        Upon completion, you will receive a confidential executive diagnostic calibrated to your responses, including:
+                        Depending on the level of deployment, Sovereign Protocol produces structured clarity
+                        across decision posture, authority architecture, escalation containment, and governance rhythm.
                     </p>
                     <ul class="deliverables-list">
-                        <li>A precision analysis of your current leadership architecture</li>
-                        <li>A classification of decision posture and cognitive load</li>
-                        <li>A private executive brief outlining the highest-leverage corrective actions</li>
+                        <li>A structured analysis of decision posture under pressure</li>
+                        <li>Identification of authority strain and escalation gaps</li>
+                        <li>A private executive coherence brief outlining stabilisation priorities</li>
+                        <li>Where appropriate, progression into organisational or board-level installation pathways</li>
                     </ul>
+
                     <div class="key-points">
-                        <div class="key-point">Delivery is direct.</div>
-                        <div class="key-point">Interpretation is unambiguous.</div>
-                        <div class="key-point">Application is entirely at your discretion.</div>
+                        <div class="key-point">Delivery is confidential.</div>
+                        <div class="key-point">Interpretation is direct.</div>
+                        <div class="key-point">Institutional application depends on structural readiness.</div>
                     </div>
+                </div>
+
+                <div class="description-section neutral-section">
+                    <h2 class="section-title">Executive Forum Relevance</h2>
+                    <p class="protocol-definition">
+                        Sovereign Protocol also underpins closed-door executive governance discussions where
+                        structural decision drift, escalation containment, and authority coherence are examined
+                        before installation is considered.
+                    </p>
+                    <a href="/executive-seat-request" class="secondary-button">Review Executive Forum</a>
+                </div>
+
+                <div class="description-section neutral-section">
+                    <h2 class="section-title">Institutional Licensing</h2>
+                    <p class="protocol-definition">
+                        Sovereign Protocol may also be licensed for structured institutional use under defined
+                        scope, custodianship, and integrity conditions.
+                    </p>
+                    <a href="/iplicensing" class="secondary-button">Review Licensing Pathways</a>
                 </div>
             </div>
-            
-            <!-- Form Container -->
+
             <div class="form-container">
                 <div class="form-header">
-                    <h2 class="form-title">Sovereign Diagnostic Assessment</h2>
-                    <p class="form-subtitle">Discover your current alignment and next growth phase</p>
+                    <h2 class="form-title">Request Executive Diagnostic</h2>
+                    <p class="form-subtitle">Confidential threshold for executive decision coherence assessment</p>
                 </div>
-                
+
                 <p class="form-subtitle" style="margin-bottom: 30px;">
-                    This confidential diagnostic helps to understand where one currently stands and what is required to move into deeper alignment, clarity, and integration.
-                    Enter your details below to receive the diagnostic and your personalized results.
+                    This confidential diagnostic is used to assess whether decision posture stabilisation,
+                    organisational containment calibration, or broader governance installation is required.
+                    It is designed for senior leaders operating under sustained complexity.
                 </p>
-                
-                <!-- Form – no submit action, data sent by checkbox -->
+
+                <div class="form-note">
+                    Sovereign Protocol begins with clarity. The diagnostic functions as an entry threshold into
+                    the architecture, not as a public assessment or general leadership tool.
+                </div>
+
                 <form id="sovereignForm">
-                    <input type="hidden" name="_subject" value="New Sovereign Protocol Registration">
-                    
+                    <input type="hidden" name="_subject" value="New Sovereign Protocol Registration" />
+
                     <div class="form-group">
                         <label for="email" class="form-label">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-input" 
-                            placeholder="your.name@company.com" 
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input"
+                            placeholder="your.name@company.com"
                             required
-                        >
+                        />
                         <div class="error-message" id="emailError">Please enter a valid email address</div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="name" class="form-label">Full Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            class="form-input" 
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-input"
                             placeholder="John Smith"
-                        >
+                        />
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="role" class="form-label">Primary Role (Optional)</label>
                         <select id="role" name="role" class="form-input">
@@ -482,6 +736,7 @@
                             <option value="CEO">CEO</option>
                             <option value="COO">COO</option>
                             <option value="CFO">CFO</option>
+                            <option value="CRO">CRO</option>
                             <option value="CTO">CTO</option>
                             <option value="CMO">CMO</option>
                             <option value="Other C-Suite">Other C-Suite</option>
@@ -489,174 +744,165 @@
                             <option value="Senior Executive">Senior Executive</option>
                             <option value="Managing Director">Managing Director</option>
                             <option value="Partner">Partner</option>
+                            <option value="Head of Risk / Governance / Audit">Head of Risk / Governance / Audit</option>
+                            <option value="Strategy / Operations Director">Strategy / Operations Director</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                    
-                    <!-- PRIVACY NOTE REMOVED -->
-                    
-                    <!-- Terms Checkbox – trigger to send data -->
+
                     <div class="checkbox-group">
-                        <input type="checkbox" id="termsCheckbox" class="checkbox-input" required>
+                        <input type="checkbox" id="termsCheckbox" class="checkbox-input" required />
                         <label for="termsCheckbox" class="checkbox-label">
-                            By proceeding, you confirm that you meet the criteria for the Sovereign Protocol and understand this is a confidential executive diagnostic.
+                            By proceeding, you confirm that you operate at senior decision level and understand
+                            that this is a confidential executive diagnostic threshold, not a public assessment.
                         </label>
                     </div>
-                    
-                    <!-- Loader (no success message) -->
+
                     <div class="loader" id="formLoader">
                         <div class="spinner"></div>
                         <p>Sending your information...</p>
                     </div>
-                    
                 </form>
 
-                <!-- Button is a LINK to the diagnostic page, styled as button -->
                 <a id="diagnosticLink" href="/sovereignprotocoldiagnostic.html" class="submit-button disabled">
-                    Begin Diagnostic Assessment
+                    Proceed to Executive Diagnostic
                 </a>
+
+                <div class="small-link-block">
+                    <h3>Important</h3>
+                    <p>
+                        The 7-day diagnostic is the threshold into Sovereign Protocol.
+                        It is not the entirety of the architecture.
+                    </p>
+                    <p>
+                        Where structural readiness exists, later deployment may extend into
+                        organisational calibration or executive and board-level installation.
+                    </p>
+                </div>
             </div>
         </div>
-        
+
         <div class="footer">
-            <p>Sovereign Protocol © 2026 | Confidential Executive Diagnostics</p>
+            <p>Sovereign Protocol © 2026 | Governance Coherence Architecture</p>
             <p style="margin-top: 10px; font-size: 12px; color: #6b7280;">
-                This assessment is designed for senior leadership only. All responses are confidential.
+                This architecture is designed for senior leadership and institutional use. All submissions are handled confidentially.
             </p>
         </div>
     </div>
 
     <script>
-        (function() {
+        (function () {
             "use strict";
 
-            document.addEventListener('DOMContentLoaded', function() {
-                const form = document.getElementById('sovereignForm');
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.getElementById("sovereignForm");
                 if (!form) return;
 
-                const emailInput = document.getElementById('email');
-                const emailError = document.getElementById('emailError');
-                const termsCheckbox = document.getElementById('termsCheckbox');
-                const nameInput = document.getElementById('name');
-                const roleSelect = document.getElementById('role');
-                const formLoader = document.getElementById('formLoader');
-                const diagnosticLink = document.getElementById('diagnosticLink');
+                const emailInput = document.getElementById("email");
+                const emailError = document.getElementById("emailError");
+                const termsCheckbox = document.getElementById("termsCheckbox");
+                const nameInput = document.getElementById("name");
+                const roleSelect = document.getElementById("role");
+                const formLoader = document.getElementById("formLoader");
+                const diagnosticLink = document.getElementById("diagnosticLink");
 
-                // State: has data been sent successfully?
                 let dataSent = false;
 
-                // Email validation
                 function validateEmail(email) {
                     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return re.test(String(email).toLowerCase());
                 }
 
-                // Enable/disable the link based on email validity, checkbox, and dataSent
                 function updateLinkState() {
                     const isEmailValid = validateEmail(emailInput.value);
                     const isChecked = termsCheckbox.checked;
-                    
+
                     if (isEmailValid && isChecked && dataSent) {
-                        diagnosticLink.classList.remove('disabled');
-                        diagnosticLink.style.pointerEvents = 'auto';
+                        diagnosticLink.classList.remove("disabled");
+                        diagnosticLink.style.pointerEvents = "auto";
                     } else {
-                        diagnosticLink.classList.add('disabled');
-                        diagnosticLink.style.pointerEvents = 'none';
+                        diagnosticLink.classList.add("disabled");
+                        diagnosticLink.style.pointerEvents = "none";
                     }
                 }
 
-                // Real-time email validation (visual only)
-                emailInput.addEventListener('input', function() {
+                emailInput.addEventListener("input", function () {
                     if (validateEmail(emailInput.value)) {
-                        emailError.style.display = 'none';
-                        emailInput.style.borderColor = '#d1d5db';
+                        emailError.style.display = "none";
+                        emailInput.style.borderColor = "#d1d5db";
                     } else {
-                        emailError.style.display = 'block';
-                        emailInput.style.borderColor = '#dc2626';
+                        emailError.style.display = "block";
+                        emailInput.style.borderColor = "#dc2626";
                     }
                     updateLinkState();
                 });
 
-                // --- CHECKBOX: when ticked, send the data (if email valid) ---
-                termsCheckbox.addEventListener('change', async function() {
-                    // If unchecked, reset sent flag and disable link
+                termsCheckbox.addEventListener("change", async function () {
                     if (!termsCheckbox.checked) {
                         dataSent = false;
                         updateLinkState();
                         return;
                     }
 
-                    // Validate email before sending
                     if (!validateEmail(emailInput.value)) {
-                        emailError.style.display = 'block';
-                        emailInput.style.borderColor = '#dc2626';
+                        emailError.style.display = "block";
+                        emailInput.style.borderColor = "#dc2626";
                         emailInput.focus();
-                        // Uncheck the box – user must fix email first
                         termsCheckbox.checked = false;
-                        alert('Please enter a valid email address before confirming.');
+                        alert("Please enter a valid email address before proceeding.");
                         return;
                     }
 
-                    // --- Show loader ---
-                    formLoader.style.display = 'block';
+                    formLoader.style.display = "block";
 
-                    // Store user data in localStorage
                     const userData = {
                         email: emailInput.value,
-                        name: nameInput ? nameInput.value : '',
-                        role: roleSelect ? roleSelect.value : '',
+                        name: nameInput ? nameInput.value : "",
+                        role: roleSelect ? roleSelect.value : "",
                         timestamp: new Date().toISOString()
                     };
-                    localStorage.setItem('sovereignUserData', JSON.stringify(userData));
+                    localStorage.setItem("sovereignUserData", JSON.stringify(userData));
 
-                    // Send to Formspree
                     const formData = new FormData(form);
-                    const endpoint = 'https://formspree.io/f/mgoovzbp';
+                    const endpoint = "https://formspree.io/f/mgoovzbp";
 
                     try {
                         const response = await fetch(endpoint, {
-                            method: 'POST',
+                            method: "POST",
                             body: formData,
-                            headers: { 'Accept': 'application/json' }
+                            headers: { "Accept": "application/json" }
                         });
-                        
+
                         if (response.ok) {
-                            console.log('✅ Form successfully sent');
                             dataSent = true;
-                            // No success message to show – link will become active
                         } else {
-                            console.warn('⚠️ Formspree error:', response.status);
                             dataSent = false;
-                            alert('There was a problem sending your details. Please try again.');
-                            // Uncheck the box so user can retry
+                            alert("There was a problem sending your details. Please try again.");
                             termsCheckbox.checked = false;
                         }
                     } catch (error) {
-                        console.error('❌ Fetch error:', error);
                         dataSent = false;
-                        alert('Network error. Please check your connection and try again.');
+                        alert("Network error. Please check your connection and try again.");
                         termsCheckbox.checked = false;
                     } finally {
-                        formLoader.style.display = 'none';
+                        formLoader.style.display = "none";
                         updateLinkState();
                     }
                 });
 
-                // Initial state: link disabled
                 updateLinkState();
 
-                // Also update link state when email changes (even if already sent)
-                emailInput.addEventListener('input', updateLinkState);
-                nameInput.addEventListener('input', updateLinkState);
-                roleSelect.addEventListener('change', updateLinkState);
+                emailInput.addEventListener("input", updateLinkState);
+                nameInput.addEventListener("input", updateLinkState);
+                roleSelect.addEventListener("change", updateLinkState);
             });
         })();
     </script>
 
-    <!-- NOSCRIPT FALLBACK -->
     <noscript>
         <div style="padding: 20px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 8px; margin-top: 20px;">
-            <strong>JavaScript is disabled.</strong> Please enable JavaScript to submit your details. Once enabled, you can proceed to the <a href="/sovereignprotocoldiagnostic.html">diagnostic page</a>.
+            <strong>JavaScript is disabled.</strong> Please enable JavaScript to submit your details.
+            Once enabled, you can proceed to the <a href="/sovereignprotocoldiagnostic.html">executive diagnostic page</a>.
         </div>
     </noscript>
 </body>
