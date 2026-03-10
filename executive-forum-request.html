@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +25,10 @@
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       --radius: 18px;
       --max-width: 1100px;
+      --success: #166534;
+      --success-bg: #ecfdf3;
+      --error: #b91c1c;
+      --error-bg: #fef2f2;
     }
 
     * {
@@ -290,14 +293,6 @@
       padding: 14px 16px;
     }
 
-    .timeline-item .time {
-      display: inline-block;
-      font-weight: 700;
-      color: var(--dark-teal);
-      margin-bottom: 6px;
-      font-size: 0.92rem;
-    }
-
     .timeline-item h3 {
       margin: 0 0 4px;
       font-size: 1.02rem;
@@ -372,6 +367,30 @@
 
     .cta-box p:last-child {
       margin-bottom: 0;
+    }
+
+    .status-message {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .status-message.success {
+      display: block;
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid rgba(22, 101, 52, 0.18);
+    }
+
+    .status-message.error {
+      display: block;
+      background: var(--error-bg);
+      color: var(--error);
+      border: 1px solid rgba(185, 28, 28, 0.18);
     }
 
     .footer {
@@ -696,12 +715,12 @@
             </p>
             <p>
               Participation confirmations are requested by
-              <strong>[16th March, 2026]</strong> to finalise the executive room
+              <strong>16 March 2026</strong> to finalise the executive room
               composition.
             </p>
           </div>
 
-          <form action="#" method="post">
+          <form id="forumForm">
             <div class="form-grid">
               <div class="form-group">
                 <label for="full-name">Full Name*</label>
@@ -732,21 +751,21 @@
                 <label for="participant-type">Participant Type*</label>
                 <select id="participant-type" name="participant_type" required>
                   <option value="">Select…</option>
-                  <option value="executive">Invited Executive</option>
-                  <option value="assistant">Executive Assistant</option>
-                  <option value="finance">Finance / Invoice Contact</option>
-                  <option value="other">Other</option>
+                  <option value="Invited Executive">Invited Executive</option>
+                  <option value="Executive Assistant">Executive Assistant</option>
+                  <option value="Finance / Invoice Contact">Finance / Invoice Contact</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label for="seats-requested">Participation Requested*</label>
-                <select id="seats-requested" name="participat_requested" required>
+                <select id="seats-requested" name="participation_requested" required>
                   <option value="">Select…</option>
-                  <option value="1">1 participant: USD800</option>
-                  <option value="2">2 participants: USD600</option>
-                  <option value="3">3 participants: USD450</option>
-                  <option value="4">4 participants: USD350</option>
+                  <option value="1 participant — USD 800">1 participant — USD 800</option>
+                  <option value="2 participants — USD 600 each">2 participants — USD 600 each</option>
+                  <option value="3 participants — USD 450 each">3 participants — USD 450 each</option>
+                  <option value="4 participants — USD 350 each">4 participants — USD 350 each</option>
                 </select>
               </div>
 
@@ -764,11 +783,11 @@
                 <label for="invoice-process">Invoice Process*</label>
                 <select id="invoice-process" name="invoice_process" required>
                   <option value="">Select…</option>
-                  <option value="company-po">Company Purchase Order Required</option>
-                  <option value="direct-invoice">Direct Invoice</option>
-                  <option value="card-payment">Card Payment</option>
-                  <option value="bank-transfer">Bank Transfer</option>
-                  <option value="other">Other</option>
+                  <option value="Company Purchase Order Required">Company Purchase Order Required</option>
+                  <option value="Direct Invoice">Direct Invoice</option>
+                  <option value="Card Payment">Card Payment</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 
@@ -788,8 +807,10 @@
             </div>
 
             <div style="margin-top: 18px;">
-              <button type="submit" class="btn btn-primary">Confirm Participation</button>
+              <button type="submit" id="submitBtn" class="btn btn-primary">Confirm Participation</button>
             </div>
+
+            <div id="formStatus" class="status-message"></div>
           </form>
         </div>
 
@@ -798,8 +819,7 @@
           <p>
             <strong>Sarah Edmore</strong><br />
             Governance Decision Architect<br />
-            The You Lounge Organisatioon
-         
+            You Lounge<br />
             Focused on structural decision coherence within complex institutional
             environments.
           </p>
@@ -811,13 +831,12 @@
             discussions will occur.
           </div>
 
-            <div class="split-item">
-              <h3>Next Step After the Forum</h3>
-              <p>
-                Private executive diagnostic conversations may be offered where structural
-                fit and institutional relevance are present.
-              </p>
-            </div>
+          <div class="split-item">
+            <h3>Next Step After the Forum</h3>
+            <p>
+              Private executive diagnostic conversations may be offered where structural
+              fit and institutional relevance are present.
+            </p>
           </div>
         </div>
       </div>
@@ -829,6 +848,76 @@
       © 2026 You Lounge. Governance Decision Architecture.
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("forumForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const statusBox = document.getElementById("formStatus");
+
+      if (!form) return;
+
+      function showStatus(message, type) {
+        statusBox.className = "status-message " + type;
+        statusBox.textContent = message;
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        statusBox.className = "status-message";
+        statusBox.textContent = "";
+
+        const formData = {
+          full_name: document.getElementById("full-name").value.trim(),
+          organisation: document.getElementById("organisation").value.trim(),
+          title_role: document.getElementById("title-role").value.trim(),
+          work_email: document.getElementById("work-email").value.trim(),
+          mobile: document.getElementById("mobile").value.trim(),
+          participant_type: document.getElementById("participant-type").value,
+          participation_requested: document.getElementById("seats-requested").value,
+          invoice_contact_name: document.getElementById("invoice-contact-name").value.trim(),
+          invoice_contact_email: document.getElementById("invoice-contact-email").value.trim(),
+          invoice_process: document.getElementById("invoice-process").value,
+          notes: document.getElementById("notes").value.trim()
+        };
+
+        try {
+          const response = await fetch("/api/forum-confirmation", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showStatus(
+              "Participation request submitted successfully. Confirmation emails have been sent to the participant and the relevant contact.",
+              "success"
+            );
+            form.reset();
+          } else {
+            showStatus(
+              result.error || "There was a problem submitting the form. Please try again.",
+              "error"
+            );
+          }
+        } catch (error) {
+          showStatus(
+            "Network error. Please check your connection and try again.",
+            "error"
+          );
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Confirm Participation";
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
