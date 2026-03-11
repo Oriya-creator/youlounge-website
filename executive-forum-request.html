@@ -1,482 +1,923 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closed-Door Executive Governance Forum | You Lounge</title>
+  <meta
+    name="description"
+    content="Closed-Door Executive Governance Forum examining structural decision drift in complex organisations."
+  />
 
-<title>Closed-Door Executive Governance Forum | You Lounge</title>
+  <style>
+    :root {
+      --sand: #E6D5B8;
+      --clay: #C4A484;
+      --terracotta: #A85C32;
+      --forest: #2D5A27;
+      --teal: #008080;
+      --dark-teal: #006666;
+      --charcoal: #222222;
+      --muted: #666666;
+      --white: #ffffff;
+      --light-bg: #f8f5ef;
+      --border: rgba(0, 0, 0, 0.08);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius: 18px;
+      --max-width: 1100px;
+      --success: #166534;
+      --success-bg: #ecfdf3;
+      --error: #b91c1c;
+      --error-bg: #fef2f2;
+    }
 
-<meta name="description"
-content="Closed-Door Executive Governance Forum examining structural decision drift in complex organisations." />
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-:root{
---sand:#E6D5B8;
---clay:#C4A484;
---terracotta:#A85C32;
---forest:#2D5A27;
---teal:#008080;
---dark-teal:#006666;
---charcoal:#222222;
---muted:#666666;
---white:#ffffff;
---border:rgba(0,0,0,0.08);
---shadow:0 10px 30px rgba(0,0,0,0.08);
---success:#166534;
---success-bg:#ecfdf3;
---error:#b91c1c;
---error-bg:#fef2f2;
-}
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--charcoal);
+      background: linear-gradient(180deg, #f8f5ef 0%, #efe6d9 100%);
+      line-height: 1.65;
+    }
 
-*{box-sizing:border-box;}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-body{
-margin:0;
-font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
-color:var(--charcoal);
-background:linear-gradient(180deg,#f8f5ef 0%,#efe6d9 100%);
-line-height:1.6;
-}
+    .container {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.container{
-width:min(1100px,calc(100% - 32px));
-margin:auto;
-}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background: rgba(248, 245, 239, 0.9);
+      border-bottom: 1px solid var(--border);
+    }
 
-.site-header{
-position:sticky;
-top:0;
-background:rgba(248,245,239,0.9);
-border-bottom:1px solid var(--border);
-}
+    .site-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
 
-.site-header-inner{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 0;
-}
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--charcoal);
+      white-space: nowrap;
+    }
 
-.brand{
-font-weight:700;
-}
+    .nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-.nav{
-display:flex;
-gap:20px;
-}
+    .nav a {
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
 
-.nav a{
-color:var(--muted);
-text-decoration:none;
-}
+    .nav a:hover {
+      color: var(--dark-teal);
+    }
 
-.nav a:hover{
-color:var(--dark-teal);
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
 
-.hero{
-padding:70px 0 40px;
-}
+    .btn-primary {
+      background: var(--dark-teal);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
 
-.hero-card{
-background:white;
-padding:40px;
-border-radius:28px;
-box-shadow:var(--shadow);
-border:1px solid var(--border);
-}
+    .btn-primary:hover {
+      background: #005757;
+      transform: translateY(-1px);
+    }
 
-.eyebrow{
-text-transform:uppercase;
-font-size:.8rem;
-letter-spacing:.12em;
-color:var(--dark-teal);
-font-weight:700;
-}
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--charcoal);
+    }
 
-h1{
-margin:0 0 10px;
-font-size:2.7rem;
-}
+    .btn-secondary:hover {
+      border-color: var(--dark-teal);
+      color: var(--dark-teal);
+    }
 
-.hero-subtitle{
-color:var(--muted);
-margin-bottom:16px;
-}
+    .hero {
+      padding: 72px 0 36px;
+    }
 
-.meta-pill{
-border:1px solid var(--border);
-padding:10px 14px;
-border-radius:999px;
-font-size:.9rem;
-}
+    .hero-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 42px;
+    }
 
-.hero-meta{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-top:20px;
-}
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--dark-teal);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
 
-.btn{
-padding:12px 18px;
-border-radius:999px;
-font-weight:600;
-border:none;
-cursor:pointer;
-}
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
 
-.btn-primary{
-background:var(--dark-teal);
-color:white;
-}
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0 0 20px;
+    }
 
-.btn-secondary{
-border:1px solid var(--border);
-background:transparent;
-}
+    .hero-highlight {
+      margin: 18px 0 24px;
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      font-weight: 600;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:1.35fr .95fr;
-gap:24px;
-}
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 30px;
+    }
 
-.section{
-padding:20px 0;
-}
+    .meta-pill {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      font-weight: 500;
+    }
 
-.card{
-background:white;
-border-radius:22px;
-padding:28px;
-border:1px solid var(--border);
-box-shadow:var(--shadow);
-}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
 
-.list{
-padding-left:18px;
-}
+    .section {
+      padding: 22px 0;
+    }
 
-.split-item{
-border:1px solid var(--border);
-padding:14px;
-border-radius:14px;
-margin-bottom:10px;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 24px;
+    }
 
-.timeline-item{
-border:1px solid var(--border);
-border-radius:14px;
-padding:14px;
-margin-bottom:10px;
-}
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
 
-.form-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-}
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
 
-.form-group{
-display:flex;
-flex-direction:column;
-gap:6px;
-}
+    .card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
 
-.form-group.full{
-grid-column:1 / -1;
-}
+    .card strong {
+      color: var(--charcoal);
+    }
 
-input,select,textarea{
-padding:12px;
-border-radius:12px;
-border:1px solid var(--border);
-}
+    .list {
+      margin: 0;
+      padding-left: 18px;
+    }
 
-textarea{
-min-height:100px;
-}
+    .list li {
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
 
-.status-message{
-display:none;
-margin-top:14px;
-padding:12px;
-border-radius:12px;
-font-weight:600;
-}
+    .small-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
 
-.status-message.success{
-display:block;
-background:var(--success-bg);
-color:var(--success);
-}
+    .emphasis-box {
+      border-left: 4px solid var(--dark-teal);
+      background: rgba(0, 128, 128, 0.06);
+      padding: 16px 18px;
+      border-radius: 14px;
+      color: var(--charcoal);
+      margin-top: 18px;
+    }
 
-.status-message.error{
-display:block;
-background:var(--error-bg);
-color:var(--error);
-}
+    .split-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
 
-.footer{
-text-align:center;
-padding:40px 0;
-color:var(--muted);
-}
+    .split-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
 
-@media(max-width:900px){
+    .split-item h3 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+    }
 
-.grid{grid-template-columns:1fr;}
+    .split-item p {
+      margin: 0;
+      font-size: 0.96rem;
+    }
 
-.form-grid{grid-template-columns:1fr;}
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
 
-.hero-card{padding:22px;}
+    .timeline-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
 
-}
+    .timeline-item h3 {
+      margin: 0 0 4px;
+      font-size: 1.02rem;
+    }
 
-</style>
+    .timeline-item p {
+      margin: 0;
+      font-size: 0.96rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding: 13px 14px;
+      font: inherit;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--dark-teal);
+      box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.12);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-helper {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(0, 128, 128, 0.08), rgba(45, 90, 39, 0.08));
+      border: 1px solid rgba(0, 128, 128, 0.14);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .cta-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .status-message {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .status-message.success {
+      display: block;
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid rgba(22, 101, 52, 0.18);
+    }
+
+    .status-message.error {
+      display: block;
+      background: var(--error-bg);
+      color: var(--error);
+      border: 1px solid rgba(185, 28, 28, 0.18);
+    }
+
+    .footer {
+      padding: 40px 0 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .card {
+        padding: 22px;
+      }
+
+      .site-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<header class="site-header">
-<div class="container site-header-inner">
-
-<a href="/" class="brand">You Lounge</a>
-
-<nav class="nav">
-<a href="/">Home</a>
-<a href="/sovereignprotocol">Sovereign Protocol</a>
-<a href="/iplicensing">IP Licensing</a>
-<a href="/contact">Contact</a>
-</nav>
-
-</div>
-</header>
-
-<main>
-
-<section class="hero">
-<div class="container">
-
-<div class="hero-card">
-
-<div class="eyebrow">Executive Governance Forum • Closed-Door</div>
-
-<h1>Structural Decision Drift in Complex Organisations</h1>
-
-<p class="hero-subtitle">
-Executive decisions rarely fail from lack of intelligence. They erode through <strong>structural decision drift</strong>.
-</p>
-
-<p class="hero-subtitle">
-This closed-door forum examines how decision drift forms inside complex organisations and what governance architecture stabilises authority.
-</p>
-
-<div class="hero-meta">
-<span class="meta-pill">Invitation-only</span>
-<span class="meta-pill">15–18 leaders</span>
-<span class="meta-pill">Horseshoe boardroom</span>
-<span class="meta-pill">08:30–13:30</span>
-</div>
-
-</div>
-</div>
-</section>
-
-<section class="section" id="confirm">
-<div class="container grid">
-
-<div class="card">
-
-<h2>Participation Confirmation</h2>
-
-<form id="forumForm">
-
-<input type="hidden" name="event" value="Executive Governance Forum Botswana 2026">
-
-<div class="form-grid">
-
-<div class="form-group">
-<label>Full Name*</label>
-<input id="full-name" required>
-</div>
-
-<div class="form-group">
-<label>Organisation*</label>
-<input id="organisation" required>
-</div>
-
-<div class="form-group">
-<label>Title / Role*</label>
-<input id="title-role" required>
-</div>
-
-<div class="form-group">
-<label>Work Email*</label>
-<input id="work-email" type="email" required>
-</div>
-
-<div class="form-group">
-<label>Mobile*</label>
-<input id="mobile" required>
-</div>
-
-<div class="form-group">
-<label>Participant Type*</label>
-<select id="participant-type" required>
-<option value="">Select</option>
-<option>Executive</option>
-<option>Executive Assistant</option>
-<option>Finance</option>
-<option>Other</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>Participation*</label>
-<select id="seats-requested" required>
-<option value="">Select</option>
-<option>1 participant — USD 800</option>
-<option>2 participants — USD 600 each</option>
-<option>3 participants — USD 450 each</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>Invoice Contact Name*</label>
-<input id="invoice-contact-name" required>
-</div>
-
-<div class="form-group">
-<label>Invoice Contact Email*</label>
-<input id="invoice-contact-email" type="email" required>
-</div>
-
-<div class="form-group full">
-<label>Invoice Process*</label>
-<select id="invoice-process" required>
-<option value="">Select</option>
-<option>Company PO</option>
-<option>Direct Invoice</option>
-<option>Bank Transfer</option>
-</select>
-</div>
-
-<div class="form-group full">
-<label>Additional Notes</label>
-<textarea id="notes"></textarea>
-</div>
-
-</div>
-
-<div style="margin-top:18px">
-<button id="submitBtn" class="btn btn-primary">Confirm Participation</button>
-</div>
-
-<div id="formStatus" class="status-message"></div>
-
-</form>
-
-</div>
-
-<div class="card">
-
-<h2>Convened By</h2>
-
-<p>
-<strong>Sarah Edmore</strong><br>
-Governance Decision Architect<br>
-You Lounge
-</p>
-
-<p>
-Private executive diagnostic discussions may be offered after the forum where structural fit is present.
-</p>
-
-</div>
-
-</div>
-</section>
-
-</main>
-
-<footer class="footer">
-<div class="container">
-© 2026 You Lounge
-</div>
-</footer>
-
-<script>
-
-document.addEventListener("DOMContentLoaded",function(){
-
-const form=document.getElementById("forumForm")
-const submitBtn=document.getElementById("submitBtn")
-const status=document.getElementById("formStatus")
-
-form.addEventListener("submit",async function(e){
-
-e.preventDefault()
-
-submitBtn.disabled=true
-submitBtn.innerText="Sending..."
-
-const data={
-
-full_name:document.getElementById("full-name").value,
-organisation:document.getElementById("organisation").value,
-title_role:document.getElementById("title-role").value,
-work_email:document.getElementById("work-email").value,
-mobile:document.getElementById("mobile").value,
-participant_type:document.getElementById("participant-type").value,
-participation_requested:document.getElementById("seats-requested").value,
-invoice_contact_name:document.getElementById("invoice-contact-name").value,
-invoice_contact_email:document.getElementById("invoice-contact-email").value,
-invoice_process:document.getElementById("invoice-process").value,
-notes:document.getElementById("notes").value
-
-}
-
-try{
-
-const res=await fetch("/api/forum-confirmation",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(data)
-})
-
-if(res.ok){
-
-status.className="status-message success"
-status.innerText="Submission received. Confirmation email sent."
-
-form.reset()
-
-}else{
-
-status.className="status-message error"
-status.innerText="Submission failed. Please try again."
-
-}
-
-}catch(err){
-
-status.className="status-message error"
-status.innerText="Network error."
-
-}
-
-submitBtn.disabled=false
-submitBtn.innerText="Confirm Participation"
-
-})
-
-})
-
-</script>
-
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a href="/" class="brand">You Lounge</a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/sovereignprotocol">Sovereign Protocol</a>
+        <a href="/iplicensing">IP Licensing</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow">Executive Governance Forum • Closed-Door • Invitation-Only</div>
+
+          <h1>Structural Decision Drift in Complex Organisations</h1>
+
+          <p class="hero-subtitle">
+            Executive decisions rarely fail from lack of intelligence. They erode through
+            <strong>structural decision drift</strong>.
+          </p>
+
+          <p class="hero-highlight">
+            Most organisations recognise the symptoms of decision drift only after its effects
+            have already compounded.
+          </p>
+
+          <p class="hero-subtitle">
+            This closed-door forum examines how decision drift forms inside complex
+            organisations, why escalation loops compound under pressure, and what governance
+            architecture is required to stabilise decision authority before it fragments.
+          </p>
+
+          <div class="hero-meta">
+            <span class="meta-pill">Participation is invitation-based</span>
+            <span class="meta-pill">Limited executive room</span>
+            <span class="meta-pill">15–18 senior leaders</span>
+            <span class="meta-pill">Horseshoe boardroom setting</span>
+            <span class="meta-pill">08:30–13:30</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#confirm" class="btn btn-primary">Confirm Participation</a>
+            <a href="/sovereignprotocol" class="btn btn-secondary">Review the Architecture</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid">
+        <div class="card">
+          <h2>Executive Time Commitment</h2>
+          <p>
+            This forum runs <strong>08:30–13:30</strong> and concludes with an optional
+            post-session executive lunch exchange.
+          </p>
+          <p>
+            The session is intentionally structured as a single focused morning block to
+            respect executive schedules while enabling substantive discussion.
+          </p>
+
+          <div class="emphasis-box">
+            Participation is limited to senior leaders responsible for decision
+            flow, escalation pathways, and governance coherence.
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Forum Format</h2>
+          <ul class="list">
+            <li>Closed-door executive session</li>
+            <li>Limited participation</li>
+            <li>Horseshoe boardroom setting</li>
+            <li>Moderated governance dialogue, not presentation-led</li>
+            <li>Chatham House Rule</li>
+          </ul>
+
+          <div class="emphasis-box">
+            <strong>Room Discipline</strong><br />
+            The session is moderated to ensure balanced participation and focused discussion.
+            The room is intentionally limited in size to maintain a serious executive
+            conversation rather than a conference-style environment.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid">
+        <div class="card">
+          <h2>What This Forum Is</h2>
+          <p>
+            A moderated executive governance session examining structural decision drift inside
+            complex environments.
+          </p>
+          <p>
+            This is <strong>not a leadership workshop or training seminar.</strong>
+          </p>
+          <p>
+            It is a governance discussion for leaders responsible for decision flow,
+            escalation pathways, institutional coherence, and operational authority boundaries.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Who This Forum Is For</h2>
+          <ul class="list">
+            <li>Senior functional leaders</li>
+            <li>Heads of risk, governance, or internal audit</li>
+            <li>Strategy and operations directors</li>
+            <li>Senior managers responsible for decision flow across teams</li>
+            <li>Institutional leaders operating under sustained organisational complexity</li>
+          </ul>
+
+          <p class="small-note">
+            This session is not intended for early-career professionals or general leadership
+            development audiences.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid">
+        <div class="card">
+          <h2>What Will Be Examined</h2>
+
+          <div class="split-list">
+            <div class="split-item">
+              <h3>Structural Reframing of Decision Drift</h3>
+              <p>
+                How drift forms beneath visible operational friction and why it often remains
+                unnamed until consequences compound.
+              </p>
+            </div>
+
+            <div class="split-item">
+              <h3>Escalation Containment Under Pressure</h3>
+              <p>
+                What happens when escalation logic is unclear, circular, or overly dependent
+                on personalities.
+              </p>
+            </div>
+
+            <div class="split-item">
+              <h3>Authority Boundary Ambiguity</h3>
+              <p>
+                How blurred authority lines across leadership layers weaken decision closure
+                and institutional coherence.
+              </p>
+            </div>
+
+            <div class="split-item">
+              <h3>Economic Exposure of Reopened Decisions</h3>
+              <p>
+                Why the visible cost of repeated meetings is rarely the real exposure, and
+                how delayed capital allocation and opportunity cost compound quietly.
+              </p>
+            </div>
+
+            <div class="split-item">
+              <h3>Institutional Friction Patterns</h3>
+              <p>
+                Decision reopen cycles, duplicated analysis, escalation fatigue, and reduced
+                executive velocity.
+              </p>
+            </div>
+          </div>
+
+          <div class="emphasis-box">
+            The discussion focuses on <strong>governance architecture</strong> rather than
+            personalities or leadership styles.
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Session Structure</h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3>Structural Framing</h3>
+              <p>
+                Why decision drift compounds quietly inside complex organisations.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Economic Exposure Modelling</h3>
+              <p>
+                How reopened executive decisions generate hidden institutional cost.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Break</h3>
+              <p>Short recess before the second session.</p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Escalation Containment Logic</h3>
+              <p>
+                Structural conditions required to stabilise decision authority.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Executive Authority Reflection</h3>
+              <p>
+                Structured self-diagnostic discussion on decision posture and authority strain.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Moderated Closed-Door Dialogue</h3>
+              <p>
+                Participant exchange under Chatham House Rule, followed by optional lunch
+                exchange.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid">
+        <div class="card">
+          <h2>Outcome</h2>
+          <ul class="list">
+            <li>A structural model explaining decision drift inside institutions</li>
+            <li>Clearer understanding of escalation containment principles</li>
+            <li>Governance language for internal executive discussions</li>
+            <li>Eligibility for private executive diagnostic discussions where appropriate</li>
+          </ul>
+
+          <div class="emphasis-box">
+            This forum <strong>does not install governance architecture</strong>.<br />
+            It clarifies the conditions under which structural installation may become
+            necessary.
+          </div>
+
+          <p>
+            <strong>Leader alignment precedes institutional coherence.</strong>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Why This Forum Matters</h2>
+          <p>
+            In complex organisations, the visible cost of a reopened executive decision is
+            rarely the real exposure.
+          </p>
+
+          <ul class="list">
+            <li>Repeated executive sessions</li>
+            <li>Duplicated analysis</li>
+            <li>Delayed capital allocation</li>
+            <li>Opportunity cost</li>
+            <li>Quiet erosion of authority alignment across leadership layers</li>
+          </ul>
+
+          <p>
+            Over time these patterns compound into <strong>governance fatigue</strong> and
+            <strong>reduced institutional velocity</strong>.
+          </p>
+
+          <p>
+            Understanding structural drift is the first step toward containing it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="confirm">
+      <div class="container grid">
+        <div class="card">
+          <div class="cta-box">
+            <h2>Participation Confirmation</h2>
+            <p>
+              Participation is limited to invited leaders and confirmed upon review to
+              maintain a balanced executive room.
+            </p>
+            <p>
+              Executive assistants may complete the participation confirmation on behalf of
+              the invited leader.
+            </p>
+            <p>
+              Participation confirmations are requested by
+              <strong>16 March 2026</strong> to finalise the executive room
+              composition.
+            </p>
+          </div>
+
+          <form id="forumForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="full-name">Full Name*</label>
+                <input id="full-name" name="full_name" type="text" required />
+              </div>
+
+              <div class="form-group">
+                <label for="organisation">Organisation*</label>
+                <input id="organisation" name="organisation" type="text" required />
+              </div>
+
+              <div class="form-group">
+                <label for="title-role">Title / Role*</label>
+                <input id="title-role" name="title_role" type="text" required />
+              </div>
+
+              <div class="form-group">
+                <label for="work-email">Work Email*</label>
+                <input id="work-email" name="work_email" type="email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="mobile">Mobile / WhatsApp*</label>
+                <input id="mobile" name="mobile" type="tel" placeholder="+267…" required />
+              </div>
+
+              <div class="form-group">
+                <label for="participant-type">Participant Type*</label>
+                <select id="participant-type" name="participant_type" required>
+                  <option value="">Select…</option>
+                  <option value="Invited Executive">Invited Executive</option>
+                  <option value="Executive Assistant">Executive Assistant</option>
+                  <option value="Finance / Invoice Contact">Finance / Invoice Contact</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="seats-requested">Participation Requested*</label>
+                <select id="seats-requested" name="participation_requested" required>
+                  <option value="">Select…</option>
+                  <option value="1 participant — USD 800">1 participant — USD 800</option>
+                  <option value="2 participants — USD 600 each">2 participants — USD 600 each</option>
+                  <option value="3 participants — USD 450 each">3 participants — USD 450 each</option>
+                  <option value="4 participants — USD 350 each">4 participants — USD 350 each</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="invoice-contact-name">Invoice Contact Name*</label>
+                <input id="invoice-contact-name" name="invoice_contact_name" type="text" required />
+              </div>
+
+              <div class="form-group">
+                <label for="invoice-contact-email">Invoice Contact Email*</label>
+                <input id="invoice-contact-email" name="invoice_contact_email" type="email" required />
+              </div>
+
+              <div class="form-group full">
+                <label for="invoice-process">Invoice Process*</label>
+                <select id="invoice-process" name="invoice_process" required>
+                  <option value="">Select…</option>
+                  <option value="Company Purchase Order Required">Company Purchase Order Required</option>
+                  <option value="Direct Invoice">Direct Invoice</option>
+                  <option value="Card Payment">Card Payment</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label for="notes">Additional Notes (Optional)</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  placeholder="Any relevant details regarding attendance, invoicing, or internal approval."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-helper">
+              By submitting, you consent to being contacted regarding participation
+              confirmation and related logistics. No data is sold or shared externally.
+            </div>
+
+            <div style="margin-top: 18px;">
+              <button type="submit" id="submitBtn" class="btn btn-primary">Confirm Participation</button>
+            </div>
+
+            <div id="formStatus" class="Submission received."></div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Convened By</h2>
+          <p>
+            <strong>Sarah Edmore</strong><br />
+            Governance Decision Architect<br />
+            You Lounge<br />
+            Focused on structural decision coherence within complex institutional
+            environments.
+          </p>
+
+          <div class="emphasis-box">
+            <strong>Important Notice</strong><br />
+            This is a closed executive session conducted under Chatham House Rule.
+            No public recording, distribution of materials, or external disclosure of
+            discussions will occur.
+          </div>
+
+          <div class="split-item">
+            <h3>Next Step After the Forum</h3>
+            <p>
+              Private executive diagnostic conversations may be offered where structural
+              fit and institutional relevance are present.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 You Lounge. Governance Decision Architecture.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("forumForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const statusBox = document.getElementById("formStatus");
+
+      if (!form) return;
+
+      function showStatus(message, type) {
+        statusBox.className = "status-message " + type;
+        statusBox.textContent = message;
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        statusBox.className = "status-message";
+        statusBox.textContent = "";
+
+        const formData = {
+          full_name: document.getElementById("full-name").value.trim(),
+          organisation: document.getElementById("organisation").value.trim(),
+          title_role: document.getElementById("title-role").value.trim(),
+          work_email: document.getElementById("work-email").value.trim(),
+          mobile: document.getElementById("mobile").value.trim(),
+          participant_type: document.getElementById("participant-type").value,
+          participation_requested: document.getElementById("seats-requested").value,
+          invoice_contact_name: document.getElementById("invoice-contact-name").value.trim(),
+          invoice_contact_email: document.getElementById("invoice-contact-email").value.trim(),
+          invoice_process: document.getElementById("invoice-process").value,
+          notes: document.getElementById("notes").value.trim()
+        };
+
+        try {
+          const response = await fetch("/api/forum-confirmation", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showStatus(
+              "Participation request submitted successfully. Confirmation emails have been sent to the participant and the relevant contact.",
+              "success"
+            );
+            form.reset();
+          } else {
+            showStatus(
+              result.error || "There was a problem submitting the form. Please try again.",
+              "error"
+            );
+          }
+        } catch (error) {
+          showStatus(
+            "Network error. Please check your connection and try again.",
+            "error"
+          );
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Confirm Participation";
+        }
+      });
+    });
+  </script>
 </body>
 </html>
