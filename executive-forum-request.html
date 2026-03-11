@@ -720,7 +720,11 @@
             </p>
           </div>
 
-          <form id="forumForm">
+          <form
+            id="forumForm"
+            action="https://formspree.io/f/mdaldvwy"
+            method="POST"
+          >
             <div class="form-grid">
               <div class="form-group">
                 <label for="full-name">Full Name*</label>
@@ -799,6 +803,12 @@
                   placeholder="Any relevant details regarding attendance, invoicing, or internal approval."
                 ></textarea>
               </div>
+
+              <!-- Optional subject for Formspree email -->
+              <input type="hidden" name="_subject" value="Executive Governance Forum Participation Confirmation" />
+
+              <!-- Optional spam trap -->
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
             </div>
 
             <div class="form-helper">
@@ -810,7 +820,7 @@
               <button type="submit" id="submitBtn" class="btn btn-primary">Confirm Participation</button>
             </div>
 
-            <div id="formStatus" class="Submission received."></div>
+            <div id="formStatus" class="status-message"></div>
           </form>
         </div>
 
@@ -870,40 +880,30 @@
         statusBox.className = "status-message";
         statusBox.textContent = "";
 
-        const formData = {
-          full_name: document.getElementById("full-name").value.trim(),
-          organisation: document.getElementById("organisation").value.trim(),
-          title_role: document.getElementById("title-role").value.trim(),
-          work_email: document.getElementById("work-email").value.trim(),
-          mobile: document.getElementById("mobile").value.trim(),
-          participant_type: document.getElementById("participant-type").value,
-          participation_requested: document.getElementById("seats-requested").value,
-          invoice_contact_name: document.getElementById("invoice-contact-name").value.trim(),
-          invoice_contact_email: document.getElementById("invoice-contact-email").value.trim(),
-          invoice_process: document.getElementById("invoice-process").value,
-          notes: document.getElementById("notes").value.trim()
-        };
+        const formData = new FormData(form);
 
         try {
-          const response = await fetch("/api/forum-confirmation", {
+          const response = await fetch(form.action, {
             method: "POST",
+            body: formData,
             headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
+              "Accept": "application/json"
+            }
           });
 
           const result = await response.json();
 
           if (response.ok) {
             showStatus(
-              "Participation request submitted successfully. Confirmation emails have been sent to the participant and the relevant contact.",
+              "Participation request submitted successfully. We will review the submission and revert with confirmation and next-step logistics.",
               "success"
             );
             form.reset();
           } else {
             showStatus(
-              result.error || "There was a problem submitting the form. Please try again.",
+              result.errors
+                ? result.errors.map(error => error.message).join(", ")
+                : "There was a problem submitting the form. Please try again.",
               "error"
             );
           }
