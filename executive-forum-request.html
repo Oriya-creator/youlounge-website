@@ -725,6 +725,7 @@
             action="https://formspree.io/f/mdaldvwy"
             method="POST"
           >
+            <input type="hidden" name="_next" value="https://www.youlounge.org/thank-you.html" />
             <div class="form-grid">
               <div class="form-group">
                 <label for="full-name">Full Name*</label>
@@ -804,10 +805,7 @@
                 ></textarea>
               </div>
 
-              <!-- Optional subject for Formspree email -->
               <input type="hidden" name="_subject" value="Executive Governance Forum Participation Confirmation" />
-
-              <!-- Optional spam trap -->
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
             </div>
 
@@ -894,11 +892,7 @@
           const result = await response.json();
 
           if (response.ok) {
-            showStatus(
-              "Participation request submitted successfully. We will review the submission and revert with confirmation and next-step logistics.",
-              "success"
-            );
-            form.reset();
+            window.location.href = "https://www.youlounge.org/thank-you.html";
           } else {
             showStatus(
               result.errors
