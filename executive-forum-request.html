@@ -369,30 +369,6 @@
       margin-bottom: 0;
     }
 
-    .status-message {
-      display: none;
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 14px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      line-height: 1.55;
-    }
-
-    .status-message.success {
-      display: block;
-      background: var(--success-bg);
-      color: var(--success);
-      border: 1px solid rgba(22, 101, 52, 0.18);
-    }
-
-    .status-message.error {
-      display: block;
-      background: var(--error-bg);
-      color: var(--error);
-      border: 1px solid rgba(185, 28, 28, 0.18);
-    }
-
     .footer {
       padding: 40px 0 60px;
       text-align: center;
@@ -726,6 +702,9 @@
             method="POST"
           >
             <input type="hidden" name="_next" value="https://www.youlounge.org/thankyou.html" />
+            <input type="hidden" name="_subject" value="Executive Governance Forum Participation Confirmation" />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
             <div class="form-grid">
               <div class="form-group">
                 <label for="full-name">Full Name*</label>
@@ -804,9 +783,6 @@
                   placeholder="Any relevant details regarding attendance, invoicing, or internal approval."
                 ></textarea>
               </div>
-
-              <input type="hidden" name="_subject" value="Executive Governance Forum Participation Confirmation" />
-              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
             </div>
 
             <div class="form-helper">
@@ -815,10 +791,8 @@
             </div>
 
             <div style="margin-top: 18px;">
-              <button type="submit" id="submitBtn" class="btn btn-primary">Confirm Participation</button>
+              <button type="submit" class="btn btn-primary">Confirm Participation</button>
             </div>
-
-            <div id="formStatus" class="status-message"></div>
           </form>
         </div>
 
@@ -856,62 +830,5 @@
       © 2026 You Lounge. Governance Decision Architecture.
     </div>
   </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("forumForm");
-      const submitBtn = document.getElementById("submitBtn");
-      const statusBox = document.getElementById("formStatus");
-
-      if (!form) return;
-
-      function showStatus(message, type) {
-        statusBox.className = "status-message " + type;
-        statusBox.textContent = message;
-      }
-
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Sending...";
-        statusBox.className = "status-message";
-        statusBox.textContent = "";
-
-        const formData = new FormData(form);
-
-        try {
-          const response = await fetch(form.action, {
-            method: "POST",
-            body: formData,
-            headers: {
-              "Accept": "application/json"
-            }
-          });
-
-          const result = await response.json();
-
-          if (response.ok) {
-            window.location.href = "https://www.youlounge.org/thankyou.html";
-          } else {
-            showStatus(
-              result.errors
-                ? result.errors.map(error => error.message).join(", ")
-                : "There was a problem submitting the form. Please try again.",
-              "error"
-            );
-          }
-        } catch (error) {
-          showStatus(
-            "Network error. Please check your connection and try again.",
-            "error"
-          );
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Confirm Participation";
-        }
-      });
-    });
-  </script>
 </body>
 </html>
