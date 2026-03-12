@@ -118,6 +118,12 @@
       transform: translateY(-1px);
     }
 
+    .btn-primary:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .btn-secondary {
       background: transparent;
       border-color: var(--border);
@@ -351,6 +357,12 @@
       font-size: 0.85rem;
       color: var(--muted);
       margin-top: 6px;
+    }
+
+    .form-status {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     .cta-box {
@@ -692,10 +704,9 @@
             </p>
           </div>
 
-          <form action="https://formspree.io/f/mqeyqgbd" method="POST">
-            <!-- Redirect to thank you page after submission -->
-            <input type="hidden" name="_next" value="thankyou.html">
-           
+          <form id="executiveForumForm" action="https://formspree.io/f/mqeyqgbd" method="POST">
+            <input type="hidden" name="_subject" value="New Executive Governance Forum Submission">
+
             <div class="form-grid">
               <div class="form-group">
                 <label for="full-name">Full Name*</label>
@@ -782,8 +793,12 @@
             </div>
 
             <div style="margin-top: 18px;">
-              <button type="submit" class="btn btn-primary">Confirm Participation</button>
+              <button type="submit" class="btn btn-primary" id="executiveSubmitBtn">
+                Confirm Participation
+              </button>
             </div>
+
+            <div id="form-status" class="form-status"></div>
           </form>
         </div>
 
@@ -821,5 +836,60 @@
       © 2026 You Lounge. Governance Decision Architecture.
     </div>
   </footer>
+
+  <script>
+    const executiveForm = document.getElementById('executiveForumForm');
+    const executiveSubmitBtn = document.getElementById('executiveSubmitBtn');
+    const formStatus = document.getElementById('form-status');
+
+    executiveForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const originalText = executiveSubmitBtn.innerHTML;
+      executiveSubmitBtn.disabled = true;
+      executiveSubmitBtn.innerHTML = 'Sending...';
+      formStatus.textContent = '';
+      formStatus.style.color = '';
+
+      try {
+        const formData = new FormData(executiveForm);
+
+        const response = await fetch(executiveForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          executiveSubmitBtn.innerHTML = 'Submitted';
+          formStatus.textContent = 'Submission received. Redirecting...';
+          formStatus.style.color = '#2D5A27';
+
+          setTimeout(() => {
+            window.location.href = 'thankyou.html';
+          }, 1200);
+        } else {
+          const data = await response.json().catch(() => null);
+          let errorMessage = 'Your submission could not be sent. Please review the form and try again.';
+
+          if (data && data.errors && data.errors.length > 0) {
+            errorMessage = data.errors.map(error => error.message).join(' ');
+          }
+
+          formStatus.textContent = errorMessage;
+          formStatus.style.color = '#A85C32';
+          executiveSubmitBtn.disabled = false;
+          executiveSubmitBtn.innerHTML = originalText;
+        }
+      } catch (error) {
+        formStatus.textContent = 'Network error. Please try again.';
+        formStatus.style.color = '#A85C32';
+        executiveSubmitBtn.disabled = false;
+        executiveSubmitBtn.innerHTML = originalText;
+      }
+    });
+  </script>
 </body>
 </html>
