@@ -693,8 +693,9 @@
           </div>
 
           <form action="https://formspree.io/f/mqeyqgbd" method="POST">
-            <input type="hidden" name="_subject" value="New Executive Governance Forum Submission">
-
+            <!-- Redirect to thank you page after submission -->
+            <input type="hidden" name="_next" value="thankyou.html">
+           
             <div class="form-grid">
               <div class="form-group">
                 <label for="full-name">Full Name*</label>
