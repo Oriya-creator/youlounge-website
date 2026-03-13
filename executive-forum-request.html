@@ -855,7 +855,7 @@
         const formData = new FormData(executiveForm);
 
         const response = await fetch(executiveForm.action, {
-          method: 'POST',
+          method: executiveForm.method,
           body: formData,
           headers: {
             'Accept': 'application/json'
