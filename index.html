@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The You Lounge | Governance Architecture For Complex, Multi-Nationa Decision</title>
+    <title>Sovereign Protocol™ | Institutional Decision Governance Architecture</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Earth & Teal Color Palette */
         :root {
             --sand: #E6D5B8;
             --clay: #C4A484;
@@ -17,9 +16,9 @@
             --charcoal: #333333;
             --light-clay: #E8D0B3;
             --white: #FFFFFF;
+            --soft-cream: #F8F5EF;
         }
 
-        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -40,7 +39,6 @@
             padding: 0 20px;
         }
 
-        /* Header & Hamburger Menu */
         header {
             background-color: var(--teal);
             position: fixed;
@@ -74,10 +72,10 @@
 
         .logo-text {
             color: var(--sand);
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: 0.6px;
             margin-left: 15px;
             display: none;
         }
@@ -92,11 +90,10 @@
         }
 
         .hamburger:hover {
-            color: var(--dark-teal);
+            color: var(--white);
             transform: scale(1.1);
         }
 
-        /* Mobile Menu */
         .mobile-menu {
             position: fixed;
             top: 80px;
@@ -143,11 +140,10 @@
             padding-left: 30px;
         }
 
-        /* Hero Section */
         .hero {
             padding: 140px 20px 80px;
             text-align: center;
-            background: linear-gradient(135deg, var(--light-clay) 0%, var(--sand) 100%);
+            background: linear-gradient(135deg, var(--soft-cream) 0%, var(--sand) 100%);
             position: relative;
             overflow: hidden;
         }
@@ -155,16 +151,18 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="%23A85C32" stroke-width="0.5" opacity="0.1" fill="none"/></svg>');
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="%23006666" stroke-width="0.5" opacity="0.08" fill="none"/></svg>');
             opacity: 0.2;
         }
 
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
         .hero-logo {
-            max-width: 300px;
+            max-width: 320px;
             height: auto;
             margin: 0 auto 30px;
             display: block;
@@ -172,24 +170,40 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: var(--teal);
             margin-bottom: 20px;
             font-weight: 700;
+            line-height: 1.15;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            max-width: 760px;
+            margin: 0 auto 30px;
             color: var(--charcoal);
+        }
+
+        .authority-signals {
+            margin-top: 10px;
+        }
+
+        .authority-signals h2 {
+            color: var(--teal);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .authority-signals p {
+            margin-bottom: 0;
+            line-height: 1.9;
         }
 
         .highlight {
             color: var(--teal);
             font-weight: 600;
         }
-        
+
         .content-block {
             background-color: var(--white);
             border-radius: 15px;
@@ -199,7 +213,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             text-align: left;
         }
-        
+
         .content-block h2 {
             color: var(--teal);
             margin-bottom: 25px;
@@ -207,19 +221,19 @@
             border-bottom: 2px solid var(--teal);
             padding-bottom: 10px;
         }
-        
+
         .bullet-list {
             list-style-type: none;
             padding-left: 0;
         }
-        
+
         .bullet-list li {
             padding: 10px 0;
             padding-left: 30px;
             position: relative;
             font-size: 1.1rem;
         }
-        
+
         .bullet-list li:before {
             content: "°";
             color: var(--teal);
@@ -228,7 +242,7 @@
             left: 0;
             top: 8px;
         }
-        
+
         .architecture-bold {
             color: var(--teal);
             font-weight: 700;
@@ -256,7 +270,6 @@
             box-shadow: 0 8px 20px rgba(0, 128, 128, 0.3);
         }
 
-        /* Testimonials */
         .testimonials-section {
             padding: 100px 20px;
             background-color: var(--light-clay);
@@ -339,7 +352,6 @@
             font-size: 0.9rem;
         }
 
-        /* Footer */
         footer {
             background-color: var(--teal);
             color: var(--sand);
@@ -362,10 +374,17 @@
         .footer-tagline {
             font-size: 1.2rem;
             margin-bottom: 40px;
-            opacity: 0.9;
+            opacity: 0.95;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .footer-parent {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-top: -15px;
+            margin-bottom: 30px;
         }
 
         .contact-info {
@@ -395,10 +414,18 @@
             padding-top: 20px;
             border-top: 1px solid rgba(230, 213, 184, 0.2);
             font-size: 0.9rem;
-            opacity: 0.7;
+            opacity: 0.78;
         }
 
-        /* CONTACT FORM MODAL */
+        .copyright a {
+            color: var(--sand);
+            text-decoration: none;
+        }
+
+        .copyright a:hover {
+            color: var(--white);
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -531,7 +558,6 @@
             color: var(--teal);
         }
 
-        /* Loading spinner */
         .loading-spinner {
             display: none;
             text-align: center;
@@ -553,37 +579,36 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.4rem;
             }
-            
+
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1.08rem;
             }
-            
+
             .hero-logo {
                 max-width: 250px;
             }
-            
+
             .section-title {
                 font-size: 2.2rem;
             }
-            
+
             .mobile-menu a {
                 padding: 18px;
                 font-size: 16px;
             }
-            
+
             .logo-img {
                 height: 40px;
             }
-            
+
             .content-block {
                 padding: 30px 20px;
             }
-            
+
             .contact-modal {
                 padding: 30px 20px;
                 width: 95%;
@@ -594,35 +619,34 @@
             .hero {
                 padding: 120px 15px 60px;
             }
-            
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.95rem;
             }
-            
+
             .hero-logo {
                 max-width: 200px;
                 margin-bottom: 20px;
             }
-            
+
             .cta-button {
                 padding: 14px 30px;
                 font-size: 1rem;
             }
-            
+
             .testimonial-card {
                 padding: 25px;
             }
-            
+
             .footer-logo-img {
                 max-width: 200px;
             }
-            
+
             .content-block {
                 padding: 25px 15px;
             }
         }
 
-        /* Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -656,76 +680,72 @@
     </style>
 </head>
 <body>
-    <!-- Header with Hamburger Menu -->
     <header>
         <div class="header-content container">
             <div class="logo-container">
                 <a href="index.html">
-                    <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="logo-img">
+                    <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="logo-img">
                 </a>
-                <a href="index.html" class="logo-text">The You<span>Lounge</span></a>
+                <a href="index.html" class="logo-text">Sovereign Protocol™</a>
             </div>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-        
-        <!-- Mobile Menu -->
+
         <nav class="mobile-menu" id="mobileMenu">
             <ul>
                 <li><a href="about.html">About</a></li>
                 <li><a href="hubs.html">Hubs</a></li>
                 <li><a href="thinktank.html">Non-Profit & Think Tank</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" id="navContact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <!-- Logo in Hero Section -->
-            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="hero-logo">
-            
-            <h1 class="fade-in">Governance Architecture for Complex, Multi-National Decision Environments</h1>
-            
+            <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="hero-logo">
+
+            <h1 class="fade-in">Institutional Decision Governance Architecture</h1>
+
             <p class="fade-in delay-1">
-                We design alignment-led governance systems that help decision-makers & senior leaders steward complexity, scale across nations, and make sustainable decisions without fragmentation.
+                Sovereign Protocol™ is designed to stabilise decision coherence in complex organisations through clearer decision rights, escalation discipline, and structural closure.
             </p>
-            
-            <div class="fade-in delay-2">
-                <h2 style="color: var(--teal); margin-bottom: 15px;">Authority Signals</h2>
+
+            <div class="authority-signals fade-in delay-2">
+                <h2>Authority Signals</h2>
                 <p>
                     ° Governance Decision Architecture<br>
-                    ° Multi-National Systems Alignment<br>
-                    ° Narrative & Institutional Coherence
+                    ° Decision Rights & Escalation Discipline<br>
+                    ° Institutional Coherence Under Complexity
                 </p>
             </div>
-            
+
             <a href="hubs.html" class="cta-button fade-in delay-3">Explore Systems</a>
         </div>
     </section>
 
-    <!-- What We Do Section -->
     <div class="content-block fade-in">
         <div class="container">
             <h2>What We Do</h2>
             <p><strong>We Operate Upstream Of Execution</strong></p>
-            <p>Our work focuses on how decisions are framed, authority is distributed, and coherence is maintained across people, institutions and nations.</p>
-            
+            <p>
+                Our work focuses on how decisions are framed, authority is distributed, and coherence is maintained across governance layers in complex institutional environments.
+            </p>
+
             <div style="margin-top: 40px;">
                 <p><strong>We Are Engaged When:</strong></p>
                 <ul class="bullet-list">
-                    <li>Decisions carry long-term civil, socio-economic or cultural consequences</li>
-                    <li>Institutions are scaling across regions and sectors</li>
-                    <li>Leaders & decision-makers need clarity without simplification</li>
-                    <li>Governance must hold complexity without burnout</li>
+                    <li>Decisions carry long-term institutional, socio-economic, or civil consequences</li>
+                    <li>Executive and board authority requires clearer structural alignment</li>
+                    <li>Escalation pathways are unclear or repeatedly re-open decisions</li>
+                    <li>Governance must hold complexity without fragmentation or burnout</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Who This Is For Section -->
     <div class="content-block fade-in delay-1">
         <div class="container">
             <h2>Who This Is For</h2>
@@ -741,20 +761,16 @@
         </div>
     </div>
 
-    <!-- Testimonials Section -->
     <section class="testimonials-section" id="hubs">
         <div class="container">
             <h2 class="section-title fade-in">Executive Testimonials</h2>
             <div class="testimonials-container">
-                <!-- Testimonial 1 -->
                 <div class="testimonial-card fade-in delay-1">
                     <div class="testimonial-text">
                         "The Sovereign Protocol transformed how I approach global challenges. The discreet peer circles provided insights no consultancy could offer. This is the most valuable network I've ever been part of."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="background-color: var(--teal);">
-                            J
-                        </div>
+                        <div class="author-avatar">J</div>
                         <div class="author-info">
                             <h4>James Chen</h4>
                             <p>CEO, Fortune 100 Tech Company</p>
@@ -762,15 +778,12 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 2 -->
                 <div class="testimonial-card fade-in delay-2">
                     <div class="testimonial-text">
-                        "The Media & Creatives system helped our executive team articulate a compelling vision across three continents. Their understanding of cultural nuance in storytelling is unparalleled."
+                        "The governance architecture helped our executive team articulate decision authority more clearly across three continents. The structural clarity changed how we moved."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="background-color: var(--dark-teal);">
-                            M
-                        </div>
+                        <div class="author-avatar" style="background-color: var(--dark-teal);">M</div>
                         <div class="author-info">
                             <h4>Maria Rodriguez</h4>
                             <p>Global CMO, Luxury Conglomerate</p>
@@ -778,15 +791,12 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 3 -->
                 <div class="testimonial-card fade-in delay-3">
                     <div class="testimonial-text">
-                        "Our board retreat in Kyoto, orchestrated by the M.I.C.E. team, was flawless. Every detail respected both Japanese tradition and our global business needs. Extraordinary execution."
+                        "Our board retreat in Kyoto surfaced decision friction we had normalised for years. The architecture brought discipline and closure where discussion had previously circulated."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="background-color: var(--terracotta);">
-                            K
-                        </div>
+                        <div class="author-avatar" style="background-color: var(--terracotta);">K</div>
                         <div class="author-info">
                             <h4>Klaus Schmidt</h4>
                             <p>Chairman, European Manufacturing Group</p>
@@ -794,15 +804,12 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 4 -->
                 <div class="testimonial-card fade-in delay-4">
                     <div class="testimonial-text">
-                        "The Think Tank's research on sustainable supply chains informed our entire ESG strategy. Their global, cross-cultural approach provided perspectives we were missing internally."
+                        "The structural lens on escalation, authority, and closure helped us recognise governance weaknesses that were slowing execution without appearing in any formal report."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar" style="background-color: var(--teal);">
-                            A
-                        </div>
+                        <div class="author-avatar">A</div>
                         <div class="author-info">
                             <h4>Aisha Nkrumah</h4>
                             <p>Chief Sustainability Officer, Energy Multinational</p>
@@ -813,107 +820,102 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="footer-content container">
-            <!-- Logo in Footer -->
-            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
-            <p class="footer-tagline">Governance Architects for Complex, Multi-National Decisions</p>
-            
+            <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="footer-logo-img">
+            <p class="footer-tagline">Institutional Decision Governance Architecture</p>
+            <p class="footer-parent">By The You Lounge</p>
+
             <div class="contact-info">
                 <p>Connect with our Governance Architects:</p>
                 <p><a href="#" id="openContactForm">executive@youlounge.org</a></p>
             </div>
-            
+
             <div class="copyright">
                 <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="#" id="footerContact">Contact</a></p>
             </div>
         </div>
     </footer>
 
-    <!-- Contact Form Modal -->
     <div class="modal-overlay" id="contactModal">
         <div class="contact-modal">
-            <button class="close-modal" id="closeModal">
+            <button class="close-modal" id="closeModal" aria-label="Close contact form">
                 <i class="fas fa-times"></i>
             </button>
-            
-            <h2 class="modal-title">Connect with The You Lounge</h2>
-            
-            <!-- Formspree Form -->
+
+            <h2 class="modal-title">Connect with Sovereign Protocol™</h2>
+
             <form id="contactForm" action="https://formspree.io/f/xykjaerk" method="POST">
                 <div class="form-group">
                     <label class="form-label">Full Name *</label>
                     <input type="text" class="form-input" name="name" required placeholder="John Smith">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Title/Position *</label>
                     <input type="text" class="form-input" name="position" required placeholder="CEO, Global Director, etc.">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Company/Organization *</label>
                     <input type="text" class="form-input" name="company" required placeholder="Your organization name">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Email Address *</label>
                     <input type="email" class="form-input" name="email" required placeholder="you@example.com">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Phone Number</label>
                     <input type="tel" class="form-input" name="phone" placeholder="+1 (123) 456-7890">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Which system interests you? *</label>
                     <select class="form-input" name="interest" required>
                         <option value="">Select an option</option>
-                        <option value="Human Agency">Human Agency</option>
-                        <option value="Media & Creatives">Media & Creatives</option>
-                        <option value="M.I.C.E.">M.I.C.E. (Meetings, Incentives, Conferences, Exhibitions)</option>
+                        <option value="Sovereign Protocol">Sovereign Protocol™</option>
+                        <option value="Executive Governance Installation">Executive Governance Installation</option>
+                        <option value="Institutional Decision Architecture">Institutional Decision Architecture</option>
                         <option value="Non-Profit & Think Tank">Non-Profit & Think Tank</option>
                         <option value="All Systems">All Systems</option>
                         <option value="Not sure yet">Not sure yet - need guidance</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Your Message *</label>
                     <textarea class="form-textarea" name="message" required placeholder="We look forward to engaging with you"></textarea>
                 </div>
-                
-                <!-- Loading Spinner -->
+
                 <div class="loading-spinner" id="loadingSpinner">
                     <div class="spinner"></div>
                     <p>Sending your message...</p>
                 </div>
-                
+
                 <button type="submit" class="submit-button">
                     <i class="fas fa-paper-plane"></i> Send Message
                 </button>
-                
+
                 <p class="form-note">
                     Your information is confidential and will only be used to connect you with the appropriate team.
                 </p>
             </form>
-            
+
             <div class="form-success" id="successMessage">
                 <i class="fas fa-check-circle"></i>
                 <h3>Message Sent Successfully!</h3>
-                <p>Thank you for reaching out to The You Lounge. Our team will contact you within 24 hours.</p>
+                <p>Thank you for reaching out to Sovereign Protocol™. Our team will contact you within 24 hours.</p>
                 <p>You may also reach us directly at <strong>executive@youlounge.org</strong></p>
             </div>
         </div>
     </div>
 
     <script>
-        // Hamburger Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
-        
+
         hamburger.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
             const icon = hamburger.querySelector('i');
@@ -925,8 +927,7 @@
                 icon.classList.add('fa-bars');
             }
         });
-        
-        // Close menu when clicking a link
+
         const menuLinks = document.querySelectorAll('.mobile-menu a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -935,17 +936,17 @@
                 hamburger.querySelector('i').classList.add('fa-bars');
             });
         });
-        
-        // Smooth scrolling
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
+                if (targetId === '#') {
+                    return;
+                }
+
+                e.preventDefault();
                 const targetElement = document.querySelector(targetId);
-                if(targetElement) {
+                if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
@@ -953,8 +954,7 @@
                 }
             });
         });
-        
-        // Fade-in animation on scroll
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -962,12 +962,11 @@
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        
+
         document.querySelectorAll('.section-title, .content-block, .testimonial-card').forEach(el => {
             observer.observe(el);
         });
 
-        // Contact Form Modal Functionality
         const contactModal = document.getElementById('contactModal');
         const openContactForm = document.getElementById('openContactForm');
         const navContact = document.getElementById('navContact');
@@ -977,61 +976,56 @@
         const successMessage = document.getElementById('successMessage');
         const loadingSpinner = document.getElementById('loadingSpinner');
 
-        // Function to open modal
         function openModal() {
             contactModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            document.body.style.overflow = 'hidden';
         }
 
-        // Function to close modal
         function closeModalFunc() {
             contactModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // Open modal when clicking email
-        openContactForm.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
+        if (openContactForm) {
+            openContactForm.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
 
-        // Open modal when clicking Contact in navigation
-        navContact.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
+        if (navContact) {
+            navContact.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
 
-        // Open modal when clicking Contact in footer
-        footerContact.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
+        if (footerContact) {
+            footerContact.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
 
-        // Close modal
         closeModal.addEventListener('click', () => {
             closeModalFunc();
         });
 
-        // Close modal when clicking outside
         contactModal.addEventListener('click', (e) => {
             if (e.target === contactModal) {
                 closeModalFunc();
             }
         });
 
-        // Handle form submission with Formspree
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Show loading spinner
+
             loadingSpinner.style.display = 'block';
             contactForm.querySelector('.submit-button').disabled = true;
-            
+
             try {
-                // Create form data
                 const formData = new FormData(contactForm);
-                
-                // Send to Formspree
+
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
@@ -1039,17 +1033,14 @@
                         'Accept': 'application/json'
                     }
                 });
-                
-                // Hide loading spinner
+
                 loadingSpinner.style.display = 'none';
                 contactForm.querySelector('.submit-button').disabled = false;
-                
+
                 if (response.ok) {
-                    // Show success message
                     contactForm.style.display = 'none';
                     successMessage.style.display = 'block';
-                    
-                    // Reset form after 5 seconds and close modal
+
                     setTimeout(() => {
                         contactForm.reset();
                         contactForm.style.display = 'block';
@@ -1057,21 +1048,16 @@
                         closeModalFunc();
                     }, 5000);
                 } else {
-                    // Handle error
                     alert('There was an error submitting the form. Please try again or email us directly at executive@youlounge.org');
                 }
             } catch (error) {
-                // Hide loading spinner
                 loadingSpinner.style.display = 'none';
                 contactForm.querySelector('.submit-button').disabled = false;
-                
-                // Handle network error
                 alert('Network error. Please check your connection and try again, or email us directly at executive@youlounge.org');
                 console.error('Form submission error:', error);
             }
         });
 
-        // Add hidden honeypot field to prevent spam (optional but recommended)
         const honeypotField = document.createElement('input');
         honeypotField.type = 'text';
         honeypotField.name = '_gotcha';
