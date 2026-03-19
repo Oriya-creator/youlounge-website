@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The You Lounge | Hubs</title>
+  <title>Sovereign Protocol™ | Hubs</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Earth & Teal Color Palette - Matching Homepage */
     :root {
       --sand: #E6D5B8;
       --clay: #C4A484;
@@ -19,7 +18,6 @@
       --white: #FFFFFF;
     }
 
-    /* Reset & Base */
     * {
       margin: 0;
       padding: 0;
@@ -40,7 +38,6 @@
       padding: 0 20px;
     }
 
-    /* Header & Hamburger Menu - CHANGED FROM FOREST TO TEAL */
     header {
       background-color: var(--teal);
       position: fixed;
@@ -86,7 +83,6 @@
       transform: scale(1.1);
     }
 
-    /* Mobile Menu - CHANGED FROM FOREST TO TEAL */
     .mobile-menu {
       position: fixed;
       top: 80px;
@@ -133,7 +129,6 @@
       padding-left: 30px;
     }
 
-    /* Hero Section */
     .hubs-hero {
       padding: 140px 20px 60px;
       text-align: center;
@@ -153,6 +148,11 @@
       opacity: 0.2;
     }
 
+    .hubs-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
     .hubs-hero h1 {
       font-size: 3.5rem;
       color: var(--teal);
@@ -167,7 +167,6 @@
       color: var(--charcoal);
     }
 
-    /* Return to Homepage Button */
     .return-home-btn {
       display: inline-block;
       background-color: var(--terracotta);
@@ -188,7 +187,6 @@
       transform: translateY(-3px);
     }
 
-    /* Main Content Section */
     .hubs-section {
       padding: 60px 20px 100px;
       background-color: var(--white);
@@ -212,7 +210,6 @@
       border-radius: 2px;
     }
 
-    /* Collapsible Sections */
     .collapsible {
       display: flex;
       align-items: center;
@@ -275,7 +272,6 @@
       font-size: 1.4em;
     }
 
-    /* Sovereign Protocol Button */
     .diagnostic-btn {
       display: inline-block;
       padding: 12px 24px;
@@ -298,7 +294,6 @@
       box-shadow: 0 5px 15px rgba(0, 128, 128, 0.3);
     }
 
-    /* NEW: IP Licensing Button (placed next to Explore button) */
     .ip-licensing-btn {
       display: inline-block;
       padding: 12px 20px;
@@ -311,7 +306,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       text-align: center;
-      margin: 15px 0 15px 12px; /* space to the left so it sits "next to" */
+      margin: 15px 0 15px 12px;
       font-size: 1.05rem;
       white-space: nowrap;
     }
@@ -323,7 +318,6 @@
       box-shadow: 0 5px 15px rgba(168, 92, 50, 0.25);
     }
 
-    /* NEW: Button Row so they sit side-by-side and wrap nicely on mobile */
     .btn-row {
       display: flex;
       justify-content: center;
@@ -333,7 +327,6 @@
       margin: 10px 0 6px;
     }
 
-    /* Think Tank Link Button */
     .thinktank-link {
       display: inline-block;
       padding: 14px 28px;
@@ -356,7 +349,6 @@
       box-shadow: 0 5px 15px rgba(168, 92, 50, 0.3);
     }
 
-    /* Nested Collapsibles */
     .nested-collapsible {
       background-color: var(--light-clay);
       color: var(--charcoal);
@@ -408,7 +400,6 @@
       color: var(--charcoal);
     }
 
-    /* Special Note Styling for Human Agency */
     .special-note {
       text-align: center;
       color: var(--terracotta);
@@ -421,7 +412,6 @@
       line-height: 1.6;
     }
 
-    /* Footer - CHANGED FROM FOREST TO TEAL */
     footer {
       background-color: var(--teal);
       color: var(--sand);
@@ -491,7 +481,6 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .hubs-hero h1 {
         font-size: 2.5rem;
@@ -574,20 +563,18 @@
   </style>
 </head>
 <body>
-  <!-- Header with Hamburger Menu - Matching thinktank.html -->
   <header>
     <div class="header-content container">
       <div class="logo-container">
         <a href="index.html">
-          <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="logo-img">
+          <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="logo-img">
         </a>
       </div>
-      <button class="hamburger" id="hamburger">
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
         <i class="fas fa-bars"></i>
       </button>
     </div>
 
-    <!-- Mobile Menu - Same as thinktank.html -->
     <nav class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="about.html">About</a></li>
@@ -598,21 +585,21 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
   <section class="hubs-hero">
     <div class="container">
-      <h1 class="fade-in">HUBS</h1>
-      <p class="fade-in delay-1">Governance Systems for Decision Integrity, Institutional Coherence, and Long-Horizon Execution </br>
-Each intervention system; hub, functions as an architectural intervention, not a service offering.</p>
+      <h1>HUBS</h1>
+      <p>
+        Governance Systems for Decision Integrity, Institutional Coherence, and Long-Horizon Execution
+        <br>
+        Each intervention system; hub, functions as an architectural intervention, not a service offering.
+      </p>
     </div>
   </section>
 
-  <!-- Main Content Section -->
   <section class="hubs-section">
     <div class="container">
-      <h2 class="section-title fade-in">Governance Decision Architect Intervention System</h2>
+      <h2 class="section-title">Governance Decision Architect Intervention System</h2>
 
-      <!-- Human Agency Systems - Updated with Sovereign Protocol -->
       <button class="collapsible">Human Agency Systems</button>
       <div class="content">
         <p><strong>Governance Decision Coherence At Executive-Individual, Institutional & National Level</strong><br></p>
@@ -624,19 +611,18 @@ Each intervention system; hub, functions as an architectural intervention, not a
         <p><strong>The Sovereign Protocol</strong> restores this clarity at the level where governance-identity, authority, and action originate.</p>
 
         <p>
-          This is not performance optimization.</br>
-          This is not leadership coaching.</br>
-          This is not performance optimisation.</br>
-          This is not cultural transformation.</br>
+          This is not performance optimization.<br>
+          This is not leadership coaching.<br>
+          This is not performance optimisation.<br>
+          This is not cultural transformation.<br>
           This is <strong>Governance Architecture.</strong>
         </p>
 
         <p>
-          This work happens before strategy, before delegation, and before execution.</br>
+          This work happens before strategy, before delegation, and before execution.<br>
           Because no external system outperforms the internal decision-architecture governing it.
         </p>
 
-        <!-- Sovereign Protocol Button Row (Explore + IP Licensing side-by-side) -->
         <div class="btn-row">
           <a href="sovereignprotocol.html" class="diagnostic-btn">
             🎯 Explore The Sovereign Protocol
@@ -647,7 +633,6 @@ Each intervention system; hub, functions as an architectural intervention, not a
           </a>
         </div>
 
-        <!-- Executive Seat Request Button -->
         <div style="text-align:center; margin: 18px 0;">
           <a href="/executive-forum-request.html"
              style="display:inline-block; padding: 14px 26px; background: #A85C32; color: #fff; border-radius: 10px;
@@ -657,12 +642,12 @@ Each intervention system; hub, functions as an architectural intervention, not a
         </div>
 
         <div class="special-note">
-          <strong>The Operating System Coherently Aligning Decisive Governance.</strong></br>
+          <strong>The Operating System Coherently Aligning Decisive Governance.</strong><br>
           The Sovereign Protocol is the core decision architecture underpinning the Human Agency System.
-          It redesigns the internal decision structural-systems through which governance is executed.<br>
+          It redesigns the internal decision structural-systems through which governance is executed.<br><br>
 
           This Work Is Fundamental.<br>
-          <strong>It governs how decisions are made; not what decisions are made.</strong></br>
+          <strong>It governs how decisions are made; not what decisions are made.</strong><br>
           It re-architects the internal structures from which executives govern:<br>
           • Decision Clarity Under Pressured-Consequence<br>
           • Authority Alignment across Governing-Decisions and Mandates<br>
@@ -671,47 +656,45 @@ Each intervention system; hub, functions as an architectural intervention, not a
         </div>
       </div>
 
-      <!-- Media & Creative Systems -->
       <button class="collapsible">Media & Creative Systems</button>
       <div class="content">
         <p><strong>Narrative Architecture For Individual-Executives, Institutional and National Coherence</strong><br>
-          A Meaning-Shaping Governance Discipline That Operates Upstream Of Opinion, Socio-Economic Culture And Policy.<br>
+          A Meaning-Shaping Governance Discipline That Operates Upstream Of Opinion, Socio-Economic Culture And Policy.<br><br>
 
-          <br>This Governance Discipline:
-          <br>• Interprets Complexity<br>
+          This Governance Discipline:<br>
+          • Interprets Complexity<br>
           • Holds Shared Meaning Under Pressured-Consequences<br>
           • Navigates Transition Without Fragmentation<br>
-          <strong>Media As Governance Communication Output.</strong></br>
+          <strong>Media As Governance Communication Output.</strong><br><br>
 
-          <br>The System Works Through Tightly Governed Narrative Forms, Including:
-          <br>■ Animation
-          <br>■ Gaming
-          <br>■ Talkshows & Films
+          The System Works Through Tightly Governed Narrative Forms, Including:<br>
+          ■ Animation<br>
+          ■ Gaming<br>
+          ■ Talkshows & Films
         </p>
 
-        <br>Precision Is Prioritised Over Reach.</br>
+        <br>Precision Is Prioritised Over Reach.<br>
         <strong>The Objective Is Coherence - Not Visibility.</strong>
       </div>
 
-      <!-- M.I.C.E Systems -->
       <button class="collapsible">M.I.C.E Systems</button>
       <div class="content">
         <p><strong>Meetings, Incentives, Decision Containment, and Execution; Re-Designed</strong>
           <br>Governance-Execution Breaks Down Not Because Leadership Decides Poorly But, Systems Translate Decisions Inconsistently.<br>
-          <br><strong>M.I.C.E. Re-Designs The Structures Where Execution Fails - So Decisions Move Swiftly Into Reality.</strong></br>
+          <br><strong>M.I.C.E. Re-Designs The Structures Where Execution Fails - So Decisions Move Swiftly Into Reality.</strong><br>
         </p>
 
         <p>
-          Governance-Execution Break Down Typically Arises From Structural & System Misalignment Within The Governance-Execution Environment:</br>
+          Governance-Execution Break Down Typically Arises From Structural & System Misalignment Within The Governance-Execution Environment:<br>
           • Execution failure at scale is rarely the result of poor leadership judgment or inadequate governance intent.<br>
           • Decision ambiguity embedded in meeting design<br>
           • Incentive structures that unintentionally contradict stated objectives<br>
           • Legacy control mechanisms that introduce friction and delay<br>
           • Accountability frameworks that exceed delegated authority<br>
-          <br><strong>The M.I.C.E. System Re-Designs For Strurctural-Systematic Coherence - Not Behavioural Pressure, Additional Oversight, Or Executive Strain.</strong></br>
+          <br><strong>The M.I.C.E. System Re-Designs For Strurctural-Systematic Coherence - Not Behavioural Pressure, Additional Oversight, Or Executive Strain.</strong><br>
 
-          <br>Why Redesign Is Required
-          <br> M.I.C.E Coherently Re-Aligns:<br>
+          <br>Why Redesign Is Required<br>
+          M.I.C.E Coherently Re-Aligns:<br>
           • How Meetings Produce Decisions<br>
           • How Incentives Reinforce Mandates<br>
           • How Decision Containment Protects Momentum Without Constraining Coherence<br>
@@ -720,10 +703,9 @@ Each intervention system; hub, functions as an architectural intervention, not a
         </p>
       </div>
 
-      <!-- Non-Profit & Think Tank Systems - Now links to thinktank.html -->
       <button class="collapsible">Non-Profit & Think Tank Systems</button>
       <div class="content">
-        <p><strong>Long-Horizon Governance Stewardship</strong> - At You Lounge, We Build With & For Community Graduation. </p>
+        <p><strong>Long-Horizon Governance Stewardship</strong> - At You Lounge, We Build With & For Community Graduation.</p>
 
         <div style="text-align: center; margin: 30px 0;">
           <a href="thinktank.html" class="thinktank-link">
@@ -732,7 +714,6 @@ Each intervention system; hub, functions as an architectural intervention, not a
         </div>
       </div>
 
-      <!-- Additional Return to Homepage Button at Bottom -->
       <div style="text-align: center; margin-top: 50px;">
         <a href="index.html" class="return-home-btn">
           <i class="fas fa-home"></i> Back to Homepage
@@ -741,25 +722,23 @@ Each intervention system; hub, functions as an architectural intervention, not a
     </div>
   </section>
 
-  <!-- Footer -->
   <footer id="contact">
     <div class="footer-content container">
-      <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
+      <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="footer-logo-img">
       <p class="footer-tagline">Governance Architects for Complex, Multi-National Decisions</p>
 
       <div class="contact-info">
         <p>Connect With Our Governance Architects:</p>
-        <p><a href="#" id="openContactForm">executive@youlounge.org</a></p>
+        <p><a href="contact.html">executive@youlounge.org</a></p>
       </div>
 
       <div class="copyright">
-        <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="#" id="footerContact">Contact</a></p>
+        <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="contact.html">Contact</a></p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Hamburger Menu Toggle - Matching thinktank.html
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -775,7 +754,6 @@ Each intervention system; hub, functions as an architectural intervention, not a
       }
     });
 
-    // Close menu when clicking a link
     const menuLinks = document.querySelectorAll('.mobile-menu a');
     menuLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -785,7 +763,6 @@ Each intervention system; hub, functions as an architectural intervention, not a
       });
     });
 
-    // Collapsible functionality
     const collapsibles = document.querySelectorAll(".collapsible");
     collapsibles.forEach(button => {
       button.addEventListener("click", () => {
