@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The You Lounge | About</title>
+    <title>Sovereign Protocol™ | About</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Earth & Teal Color Palette - Matching Homepage */
         :root {
             --sand: #E6D5B8;
             --clay: #C4A484;
@@ -19,7 +18,6 @@
             --white: #FFFFFF;
         }
 
-        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -40,9 +38,8 @@
             padding: 0 20px;
         }
 
-        /* Header & Hamburger Menu - CHANGED FROM FOREST TO TEAL */
         header {
-            background-color: var(--teal); /* CHANGED FROM FOREST */
+            background-color: var(--teal);
             position: fixed;
             width: 100%;
             top: 0;
@@ -82,17 +79,16 @@
         }
 
         .hamburger:hover {
-            color: var(--dark-teal); /* CHANGED FROM TEAL */
+            color: var(--dark-teal);
             transform: scale(1.1);
         }
 
-        /* Mobile Menu - CHANGED FROM FOREST TO TEAL */
         .mobile-menu {
             position: fixed;
             top: 80px;
             left: 0;
             width: 100%;
-            background-color: var(--teal); /* CHANGED FROM FOREST */
+            background-color: var(--teal);
             padding: 0;
             transform: translateY(-100%);
             opacity: 0;
@@ -128,12 +124,11 @@
         }
 
         .mobile-menu a:hover {
-            background-color: var(--dark-teal); /* Already teal, changed to dark-teal */
+            background-color: var(--dark-teal);
             color: var(--white);
             padding-left: 30px;
         }
 
-        /* Hero Section - UPDATED: Reduced padding since video will be inside */
         .about-hero {
             padding: 140px 20px 60px;
             text-align: center;
@@ -153,10 +148,15 @@
             opacity: 0.2;
         }
 
+        .about-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
         .about-hero h1 {
             font-size: 3.5rem;
-            color: var(--teal); /* CHANGED FROM FOREST TO TEAL */
-            margin-bottom: 40px; /* Increased margin for video spacing */
+            color: var(--teal);
+            margin-bottom: 40px;
             font-weight: 700;
         }
 
@@ -167,12 +167,11 @@
             color: var(--charcoal);
         }
 
-        /* Video Container - MOVED to inside about-hero */
         .video-container {
             position: relative;
             width: 100%;
             max-width: 800px;
-            margin: 0 auto 40px; /* Added bottom margin */
+            margin: 0 auto 40px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -185,7 +184,6 @@
             border-radius: 12px;
         }
 
-        /* Operating Principles Styling */
         .operating-principles {
             color: var(--teal);
             font-weight: 600;
@@ -212,7 +210,6 @@
             padding: 5px 0;
         }
 
-        /* Return to Homepage Button */
         .return-home-btn {
             display: inline-block;
             background-color: var(--terracotta);
@@ -233,14 +230,12 @@
             transform: translateY(-3px);
         }
 
-        /* REMOVED: Video Section CSS since video is now in about-hero */
         .video-section {
             display: none;
         }
 
-        /* Footer - CHANGED FROM FOREST TO TEAL */
         footer {
-            background-color: var(--teal); /* CHANGED FROM FOREST */
+            background-color: var(--teal);
             color: var(--sand);
             padding: 60px 20px 30px;
             text-align: center;
@@ -278,7 +273,7 @@
         }
 
         .contact-info a {
-            color: var(--sand); /* CHANGED FROM TEAL TO SAND for better contrast */
+            color: var(--sand);
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -298,25 +293,33 @@
             opacity: 0.7;
         }
 
-        /* Responsive */
+        .copyright a {
+            color: var(--sand);
+            text-decoration: none;
+        }
+
+        .copyright a:hover {
+            color: var(--white);
+        }
+
         @media (max-width: 768px) {
             .about-hero h1 {
                 font-size: 2.5rem;
             }
-            
+
             .about-hero p {
                 font-size: 1.1rem;
             }
-            
+
             .mobile-menu a {
                 padding: 18px;
                 font-size: 16px;
             }
-            
+
             .logo-img {
                 height: 40px;
             }
-            
+
             .operating-principles {
                 font-size: 1.1rem;
             }
@@ -326,12 +329,12 @@
             .about-hero {
                 padding: 120px 15px 50px;
             }
-            
+
             .about-hero h1 {
                 font-size: 2rem;
                 margin-bottom: 30px;
             }
-            
+
             .footer-logo-img {
                 max-width: 200px;
             }
@@ -339,91 +342,81 @@
     </style>
 </head>
 <body>
-    <!-- Header with Hamburger Menu - Matching Homepage -->
     <header>
         <div class="header-content container">
             <div class="logo-container">
                 <a href="index.html">
-                    <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="logo-img">
+                    <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="logo-img">
                 </a>
             </div>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-        
-        <!-- Mobile Menu -->
+
         <nav class="mobile-menu" id="mobileMenu">
             <ul>
                 <li><a href="about.html" style="background-color: var(--dark-teal); color: var(--white);">About</a></li>
                 <li><a href="hubs.html">Hubs</a></li>
                 <li><a href="thinktank.html">Non-Profit & Think Tank</a></li>
-                <li><a href="contact.html">Contact</a></li> <!-- CHANGED: Link to contact.html -->
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section - Now contains both heading and video -->
     <section class="about-hero">
         <div class="container">
-            <h1 class="fade-in">About</h1>
-            
-            <!-- Video is now directly under the "About" heading -->
+            <h1>About</h1>
+
             <div class="video-container">
                 <video id="aboutVideo" autoplay muted loop playsinline>
                     <source src="about.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            
-            <!-- Text content comes after the video -->
-            <p class="fade-in delay-1">As governance architects- we design the conditions under which decision-makers, executives, leaders, institutions and systems operate in alignment with their true mandate.</p>
-            
-            <p>Our work sits at the intersection of governance design, human agency and narrative coherence.</p>
-            
+
+            <p>As governance architects, we design the conditions under which decision-makers, executives, leaders, institutions, and systems operate in alignment with their true mandate.</p>
+
+            <p>Our work sits at the intersection of governance design, human agency, and narrative coherence.</p>
+
             <p>Rather than increasing activity, we focus on increasing <strong>dominion;</strong> authority that flows through structure and systems, not personality.</p>
-         
+
             <div class="operating-principles">
                 <strong>Operating Principles</strong>
                 <ul>
-                    <li>°Authority Must Match Territory</li>
-                    <li>°Alignment Precedes Performance</li>
-                    <li>°Systems Fail When Mandate & Substance Diverge</li>
-                    <li>°Sustainable Governance Is Designed, Not Forced</li>
+                    <li>° Authority Must Match Territory</li>
+                    <li>° Alignment Precedes Performance</li>
+                    <li>° Systems Fail When Mandate & Substance Diverge</li>
+                    <li>° Sustainable Governance Is Designed, Not Forced</li>
                 </ul>
             </div>
-            
-            <!-- Back to Homepage button -->
+
             <a href="index.html" class="return-home-btn">
                 <i class="fas fa-home"></i> Back to Homepage
             </a>
         </div>
     </section>
 
-    <!-- Footer - Matching Homepage -->
     <footer id="contact">
         <div class="footer-content container">
-            <img src="youloungelogo.jpg" alt="The You Lounge Logo" class="footer-logo-img">
+            <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="footer-logo-img">
             <p class="footer-tagline">Governance Architects for Complex, Multi-National Decisions</p>
-            
+
             <div class="contact-info">
                 <p>Connect with our Governance Architects:</p>
-                <p><a href="contact.html">executive@youlounge.org</a></p> <!-- CHANGED: Link to contact.html -->
-                <p>
-                    </p>
+                <p><a href="contact.html">executive@youlounge.org</a></p>
             </div>
-            
+
             <div class="copyright">
-                <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="contact.html">Contact</a></p> <!-- CHANGED: Link to contact.html -->
+                <p>&copy; 2026 The You Lounge. All legal rights reserved. | <a href="about.html">About</a> • <a href="hubs.html">Hubs</a> • <a href="thinktank.html">Non-Profit & Think Tank</a> • <a href="contact.html">Contact</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Hamburger Menu Toggle - Matching Homepage
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
-        
+
         hamburger.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
             const icon = hamburger.querySelector('i');
@@ -435,8 +428,7 @@
                 icon.classList.add('fa-bars');
             }
         });
-        
-        // Close menu when clicking a link
+
         const menuLinks = document.querySelectorAll('.mobile-menu a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -445,8 +437,6 @@
                 hamburger.querySelector('i').classList.add('fa-bars');
             });
         });
-
-        // REMOVED: All modal functionality since contact buttons now link to contact.html
     </script>
 </body>
 </html>
