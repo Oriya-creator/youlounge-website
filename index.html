@@ -61,9 +61,10 @@
         }
 
         .logo-img {
-            height: 100px;
+            height: 70px;
             width: auto;
             transition: all 0.3s ease;
+            display: block;
         }
 
         .logo-img:hover {
@@ -96,7 +97,7 @@
 
         .mobile-menu {
             position: fixed;
-            top: 80px;
+            top: 100px;
             left: 0;
             width: 100%;
             background-color: var(--teal);
@@ -141,7 +142,7 @@
         }
 
         .hero {
-            padding: 140px 20px 80px;
+            padding: 130px 20px 80px;
             text-align: center;
             background: linear-gradient(135deg, var(--soft-cream) 0%, var(--sand) 100%);
             position: relative;
@@ -153,7 +154,7 @@
             position: absolute;
             inset: 0;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="%23006666" stroke-width="0.5" opacity="0.08" fill="none"/></svg>');
-            opacity: 0.2;
+            opacity: 0.18;
         }
 
         .hero .container {
@@ -161,25 +162,56 @@
             z-index: 1;
         }
 
-        .hero-logo {
-            max-width: 320px;
-            height: auto;
-            margin: 0 auto 30px;
+        /* Banner now stretches across the hero width */
+        .hero-banner-wrap {
+            width: 100%;
+            margin: 0 auto 28px;
+            background: transparent;
+        }
+
+        .hero-banner {
             display: block;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            margin: 0 auto;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        /* Logo enlarged and without any visible panel */
+        .hero-logo-wrap {
+            margin: 0 auto 24px;
+            background: transparent;
+        }
+
+        .hero-logo {
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
             animation: fadeInUp 0.8s ease forwards;
         }
 
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: var(--teal);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-weight: 700;
             line-height: 1.15;
+            max-width: 980px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 760px;
+            font-size: 1.22rem;
+            max-width: 780px;
             margin: 0 auto 30px;
             color: var(--charcoal);
         }
@@ -365,7 +397,7 @@
         }
 
         .footer-logo-img {
-            max-width: 250px;
+            max-width: 320px;
             height: auto;
             margin: 0 auto 20px;
             display: block;
@@ -580,16 +612,32 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu {
+                top: 90px;
+            }
+
+            .logo-img {
+                height: 54px;
+            }
+
+            .hero {
+                padding: 120px 18px 70px;
+            }
+
+            .hero-banner {
+                max-width: 100%;
+            }
+
+            .hero-logo {
+                max-width: 340px;
+            }
+
             .hero h1 {
-                font-size: 2.4rem;
+                font-size: 2.35rem;
             }
 
             .hero p {
                 font-size: 1.08rem;
-            }
-
-            .hero-logo {
-                max-width: 350px;
             }
 
             .section-title {
@@ -601,10 +649,6 @@
                 font-size: 16px;
             }
 
-            .logo-img {
-                height: 100px;
-            }
-
             .content-block {
                 padding: 30px 20px;
             }
@@ -613,20 +657,35 @@
                 padding: 30px 20px;
                 width: 95%;
             }
+
+            .footer-logo-img {
+                max-width: 240px;
+            }
         }
 
         @media (max-width: 480px) {
             .hero {
-                padding: 120px 15px 60px;
+                padding: 110px 15px 60px;
             }
 
-            .hero h1 {
-                font-size: 1.95rem;
+            .logo-img {
+                height: 46px;
+            }
+
+            .hero-banner-wrap {
+                margin-bottom: 20px;
+            }
+
+            .hero-logo-wrap {
+                margin-bottom: 18px;
             }
 
             .hero-logo {
-                max-width: 200px;
-                margin-bottom: 20px;
+                max-width: 260px;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
             }
 
             .cta-button {
@@ -686,7 +745,6 @@
                 <a href="index.html">
                     <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="logo-img">
                 </a>
-                <a href="index.html" class="logo-text">Sovereign Protocol™</a>
             </div>
             <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
                 <i class="fas fa-bars"></i>
@@ -705,15 +763,21 @@
 
     <section class="hero">
         <div class="container">
-            <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="hero-logo">
+            <div class="hero-banner-wrap fade-in">
+                <img src="sovereignprotocolbanner.png" alt="Sovereign Protocol banner" class="hero-banner">
+            </div>
 
-            <h1 class="fade-in">Institutional Decision Governance Architecture</h1>
+            <div class="hero-logo-wrap fade-in delay-1">
+                <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="hero-logo">
+            </div>
 
-            <p class="fade-in delay-1">
+            <h1 class="fade-in delay-2">Institutional Decision Governance Architecture</h1>
+
+            <p class="fade-in delay-3">
                 Sovereign Protocol™ is designed to stabilise decision coherence in complex organisations through clearer decision rights, escalation discipline, and structural closure.
             </p>
 
-            <div class="authority-signals fade-in delay-2">
+            <div class="authority-signals fade-in delay-3">
                 <h2>Authority Signals</h2>
                 <p>
                     ° Governance Decision Architecture<br>
@@ -722,7 +786,7 @@
                 </p>
             </div>
 
-            <a href="hubs.html" class="cta-button fade-in delay-3">Explore Systems</a>
+            <a href="hubs.html" class="cta-button fade-in delay-4">Explore Systems</a>
         </div>
     </section>
 
