@@ -61,24 +61,15 @@
         }
 
         .logo-img {
-            height: 70px;
+            height: 64px;
             width: auto;
             transition: all 0.3s ease;
             display: block;
+            background: transparent;
         }
 
         .logo-img:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-text {
-            color: var(--sand);
-            font-size: 22px;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: 0.6px;
-            margin-left: 15px;
-            display: none;
+            transform: scale(1.03);
         }
 
         .hamburger {
@@ -97,7 +88,7 @@
 
         .mobile-menu {
             position: fixed;
-            top: 100px;
+            top: 96px;
             left: 0;
             width: 100%;
             background-color: var(--teal);
@@ -162,58 +153,82 @@
             z-index: 1;
         }
 
-        /* Banner now stretches across the hero width */
-        .hero-banner-wrap {
-            width: 100%;
-            margin: 0 auto 28px;
-            background: transparent;
+        .hero-banner-card {
+            max-width: 1100px;
+            margin: 0 auto 26px;
+            background: rgba(248, 245, 239, 0.92);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            padding: 26px 28px 20px;
+            text-align: center;
         }
 
-        .hero-banner {
-            display: block;
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            margin: 0 auto;
-            background: transparent;
-            box-shadow: none;
-            border-radius: 0;
+        .hero-banner-top {
+            text-align: left;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem;
+            color: #2b2b2b;
+            margin-bottom: 18px;
         }
 
-        /* Logo enlarged and without any visible panel */
-        .hero-logo-wrap {
+        .hero-banner-divider,
+        .hero-banner-bottom-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.08);
+            width: 92%;
             margin: 0 auto 24px;
+        }
+
+        .hero-banner-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 3.2rem;
+            line-height: 1.15;
+            font-weight: 500;
+            color: #202020;
+            max-width: 980px;
+            margin: 0 auto 18px;
+        }
+
+        .hero-banner-title-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.08);
+            width: 62%;
+            margin: 0 auto 18px;
+        }
+
+        .hero-banner-subtitle {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.15rem;
+            line-height: 1.5;
+            color: #2d2d2d;
+            margin: 0 auto 18px;
+        }
+
+        .hero-banner-footer {
+            font-family: Georgia, "Times New Roman", serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--dark-teal);
+            margin: 0;
+        }
+
+        .hero-logo-wrap {
+            max-width: 760px;
+            margin: 0 auto 34px;
             background: transparent;
+            padding: 0;
+            border: none;
+            box-shadow: none;
         }
 
         .hero-logo {
-            max-width: 480px;
+            display: block;
             width: 100%;
             height: auto;
             margin: 0 auto;
-            display: block;
             background: transparent;
+            border: none;
             box-shadow: none;
-            border-radius: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: var(--teal);
-            margin-bottom: 18px;
-            font-weight: 700;
-            line-height: 1.15;
-            max-width: 980px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero p {
-            font-size: 1.22rem;
-            max-width: 780px;
-            margin: 0 auto 30px;
-            color: var(--charcoal);
         }
 
         .authority-signals {
@@ -229,11 +244,7 @@
         .authority-signals p {
             margin-bottom: 0;
             line-height: 1.9;
-        }
-
-        .highlight {
-            color: var(--teal);
-            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .content-block {
@@ -401,6 +412,7 @@
             height: auto;
             margin: 0 auto 20px;
             display: block;
+            background: transparent;
         }
 
         .footer-tagline {
@@ -617,27 +629,43 @@
             }
 
             .logo-img {
-                height: 54px;
+                height: 50px;
             }
 
             .hero {
                 padding: 120px 18px 70px;
             }
 
-            .hero-banner {
+            .hero-banner-card {
+                padding: 20px 16px 18px;
+                margin-bottom: 22px;
+            }
+
+            .hero-banner-top {
+                font-size: 0.95rem;
+                margin-bottom: 14px;
+            }
+
+            .hero-banner-title {
+                font-size: 2.1rem;
                 max-width: 100%;
             }
 
-            .hero-logo {
-                max-width: 340px;
+            .hero-banner-title-divider {
+                width: 78%;
             }
 
-            .hero h1 {
-                font-size: 2.35rem;
+            .hero-banner-subtitle {
+                font-size: 1rem;
             }
 
-            .hero p {
-                font-size: 1.08rem;
+            .hero-banner-footer {
+                font-size: 0.95rem;
+            }
+
+            .hero-logo-wrap {
+                max-width: 520px;
+                margin-bottom: 28px;
             }
 
             .section-title {
@@ -669,23 +697,39 @@
             }
 
             .logo-img {
-                height: 46px;
+                height: 42px;
             }
 
-            .hero-banner-wrap {
-                margin-bottom: 20px;
+            .hero-banner-card {
+                padding: 16px 12px 16px;
+            }
+
+            .hero-banner-top {
+                font-size: 0.85rem;
+            }
+
+            .hero-banner-title {
+                font-size: 1.55rem;
+                line-height: 1.2;
+            }
+
+            .hero-banner-title-divider {
+                width: 86%;
+                margin-bottom: 14px;
+            }
+
+            .hero-banner-subtitle {
+                font-size: 0.92rem;
+            }
+
+            .hero-banner-footer {
+                font-size: 0.88rem;
+                line-height: 1.5;
             }
 
             .hero-logo-wrap {
-                margin-bottom: 18px;
-            }
-
-            .hero-logo {
-                max-width: 260px;
-            }
-
-            .hero h1 {
-                font-size: 1.9rem;
+                max-width: 360px;
+                margin-bottom: 24px;
             }
 
             .cta-button {
@@ -743,7 +787,7 @@
         <div class="header-content container">
             <div class="logo-container">
                 <a href="index.html">
-                    <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="logo-img">
+                    <img src="Sovereign Protocol Logo 1.JPG" alt="Sovereign Protocol logo" class="logo-img">
                 </a>
             </div>
             <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
@@ -763,21 +807,31 @@
 
     <section class="hero">
         <div class="container">
-            <div class="hero-banner-wrap fade-in">
-                <img src="sovereignprotocolbanner.png" alt="Sovereign Protocol banner" class="hero-banner">
+            <div class="hero-banner-card fade-in">
+                <div class="hero-banner-top">Sovereign Protocol™</div>
+
+                <div class="hero-banner-divider"></div>
+
+                <h1 class="hero-banner-title">Institutional Decision Governance Architecture</h1>
+
+                <div class="hero-banner-title-divider"></div>
+
+                <p class="hero-banner-subtitle">
+                    Stabilising Decision Coherence in Complex Organisations
+                </p>
+
+                <div class="hero-banner-bottom-divider"></div>
+
+                <p class="hero-banner-footer">
+                    Board • Executive • Risk • Governance Systems
+                </p>
             </div>
 
             <div class="hero-logo-wrap fade-in delay-1">
-                <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="hero-logo">
+                <img src="Sovereign Protocol Logo 1.JPG" alt="Sovereign Protocol logo" class="hero-logo">
             </div>
 
-            <h1 class="fade-in delay-2">Institutional Decision Governance Architecture</h1>
-
-            <p class="fade-in delay-3">
-                Sovereign Protocol™ is designed to stabilise decision coherence in complex organisations through clearer decision rights, escalation discipline, and structural closure.
-            </p>
-
-            <div class="authority-signals fade-in delay-3">
+            <div class="authority-signals fade-in delay-2">
                 <h2>Authority Signals</h2>
                 <p>
                     ° Governance Decision Architecture<br>
@@ -786,7 +840,7 @@
                 </p>
             </div>
 
-            <a href="hubs.html" class="cta-button fade-in delay-4">Explore Systems</a>
+            <a href="hubs.html" class="cta-button fade-in delay-3">Explore Systems</a>
         </div>
     </section>
 
@@ -886,7 +940,7 @@
 
     <footer id="contact">
         <div class="footer-content container">
-            <img src="sovereignprotocollogo.png" alt="Sovereign Protocol logo" class="footer-logo-img">
+            <img src="Sovereign Protocol Logo 1.JPG" alt="Sovereign Protocol logo" class="footer-logo-img">
             <p class="footer-tagline">Institutional Decision Governance Architecture</p>
             <p class="footer-parent">By The You Lounge</p>
 
